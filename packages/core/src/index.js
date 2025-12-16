@@ -1,15 +1,14 @@
 /**
  * @yetzirah/core
- * 
+ *
  * Web Components for behavioral UI patterns.
  * Zero dependencies, framework-agnostic, accessibility-first.
- * 
+ *
  * @packageDocumentation
  */
 
-// Components will be exported here as they are implemented
-// Example:
-// export { YtzButton } from './button.js'
+// Components
+export { YtzButton } from './button.js'
 // export { YtzDialog } from './dialog.js'
 // export { YtzDisclosure } from './disclosure.js'
 // export { YtzTabs, YtzTab, YtzTabPanel } from './tabs.js'
