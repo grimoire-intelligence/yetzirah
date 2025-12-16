@@ -1,0 +1,57 @@
+/**
+ * Optional interaction styles for ytz-disclosure
+ *
+ * Import this stylesheet for smooth expand/collapse animations:
+ *   import '@yetzirah/core/disclosure.css'
+ *
+ * Or in HTML:
+ *   <link rel="stylesheet" href="@yetzirah/core/disclosure.css">
+ *
+ * These styles are kept separate because Yetzirah takes no styling opinions.
+ * However, animated transitions are basic enough interaction behavior that most
+ * applications will want them. We ship it as opt-in to stay true to the
+ * "unstyled" philosophy while making the common case easy.
+ */
+
+/* Content panel - collapsed state */
+ytz-disclosure > :last-child {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.25s ease-out, opacity 0.2s ease-out;
+}
+
+/* Override hidden attribute to enable animation */
+ytz-disclosure > :last-child[hidden] {
+  display: grid !important;
+}
+
+/* Inner wrapper needed for grid animation */
+ytz-disclosure > :last-child > * {
+  overflow: hidden;
+}
+
+/* Content panel - expanded state */
+ytz-disclosure[open] > :last-child {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+/* Chevron indicator rotation */
+ytz-disclosure .ytz-disclosure-icon {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+ytz-disclosure[open] .ytz-disclosure-icon {
+  transform: rotate(180deg);
+}
+
+/* Plus/minus indicator toggle */
+ytz-disclosure .ytz-disclosure-indicator::after {
+  content: '+';
+}
+
+ytz-disclosure[open] .ytz-disclosure-indicator::after {
+  content: '\2212'; /* minus sign */
+}
