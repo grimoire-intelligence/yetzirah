@@ -148,7 +148,7 @@ Implement `<ytz-disclosure>` - expandable content with aria-expanded. `open` att
 ---
 pr_id: PR-003
 title: Button React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
