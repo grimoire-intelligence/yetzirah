@@ -182,7 +182,7 @@ Create React wrapper for `<ytz-button>`. Bridge onClick prop to element, handle 
 ---
 pr_id: PR-004
 title: Button Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2

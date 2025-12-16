@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Button - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Button</h1>
+    <p class="f5 lh-copy gray mt0">
+      Polymorphic button/anchor component. Renders <code>&lt;a&gt;</code> when
+      <code>href</code> is provided, <code>&lt;button&gt;</code> otherwise.
+    </p>
+  </header>
+
+  <main>
+    <!-- Link Buttons -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Link Buttons (with href)</h2>
+      <p class="lh-copy mb3">
+        When <code>href</code> is provided, renders as an anchor element with
+        default classes: <code>pointer font-inherit no-underline dib</code>
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-button href="#contained" class="ph3 pv2 br2 white bg-blue">
+          Contained
+        </ytz-button>
+        <ytz-button href="#outlined" class="ph3 pv2 br2 ba b--blue blue bg-transparent">
+          Outlined
+        </ytz-button>
+        <ytz-button href="#text" class="ph3 pv2 blue">
+          Text
+        </ytz-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-button href="/dashboard" class="ph3 pv2 br2 white bg-blue"&gt;
+  Dashboard
+&lt;/ytz-button&gt;</code></pre>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Action Buttons (with onclick)</h2>
+      <p class="lh-copy mb3">
+        Without <code>href</code>, renders as a button element with
+        default classes: <code>pointer font-inherit bn bg-transparent</code>
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 br2 white bg-blue">
+          Contained
+        </ytz-button>
+        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 br2 ba b--blue blue bg-white">
+          Outlined
+        </ytz-button>
+        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 blue">
+          Text
+        </ytz-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-button onclick="handleSubmit()" class="ph3 pv2 br2 white bg-blue"&gt;
+  Submit
+&lt;/ytz-button&gt;</code></pre>
+    </section>
+
+    <!-- Sizes -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Sizes</h2>
+      <p class="lh-copy mb3">
+        Size is controlled via Tachyons classes, not props.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-button onclick="void(0)" class="f6 ph2 pv1 br2 white bg-blue">
+          Small
+        </ytz-button>
+        <ytz-button onclick="void(0)" class="f5 ph3 pv2 br2 white bg-blue">
+          Medium
+        </ytz-button>
+        <ytz-button onclick="void(0)" class="f4 ph4 pv3 br2 white bg-blue">
+          Large
+        </ytz-button>
+      </div>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Size</th>
+            <th class="pa2 tl">Tachyons Classes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Small</td><td class="pa2 code">f6 ph2 pv1</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Medium</td><td class="pa2 code">f5 ph3 pv2</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Large</td><td class="pa2 code">f4 ph4 pv3</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Colors -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Colors</h2>
+
+      <div class="demo-row mb3">
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-blue">Primary</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-purple">Secondary</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-red">Error</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-green">Success</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-orange">Warning</ytz-button>
+      </div>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Color</th>
+            <th class="pa2 tl">Contained</th>
+            <th class="pa2 tl">Outlined</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Primary</td><td class="pa2 code">bg-blue white</td><td class="pa2 code">blue b--blue</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Secondary</td><td class="pa2 code">bg-purple white</td><td class="pa2 code">purple b--purple</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Error</td><td class="pa2 code">bg-red white</td><td class="pa2 code">red b--red</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Success</td><td class="pa2 code">bg-green white</td><td class="pa2 code">green b--green</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Warning</td><td class="pa2 code">bg-orange white</td><td class="pa2 code">orange b--orange</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Disabled State -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Disabled State</h2>
+
+      <div class="demo-row mb3">
+        <ytz-button disabled class="ph3 pv2 br2 white bg-blue o-50">
+          Disabled Button
+        </ytz-button>
+        <ytz-button href="#" disabled class="ph3 pv2 br2 white bg-blue o-50">
+          Disabled Link
+        </ytz-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-button disabled class="... o-50"&gt;Disabled&lt;/ytz-button&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration Examples</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Button variant="contained"&gt;</td>
+              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 br2 white bg-blue"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Button variant="outlined"&gt;</td>
+              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 br2 ba b--blue blue"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Button variant="text"&gt;</td>
+              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 blue"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Button component={Link} to="/x"&gt;</td>
+              <td class="pa2 code">&lt;ytz-button href="/x"&gt;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Button } from '@yetzirah/react'
+
+function App() {
+  const [count, setCount] = useState(0)
+
+  return (
+    &lt;&gt;
+      {/* Link button */}
+      &lt;Button href="/dashboard" className="ph3 pv2 br2 white bg-blue"&gt;
+        Dashboard
+      &lt;/Button&gt;
+
+      {/* Action button */}
+      &lt;Button onClick={() =&gt; setCount(c =&gt; c + 1)} className="ph3 pv2 br2 white bg-blue"&gt;
+        Count: {count}
+      &lt;/Button&gt;
+
+      {/* Form submit */}
+      &lt;Button type="submit" className="ph3 pv2 br2 white bg-green"&gt;
+        Submit
+      &lt;/Button&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
