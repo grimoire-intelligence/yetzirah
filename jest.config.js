@@ -4,7 +4,12 @@ export default {
   roots: ['<rootDir>/packages'],
   testMatch: ['**/*.test.js'],
   moduleFileExtensions: ['js'],
-  transform: {},
+  transform: {
+    '^.+\.js$': 'babel-jest',
+  },
+  transformIgnorePatterns: [
+    '/node_modules/(?!@yetzirah)',
+  ],
   collectCoverageFrom: [
     'packages/*/src/**/*.js',
     '!packages/*/src/**/*.test.js',
