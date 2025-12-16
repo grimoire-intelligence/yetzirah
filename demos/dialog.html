@@ -5,34 +5,19 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dialog - Yetzirah Demo</title>
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <link rel="stylesheet" href="../packages/core/dialog.css">
   <script type="module" src="../packages/core/dist/index.js"></script>
   <style>
-    /* Dialog positioning - user provides these styles */
+    /* USER-PROVIDED: backdrop color and z-index */
     ytz-dialog {
-      position: fixed;
-      inset: 0;
-      display: none;
-      align-items: center;
-      justify-content: center;
       background: rgba(0, 0, 0, 0.5);
       z-index: 1000;
-    }
-    ytz-dialog:not([hidden]) {
-      display: flex;
     }
     /* Dialog content container */
     .dialog-content {
       max-width: 90vw;
       max-height: 90vh;
       overflow: auto;
-    }
-    /* Drawer positioning */
-    .drawer-left {
-      justify-content: flex-start;
-    }
-    .drawer-left .dialog-content {
-      height: 100vh;
-      max-height: 100vh;
     }
   </style>
 </head>
@@ -323,40 +308,61 @@ document.getElementById('my-dialog').setAttribute('open', '')</code></pre>
       </ytz-dialog>
     </section>
 
-    <!-- CSS Requirements -->
+    <!-- Optional Stylesheet -->
     <section class="mb5">
-      <h2 class="f4 fw6 mb3">CSS Requirements</h2>
+      <h2 class="f4 fw6 mb3">Overlay Positioning & Animation</h2>
       <p class="lh-copy mb3">
-        The dialog component handles behavior only. You provide positioning CSS:
+        Yetzirah takes no styling opinions&mdash;but overlay positioning and content
+        animations are basic enough interaction behavior that most applications will
+        want them. We ship an <strong>optional stylesheet</strong> that provides this
+        while staying true to the "unstyled" philosophy.
       </p>
 
-      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Backdrop and centering */
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// Import the optional stylesheet
+import '@yetzirah/core/dialog.css'
+
+// Or in HTML
+&lt;link rel="stylesheet" href="@yetzirah/core/dialog.css"&gt;</code></pre>
+
+      <p class="lh-copy mv3">
+        <strong>You must still provide:</strong> backdrop color and z-index appropriate
+        for your app.
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Your app's styles */
+ytz-dialog {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}</code></pre>
+
+      <details class="mt3">
+        <summary class="pointer blue">View stylesheet source</summary>
+        <pre class="f6 bg-near-white pa3 br2 overflow-auto mt2"><code>/* Overlay positioning - covers viewport, centers content */
 ytz-dialog {
   position: fixed;
   inset: 0;
   display: none;
   align-items: center;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
 }
 
-/* Show when open */
+/* Show when not hidden */
 ytz-dialog:not([hidden]) {
   display: flex;
 }
 
-/* Optional: slide-in animation */
-ytz-dialog .dialog-content {
-  transform: translateY(-20px);
+/* Content fade-in animation */
+ytz-dialog > * {
   opacity: 0;
-  transition: transform 0.2s, opacity 0.2s;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
 }
 
-ytz-dialog:not([hidden]) .dialog-content {
-  transform: translateY(0);
+ytz-dialog:not([hidden]) > * {
   opacity: 1;
+  transform: translateY(0);
 }</code></pre>
+      </details>
     </section>
 
     <!-- React Usage -->
@@ -365,6 +371,8 @@ ytz-dialog:not([hidden]) .dialog-content {
 
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
 import { Dialog, Button } from '@yetzirah/react'
+import '@yetzirah/core/dialog.css'
+import './dialog-overrides.css' // your backdrop color &amp; z-index
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -375,11 +383,7 @@ function App() {
         Open Dialog
       &lt;/Button&gt;
 
-      &lt;Dialog
-        open={open}
-        onClose={() =&gt; setOpen(false)}
-        className="fixed inset-0 flex items-center justify-center bg-black-50"
-      &gt;
+      &lt;Dialog open={open} onClose={() =&gt; setOpen(false)}&gt;
         &lt;div className="pa4 bg-white br3 shadow-2"&gt;
           &lt;h2 className="f4 fw6 mt0"&gt;Title&lt;/h2&gt;
           &lt;p className="lh-copy"&gt;Content goes here.&lt;/p&gt;

@@ -1,0 +1,46 @@
+/**
+ * Optional interaction styles for ytz-dialog
+ *
+ * Import this stylesheet for overlay positioning and fade animations:
+ *   import '@yetzirah/core/dialog.css'
+ *
+ * Or in HTML:
+ *   <link rel="stylesheet" href="@yetzirah/core/dialog.css">
+ *
+ * These styles are kept separate because Yetzirah takes no styling opinions.
+ * However, overlay positioning and content animations are basic enough
+ * interaction behavior that most applications will want them. We ship it as
+ * opt-in to stay true to the "unstyled" philosophy while making the common
+ * case easy.
+ *
+ * YOU MUST STILL PROVIDE:
+ *   - Backdrop color: background: rgba(0, 0, 0, 0.5)
+ *   - z-index appropriate for your app
+ *   - Dialog content styling (padding, background, border-radius, shadow)
+ */
+
+/* Overlay positioning - covers viewport, centers content */
+ytz-dialog {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Show when not hidden */
+ytz-dialog:not([hidden]) {
+  display: flex;
+}
+
+/* Content fade-in animation */
+ytz-dialog > * {
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+}
+
+ytz-dialog:not([hidden]) > * {
+  opacity: 1;
+  transform: translateY(0);
+}
