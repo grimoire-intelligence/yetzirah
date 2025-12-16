@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dialog - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    /* Dialog positioning - user provides these styles */
+    ytz-dialog {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    ytz-dialog:not([hidden]) {
+      display: flex;
+    }
+    /* Dialog content container */
+    .dialog-content {
+      max-width: 90vw;
+      max-height: 90vh;
+      overflow: auto;
+    }
+    /* Drawer positioning */
+    .drawer-left {
+      justify-content: flex-start;
+    }
+    .drawer-left .dialog-content {
+      height: 100vh;
+      max-height: 100vh;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Dialog</h1>
+    <p class="f5 lh-copy gray mt0">
+      Modal dialog with focus trap, scroll lock, escape-to-close, and backdrop dismiss.
+      Fully accessible with <code>role="dialog"</code> and <code>aria-modal="true"</code>.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Dialog -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Basic Dialog</h2>
+      <p class="lh-copy mb3">
+        Click the button to open a basic dialog. Close by clicking the backdrop,
+        pressing Escape, or clicking the close button.
+      </p>
+
+      <button
+        onclick="document.getElementById('basic-dialog').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Dialog
+      </button>
+
+      <ytz-dialog id="basic-dialog">
+        <div class="dialog-content pa4 bg-white br3 shadow-2">
+          <h2 class="f4 fw6 mt0 mb3">Dialog Title</h2>
+          <p class="lh-copy mb3">
+            This is a basic dialog. It traps focus, locks body scroll,
+            and can be dismissed multiple ways.
+          </p>
+          <div class="flex justify-end">
+            <button
+              onclick="this.closest('ytz-dialog').removeAttribute('open')"
+              class="ph3 pv2 br2 bn white bg-blue pointer"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </ytz-dialog>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-dialog id="my-dialog"&gt;
+  &lt;div class="dialog-content pa4 bg-white br3"&gt;
+    &lt;h2&gt;Title&lt;/h2&gt;
+    &lt;p&gt;Content&lt;/p&gt;
+    &lt;button onclick="this.closest('ytz-dialog').removeAttribute('open')"&gt;
+      Close
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/ytz-dialog&gt;
+
+&lt;!-- Open with: --&gt;
+document.getElementById('my-dialog').setAttribute('open', '')</code></pre>
+    </section>
+
+    <!-- Static Dialog -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Static Dialog (Non-dismissible Backdrop)</h2>
+      <p class="lh-copy mb3">
+        Add the <code>static</code> attribute to prevent closing when clicking the backdrop.
+        User must use the close button or Escape key.
+      </p>
+
+      <button
+        onclick="document.getElementById('static-dialog').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Static Dialog
+      </button>
+
+      <ytz-dialog id="static-dialog" static>
+        <div class="dialog-content pa4 bg-white br3 shadow-2">
+          <h2 class="f4 fw6 mt0 mb3">Important Action</h2>
+          <p class="lh-copy mb3">
+            This dialog cannot be dismissed by clicking outside.
+            You must make a choice or press Escape.
+          </p>
+          <div class="flex gap3 justify-end">
+            <button
+              onclick="this.closest('ytz-dialog').removeAttribute('open')"
+              class="ph3 pv2 br2 ba b--gray gray bg-white pointer"
+            >
+              Cancel
+            </button>
+            <button
+              onclick="alert('Confirmed!'); this.closest('ytz-dialog').removeAttribute('open')"
+              class="ph3 pv2 br2 bn white bg-blue pointer"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </ytz-dialog>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-dialog static&gt;
+  &lt;!-- Backdrop clicks won't close --&gt;
+&lt;/ytz-dialog&gt;</code></pre>
+    </section>
+
+    <!-- Form Dialog -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Form Dialog</h2>
+      <p class="lh-copy mb3">
+        Dialogs can contain forms. Focus automatically moves to the first input.
+      </p>
+
+      <button
+        onclick="document.getElementById('form-dialog').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Form Dialog
+      </button>
+
+      <ytz-dialog id="form-dialog">
+        <div class="dialog-content pa4 bg-white br3 shadow-2 w-100" style="max-width: 400px;">
+          <h2 class="f4 fw6 mt0 mb3">Sign In</h2>
+          <form onsubmit="event.preventDefault(); alert('Submitted!'); this.closest('ytz-dialog').removeAttribute('open')">
+            <label class="db mb3">
+              <span class="db mb1 f6 fw5">Email</span>
+              <input type="email" class="input-reset pa2 ba b--light-gray br2 w-100" placeholder="you@example.com" required>
+            </label>
+            <label class="db mb3">
+              <span class="db mb1 f6 fw5">Password</span>
+              <input type="password" class="input-reset pa2 ba b--light-gray br2 w-100" placeholder="********" required>
+            </label>
+            <div class="flex gap3 justify-end">
+              <button
+                type="button"
+                onclick="this.closest('ytz-dialog').removeAttribute('open')"
+                class="ph3 pv2 br2 ba b--gray gray bg-white pointer"
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                class="ph3 pv2 br2 bn white bg-blue pointer"
+              >
+                Sign In
+              </button>
+            </div>
+          </form>
+        </div>
+      </ytz-dialog>
+    </section>
+
+    <!-- Nested Dialog -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Nested Dialogs</h2>
+      <p class="lh-copy mb3">
+        Dialogs can open other dialogs. Each maintains its own focus trap.
+      </p>
+
+      <button
+        onclick="document.getElementById('outer-dialog').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Outer Dialog
+      </button>
+
+      <ytz-dialog id="outer-dialog">
+        <div class="dialog-content pa4 bg-white br3 shadow-2">
+          <h2 class="f4 fw6 mt0 mb3">Outer Dialog</h2>
+          <p class="lh-copy mb3">
+            This dialog can open another dialog.
+          </p>
+          <div class="flex gap3 justify-end">
+            <button
+              onclick="this.closest('ytz-dialog').removeAttribute('open')"
+              class="ph3 pv2 br2 ba b--gray gray bg-white pointer"
+            >
+              Close
+            </button>
+            <button
+              onclick="document.getElementById('inner-dialog').setAttribute('open', '')"
+              class="ph3 pv2 br2 bn white bg-purple pointer"
+            >
+              Open Inner Dialog
+            </button>
+          </div>
+        </div>
+      </ytz-dialog>
+
+      <ytz-dialog id="inner-dialog">
+        <div class="dialog-content pa4 bg-white br3 shadow-2">
+          <h2 class="f4 fw6 mt0 mb3">Inner Dialog</h2>
+          <p class="lh-copy mb3">
+            This is a nested dialog. Closing returns focus to the outer dialog.
+          </p>
+          <button
+            onclick="this.closest('ytz-dialog').removeAttribute('open')"
+            class="ph3 pv2 br2 bn white bg-purple pointer"
+          >
+            Close Inner
+          </button>
+        </div>
+      </ytz-dialog>
+    </section>
+
+    <!-- Styling Examples -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Styling with Tachyons</h2>
+      <p class="lh-copy mb3">
+        Dialog content styling is entirely up to you. Here are some examples.
+      </p>
+
+      <div class="flex gap3 flex-wrap">
+        <button
+          onclick="document.getElementById('small-dialog').setAttribute('open', '')"
+          class="ph3 pv2 br2 bn white bg-green pointer"
+        >
+          Small Dialog
+        </button>
+        <button
+          onclick="document.getElementById('large-dialog').setAttribute('open', '')"
+          class="ph3 pv2 br2 bn white bg-orange pointer"
+        >
+          Large Dialog
+        </button>
+        <button
+          onclick="document.getElementById('alert-dialog').setAttribute('open', '')"
+          class="ph3 pv2 br2 bn white bg-red pointer"
+        >
+          Alert Dialog
+        </button>
+      </div>
+
+      <ytz-dialog id="small-dialog">
+        <div class="dialog-content pa3 bg-white br2 shadow-1" style="max-width: 280px;">
+          <p class="f6 ma0">A compact dialog for quick actions.</p>
+          <button
+            onclick="this.closest('ytz-dialog').removeAttribute('open')"
+            class="mt2 f6 ph2 pv1 br2 bn white bg-green pointer"
+          >
+            OK
+          </button>
+        </div>
+      </ytz-dialog>
+
+      <ytz-dialog id="large-dialog">
+        <div class="dialog-content pa4 bg-white br3 shadow-2" style="max-width: 600px;">
+          <h2 class="f3 fw6 mt0 mb3">Large Dialog</h2>
+          <p class="lh-copy mb3">
+            This dialog has more space for content. You can include longer text,
+            images, or complex layouts.
+          </p>
+          <p class="lh-copy mb3">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+          <button
+            onclick="this.closest('ytz-dialog').removeAttribute('open')"
+            class="ph3 pv2 br2 bn white bg-orange pointer"
+          >
+            Close
+          </button>
+        </div>
+      </ytz-dialog>
+
+      <ytz-dialog id="alert-dialog" static>
+        <div class="dialog-content pa4 bg-washed-red br3 shadow-2" style="max-width: 400px;">
+          <h2 class="f4 fw6 mt0 mb2 dark-red">Warning</h2>
+          <p class="lh-copy mb3 dark-red">
+            This action cannot be undone. Are you sure you want to proceed?
+          </p>
+          <div class="flex gap3 justify-end">
+            <button
+              onclick="this.closest('ytz-dialog').removeAttribute('open')"
+              class="ph3 pv2 br2 ba b--gray gray bg-white pointer"
+            >
+              Cancel
+            </button>
+            <button
+              onclick="this.closest('ytz-dialog').removeAttribute('open')"
+              class="ph3 pv2 br2 bn white bg-red pointer"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
+      </ytz-dialog>
+    </section>
+
+    <!-- CSS Requirements -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">CSS Requirements</h2>
+      <p class="lh-copy mb3">
+        The dialog component handles behavior only. You provide positioning CSS:
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Backdrop and centering */
+ytz-dialog {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Show when open */
+ytz-dialog:not([hidden]) {
+  display: flex;
+}
+
+/* Optional: slide-in animation */
+ytz-dialog .dialog-content {
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+ytz-dialog:not([hidden]) .dialog-content {
+  transform: translateY(0);
+  opacity: 1;
+}</code></pre>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Dialog, Button } from '@yetzirah/react'
+
+function App() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    &lt;&gt;
+      &lt;Button onClick={() =&gt; setOpen(true)} className="ph3 pv2 br2 bn white bg-blue"&gt;
+        Open Dialog
+      &lt;/Button&gt;
+
+      &lt;Dialog
+        open={open}
+        onClose={() =&gt; setOpen(false)}
+        className="fixed inset-0 flex items-center justify-center bg-black-50"
+      &gt;
+        &lt;div className="pa4 bg-white br3 shadow-2"&gt;
+          &lt;h2 className="f4 fw6 mt0"&gt;Title&lt;/h2&gt;
+          &lt;p className="lh-copy"&gt;Content goes here.&lt;/p&gt;
+          &lt;Button onClick={() =&gt; setOpen(false)} className="ph3 pv2 br2 bn white bg-blue"&gt;
+            Close
+          &lt;/Button&gt;
+        &lt;/div&gt;
+      &lt;/Dialog&gt;
+    &lt;/&gt;
+  )
+}
+
+// Static dialog (no backdrop dismiss)
+&lt;Dialog open={open} onClose={handleClose} static&gt;
+  ...
+&lt;/Dialog&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Dialog open={open}&gt;</td>
+              <td class="pa2 code">&lt;Dialog open={open}&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">onClose={handleClose}</td>
+              <td class="pa2 code">onClose={handleClose}</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Modal disableEscapeKeyDown&gt;</td>
+              <td class="pa2">Handle in onClose callback</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Dialog disableBackdropClick&gt;</td>
+              <td class="pa2 code">&lt;Dialog static&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;DialogTitle&gt;</td>
+              <td class="pa2 code">&lt;h2&gt; + Tachyons</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;DialogContent&gt;</td>
+              <td class="pa2 code">&lt;div&gt; + Tachyons</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;DialogActions&gt;</td>
+              <td class="pa2 code">&lt;div class="flex justify-end"&gt;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Features</h2>
+
+      <ul class="lh-copy pl3">
+        <li class="mb2"><strong>Focus trap:</strong> Tab cycles within dialog</li>
+        <li class="mb2"><strong>Focus restore:</strong> Returns focus to trigger on close</li>
+        <li class="mb2"><strong>Escape to close:</strong> Press Escape to dismiss</li>
+        <li class="mb2"><strong>Backdrop click:</strong> Click outside to close (unless <code>static</code>)</li>
+        <li class="mb2"><strong>Scroll lock:</strong> Body scroll disabled while open</li>
+        <li class="mb2"><strong>ARIA:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code></li>
+      </ul>
+    </section>
+
+    <!-- API Reference -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Attributes</h3>
+      <table class="f6 w-100 collapse ba b--light-gray mb4">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">open</td>
+            <td class="pa2">boolean</td>
+            <td class="pa2">Controls dialog visibility</td>
+          </tr>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">static</td>
+            <td class="pa2">boolean</td>
+            <td class="pa2">Prevents backdrop click close</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="f6 w-100 collapse ba b--light-gray mb4">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">close</td>
+            <td class="pa2">Fired when dialog closes (bubbles)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Methods</h3>
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Method</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">showModal()</td>
+            <td class="pa2">Opens the dialog</td>
+          </tr>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">close()</td>
+            <td class="pa2">Closes the dialog</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
