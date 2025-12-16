@@ -17,11 +17,10 @@
 
     /* Base reset for custom elements */
     ytz-tab {
-      display: inline-block;
+      display: block;
       text-decoration: none;
       background: transparent;
       border: none;
-      vertical-align: middle;
     }
 
     /* Styled tabs (scoped to avoid affecting "unstyled" demos) */
@@ -46,6 +45,14 @@
     }
     .styled-tabs ytz-tabpanel {
       padding: 1rem;
+    }
+
+    /* Tachyons demo section - dynamic selection styling */
+    .tachyons-demo ytz-tab {
+      border-bottom: 2px solid transparent;
+    }
+    .tachyons-demo ytz-tab[aria-selected="true"] {
+      border-bottom-color: #357edd;
     }
   </style>
 </head>
@@ -200,15 +207,15 @@ tabs.addEventListener('change', (e) => {
         The <code class="bg-near-white ph1">[aria-selected="true"]</code> selector targets the active tab.
       </p>
 
-      <ytz-tabs class="db mb3">
-        <div class="flex br2 ba b--light-gray bg-light-gray">
-          <ytz-tab panel="s1" class="ph3 pv2 pointer bg-white" style="border-right: 1px solid #ccc;">Dashboard</ytz-tab>
-          <ytz-tab panel="s2" class="ph3 pv2 pointer bg-white" style="border-right: 1px solid #ccc;">Analytics</ytz-tab>
-          <ytz-tab panel="s3" class="ph3 pv2 pointer bg-white">Reports</ytz-tab>
+      <ytz-tabs class="tachyons-demo db ba b--light-gray br2 mb3">
+        <div class="flex bb b--light-gray">
+          <ytz-tab panel="s1" class="ph3 pv2 pointer">Dashboard</ytz-tab>
+          <ytz-tab panel="s2" class="ph3 pv2 pointer">Analytics</ytz-tab>
+          <ytz-tab panel="s3" class="ph3 pv2 pointer">Reports</ytz-tab>
         </div>
-        <ytz-tabpanel id="s1" class="pa3 bt b--light-gray">Dashboard overview with key metrics.</ytz-tabpanel>
-        <ytz-tabpanel id="s2" class="pa3 bt b--light-gray">Analytics and user behavior insights.</ytz-tabpanel>
-        <ytz-tabpanel id="s3" class="pa3 bt b--light-gray">Generated reports and exports.</ytz-tabpanel>
+        <ytz-tabpanel id="s1" class="pa3">Dashboard overview with key metrics.</ytz-tabpanel>
+        <ytz-tabpanel id="s2" class="pa3">Analytics and user behavior insights.</ytz-tabpanel>
+        <ytz-tabpanel id="s3" class="pa3">Generated reports and exports.</ytz-tabpanel>
       </ytz-tabs>
 
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Target active tab with attribute selector */
