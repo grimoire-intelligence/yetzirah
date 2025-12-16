@@ -8,6 +8,7 @@
  */
 
 // Components
+export { YtzAccordion, YtzAccordionItem } from './accordion.js'
 export { YtzButton } from './button.js'
 export { YtzDialog } from './dialog.js'
 export { YtzDisclosure } from './disclosure.js'
