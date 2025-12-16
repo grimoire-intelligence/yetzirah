@@ -15,27 +15,36 @@
       border-bottom: none;
     }
 
-    /* Basic tab styling for demos */
+    /* Base reset for custom elements */
     ytz-tab {
+      display: inline-block;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+      vertical-align: middle;
+    }
+
+    /* Styled tabs (scoped to avoid affecting "unstyled" demos) */
+    .styled-tabs ytz-tab {
       padding: 0.75rem 1rem;
       cursor: pointer;
       border-bottom: 2px solid transparent;
       background: none;
       transition: border-color 0.15s ease;
     }
-    ytz-tab:hover {
+    .styled-tabs ytz-tab:hover {
       background: rgba(0,0,0,0.02);
     }
-    ytz-tab[aria-selected="true"] {
+    .styled-tabs ytz-tab[aria-selected="true"] {
       border-bottom-color: #357edd;
       color: #357edd;
       font-weight: 600;
     }
-    ytz-tab:focus {
+    .styled-tabs ytz-tab:focus {
       outline: 2px solid #357edd;
       outline-offset: -2px;
     }
-    ytz-tabpanel {
+    .styled-tabs ytz-tabpanel {
       padding: 1rem;
     }
   </style>
@@ -61,7 +70,7 @@
         and keyboard navigation automatically.
       </p>
 
-      <ytz-tabs class="db ba b--light-gray br2 mb3">
+      <ytz-tabs class="styled-tabs db ba b--light-gray br2 mb3">
         <div class="flex bb b--light-gray">
           <ytz-tab panel="account">Account</ytz-tab>
           <ytz-tab panel="password">Password</ytz-tab>
@@ -105,7 +114,7 @@
         Arrow Up/Down navigate instead of Left/Right.
       </p>
 
-      <ytz-tabs orientation="vertical" class="flex ba b--light-gray br2 mb3">
+      <ytz-tabs orientation="vertical" class="styled-tabs flex ba b--light-gray br2 mb3">
         <div class="flex flex-column br b--light-gray bg-near-white" style="min-width: 140px;">
           <ytz-tab panel="general" class="tl bb b--light-gray" style="border-bottom-width: 1px;">General</ytz-tab>
           <ytz-tab panel="privacy" class="tl bb b--light-gray" style="border-bottom-width: 1px;">Privacy</ytz-tab>
@@ -158,7 +167,7 @@
         </button>
       </div>
 
-      <ytz-tabs id="prog-tabs" class="db ba b--light-gray br2 mb3">
+      <ytz-tabs id="prog-tabs" class="styled-tabs db ba b--light-gray br2 mb3">
         <div class="flex bb b--light-gray">
           <ytz-tab panel="first">First</ytz-tab>
           <ytz-tab panel="second">Second</ytz-tab>
@@ -192,14 +201,14 @@ tabs.addEventListener('change', (e) => {
       </p>
 
       <ytz-tabs class="db mb3">
-        <div class="flex bg-near-white br2 ba b--light-gray">
-          <ytz-tab panel="s1" class="ph3 pv2 pointer br bl-0 bt-0 bb-0 b--light-gray">Dashboard</ytz-tab>
-          <ytz-tab panel="s2" class="ph3 pv2 pointer br bl-0 bt-0 bb-0 b--light-gray">Analytics</ytz-tab>
-          <ytz-tab panel="s3" class="ph3 pv2 pointer">Reports</ytz-tab>
+        <div class="flex br2 ba b--light-gray bg-light-gray">
+          <ytz-tab panel="s1" class="ph3 pv2 pointer bg-white" style="border-right: 1px solid #ccc;">Dashboard</ytz-tab>
+          <ytz-tab panel="s2" class="ph3 pv2 pointer bg-white" style="border-right: 1px solid #ccc;">Analytics</ytz-tab>
+          <ytz-tab panel="s3" class="ph3 pv2 pointer bg-white">Reports</ytz-tab>
         </div>
-        <ytz-tabpanel id="s1" class="pa3 ba bl-0 br-0 bb-0 b--light-gray">Dashboard overview with key metrics.</ytz-tabpanel>
-        <ytz-tabpanel id="s2" class="pa3 ba bl-0 br-0 bb-0 b--light-gray">Analytics and user behavior insights.</ytz-tabpanel>
-        <ytz-tabpanel id="s3" class="pa3 ba bl-0 br-0 bb-0 b--light-gray">Generated reports and exports.</ytz-tabpanel>
+        <ytz-tabpanel id="s1" class="pa3 bt b--light-gray">Dashboard overview with key metrics.</ytz-tabpanel>
+        <ytz-tabpanel id="s2" class="pa3 bt b--light-gray">Analytics and user behavior insights.</ytz-tabpanel>
+        <ytz-tabpanel id="s3" class="pa3 bt b--light-gray">Generated reports and exports.</ytz-tabpanel>
       </ytz-tabs>
 
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Target active tab with attribute selector */
@@ -263,7 +272,7 @@ ytz-tab:focus {
         Try it: focus a tab below and use arrow keys to navigate.
       </p>
 
-      <ytz-tabs class="db ba b--light-gray br2 mt3">
+      <ytz-tabs class="styled-tabs db ba b--light-gray br2 mt3">
         <div class="flex bb b--light-gray">
           <ytz-tab panel="k1">Tab 1</ytz-tab>
           <ytz-tab panel="k2">Tab 2</ytz-tab>
