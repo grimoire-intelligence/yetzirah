@@ -38,8 +38,8 @@ describe('YtzButton', () => {
 
       expect(inner.className).toContain('pointer')
       expect(inner.className).toContain('font-inherit')
-      expect(inner.className).toContain('bn')
       expect(inner.className).toContain('bg-transparent')
+      // Note: bn (border-none) is NOT included - users control borders
     })
 
     test('prepends anchor defaults for anchor element', () => {
@@ -56,7 +56,7 @@ describe('YtzButton', () => {
       document.body.innerHTML = '<ytz-button class="ph3 pv2 bg-blue">Styled</ytz-button>'
       const inner = document.querySelector('ytz-button button')
 
-      expect(inner.className).toBe('pointer font-inherit bn bg-transparent ph3 pv2 bg-blue')
+      expect(inner.className).toBe('pointer font-inherit bg-transparent ph3 pv2 bg-blue')
     })
   })
 

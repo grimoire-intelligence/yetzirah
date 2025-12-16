@@ -15,8 +15,8 @@
 /** @type {string} Default classes for anchor elements */
 const ANCHOR_DEFAULTS = 'pointer font-inherit no-underline dib'
 
-/** @type {string} Default classes for button elements */
-const BUTTON_DEFAULTS = 'pointer font-inherit bn bg-transparent'
+/** @type {string} Default classes for button elements (no border reset - user controls borders) */
+const BUTTON_DEFAULTS = 'pointer font-inherit bg-transparent'
 
 /**
  * @class YtzButton

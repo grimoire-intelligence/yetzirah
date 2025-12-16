@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Button - Yetzirah Demo</title>
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <link rel="stylesheet" href="../packages/core/button.css">
   <script type="module" src="../packages/core/dist/index.js"></script>
   <style>
     .demo-row {
@@ -58,22 +59,22 @@
       <h2 class="f4 fw6 mb3">Action Buttons (with onclick)</h2>
       <p class="lh-copy mb3">
         Without <code>href</code>, renders as a button element with
-        default classes: <code>pointer font-inherit bn bg-transparent</code>
+        default classes: <code>pointer font-inherit bg-transparent</code>
       </p>
 
       <div class="demo-row mb3">
-        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 br2 white bg-blue">
+        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 br2 bn white bg-blue">
           Contained
         </ytz-button>
         <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 br2 ba b--blue blue bg-white">
           Outlined
         </ytz-button>
-        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 blue">
+        <ytz-button onclick="alert('Clicked!')" class="ph3 pv2 bn blue">
           Text
         </ytz-button>
       </div>
 
-      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-button onclick="handleSubmit()" class="ph3 pv2 br2 white bg-blue"&gt;
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-button onclick="handleSubmit()" class="ph3 pv2 br2 bn white bg-blue"&gt;
   Submit
 &lt;/ytz-button&gt;</code></pre>
     </section>
@@ -86,13 +87,13 @@
       </p>
 
       <div class="demo-row mb3">
-        <ytz-button onclick="void(0)" class="f6 ph2 pv1 br2 white bg-blue">
+        <ytz-button onclick="void(0)" class="f6 ph2 pv1 br2 bn white bg-blue">
           Small
         </ytz-button>
-        <ytz-button onclick="void(0)" class="f5 ph3 pv2 br2 white bg-blue">
+        <ytz-button onclick="void(0)" class="f5 ph3 pv2 br2 bn white bg-blue">
           Medium
         </ytz-button>
-        <ytz-button onclick="void(0)" class="f4 ph4 pv3 br2 white bg-blue">
+        <ytz-button onclick="void(0)" class="f4 ph4 pv3 br2 bn white bg-blue">
           Large
         </ytz-button>
       </div>
@@ -117,11 +118,11 @@
       <h2 class="f4 fw6 mb3">Colors</h2>
 
       <div class="demo-row mb3">
-        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-blue">Primary</ytz-button>
-        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-purple">Secondary</ytz-button>
-        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-red">Error</ytz-button>
-        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-green">Success</ytz-button>
-        <ytz-button onclick="void(0)" class="ph3 pv2 br2 white bg-orange">Warning</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 bn white bg-blue">Primary</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 bn white bg-purple">Secondary</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 bn white bg-red">Error</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 bn white bg-green">Success</ytz-button>
+        <ytz-button onclick="void(0)" class="ph3 pv2 br2 bn white bg-orange">Warning</ytz-button>
       </div>
 
       <table class="f6 w-100 collapse ba b--light-gray">
@@ -147,7 +148,7 @@
       <h2 class="f4 fw6 mb3">Disabled State</h2>
 
       <div class="demo-row mb3">
-        <ytz-button disabled class="ph3 pv2 br2 white bg-blue o-50">
+        <ytz-button disabled class="ph3 pv2 br2 bn white bg-blue o-50">
           Disabled Button
         </ytz-button>
         <ytz-button href="#" disabled class="ph3 pv2 br2 white bg-blue o-50">
@@ -173,7 +174,7 @@
           <tbody>
             <tr class="bt b--light-gray">
               <td class="pa2 code">&lt;Button variant="contained"&gt;</td>
-              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 br2 white bg-blue"&gt;</td>
+              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 br2 bn white bg-blue"&gt;</td>
             </tr>
             <tr class="bt b--light-gray">
               <td class="pa2 code">&lt;Button variant="outlined"&gt;</td>
@@ -181,7 +182,7 @@
             </tr>
             <tr class="bt b--light-gray">
               <td class="pa2 code">&lt;Button variant="text"&gt;</td>
-              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 blue"&gt;</td>
+              <td class="pa2 code">&lt;ytz-button class="ph3 pv2 bn blue"&gt;</td>
             </tr>
             <tr class="bt b--light-gray">
               <td class="pa2 code">&lt;Button component={Link} to="/x"&gt;</td>
@@ -190,6 +191,54 @@
           </tbody>
         </table>
       </div>
+    </section>
+
+    <!-- Hover & Click Feedback -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Hover & Click Feedback</h2>
+      <p class="lh-copy mb3">
+        Yetzirah takes no styling opinions&mdash;but tactile feedback on hover and click
+        is basic interaction behavior that most applications will want. We ship an
+        <strong>optional stylesheet</strong> that provides this feedback while staying
+        true to the "unstyled" philosophy.
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// Import the optional stylesheet
+import '@yetzirah/core/button.css'
+
+// Or in HTML
+&lt;link rel="stylesheet" href="@yetzirah/core/button.css"&gt;</code></pre>
+
+      <details class="mt3">
+        <summary class="pointer blue">View stylesheet source</summary>
+        <pre class="f6 bg-near-white pa3 br2 overflow-auto mt2"><code>/* Make wrapper invisible - only inner element renders */
+ytz-button {
+  display: contents;
+}
+
+/* Hover and click transitions */
+ytz-button > a,
+ytz-button > button {
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+ytz-button > a:hover,
+ytz-button > button:hover {
+  filter: brightness(0.9);
+}
+
+ytz-button > a:active,
+ytz-button > button:active {
+  transform: scale(0.97);
+  filter: brightness(0.85);
+}
+
+/* Disabled buttons - no hover/active effects */
+ytz-button[disabled] > a,
+ytz-button[disabled] > button {
+  pointer-events: none;
+}</code></pre>
+      </details>
     </section>
 
     <!-- React Usage -->
@@ -209,12 +258,12 @@ function App() {
       &lt;/Button&gt;
 
       {/* Action button */}
-      &lt;Button onClick={() =&gt; setCount(c =&gt; c + 1)} className="ph3 pv2 br2 white bg-blue"&gt;
+      &lt;Button onClick={() =&gt; setCount(c =&gt; c + 1)} className="ph3 pv2 br2 bn white bg-blue"&gt;
         Count: {count}
       &lt;/Button&gt;
 
       {/* Form submit */}
-      &lt;Button type="submit" className="ph3 pv2 br2 white bg-green"&gt;
+      &lt;Button type="submit" className="ph3 pv2 br2 bn white bg-green"&gt;
         Submit
       &lt;/Button&gt;
     &lt;/&gt;
