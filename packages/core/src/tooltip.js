@@ -60,14 +60,41 @@ class YtzTooltip extends HTMLElement {
     return this.getAttribute('placement') || 'top'
   }
 
+  /** @param {'top'|'bottom'|'left'|'right'} value */
+  set placement(value) {
+    if (value) {
+      this.setAttribute('placement', value)
+    } else {
+      this.removeAttribute('placement')
+    }
+  }
+
   /** @returns {number} */
   get delay() {
     return parseInt(this.getAttribute('delay') || '0', 10)
   }
 
+  /** @param {number} value */
+  set delay(value) {
+    if (value != null) {
+      this.setAttribute('delay', String(value))
+    } else {
+      this.removeAttribute('delay')
+    }
+  }
+
   /** @returns {number} */
   get offset() {
     return parseInt(this.getAttribute('offset') || '8', 10)
+  }
+
+  /** @param {number} value */
+  set offset(value) {
+    if (value != null) {
+      this.setAttribute('offset', String(value))
+    } else {
+      this.removeAttribute('offset')
+    }
   }
 
   #setup() {
