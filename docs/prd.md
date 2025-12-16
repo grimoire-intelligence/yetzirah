@@ -217,6 +217,8 @@ Edge case: supplying both `href` and `onclick` renders an `<a>` with the click h
 |-----------|---------|-----------------|
 | **Toggle/Switch** | `<ytz-toggle>` | Checkbox semantics with aria-checked |
 | **Slider** | `<ytz-slider>` | aria-slider, keyboard control, range support |
+| **IconButton** | `<ytz-icon-button>` | Button variant requiring aria-label, optional integrated tooltip |
+| **DataGrid** | `<ytz-datagrid>` | Virtual scroll, sort, filter, keyboard nav. No pivot tables—YAGNI. |
 
 ### Tier 3: Not Needed
 
