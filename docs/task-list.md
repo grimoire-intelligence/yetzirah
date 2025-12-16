@@ -112,7 +112,7 @@ Implement `<ytz-button>` - polymorphic button/anchor based on props. `href` attr
 ---
 pr_id: PR-005
 title: Disclosure Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
