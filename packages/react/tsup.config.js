@@ -11,4 +11,7 @@ export default defineConfig({
   minify: false,
   outDir: 'dist',
   external: ['react', 'react-dom', '@yetzirah/core'],
+  esbuildOptions(options) {
+    options.loader = { '.js': 'jsx' }
+  },
 })

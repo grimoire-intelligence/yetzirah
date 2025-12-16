@@ -1,0 +1,42 @@
+/**
+ * Optional interaction styles for ytz-button
+ *
+ * Import this stylesheet for hover/click feedback:
+ *   import '@yetzirah/core/button.css'
+ *
+ * Or in HTML:
+ *   <link rel="stylesheet" href="@yetzirah/core/button.css">
+ *
+ * These styles are kept separate because Yetzirah takes no styling opinions.
+ * However, tactile feedback is basic enough interaction behavior that most
+ * applications will want it. We ship it as opt-in to stay true to the
+ * "unstyled" philosophy while making the common case easy.
+ */
+
+/* Make wrapper invisible - only inner element renders */
+ytz-button {
+  display: contents;
+}
+
+/* Hover and click transitions */
+ytz-button > a,
+ytz-button > button {
+  transition: filter 0.15s ease, transform 0.1s ease;
+}
+
+ytz-button > a:hover,
+ytz-button > button:hover {
+  filter: brightness(0.9);
+}
+
+ytz-button > a:active,
+ytz-button > button:active {
+  transform: scale(0.97);
+  filter: brightness(0.85);
+}
+
+/* Disabled buttons - no hover/active effects */
+ytz-button[disabled] > a,
+ytz-button[disabled] > button {
+  pointer-events: none;
+}

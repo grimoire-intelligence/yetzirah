@@ -17,6 +17,7 @@
       "import": "./dist/button.js",
       "require": "./dist/button.cjs"
     },
+    "./button.css": "./button.css",
     "./disclosure": {
       "types": "./dist/disclosure.d.ts",
       "import": "./dist/disclosure.js",
@@ -49,7 +50,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "*.css"
   ],
   "scripts": {
     "build": "tsup",

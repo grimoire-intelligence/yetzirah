@@ -7,17 +7,14 @@
 - Haiku agents: 3 (for complexity 1-3)
 - Sonnet agents: 2 (for complexity 4-7)
 - Opus agents: 0 (for complexity 8-10)
-
 ---
-
 ## Block 0: Foundation (No dependencies)
 
 ### PR-001: Project Setup & Monorepo Structure
-
 ---
 pr_id: PR-001
 title: Project Setup & Monorepo Structure
-cold_state: new
+cold_state: completed
 priority: critical
 complexity:
   score: 4
@@ -66,7 +63,6 @@ estimated_files:
     action: create
     description: Jest configuration with jsdom
 ---
-
 **Description:**
 Initialize monorepo with pnpm workspaces. Configure tsup for both packages (ESM + CJS outputs, .d.ts generation from JSDoc). Configure Jest with jsdom for Web Component testing. Create demos/ directory structure for static HTML demos.
 
@@ -75,17 +71,14 @@ Initialize monorepo with pnpm workspaces. Configure tsup for both packages (ESM 
 - [ ] `pnpm test` runs Jest successfully
 - [ ] TypeScript declarations generated from JSDoc
 - [ ] Demo index page loads in browser
-
 ---
-
 ## Block 1: Simple Components (Depends on PR-001)
 
 ### PR-002: Button Component (Core)
-
 ---
 pr_id: PR-002
 title: Button Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -105,7 +98,6 @@ estimated_files:
     action: modify
     description: Export button component
 ---
-
 **Description:**
 Implement `<ytz-button>` - polymorphic button/anchor based on props. `href` attribute renders `<a>`, `onclick` renders `<button>`. Default classes prepended based on rendered element.
 
@@ -115,15 +107,12 @@ Implement `<ytz-button>` - polymorphic button/anchor based on props. `href` attr
 - [ ] User classes preserved and appended
 - [ ] Accessible (correct semantics, no ARIA needed)
 - [ ] < 50 lines implementation
-
 ---
-
 ### PR-005: Disclosure Component (Core)
-
 ---
 pr_id: PR-005
 title: Disclosure Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -143,7 +132,6 @@ estimated_files:
     action: modify
     description: Export disclosure component
 ---
-
 **Description:**
 Implement `<ytz-disclosure>` - expandable content with aria-expanded. `open` attribute controls visibility. Dispatches `toggle` event on state change. Animation-friendly (CSS can hook into open/closed states).
 
@@ -153,17 +141,14 @@ Implement `<ytz-disclosure>` - expandable content with aria-expanded. `open` att
 - [ ] `toggle` event dispatched
 - [ ] Keyboard accessible (Enter/Space on trigger)
 - [ ] < 100 lines
-
 ---
-
 ## Block 2: Button Wrapper & Docs (Depends on PR-002)
 
 ### PR-003: Button React Wrapper
-
 ---
 pr_id: PR-003
 title: Button React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -183,7 +168,6 @@ estimated_files:
     action: modify
     description: Export Button component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-button>`. Bridge onClick prop to element, handle href, pass through className, support ref forwarding.
 
@@ -193,15 +177,12 @@ Create React wrapper for `<ytz-button>`. Bridge onClick prop to element, handle 
 - [ ] `className` passed through
 - [ ] Ref forwarding works
 - [ ] < 50 lines
-
 ---
-
 ### PR-004: Button Documentation & Demo
-
 ---
 pr_id: PR-004
 title: Button Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -215,7 +196,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing all button variants
 ---
-
 **Description:**
 Create static HTML demo page showing all button variants. Complete JSDoc documentation with examples.
 
@@ -223,13 +203,10 @@ Create static HTML demo page showing all button variants. Complete JSDoc documen
 - [ ] Demo shows: link-button, action-button, styled variants
 - [ ] Works when opened directly in browser (no build)
 - [ ] JSDoc complete with examples
-
 ---
-
 ## Block 3: Disclosure Wrapper & Docs (Depends on PR-005)
 
 ### PR-006: Disclosure React Wrapper
-
 ---
 pr_id: PR-006
 title: Disclosure React Wrapper
@@ -253,7 +230,6 @@ estimated_files:
     action: modify
     description: Export Disclosure component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-disclosure>`. Sync open prop to attribute, provide onToggle callback, support ref forwarding.
 
@@ -262,11 +238,8 @@ Create React wrapper for `<ytz-disclosure>`. Sync open prop to attribute, provid
 - [ ] `onToggle` callback
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-007: Disclosure Documentation & Demo
-
 ---
 pr_id: PR-007
 title: Disclosure Documentation & Demo
@@ -284,7 +257,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing disclosure variants
 ---
-
 **Description:**
 Create static HTML demo page showing disclosure component usage with various content types.
 
@@ -292,13 +264,10 @@ Create static HTML demo page showing disclosure component usage with various con
 - [ ] Demo shows basic disclosure, nested content, animation examples
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
-
 ---
-
 ## Block 4: Dialog with Focus Trap (Depends on PR-001)
 
 ### PR-008: Dialog Component (Core)
-
 ---
 pr_id: PR-008
 title: Dialog Component (Core)
@@ -325,7 +294,6 @@ estimated_files:
     action: modify
     description: Export dialog component
 ---
-
 **Description:**
 Implement `<ytz-dialog>` - modal dialog with focus management. Features: focus trap while open, restore focus to trigger on close, Escape to close, backdrop click to close (configurable via `static` attribute), body scroll lock, aria-modal, role="dialog".
 
@@ -337,11 +305,8 @@ Implement `<ytz-dialog>` - modal dialog with focus management. Features: focus t
 - [ ] `close` event dispatched
 - [ ] WCAG 2.1 AA compliant
 - [ ] < 200 lines
-
 ---
-
 ### PR-009: Dialog React Wrapper
-
 ---
 pr_id: PR-009
 title: Dialog React Wrapper
@@ -365,7 +330,6 @@ estimated_files:
     action: modify
     description: Export Dialog component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-dialog>`. Sync open prop, provide onClose callback, render children correctly.
 
@@ -374,11 +338,8 @@ Create React wrapper for `<ytz-dialog>`. Sync open prop, provide onClose callbac
 - [ ] `onClose` callback
 - [ ] Children rendered correctly
 - [ ] < 50 lines
-
 ---
-
 ### PR-010: Dialog Documentation & Demo
-
 ---
 pr_id: PR-010
 title: Dialog Documentation & Demo
@@ -396,7 +357,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing dialog variants
 ---
-
 **Description:**
 Create static HTML demo page showing dialog component with various configurations.
 
@@ -404,13 +364,10 @@ Create static HTML demo page showing dialog component with various configuration
 - [ ] Demo shows: basic dialog, static (non-dismissible), nested dialogs
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
-
 ---
-
 ## Block 5: Tabs with Key Navigation (Depends on PR-001)
 
 ### PR-011: Tabs Component (Core)
-
 ---
 pr_id: PR-011
 title: Tabs Component (Core)
@@ -437,7 +394,6 @@ estimated_files:
     action: modify
     description: Export tabs components
 ---
-
 **Description:**
 Implement `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`. Features: aria-tablist/tab/tabpanel roles, keyboard arrow navigation (left/right), roving tabindex, aria-selected on active tab, aria-controls/aria-labelledby linking.
 
@@ -447,11 +403,8 @@ Implement `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`. Features: aria-tablist/ta
 - [ ] Correct ARIA roles and states
 - [ ] `change` event on tab switch
 - [ ] < 200 lines total
-
 ---
-
 ### PR-012: Tabs React Wrapper
-
 ---
 pr_id: PR-012
 title: Tabs React Wrapper
@@ -475,7 +428,6 @@ estimated_files:
     action: modify
     description: Export Tabs, Tab, TabPanel components
 ---
-
 **Description:**
 Create React wrappers for `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`.
 
@@ -484,11 +436,8 @@ Create React wrappers for `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`.
 - [ ] `onChange` callback on Tabs
 - [ ] Ref forwarding
 - [ ] < 50 lines per component
-
 ---
-
 ### PR-013: Tabs Documentation & Demo
-
 ---
 pr_id: PR-013
 title: Tabs Documentation & Demo
@@ -506,7 +455,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing tabs variants
 ---
-
 **Description:**
 Create static HTML demo page showing tabs component with various configurations.
 
@@ -514,13 +462,10 @@ Create static HTML demo page showing tabs component with various configurations.
 - [ ] Demo shows: basic tabs, vertical tabs, dynamic content
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
-
 ---
-
 ## Block 6: Tooltip with Positioning (Depends on PR-001)
 
 ### PR-014: Tooltip Component (Core)
-
 ---
 pr_id: PR-014
 title: Tooltip Component (Core)
@@ -547,7 +492,6 @@ estimated_files:
     action: modify
     description: Export tooltip component
 ---
-
 **Description:**
 Implement `<ytz-tooltip>` - positioned tooltip with delay logic. Features: positioning relative to trigger (top/bottom/left/right), flip when near viewport edge, show/hide delays, aria-describedby linking, hover/focus/touch handling, role="tooltip".
 
@@ -560,11 +504,8 @@ Implement `<ytz-tooltip>` - positioned tooltip with delay logic. Features: posit
 - [ ] ARIA correct
 - [ ] < 200 lines (excluding position utility)
 - [ ] Position utility < 100 lines
-
 ---
-
 ### PR-015: Tooltip React Wrapper
-
 ---
 pr_id: PR-015
 title: Tooltip React Wrapper
@@ -588,7 +529,6 @@ estimated_files:
     action: modify
     description: Export Tooltip component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-tooltip>`.
 
@@ -596,11 +536,8 @@ Create React wrapper for `<ytz-tooltip>`.
 - [ ] Props passed through correctly
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-016: Tooltip Documentation & Demo
-
 ---
 pr_id: PR-016
 title: Tooltip Documentation & Demo
@@ -618,7 +555,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing tooltip variants
 ---
-
 **Description:**
 Create static HTML demo page showing tooltip component with various positions and triggers.
 
@@ -626,13 +562,10 @@ Create static HTML demo page showing tooltip component with various positions an
 - [ ] Demo shows: all positions, focus trigger, custom delays
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
-
 ---
-
 ## Block 7: Menu (Depends on PR-011 keyNav, PR-014 position)
 
 ### PR-017: Menu Component (Core)
-
 ---
 pr_id: PR-017
 title: Menu Component (Core)
@@ -660,7 +593,6 @@ estimated_files:
     action: modify
     description: Export menu components
 ---
-
 **Description:**
 Implement `<ytz-menu>`, `<ytz-menuitem>`. Features: positioning relative to trigger, keyboard navigation (up/down arrows, Home/End), click outside to close, focus management, aria-menu/menuitem roles.
 
@@ -671,11 +603,8 @@ Implement `<ytz-menu>`, `<ytz-menuitem>`. Features: positioning relative to trig
 - [ ] Focus returns to trigger
 - [ ] ARIA correct
 - [ ] < 200 lines
-
 ---
-
 ### PR-018: Menu React Wrapper
-
 ---
 pr_id: PR-018
 title: Menu React Wrapper
@@ -699,7 +628,6 @@ estimated_files:
     action: modify
     description: Export Menu, MenuItem components
 ---
-
 **Description:**
 Create React wrappers for `<ytz-menu>`, `<ytz-menuitem>`.
 
@@ -708,11 +636,8 @@ Create React wrappers for `<ytz-menu>`, `<ytz-menuitem>`.
 - [ ] `onClose` callback
 - [ ] Ref forwarding
 - [ ] < 50 lines per component
-
 ---
-
 ### PR-019: Menu Documentation & Demo
-
 ---
 pr_id: PR-019
 title: Menu Documentation & Demo
@@ -730,7 +655,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing menu variants
 ---
-
 **Description:**
 Create static HTML demo page showing menu component with various configurations.
 
@@ -738,13 +662,10 @@ Create static HTML demo page showing menu component with various configurations.
 - [ ] Demo shows: basic menu, icon menu, grouped items
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
-
 ---
-
 ## Block 8: Autocomplete (Depends on PR-017 - uses all utilities)
 
 ### PR-020: Autocomplete Component (Core)
-
 ---
 pr_id: PR-020
 title: Autocomplete Component (Core)
@@ -768,7 +689,6 @@ estimated_files:
     action: modify
     description: Export autocomplete component
 ---
-
 **Description:**
 Implement `<ytz-autocomplete>` - the most complex Tier 1 component. Features: text input with filtering, keyboard navigation (up/down), single and multi-select modes, aria-combobox pattern, async loading support (loading state), click outside to close.
 
@@ -780,11 +700,8 @@ Implement `<ytz-autocomplete>` - the most complex Tier 1 component. Features: te
 - [ ] Async loading state
 - [ ] WCAG combobox pattern
 - [ ] < 200 lines
-
 ---
-
 ### PR-021: Autocomplete React Wrapper
-
 ---
 pr_id: PR-021
 title: Autocomplete React Wrapper
@@ -808,7 +725,6 @@ estimated_files:
     action: modify
     description: Export Autocomplete component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-autocomplete>`.
 
@@ -818,11 +734,8 @@ Create React wrapper for `<ytz-autocomplete>`.
 - [ ] `multiple` prop
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-022: Autocomplete Documentation & Demo
-
 ---
 pr_id: PR-022
 title: Autocomplete Documentation & Demo
@@ -840,7 +753,6 @@ estimated_files:
     action: create
     description: Static HTML demo showing autocomplete variants
 ---
-
 **Description:**
 Create static HTML demo page showing autocomplete component with various configurations.
 
@@ -848,13 +760,10 @@ Create static HTML demo page showing autocomplete component with various configu
 - [ ] Demo shows: basic, multi-select, async loading, custom rendering
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
-
 ---
-
 ## Block 9: Derived Components - Listbox & Select (Depends on PR-020)
 
 ### PR-023: Listbox Component (Core)
-
 ---
 pr_id: PR-023
 title: Listbox Component (Core)
@@ -878,7 +787,6 @@ estimated_files:
     action: modify
     description: Export listbox component
 ---
-
 **Description:**
 Derive from Autocomplete: remove text input and filtering. Pure keyboard-navigable list selection.
 
@@ -887,11 +795,8 @@ Derive from Autocomplete: remove text input and filtering. Pure keyboard-navigab
 - [ ] Single/multi-select modes
 - [ ] ARIA listbox pattern
 - [ ] < 150 lines
-
 ---
-
 ### PR-024: Listbox React Wrapper
-
 ---
 pr_id: PR-024
 title: Listbox React Wrapper
@@ -915,7 +820,6 @@ estimated_files:
     action: modify
     description: Export Listbox component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-listbox>`.
 
@@ -923,11 +827,8 @@ Create React wrapper for `<ytz-listbox>`.
 - [ ] Props passed through
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-025: Listbox Documentation & Demo
-
 ---
 pr_id: PR-025
 title: Listbox Documentation & Demo
@@ -945,18 +846,14 @@ estimated_files:
     action: create
     description: Static HTML demo showing listbox variants
 ---
-
 **Description:**
 Create static HTML demo page showing listbox component.
 
 **Acceptance Criteria:**
 - [ ] Demo shows: single-select, multi-select
 - [ ] Works when opened directly in browser
-
 ---
-
 ### PR-026: Select Component (Core)
-
 ---
 pr_id: PR-026
 title: Select Component (Core)
@@ -980,7 +877,6 @@ estimated_files:
     action: modify
     description: Export select component
 ---
-
 **Description:**
 Derive from Listbox: add trigger button that shows selected value and opens listbox.
 
@@ -989,11 +885,8 @@ Derive from Listbox: add trigger button that shows selected value and opens list
 - [ ] Opens listbox on click/Enter/Space
 - [ ] ARIA combobox pattern (button variant)
 - [ ] < 150 lines
-
 ---
-
 ### PR-027: Select React Wrapper
-
 ---
 pr_id: PR-027
 title: Select React Wrapper
@@ -1017,7 +910,6 @@ estimated_files:
     action: modify
     description: Export Select component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-select>`.
 
@@ -1025,11 +917,8 @@ Create React wrapper for `<ytz-select>`.
 - [ ] `value` and `onChange` props
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-028: Select Documentation & Demo
-
 ---
 pr_id: PR-028
 title: Select Documentation & Demo
@@ -1047,20 +936,16 @@ estimated_files:
     action: create
     description: Static HTML demo showing select variants
 ---
-
 **Description:**
 Create static HTML demo page showing select component.
 
 **Acceptance Criteria:**
 - [ ] Demo shows: basic select, with placeholder, disabled
 - [ ] Works when opened directly in browser
-
 ---
-
 ## Block 10: Derived Components - Accordion (Depends on PR-005)
 
 ### PR-029: Accordion Component (Core)
-
 ---
 pr_id: PR-029
 title: Accordion Component (Core)
@@ -1084,7 +969,6 @@ estimated_files:
     action: modify
     description: Export accordion components
 ---
-
 **Description:**
 Derive from Disclosure: coordinated disclosures with optional exclusive mode (only one open at a time).
 
@@ -1093,11 +977,8 @@ Derive from Disclosure: coordinated disclosures with optional exclusive mode (on
 - [ ] `exclusive` attribute for single-open mode
 - [ ] ARIA accordion pattern
 - [ ] < 150 lines
-
 ---
-
 ### PR-030: Accordion React Wrapper
-
 ---
 pr_id: PR-030
 title: Accordion React Wrapper
@@ -1121,7 +1002,6 @@ estimated_files:
     action: modify
     description: Export Accordion, AccordionItem components
 ---
-
 **Description:**
 Create React wrappers for `<ytz-accordion>`, `<ytz-accordion-item>`.
 
@@ -1129,11 +1009,8 @@ Create React wrappers for `<ytz-accordion>`, `<ytz-accordion-item>`.
 - [ ] Both components wrapped
 - [ ] Ref forwarding
 - [ ] < 50 lines per component
-
 ---
-
 ### PR-031: Accordion Documentation & Demo
-
 ---
 pr_id: PR-031
 title: Accordion Documentation & Demo
@@ -1151,20 +1028,16 @@ estimated_files:
     action: create
     description: Static HTML demo showing accordion variants
 ---
-
 **Description:**
 Create static HTML demo page showing accordion component.
 
 **Acceptance Criteria:**
 - [ ] Demo shows: basic accordion, exclusive mode
 - [ ] Works when opened directly in browser
-
 ---
-
 ## Block 11: Derived Components - Drawer (Depends on PR-008)
 
 ### PR-032: Drawer Component (Core)
-
 ---
 pr_id: PR-032
 title: Drawer Component (Core)
@@ -1188,7 +1061,6 @@ estimated_files:
     action: modify
     description: Export drawer component
 ---
-
 **Description:**
 Derive from Dialog: slide-in positioning from screen edge. Supports left/right/top/bottom anchoring via `anchor` attribute.
 
@@ -1197,11 +1069,8 @@ Derive from Dialog: slide-in positioning from screen edge. Supports left/right/t
 - [ ] `anchor` attribute (left/right/top/bottom)
 - [ ] CSS-friendly for slide animations
 - [ ] < 100 lines (reuses Dialog internals)
-
 ---
-
 ### PR-033: Drawer React Wrapper
-
 ---
 pr_id: PR-033
 title: Drawer React Wrapper
@@ -1225,7 +1094,6 @@ estimated_files:
     action: modify
     description: Export Drawer component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-drawer>`.
 
@@ -1233,11 +1101,8 @@ Create React wrapper for `<ytz-drawer>`.
 - [ ] `open`, `onClose`, `anchor` props
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-034: Drawer Documentation & Demo
-
 ---
 pr_id: PR-034
 title: Drawer Documentation & Demo
@@ -1255,20 +1120,16 @@ estimated_files:
     action: create
     description: Static HTML demo showing drawer variants
 ---
-
 **Description:**
 Create static HTML demo page showing drawer component from all edges.
 
 **Acceptance Criteria:**
 - [ ] Demo shows: left, right, top, bottom drawers
 - [ ] Works when opened directly in browser
-
 ---
-
 ## Block 12: Derived Components - Popover (Depends on PR-014)
 
 ### PR-035: Popover Component (Core)
-
 ---
 pr_id: PR-035
 title: Popover Component (Core)
@@ -1292,7 +1153,6 @@ estimated_files:
     action: modify
     description: Export popover component
 ---
-
 **Description:**
 Derive from Tooltip: click-triggered (not hover), supports richer content, stays open until dismissed.
 
@@ -1302,11 +1162,8 @@ Derive from Tooltip: click-triggered (not hover), supports richer content, stays
 - [ ] Escape to close
 - [ ] Positioning inherited from Tooltip
 - [ ] < 100 lines
-
 ---
-
 ### PR-036: Popover React Wrapper
-
 ---
 pr_id: PR-036
 title: Popover React Wrapper
@@ -1330,7 +1187,6 @@ estimated_files:
     action: modify
     description: Export Popover component
 ---
-
 **Description:**
 Create React wrapper for `<ytz-popover>`.
 
@@ -1338,11 +1194,8 @@ Create React wrapper for `<ytz-popover>`.
 - [ ] `open`, `onClose` props
 - [ ] Ref forwarding
 - [ ] < 50 lines
-
 ---
-
 ### PR-037: Popover Documentation & Demo
-
 ---
 pr_id: PR-037
 title: Popover Documentation & Demo
@@ -1360,20 +1213,16 @@ estimated_files:
     action: create
     description: Static HTML demo showing popover variants
 ---
-
 **Description:**
 Create static HTML demo page showing popover component with various content.
 
 **Acceptance Criteria:**
 - [ ] Demo shows: basic popover, with form, with actions
 - [ ] Works when opened directly in browser
-
 ---
-
 ## Block 13: Final Documentation & Verification (Depends on all components)
 
 ### PR-038: MUI Rosetta Stone Documentation
-
 ---
 pr_id: PR-038
 title: MUI Rosetta Stone Documentation
@@ -1402,7 +1251,6 @@ estimated_files:
     action: create
     description: MUI to Yetzirah migration guide
 ---
-
 **Description:**
 Create comprehensive MUI → Yetzirah migration guide. Component mapping table, prop → class translations, code examples for each component, common patterns.
 
@@ -1411,11 +1259,8 @@ Create comprehensive MUI → Yetzirah migration guide. Component mapping table, 
 - [ ] Prop translations documented (variant, size, color → Tachyons)
 - [ ] Side-by-side code examples
 - [ ] Works when opened directly in browser
-
 ---
-
 ### PR-039: Final Bundle Optimization & Verification
-
 ---
 pr_id: PR-039
 title: Final Bundle Optimization & Verification
@@ -1444,7 +1289,6 @@ estimated_files:
     action: modify
     description: Add bundle size check scripts
 ---
-
 **Description:**
 Verify total core bundle < 10kb gzipped. Verify each wrapper < 50 lines per component. Tree-shaking verification. CDN-ready single file bundle.
 
@@ -1453,9 +1297,7 @@ Verify total core bundle < 10kb gzipped. Verify each wrapper < 50 lines per comp
 - [ ] Individual component imports work
 - [ ] No dependencies in core package.json
 - [ ] Tree-shaking verified
-
 ---
-
 ## Dependency Graph
 
 ```
@@ -1477,9 +1319,7 @@ PR-001 (Setup)
 PR-038 (Rosetta) ← All demo PRs
 PR-039 (Optimization) ← All demo PRs
 ```
-
 ---
-
 ## Notes
 
 - **Utilities are internal**: `position()`, `focusTrap()`, `clickOutside()`, `keyNav()` live in `packages/core/src/utils/` but are not exported
