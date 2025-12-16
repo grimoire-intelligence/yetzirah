@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tabs Component - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    /* Demo layout */
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    /* Base reset for custom elements */
+    ytz-tab {
+      display: block;
+      text-decoration: none;
+      background: transparent;
+      border: none;
+    }
+
+    /* Styled tabs (scoped to avoid affecting "unstyled" demos) */
+    .styled-tabs ytz-tab {
+      padding: 0.75rem 1rem;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      background: none;
+      transition: border-color 0.15s ease;
+    }
+    .styled-tabs ytz-tab:hover {
+      background: rgba(0,0,0,0.02);
+    }
+    .styled-tabs ytz-tab[aria-selected="true"] {
+      border-bottom-color: #357edd;
+      color: #357edd;
+      font-weight: 600;
+    }
+    .styled-tabs ytz-tab:focus {
+      outline: 2px solid #357edd;
+      outline-offset: -2px;
+    }
+    .styled-tabs ytz-tabpanel {
+      padding: 1rem;
+    }
+
+    /* Tachyons demo section - dynamic selection styling */
+    .tachyons-demo ytz-tab {
+      border-bottom: 2px solid transparent;
+    }
+    .tachyons-demo ytz-tab[aria-selected="true"] {
+      border-bottom-color: #357edd;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Tabs</h1>
+    <p class="f5 lh-copy gray mt0">
+      Tabbed interface with keyboard navigation and roving tabindex.
+      Arrow keys move between tabs, only the active tab is in the tab order.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Click tabs to switch content. The component manages ARIA attributes
+        and keyboard navigation automatically.
+      </p>
+
+      <ytz-tabs class="styled-tabs db ba b--light-gray br2 mb3">
+        <div class="flex bb b--light-gray">
+          <ytz-tab panel="account">Account</ytz-tab>
+          <ytz-tab panel="password">Password</ytz-tab>
+          <ytz-tab panel="notifications">Notifications</ytz-tab>
+        </div>
+        <ytz-tabpanel id="account">
+          <h3 class="f5 fw6 mt0 mb2">Account Settings</h3>
+          <p class="lh-copy ma0">
+            Manage your account details, profile information, and preferences.
+          </p>
+        </ytz-tabpanel>
+        <ytz-tabpanel id="password">
+          <h3 class="f5 fw6 mt0 mb2">Password &amp; Security</h3>
+          <p class="lh-copy ma0">
+            Change your password, enable two-factor authentication, and review security settings.
+          </p>
+        </ytz-tabpanel>
+        <ytz-tabpanel id="notifications">
+          <h3 class="f5 fw6 mt0 mb2">Notification Preferences</h3>
+          <p class="lh-copy ma0">
+            Control how and when you receive notifications via email, SMS, or push.
+          </p>
+        </ytz-tabpanel>
+      </ytz-tabs>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tabs&gt;
+  &lt;div class="flex"&gt;
+    &lt;ytz-tab panel="account"&gt;Account&lt;/ytz-tab&gt;
+    &lt;ytz-tab panel="password"&gt;Password&lt;/ytz-tab&gt;
+  &lt;/div&gt;
+  &lt;ytz-tabpanel id="account"&gt;Account content...&lt;/ytz-tabpanel&gt;
+  &lt;ytz-tabpanel id="password"&gt;Password content...&lt;/ytz-tabpanel&gt;
+&lt;/ytz-tabs&gt;</code></pre>
+    </section>
+
+    <!-- Vertical Tabs -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Vertical Tabs</h2>
+      <p class="lh-copy mb3">
+        Use <code class="bg-near-white ph1">orientation="vertical"</code> for sidebar-style tabs.
+        Arrow Up/Down navigate instead of Left/Right.
+      </p>
+
+      <ytz-tabs orientation="vertical" class="styled-tabs flex ba b--light-gray br2 mb3">
+        <div class="flex flex-column br b--light-gray bg-near-white" style="min-width: 140px;">
+          <ytz-tab panel="general" class="tl bb b--light-gray" style="border-bottom-width: 1px;">General</ytz-tab>
+          <ytz-tab panel="privacy" class="tl bb b--light-gray" style="border-bottom-width: 1px;">Privacy</ytz-tab>
+          <ytz-tab panel="advanced" class="tl">Advanced</ytz-tab>
+        </div>
+        <div class="flex-auto">
+          <ytz-tabpanel id="general">
+            <h3 class="f5 fw6 mt0 mb2">General Settings</h3>
+            <p class="lh-copy ma0">Configure general application behavior and appearance.</p>
+          </ytz-tabpanel>
+          <ytz-tabpanel id="privacy">
+            <h3 class="f5 fw6 mt0 mb2">Privacy Settings</h3>
+            <p class="lh-copy ma0">Manage data sharing, tracking preferences, and visibility.</p>
+          </ytz-tabpanel>
+          <ytz-tabpanel id="advanced">
+            <h3 class="f5 fw6 mt0 mb2">Advanced Settings</h3>
+            <p class="lh-copy ma0">Developer options, experimental features, and diagnostics.</p>
+          </ytz-tabpanel>
+        </div>
+      </ytz-tabs>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tabs orientation="vertical" class="flex"&gt;
+  &lt;div class="flex flex-column"&gt;
+    &lt;ytz-tab panel="general"&gt;General&lt;/ytz-tab&gt;
+    &lt;ytz-tab panel="privacy"&gt;Privacy&lt;/ytz-tab&gt;
+  &lt;/div&gt;
+  &lt;div class="flex-auto"&gt;
+    &lt;ytz-tabpanel id="general"&gt;...&lt;/ytz-tabpanel&gt;
+    &lt;ytz-tabpanel id="privacy"&gt;...&lt;/ytz-tabpanel&gt;
+  &lt;/div&gt;
+&lt;/ytz-tabs&gt;</code></pre>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+      <p class="lh-copy mb3">
+        Control the active tab via the <code class="bg-near-white ph1">value</code> property.
+      </p>
+
+      <div class="mb3">
+        <button onclick="document.getElementById('prog-tabs').value = 'first'" class="ph3 pv2 br2 bg-blue white bn pointer mr2">
+          Select First
+        </button>
+        <button onclick="document.getElementById('prog-tabs').value = 'second'" class="ph3 pv2 br2 bg-blue white bn pointer mr2">
+          Select Second
+        </button>
+        <button onclick="document.getElementById('prog-tabs').value = 'third'" class="ph3 pv2 br2 bg-blue white bn pointer">
+          Select Third
+        </button>
+      </div>
+
+      <ytz-tabs id="prog-tabs" class="styled-tabs db ba b--light-gray br2 mb3">
+        <div class="flex bb b--light-gray">
+          <ytz-tab panel="first">First</ytz-tab>
+          <ytz-tab panel="second">Second</ytz-tab>
+          <ytz-tab panel="third">Third</ytz-tab>
+        </div>
+        <ytz-tabpanel id="first">First tab content</ytz-tabpanel>
+        <ytz-tabpanel id="second">Second tab content</ytz-tabpanel>
+        <ytz-tabpanel id="third">Third tab content</ytz-tabpanel>
+      </ytz-tabs>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const tabs = document.getElementById('my-tabs')
+
+// Get current value
+console.log(tabs.value) // "first"
+
+// Set programmatically
+tabs.value = 'second'
+
+// Listen for changes
+tabs.addEventListener('change', (e) => {
+  console.log('Selected:', e.detail.value)
+})</code></pre>
+    </section>
+
+    <!-- Styled Tabs -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Styling with Tachyons</h2>
+      <p class="lh-copy mb3">
+        Tabs are unstyled by default. Use Tachyons or custom CSS for appearance.
+        The <code class="bg-near-white ph1">[aria-selected="true"]</code> selector targets the active tab.
+      </p>
+
+      <ytz-tabs class="tachyons-demo db ba b--light-gray br2 mb3">
+        <div class="flex bb b--light-gray">
+          <ytz-tab panel="s1" class="ph3 pv2 pointer">Dashboard</ytz-tab>
+          <ytz-tab panel="s2" class="ph3 pv2 pointer">Analytics</ytz-tab>
+          <ytz-tab panel="s3" class="ph3 pv2 pointer">Reports</ytz-tab>
+        </div>
+        <ytz-tabpanel id="s1" class="pa3">Dashboard overview with key metrics.</ytz-tabpanel>
+        <ytz-tabpanel id="s2" class="pa3">Analytics and user behavior insights.</ytz-tabpanel>
+        <ytz-tabpanel id="s3" class="pa3">Generated reports and exports.</ytz-tabpanel>
+      </ytz-tabs>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Target active tab with attribute selector */
+ytz-tab[aria-selected="true"] {
+  border-bottom-color: blue;
+  font-weight: 600;
+}
+
+/* Hover state */
+ytz-tab:hover {
+  background: rgba(0,0,0,0.05);
+}
+
+/* Focus state for accessibility */
+ytz-tab:focus {
+  outline: 2px solid blue;
+  outline-offset: -2px;
+}</code></pre>
+    </section>
+
+    <!-- Keyboard Navigation -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Keyboard Navigation</h2>
+      <p class="lh-copy mb3">
+        Tabs implement the WAI-ARIA tabs pattern with roving tabindex.
+        Only the active tab is in the tab order; arrow keys move between tabs.
+      </p>
+
+      <table class="collapse ba b--light-gray w-100 mb3">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Tab</kbd></td>
+            <td class="pa2">Move focus to active tab, then to panel content</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">&larr;</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">&rarr;</kbd></td>
+            <td class="pa2">Navigate between tabs (horizontal orientation)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">&uarr;</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">&darr;</kbd></td>
+            <td class="pa2">Navigate between tabs (vertical orientation)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Home</kbd></td>
+            <td class="pa2">Move to first tab</td>
+          </tr>
+          <tr>
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">End</kbd></td>
+            <td class="pa2">Move to last tab</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <p class="lh-copy">
+        Try it: focus a tab below and use arrow keys to navigate.
+      </p>
+
+      <ytz-tabs class="styled-tabs db ba b--light-gray br2 mt3">
+        <div class="flex bb b--light-gray">
+          <ytz-tab panel="k1">Tab 1</ytz-tab>
+          <ytz-tab panel="k2">Tab 2</ytz-tab>
+          <ytz-tab panel="k3">Tab 3</ytz-tab>
+          <ytz-tab panel="k4">Tab 4</ytz-tab>
+        </div>
+        <ytz-tabpanel id="k1">Use arrow keys to navigate between tabs.</ytz-tabpanel>
+        <ytz-tabpanel id="k2">Press Home to jump to the first tab.</ytz-tabpanel>
+        <ytz-tabpanel id="k3">Press End to jump to the last tab.</ytz-tabpanel>
+        <ytz-tabpanel id="k4">Navigation wraps from last to first and vice versa.</ytz-tabpanel>
+      </ytz-tabs>
+    </section>
+
+    <!-- API Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">ytz-tabs Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>value</code></td>
+            <td class="pa2">string</td>
+            <td class="pa2">ID of the currently selected panel</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>orientation</code></td>
+            <td class="pa2">"horizontal" | "vertical"</td>
+            <td class="pa2">Arrow key direction (default: horizontal)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">ytz-tab Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>panel</code></td>
+            <td class="pa2">string</td>
+            <td class="pa2">ID of the associated tabpanel (required)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">ytz-tabpanel Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>id</code></td>
+            <td class="pa2">string</td>
+            <td class="pa2">Panel identifier, must match a tab's panel attribute</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Target</th>
+            <th class="pa2 tl">Detail</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>change</code></td>
+            <td class="pa2">ytz-tabs</td>
+            <td class="pa2"><code>{ value: string }</code></td>
+            <td class="pa2">Fired when active tab changes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">ARIA Attributes (Auto-managed)</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Element</th>
+            <th class="pa2 tl">ARIA</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>ytz-tabs</code></td>
+            <td class="pa2"><code>role="tablist"</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>ytz-tab</code></td>
+            <td class="pa2"><code>role="tab"</code>, <code>aria-selected</code>, <code>aria-controls</code>, <code>tabindex</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>ytz-tabpanel</code></td>
+            <td class="pa2"><code>role="tabpanel"</code>, <code>aria-labelledby</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Tabs, Tab, TabPanel } from '@yetzirah/react'
+
+function Settings() {
+  const [activeTab, setActiveTab] = useState('account')
+
+  return (
+    &lt;Tabs value={activeTab} onChange={setActiveTab}&gt;
+      &lt;div className="flex"&gt;
+        &lt;Tab panel="account"&gt;Account&lt;/Tab&gt;
+        &lt;Tab panel="password"&gt;Password&lt;/Tab&gt;
+        &lt;Tab panel="notifications"&gt;Notifications&lt;/Tab&gt;
+      &lt;/div&gt;
+      &lt;TabPanel id="account"&gt;Account settings...&lt;/TabPanel&gt;
+      &lt;TabPanel id="password"&gt;Password settings...&lt;/TabPanel&gt;
+      &lt;TabPanel id="notifications"&gt;Notification settings...&lt;/TabPanel&gt;
+    &lt;/Tabs&gt;
+  )
+}
+
+// Vertical tabs
+&lt;Tabs orientation="vertical" value={tab} onChange={setTab}&gt;
+  ...
+&lt;/Tabs&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Migrating from MUI Tabs</h2>
+
+      <div class="flex flex-wrap nl2 nr2">
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">MUI</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Tabs value={value} onChange={handleChange}&gt;
+  &lt;Tab label="Item One" /&gt;
+  &lt;Tab label="Item Two" /&gt;
+&lt;/Tabs&gt;
+&lt;TabPanel value={value} index={0}&gt;
+  Content One
+&lt;/TabPanel&gt;
+&lt;TabPanel value={value} index={1}&gt;
+  Content Two
+&lt;/TabPanel&gt;</code></pre>
+        </div>
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">Yetzirah</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Tabs value={value} onChange={setValue}&gt;
+  &lt;Tab panel="one"&gt;Item One&lt;/Tab&gt;
+  &lt;Tab panel="two"&gt;Item Two&lt;/Tab&gt;
+  &lt;TabPanel id="one"&gt;
+    Content One
+  &lt;/TabPanel&gt;
+  &lt;TabPanel id="two"&gt;
+    Content Two
+  &lt;/TabPanel&gt;
+&lt;/Tabs&gt;</code></pre>
+        </div>
+      </div>
+
+      <h3 class="f5 fw6 mb2">Key Differences</h3>
+      <table class="collapse ba b--light-gray w-100 mb3">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">MUI</th>
+            <th class="pa2 tl">Yetzirah</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>value={0}</code> (index)</td>
+            <td class="pa2"><code>value="panel-id"</code> (string ID)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>onChange={(e, val) => ...}</code></td>
+            <td class="pa2"><code>onChange={val => ...}</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>&lt;Tab label="..." /&gt;</code></td>
+            <td class="pa2"><code>&lt;Tab panel="id"&gt;...&lt;/Tab&gt;</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>&lt;TabPanel value={v} index={0}&gt;</code></td>
+            <td class="pa2"><code>&lt;TabPanel id="panel-id"&gt;</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>variant="scrollable"</code></td>
+            <td class="pa2">Use CSS <code>overflow-x: auto</code></td>
+          </tr>
+          <tr>
+            <td class="pa2"><code>orientation="vertical"</code></td>
+            <td class="pa2"><code>orientation="vertical"</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="lh-copy f6 gray">
+        Key difference: Yetzirah uses string IDs to link tabs and panels, making the relationship explicit.
+        Panels are children of the tabs container, not separate components.
+      </p>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
