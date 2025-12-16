@@ -11,6 +11,7 @@
 export { VERSION } from '@yetzirah/core'
 
 // Components
+export { Accordion, AccordionItem } from './accordion.js'
 export { Button } from './button.js'
 export { Disclosure } from './disclosure.js'
 export { Dialog } from './dialog.js'
