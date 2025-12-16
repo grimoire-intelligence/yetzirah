@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Popover Component - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    /* Demo layout */
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    /* Basic popover content styling - users customize this */
+    [slot="content"] {
+      z-index: 1000;
+    }
+
+    /* Hover state for menu items */
+    .menu-item:hover {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Popover</h1>
+    <p class="f5 lh-copy gray mt0">
+      Click-triggered positioned content for menus, forms, and interactive overlays.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Click the button to toggle the popover. Click outside or press
+        <kbd class="ph1 pv1 bg-light-gray br1 f6">Escape</kbd> to close.
+      </p>
+
+      <div class="mb3">
+        <ytz-popover>
+          <button class="ph3 pv2 br2 bg-blue white bn pointer">
+            Click me
+          </button>
+          <div slot="content" class="pa3 bg-white shadow-2 br2 ba b--light-gray">
+            <p class="ma0 mb2 fw5">Popover Title</p>
+            <p class="ma0 f6 gray">This is interactive popover content.</p>
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-popover&gt;
+  &lt;button class="ph3 pv2 br2 bg-blue white bn pointer"&gt;
+    Click me
+  &lt;/button&gt;
+  &lt;div slot="content" class="pa3 bg-white shadow-2 br2"&gt;
+    &lt;p class="fw5"&gt;Popover Title&lt;/p&gt;
+    &lt;p&gt;Popover content here.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/ytz-popover&gt;</code></pre>
+    </section>
+
+    <!-- Placements -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Placements</h2>
+      <p class="lh-copy mb3">
+        Use the <code class="bg-near-white ph1">placement</code> attribute to position
+        the popover. Default is <code class="bg-near-white ph1">"bottom"</code>.
+        It will automatically flip if there's not enough space.
+      </p>
+
+      <div class="flex flex-wrap items-center mb3" style="gap: 1rem;">
+        <ytz-popover placement="top">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Top</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Top placement
+          </div>
+        </ytz-popover>
+
+        <ytz-popover placement="bottom">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Bottom</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Bottom placement (default)
+          </div>
+        </ytz-popover>
+
+        <ytz-popover placement="left">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Left</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Left placement
+          </div>
+        </ytz-popover>
+
+        <ytz-popover placement="right">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Right</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Right placement
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-popover placement="top"&gt;...&lt;/ytz-popover&gt;
+&lt;ytz-popover placement="bottom"&gt;...&lt;/ytz-popover&gt;
+&lt;ytz-popover placement="left"&gt;...&lt;/ytz-popover&gt;
+&lt;ytz-popover placement="right"&gt;...&lt;/ytz-popover&gt;</code></pre>
+    </section>
+
+    <!-- Interactive Content -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Interactive Content</h2>
+      <p class="lh-copy mb3">
+        Unlike tooltips, popovers can contain interactive elements like forms,
+        buttons, and links. Focus is automatically moved to the first focusable
+        element when the popover opens.
+      </p>
+
+      <div class="mb3">
+        <ytz-popover placement="bottom">
+          <button class="ph3 pv2 br2 bg-blue white bn pointer">
+            Settings
+          </button>
+          <div slot="content" class="pa3 bg-white shadow-2 br2 ba b--light-gray w5">
+            <h3 class="f5 fw6 mt0 mb3">Preferences</h3>
+            <label class="db mb3">
+              <input type="checkbox" class="mr2">
+              Enable notifications
+            </label>
+            <label class="db mb3">
+              <input type="checkbox" class="mr2" checked>
+              Dark mode
+            </label>
+            <label class="db mb3">
+              <span class="db mb1 f6 gray">Language</span>
+              <select class="w-100 pa2 br2 ba b--light-gray">
+                <option>English</option>
+                <option>Spanish</option>
+                <option>French</option>
+              </select>
+            </label>
+            <div class="flex justify-end">
+              <button onclick="this.closest('ytz-popover').open = false"
+                      class="ph3 pv2 br2 bg-blue white bn pointer f6">
+                Save
+              </button>
+            </div>
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-popover placement="bottom"&gt;
+  &lt;button&gt;Settings&lt;/button&gt;
+  &lt;div slot="content" class="pa3 bg-white shadow-2"&gt;
+    &lt;h3&gt;Preferences&lt;/h3&gt;
+    &lt;label&gt;
+      &lt;input type="checkbox"&gt; Enable notifications
+    &lt;/label&gt;
+    &lt;button onclick="this.closest('ytz-popover').open = false"&gt;
+      Save
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/ytz-popover&gt;</code></pre>
+    </section>
+
+    <!-- Dropdown Menu Pattern -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Dropdown Menu Pattern</h2>
+      <p class="lh-copy mb3">
+        Create simple dropdown menus with popover. For complex menus with
+        keyboard navigation (arrow keys), use <code class="bg-near-white ph1">&lt;ytz-menu&gt;</code>.
+      </p>
+
+      <div class="mb3">
+        <ytz-popover placement="bottom">
+          <button class="ph3 pv2 br2 bg-white ba b--light-gray pointer flex items-center">
+            Actions
+            <span class="ml2 f7">&#9660;</span>
+          </button>
+          <div slot="content" class="bg-white shadow-2 br2 ba b--light-gray overflow-hidden" style="min-width: 150px;">
+            <button onclick="alert('Edit clicked'); this.closest('ytz-popover').open = false"
+                    class="menu-item db w-100 pa3 tl bg-transparent bn pointer bb b--light-gray">
+              Edit
+            </button>
+            <button onclick="alert('Duplicate clicked'); this.closest('ytz-popover').open = false"
+                    class="menu-item db w-100 pa3 tl bg-transparent bn pointer bb b--light-gray">
+              Duplicate
+            </button>
+            <button onclick="alert('Archive clicked'); this.closest('ytz-popover').open = false"
+                    class="menu-item db w-100 pa3 tl bg-transparent bn pointer bb b--light-gray">
+              Archive
+            </button>
+            <button onclick="alert('Delete clicked'); this.closest('ytz-popover').open = false"
+                    class="menu-item db w-100 pa3 tl bg-transparent bn pointer red">
+              Delete
+            </button>
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-popover placement="bottom"&gt;
+  &lt;button&gt;Actions &#9660;&lt;/button&gt;
+  &lt;div slot="content" class="bg-white shadow-2 br2"&gt;
+    &lt;button onclick="...; this.closest('ytz-popover').open = false"&gt;
+      Edit
+    &lt;/button&gt;
+    &lt;button onclick="..."&gt;Duplicate&lt;/button&gt;
+    &lt;button onclick="..."&gt;Delete&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/ytz-popover&gt;</code></pre>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+      <p class="lh-copy mb3">
+        Control popovers via JavaScript using the <code class="bg-near-white ph1">open</code>
+        property or the <code class="bg-near-white ph1">show()</code>,
+        <code class="bg-near-white ph1">hide()</code>, and
+        <code class="bg-near-white ph1">toggle()</code> methods.
+      </p>
+
+      <div class="mb3">
+        <button onclick="document.getElementById('prog-popover').show()"
+                class="ph3 pv2 br2 bg-blue white bn pointer mr2">
+          Open
+        </button>
+        <button onclick="document.getElementById('prog-popover').hide()"
+                class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer mr2">
+          Close
+        </button>
+        <button onclick="document.getElementById('prog-popover').toggle()"
+                class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer">
+          Toggle
+        </button>
+      </div>
+
+      <div class="mb3">
+        <ytz-popover id="prog-popover">
+          <button class="ph3 pv2 br2 bg-green white bn pointer">
+            Target Button
+          </button>
+          <div slot="content" class="pa3 bg-white shadow-2 br2 ba b--light-gray">
+            Controlled popover content
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const popover = document.getElementById('my-popover')
+
+// Methods
+popover.show()    // Open
+popover.hide()    // Close
+popover.toggle()  // Toggle
+
+// Property access
+popover.open = true   // Open
+popover.open = false  // Close
+
+// Check state
+if (popover.open) { ... }</code></pre>
+    </section>
+
+    <!-- Custom Offset -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Custom Offset</h2>
+      <p class="lh-copy mb3">
+        The <code class="bg-near-white ph1">offset</code> attribute controls the gap
+        between the trigger and popover content. Default is 8px.
+      </p>
+
+      <div class="flex flex-wrap items-center mb3" style="gap: 2rem;">
+        <ytz-popover offset="4">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">4px offset</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Close to trigger
+          </div>
+        </ytz-popover>
+
+        <ytz-popover offset="8">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">8px (default)</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Default distance
+          </div>
+        </ytz-popover>
+
+        <ytz-popover offset="24">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">24px offset</button>
+          <div slot="content" class="pa2 bg-dark-gray white br2 f6">
+            Far from trigger
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-popover offset="4"&gt;...&lt;/ytz-popover&gt;
+&lt;ytz-popover offset="24"&gt;...&lt;/ytz-popover&gt;</code></pre>
+    </section>
+
+    <!-- Keyboard & Focus -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Keyboard & Focus</h2>
+      <p class="lh-copy mb3">
+        Popovers provide full keyboard accessibility:
+      </p>
+      <ul class="lh-copy pl3 mb3">
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Enter</kbd> / <kbd class="ph2 pv1 bg-light-gray br1 f6">Space</kbd> - Toggle popover (on trigger)</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Escape</kbd> - Close popover and return focus to trigger</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Tab</kbd> - Navigate within popover content</li>
+        <li>Focus automatically moves to first focusable element on open</li>
+      </ul>
+
+      <div class="mb3 pa3 bg-near-white br2">
+        <p class="f6 gray mb2">Try tabbing to the button and pressing Enter:</p>
+        <ytz-popover>
+          <button class="ph3 pv2 br2 bg-purple white bn pointer">
+            Keyboard Test
+          </button>
+          <div slot="content" class="pa3 bg-white shadow-2 br2 ba b--light-gray">
+            <p class="ma0 mb2">Press Escape to close and return focus.</p>
+            <input type="text" class="w-100 pa2 br2 ba b--light-gray mb2" placeholder="First focusable">
+            <button class="ph3 pv2 br2 bg-blue white bn pointer">Submit</button>
+          </div>
+        </ytz-popover>
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Default</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>open</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2"><code>false</code></td>
+            <td class="pa2">Controls visibility</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>placement</code></td>
+            <td class="pa2">String</td>
+            <td class="pa2"><code>"bottom"</code></td>
+            <td class="pa2">Position: "top", "bottom", "left", "right"</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>offset</code></td>
+            <td class="pa2">Number</td>
+            <td class="pa2"><code>8</code></td>
+            <td class="pa2">Gap between trigger and content in pixels</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Methods</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Method</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>show()</code></td>
+            <td class="pa2">Open the popover</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>hide()</code></td>
+            <td class="pa2">Close the popover</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>toggle()</code></td>
+            <td class="pa2">Toggle open/closed state</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>show</code></td>
+            <td class="pa2">Fired when popover opens</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>hide</code></td>
+            <td class="pa2">Fired when popover closes</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">ARIA</h3>
+      <ul class="lh-copy pl3 mb4">
+        <li>Trigger gets <code class="bg-near-white ph1">aria-haspopup="dialog"</code></li>
+        <li>Trigger gets <code class="bg-near-white ph1">aria-expanded</code> (true/false)</li>
+        <li>Trigger gets <code class="bg-near-white ph1">aria-controls</code> pointing to content</li>
+        <li>Content gets <code class="bg-near-white ph1">data-placement</code> with actual placement</li>
+      </ul>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Popover } from '@yetzirah/react'
+
+// Controlled mode
+function App() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    &lt;Popover
+      open={open}
+      onOpenChange={setOpen}
+      placement="bottom"
+    &gt;
+      &lt;button&gt;Open menu&lt;/button&gt;
+      &lt;div className="pa3 bg-white shadow-2 br2"&gt;
+        &lt;p&gt;Popover content&lt;/p&gt;
+        &lt;button onClick={() =&gt; setOpen(false)}&gt;
+          Close
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/Popover&gt;
+  )
+}
+
+// Uncontrolled - manages its own state
+&lt;Popover placement="bottom"&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+  &lt;div&gt;Popover content&lt;/div&gt;
+&lt;/Popover&gt;
+
+// With callbacks
+&lt;Popover
+  onShow={() =&gt; console.log('opened')}
+  onHide={() =&gt; console.log('closed')}
+&gt;
+  &lt;button&gt;Tracked popover&lt;/button&gt;
+  &lt;div&gt;Content&lt;/div&gt;
+&lt;/Popover&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Migrating from MUI Popover</h2>
+
+      <div class="flex flex-wrap nl2 nr2 mb4">
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">MUI</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Button onClick={handleClick}&gt;
+  Open Popover
+&lt;/Button&gt;
+&lt;Popover
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'left',
+  }}
+&gt;
+  &lt;Box sx={{ p: 2 }}&gt;
+    Popover content
+  &lt;/Box&gt;
+&lt;/Popover&gt;</code></pre>
+        </div>
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">Yetzirah</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Popover
+  open={open}
+  onOpenChange={setOpen}
+  placement="bottom"
+&gt;
+  &lt;button&gt;Open Popover&lt;/button&gt;
+  &lt;div className="pa3"&gt;
+    Popover content
+  &lt;/div&gt;
+&lt;/Popover&gt;</code></pre>
+        </div>
+      </div>
+
+      <h4 class="f6 fw6 mb2">Prop Mapping</h4>
+      <table class="collapse ba b--light-gray w-100 mb3">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">MUI Prop</th>
+            <th class="pa2 tl">Yetzirah Equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>open</code></td>
+            <td class="pa2"><code>open</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>anchorEl</code></td>
+            <td class="pa2">First child (trigger)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>onClose</code></td>
+            <td class="pa2"><code>onOpenChange</code> / <code>onHide</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>anchorOrigin</code></td>
+            <td class="pa2"><code>placement</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>transformOrigin</code></td>
+            <td class="pa2">CSS transforms</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>TransitionComponent</code></td>
+            <td class="pa2">CSS transitions on content</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Tooltip vs Popover -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Tooltip vs Popover</h2>
+      <p class="lh-copy mb3">
+        When to use each component:
+      </p>
+      <table class="w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl bb b--light-gray">Use Case</th>
+            <th class="pa2 tl bb b--light-gray">Component</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pa2 bb b--light-gray">Brief hint text (labels, descriptions)</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-tooltip&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray">Show on hover/focus</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-tooltip&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray">Non-interactive content</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-tooltip&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray">Rich interactive content</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-popover&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray">Click to open/close</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-popover&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray">Forms, buttons, links inside</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-popover&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray">Simple dropdown menu</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;ytz-popover&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2">Menu with arrow key navigation</td>
+            <td class="pa2"><code>&lt;ytz-menu&gt;</code></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
