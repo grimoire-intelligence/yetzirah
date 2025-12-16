@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tooltip Component - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    /* Demo layout */
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    /* Basic tooltip styling - users customize this */
+    [role="tooltip"] {
+      background: #333;
+      color: white;
+      padding: 0.375rem 0.625rem;
+      border-radius: 4px;
+      font-size: 0.875rem;
+      z-index: 1000;
+      max-width: 250px;
+      pointer-events: auto;
+    }
+
+    /* Arrow examples */
+    [role="tooltip"][data-placement="top"]::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: #333 transparent transparent transparent;
+    }
+    [role="tooltip"][data-placement="bottom"]::after {
+      content: '';
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      margin-left: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent #333 transparent;
+    }
+    [role="tooltip"][data-placement="left"]::after {
+      content: '';
+      position: absolute;
+      left: 100%;
+      top: 50%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent transparent transparent #333;
+    }
+    [role="tooltip"][data-placement="right"]::after {
+      content: '';
+      position: absolute;
+      right: 100%;
+      top: 50%;
+      margin-top: -5px;
+      border-width: 5px;
+      border-style: solid;
+      border-color: transparent #333 transparent transparent;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Tooltip</h1>
+    <p class="f5 lh-copy gray mt0">
+      Positioned hint text on hover/focus with configurable placement and delay.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Wrap any element with <code class="bg-near-white ph1">&lt;ytz-tooltip&gt;</code>.
+        The first child is the trigger, and the <code class="bg-near-white ph1">[slot="content"]</code>
+        element contains the tooltip text.
+      </p>
+
+      <div class="mb3">
+        <ytz-tooltip>
+          <button class="ph3 pv2 br2 bg-blue white bn pointer">
+            Hover me
+          </button>
+          <span slot="content">This is a helpful tooltip!</span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tooltip&gt;
+  &lt;button class="ph3 pv2 br2 bg-blue white bn pointer"&gt;
+    Hover me
+  &lt;/button&gt;
+  &lt;span slot="content"&gt;This is a helpful tooltip!&lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Placements -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Placements</h2>
+      <p class="lh-copy mb3">
+        Use the <code class="bg-near-white ph1">placement</code> attribute to position
+        the tooltip. It will automatically flip if there's not enough space.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-tooltip placement="top">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Top</button>
+          <span slot="content">Tooltip on top</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip placement="bottom">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Bottom</button>
+          <span slot="content">Tooltip on bottom</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip placement="left">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Left</button>
+          <span slot="content">Tooltip on left</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip placement="right">
+          <button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">Right</button>
+          <span slot="content">Tooltip on right</span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tooltip placement="top"&gt;...&lt;/ytz-tooltip&gt;
+&lt;ytz-tooltip placement="bottom"&gt;...&lt;/ytz-tooltip&gt;
+&lt;ytz-tooltip placement="left"&gt;...&lt;/ytz-tooltip&gt;
+&lt;ytz-tooltip placement="right"&gt;...&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Show Delay -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Show Delay</h2>
+      <p class="lh-copy mb3">
+        Use the <code class="bg-near-white ph1">delay</code> attribute to add a delay
+        before the tooltip appears on hover. This prevents tooltips from appearing
+        when quickly moving the mouse across the page.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-tooltip delay="0">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">No delay</button>
+          <span slot="content">Appears immediately</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip delay="300">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">300ms delay</button>
+          <span slot="content">Waited 300ms to show</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip delay="500">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">500ms delay</button>
+          <span slot="content">Waited 500ms to show</span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tooltip delay="500"&gt;
+  &lt;button&gt;Hover me&lt;/button&gt;
+  &lt;span slot="content"&gt;Delayed tooltip&lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Custom Offset -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Custom Offset</h2>
+      <p class="lh-copy mb3">
+        The <code class="bg-near-white ph1">offset</code> attribute controls the gap
+        between the trigger and tooltip. Default is 8px.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-tooltip offset="4">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">4px offset</button>
+          <span slot="content">Close to trigger</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip offset="8">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">8px offset (default)</button>
+          <span slot="content">Default distance</span>
+        </ytz-tooltip>
+
+        <ytz-tooltip offset="16">
+          <button class="ph3 pv2 br2 ba b--gray bg-transparent pointer">16px offset</button>
+          <span slot="content">More space from trigger</span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tooltip offset="16"&gt;
+  &lt;button&gt;Hover me&lt;/button&gt;
+  &lt;span slot="content"&gt;Farther away&lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Focus Support -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Focus Support</h2>
+      <p class="lh-copy mb3">
+        Tooltips show on focus for keyboard accessibility. Unlike hover, focus
+        shows the tooltip immediately without delay.
+      </p>
+
+      <div class="mb3">
+        <p class="f6 gray mb2">Tab to the input to see the tooltip on focus:</p>
+        <ytz-tooltip placement="right" delay="300">
+          <input
+            type="text"
+            class="input-reset pa2 ba b--light-gray br2"
+            placeholder="Focus me with Tab"
+          >
+          <span slot="content">Tooltips show on focus too! No delay for accessibility.</span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tooltip&gt;
+  &lt;input type="text" placeholder="Focus me"&gt;
+  &lt;span slot="content"&gt;Keyboard accessible!&lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Auto-flip -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Auto-flip</h2>
+      <p class="lh-copy mb3">
+        Tooltips automatically flip when there's not enough space in the
+        preferred direction. The <code class="bg-near-white ph1">data-placement</code>
+        attribute on the tooltip content reflects the actual placement.
+      </p>
+
+      <div class="flex justify-end mb3">
+        <ytz-tooltip placement="right">
+          <button class="ph3 pv2 br2 bg-orange white bn pointer">
+            Near right edge (prefers right)
+          </button>
+          <span slot="content">I flip to the left when there's no room!</span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* CSS can target actual placement */
+[data-placement="left"]::after { /* arrow pointing right */ }
+[data-placement="right"]::after { /* arrow pointing left */ }</code></pre>
+    </section>
+
+    <!-- Rich Content -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Rich Content</h2>
+      <p class="lh-copy mb3">
+        Tooltip content can contain HTML. Users can hover over the tooltip
+        content without it disappearing.
+      </p>
+
+      <div class="mb3">
+        <ytz-tooltip placement="bottom">
+          <button class="ph3 pv2 br2 bg-purple white bn pointer">
+            Hover for details
+          </button>
+          <span slot="content">
+            <strong class="db mb1">Pro Tip</strong>
+            <span class="f7">You can hover over this tooltip content without it disappearing!</span>
+          </span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-tooltip&gt;
+  &lt;button&gt;Hover for details&lt;/button&gt;
+  &lt;span slot="content"&gt;
+    &lt;strong&gt;Title&lt;/strong&gt;&lt;br&gt;
+    &lt;span class="f7"&gt;Detailed description&lt;/span&gt;
+  &lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Styling -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Styling</h2>
+      <p class="lh-copy mb3">
+        Yetzirah provides no default styles. Add your own with CSS targeting
+        <code class="bg-near-white ph1">[role="tooltip"]</code>.
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Basic dark tooltip */
+[role="tooltip"] {
+  background: #333;
+  color: white;
+  padding: 0.375rem 0.625rem;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  z-index: 1000;
+  max-width: 250px;
+}
+
+/* Arrow based on actual placement */
+[role="tooltip"][data-placement="top"]::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-top-color: #333;
+}
+
+[role="tooltip"][data-placement="bottom"]::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border: 5px solid transparent;
+  border-bottom-color: #333;
+}</code></pre>
+    </section>
+
+    <!-- API Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Default</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>placement</code></td>
+            <td class="pa2">String</td>
+            <td class="pa2"><code>"top"</code></td>
+            <td class="pa2">Position: "top", "bottom", "left", "right"</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>delay</code></td>
+            <td class="pa2">Number</td>
+            <td class="pa2"><code>0</code></td>
+            <td class="pa2">Show delay in milliseconds (hover only)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>offset</code></td>
+            <td class="pa2">Number</td>
+            <td class="pa2"><code>8</code></td>
+            <td class="pa2">Gap between trigger and tooltip in pixels</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>show</code></td>
+            <td class="pa2">Fired when tooltip becomes visible</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>hide</code></td>
+            <td class="pa2">Fired when tooltip is hidden</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">ARIA</h3>
+      <ul class="lh-copy pl3 mb4">
+        <li>Trigger gets <code class="bg-near-white ph1">aria-describedby</code> pointing to tooltip</li>
+        <li>Tooltip content gets <code class="bg-near-white ph1">role="tooltip"</code></li>
+        <li>Content gets <code class="bg-near-white ph1">data-placement</code> with actual placement</li>
+      </ul>
+
+      <h3 class="f5 fw6 mb2">JavaScript API</h3>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const tooltip = document.querySelector('ytz-tooltip')
+
+// Read properties
+console.log(tooltip.placement) // "top"
+console.log(tooltip.delay)     // 0
+console.log(tooltip.offset)    // 8
+
+// Set properties
+tooltip.placement = 'bottom'
+tooltip.delay = 300
+
+// Show/hide programmatically
+tooltip.show()
+tooltip.hide()
+
+// Listen for events
+tooltip.addEventListener('show', () => console.log('Tooltip shown'))
+tooltip.addEventListener('hide', () => console.log('Tooltip hidden'))</code></pre>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Tooltip, Button } from '@yetzirah/react'
+
+function App() {
+  return (
+    &lt;Tooltip content="Helpful hint" placement="top"&gt;
+      &lt;Button&gt;Hover me&lt;/Button&gt;
+    &lt;/Tooltip&gt;
+  )
+}
+
+// With callbacks
+&lt;Tooltip
+  content="Tracked tooltip"
+  placement="bottom"
+  delay={300}
+  onShow={() =&gt; analytics.track('tooltip_shown')}
+  onHide={() =&gt; analytics.track('tooltip_hidden')}
+&gt;
+  &lt;button&gt;Hover me&lt;/button&gt;
+&lt;/Tooltip&gt;
+
+// With className for tooltip styling
+&lt;Tooltip content="Styled tooltip" className="custom-tooltip"&gt;
+  &lt;button&gt;Hover me&lt;/button&gt;
+&lt;/Tooltip&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Migrating from MUI Tooltip</h2>
+
+      <div class="flex flex-wrap nl2 nr2">
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">MUI</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Tooltip title="Hint text"&gt;
+  &lt;Button&gt;Hover&lt;/Button&gt;
+&lt;/Tooltip&gt;
+
+&lt;Tooltip
+  title="Delayed"
+  placement="bottom"
+  enterDelay={500}
+  arrow
+&gt;
+  &lt;Button&gt;Hover&lt;/Button&gt;
+&lt;/Tooltip&gt;</code></pre>
+        </div>
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">Yetzirah</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Tooltip content="Hint text"&gt;
+  &lt;Button&gt;Hover&lt;/Button&gt;
+&lt;/Tooltip&gt;
+
+&lt;Tooltip
+  content="Delayed"
+  placement="bottom"
+  delay={500}
+&gt;
+  &lt;Button&gt;Hover&lt;/Button&gt;
+&lt;/Tooltip&gt;
+{/* Arrow via CSS */}</code></pre>
+        </div>
+      </div>
+
+      <h4 class="f6 fw6 mb2">Prop Mapping</h4>
+      <table class="collapse ba b--light-gray w-100 mb3">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">MUI Prop</th>
+            <th class="pa2 tl">Yetzirah Equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>title</code></td>
+            <td class="pa2"><code>content</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>placement</code></td>
+            <td class="pa2"><code>placement</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>enterDelay</code></td>
+            <td class="pa2"><code>delay</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>arrow</code></td>
+            <td class="pa2">CSS (see styling section)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>open</code> (controlled)</td>
+            <td class="pa2"><code>show()</code> / <code>hide()</code> methods</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
