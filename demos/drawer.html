@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawer - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    /* USER-PROVIDED: Drawer backdrop and positioning */
+    ytz-drawer {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      display: none;
+    }
+    ytz-drawer:not([hidden]) {
+      display: flex;
+    }
+    /* Anchor positioning */
+    ytz-drawer[anchor="left"] { justify-content: flex-start; }
+    ytz-drawer[anchor="right"] { justify-content: flex-end; }
+    ytz-drawer[anchor="top"] { align-items: flex-start; }
+    ytz-drawer[anchor="bottom"] { align-items: flex-end; }
+    /* Drawer panel sizing */
+    ytz-drawer[anchor="left"] > *,
+    ytz-drawer[anchor="right"] > * { height: 100%; }
+    ytz-drawer[anchor="top"] > *,
+    ytz-drawer[anchor="bottom"] > * { width: 100%; }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Drawer</h1>
+    <p class="f5 lh-copy gray mt0">
+      Slide-in panel from screen edges. Built on Dialog's modal behavior with
+      focus trap, scroll lock, escape-to-close, and backdrop dismiss.
+    </p>
+  </header>
+
+  <main>
+    <!-- Left Drawer -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Left Drawer (Default)</h2>
+      <p class="lh-copy mb3">
+        Navigation drawers typically slide from the left. This is the default anchor.
+      </p>
+
+      <button
+        onclick="document.getElementById('left-drawer').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Left Drawer
+      </button>
+
+      <ytz-drawer id="left-drawer" anchor="left">
+        <nav class="w5 bg-white shadow-2 pa4 overflow-auto">
+          <h2 class="f4 fw6 mt0 mb4">Navigation</h2>
+          <ul class="list pa0 ma0">
+            <li class="mb3"><a href="#" class="link blue db pv1">Home</a></li>
+            <li class="mb3"><a href="#" class="link blue db pv1">Products</a></li>
+            <li class="mb3"><a href="#" class="link blue db pv1">About</a></li>
+            <li class="mb3"><a href="#" class="link blue db pv1">Contact</a></li>
+          </ul>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="mt4 ph3 pv2 br2 ba b--blue blue bg-transparent pointer w-100"
+          >
+            Close
+          </button>
+        </nav>
+      </ytz-drawer>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-drawer id="nav" anchor="left"&gt;
+  &lt;nav class="w5 bg-white pa4"&gt;
+    &lt;a href="/home"&gt;Home&lt;/a&gt;
+    &lt;button onclick="this.closest('ytz-drawer').close()"&gt;Close&lt;/button&gt;
+  &lt;/nav&gt;
+&lt;/ytz-drawer&gt;
+
+// Open
+document.getElementById('nav').open = true</code></pre>
+    </section>
+
+    <!-- Right Drawer -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Right Drawer</h2>
+      <p class="lh-copy mb3">
+        Settings panels, details views, or secondary actions often use right drawers.
+      </p>
+
+      <button
+        onclick="document.getElementById('right-drawer').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Settings
+      </button>
+
+      <ytz-drawer id="right-drawer" anchor="right">
+        <aside class="w5 bg-white shadow-2 pa4 overflow-auto">
+          <h2 class="f4 fw6 mt0 mb4">Settings</h2>
+          <label class="db mb3">
+            <span class="db mb1 fw5">Theme</span>
+            <select class="w-100 pa2 br2 ba b--light-gray">
+              <option>Light</option>
+              <option>Dark</option>
+              <option>System</option>
+            </select>
+          </label>
+          <label class="db mb3">
+            <span class="db mb1 fw5">Language</span>
+            <select class="w-100 pa2 br2 ba b--light-gray">
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+            </select>
+          </label>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="mt4 ph3 pv2 br2 bn white bg-blue pointer w-100"
+          >
+            Save & Close
+          </button>
+        </aside>
+      </ytz-drawer>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-drawer anchor="right"&gt;
+  &lt;aside class="w5 bg-white pa4"&gt;
+    Settings content...
+  &lt;/aside&gt;
+&lt;/ytz-drawer&gt;</code></pre>
+    </section>
+
+    <!-- Top Drawer -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Top Drawer</h2>
+      <p class="lh-copy mb3">
+        Notifications, search overlays, or alerts can slide from the top.
+      </p>
+
+      <button
+        onclick="document.getElementById('top-drawer').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Show Notification
+      </button>
+
+      <ytz-drawer id="top-drawer" anchor="top">
+        <div class="bg-dark-blue white pa4">
+          <div class="mw7 center flex justify-between items-center">
+            <div>
+              <p class="ma0 fw6">New message received</p>
+              <p class="ma0 mt1 f6 o-70">John Doe sent you a message 2 minutes ago</p>
+            </div>
+            <button
+              onclick="this.closest('ytz-drawer').close()"
+              class="ph3 pv2 br2 bg-white dark-blue bn pointer"
+            >
+              Dismiss
+            </button>
+          </div>
+        </div>
+      </ytz-drawer>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-drawer anchor="top"&gt;
+  &lt;div class="bg-dark-blue white pa4"&gt;
+    Notification content...
+  &lt;/div&gt;
+&lt;/ytz-drawer&gt;</code></pre>
+    </section>
+
+    <!-- Bottom Drawer -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Bottom Drawer</h2>
+      <p class="lh-copy mb3">
+        Mobile action sheets or additional controls often slide from the bottom.
+      </p>
+
+      <button
+        onclick="document.getElementById('bottom-drawer').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Share Options
+      </button>
+
+      <ytz-drawer id="bottom-drawer" anchor="bottom">
+        <div class="bg-white shadow-2 pa4 br3 br--top">
+          <h3 class="f5 fw6 mt0 mb3 tc">Share via</h3>
+          <div class="flex justify-center mb4">
+            <button class="mh2 pa3 br-100 bg-blue white bn pointer f4">&#9993;</button>
+            <button class="mh2 pa3 br-100 bg-green white bn pointer f4">&#128172;</button>
+            <button class="mh2 pa3 br-100 bg-light-purple white bn pointer f4">&#128206;</button>
+            <button class="mh2 pa3 br-100 bg-gold white bn pointer f4">&#9733;</button>
+          </div>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="w-100 pa3 br2 ba b--light-gray bg-transparent pointer"
+          >
+            Cancel
+          </button>
+        </div>
+      </ytz-drawer>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-drawer anchor="bottom"&gt;
+  &lt;div class="bg-white pa4 br3 br--top"&gt;
+    Action sheet content...
+  &lt;/div&gt;
+&lt;/ytz-drawer&gt;</code></pre>
+    </section>
+
+    <!-- Static Drawer -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Static Drawer (No Backdrop Dismiss)</h2>
+      <p class="lh-copy mb3">
+        Add the <code>static</code> attribute to prevent closing when clicking the backdrop.
+        User must click the close button or press Escape.
+      </p>
+
+      <button
+        onclick="document.getElementById('static-drawer').setAttribute('open', '')"
+        class="ph3 pv2 br2 bn white bg-blue pointer"
+      >
+        Open Static Drawer
+      </button>
+
+      <ytz-drawer id="static-drawer" anchor="right" static>
+        <div class="w5 bg-white shadow-2 pa4 overflow-auto">
+          <h2 class="f4 fw6 mt0 mb3">Important Action</h2>
+          <p class="lh-copy mb4">
+            This drawer won't close when clicking outside.
+            You must use the button below or press Escape.
+          </p>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="ph3 pv2 br2 bg-red white bn pointer w-100"
+          >
+            Close Drawer
+          </button>
+        </div>
+      </ytz-drawer>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-drawer static&gt;
+  &lt;!-- Backdrop clicks won't close --&gt;
+&lt;/ytz-drawer&gt;</code></pre>
+    </section>
+
+    <!-- Features -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Features</h2>
+
+      <ul class="lh-copy pl3">
+        <li class="mb2"><strong>Focus trap:</strong> Tab cycles within drawer</li>
+        <li class="mb2"><strong>Focus restore:</strong> Returns focus to trigger on close</li>
+        <li class="mb2"><strong>Escape to close:</strong> Press Escape to dismiss</li>
+        <li class="mb2"><strong>Backdrop click:</strong> Click outside to close (unless <code>static</code>)</li>
+        <li class="mb2"><strong>Scroll lock:</strong> Body scroll disabled while open</li>
+        <li class="mb2"><strong>ARIA:</strong> <code>role="dialog"</code>, <code>aria-modal="true"</code></li>
+        <li class="mb2"><strong>Edge anchoring:</strong> left, right, top, bottom</li>
+      </ul>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Drawer, Button } from '@yetzirah/react'
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false)
+
+  return (
+    &lt;&gt;
+      &lt;Button onClick={() =&gt; setMenuOpen(true)} className="ph3 pv2 br2 bn white bg-blue"&gt;
+        Open Menu
+      &lt;/Button&gt;
+
+      &lt;Drawer open={menuOpen} onClose={() =&gt; setMenuOpen(false)} anchor="left"&gt;
+        &lt;nav className="w5 bg-white pa4"&gt;
+          &lt;a href="/home"&gt;Home&lt;/a&gt;
+          &lt;a href="/about"&gt;About&lt;/a&gt;
+          &lt;Button onClick={() =&gt; setMenuOpen(false)}&gt;Close&lt;/Button&gt;
+        &lt;/nav&gt;
+      &lt;/Drawer&gt;
+    &lt;/&gt;
+  )
+}
+
+// Static drawer (no backdrop dismiss)
+&lt;Drawer open={open} onClose={handleClose} anchor="right" static&gt;
+  ...
+&lt;/Drawer&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Drawer&gt;</td>
+              <td class="pa2 code">&lt;ytz-drawer&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">open={true}</td>
+              <td class="pa2 code">open attribute</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">onClose={fn}</td>
+              <td class="pa2 code">close event</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">anchor="left"</td>
+              <td class="pa2 code">anchor="left"</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">variant="temporary"</td>
+              <td class="pa2">(default behavior)</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">variant="persistent"</td>
+              <td class="pa2 code">static attribute</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">ModalProps</td>
+              <td class="pa2">Behavior built-in</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">SlideProps</td>
+              <td class="pa2">CSS animations (user-provided)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Dialog vs Drawer -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Dialog vs Drawer</h2>
+      <p class="lh-copy mb3">
+        When to use each component:
+      </p>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">Use Case</th>
+              <th class="pa2 tl">Component</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2">Confirmation messages, alerts</td>
+              <td class="pa2 code">&lt;ytz-dialog&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2">Forms, focused content</td>
+              <td class="pa2 code">&lt;ytz-dialog&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2">Navigation menu</td>
+              <td class="pa2 code">&lt;ytz-drawer anchor="left"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2">Settings panel</td>
+              <td class="pa2 code">&lt;ytz-drawer anchor="right"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2">Mobile action sheet</td>
+              <td class="pa2 code">&lt;ytz-drawer anchor="bottom"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2">Detail/preview panel</td>
+              <td class="pa2 code">&lt;ytz-drawer anchor="right"&gt;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- API Reference -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Attributes</h3>
+      <table class="f6 w-100 collapse ba b--light-gray mb4">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Default</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">open</td>
+            <td class="pa2">boolean</td>
+            <td class="pa2">false</td>
+            <td class="pa2">Controls drawer visibility</td>
+          </tr>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">anchor</td>
+            <td class="pa2">string</td>
+            <td class="pa2">"left"</td>
+            <td class="pa2">Edge to slide from: left, right, top, bottom</td>
+          </tr>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">static</td>
+            <td class="pa2">boolean</td>
+            <td class="pa2">false</td>
+            <td class="pa2">Prevents backdrop click close</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="f6 w-100 collapse ba b--light-gray mb4">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">close</td>
+            <td class="pa2">Fired when drawer closes (bubbles)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Methods</h3>
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Method</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">show()</td>
+            <td class="pa2">Opens the drawer</td>
+          </tr>
+          <tr class="bt b--light-gray">
+            <td class="pa2 code">close()</td>
+            <td class="pa2">Closes the drawer</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Styling Notes -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Styling Notes</h2>
+      <p class="lh-copy mb3">
+        Yetzirah takes no styling opinions&mdash;you must provide positioning CSS.
+        Here's a minimal setup:
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Required: positioning and backdrop */
+ytz-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  display: none;
+}
+ytz-drawer:not([hidden]) {
+  display: flex;
+}
+
+/* Anchor positioning */
+ytz-drawer[anchor="left"] { justify-content: flex-start; }
+ytz-drawer[anchor="right"] { justify-content: flex-end; }
+ytz-drawer[anchor="top"] { align-items: flex-start; }
+ytz-drawer[anchor="bottom"] { align-items: flex-end; }
+
+/* Panel sizing */
+ytz-drawer[anchor="left"] > *,
+ytz-drawer[anchor="right"] > * { height: 100%; }
+ytz-drawer[anchor="top"] > *,
+ytz-drawer[anchor="bottom"] > * { width: 100%; }
+
+/* Optional: slide animations */
+@media (prefers-reduced-motion: no-preference) {
+  ytz-drawer > * {
+    transition: transform 0.2s ease-out;
+  }
+  ytz-drawer[anchor="left"]:not(:has([hidden])) > * { transform: translateX(0); }
+  ytz-drawer[anchor="left"][hidden] > * { transform: translateX(-100%); }
+  /* ... similar for other anchors */
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
