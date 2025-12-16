@@ -12,7 +12,7 @@ export { YtzButton } from './button.js'
 export { YtzDialog } from './dialog.js'
 export { YtzDisclosure } from './disclosure.js'
 export { YtzTabs, YtzTab, YtzTabPanel } from './tabs.js'
-// export { YtzTooltip } from './tooltip.js'
+export { YtzTooltip } from './tooltip.js'
 // export { YtzMenu, YtzMenuItem } from './menu.js'
 // export { YtzAutocomplete } from './autocomplete.js'
 
