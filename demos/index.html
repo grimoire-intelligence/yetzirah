@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yetzirah - Component Demos</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <style>
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <h1 class="f1 fw6 mb2">Yetzirah</h1>
+    <p class="f4 lh-copy gray mt0">The world of formation.</p>
+    <p class="f5 lh-copy">
+      AI-native, unstyled Web Components with Material behavior.
+      Zero dependencies, framework-agnostic, accessibility-first.
+    </p>
+  </header>
+
+  <main>
+    <section class="demo-section pv4">
+      <h2 class="f3 fw6 mb3">Component Demos</h2>
+      <p class="lh-copy mb3">
+        Each component has its own demo page showing usage examples and variations.
+        All demos work by opening the HTML file directly in a browser - no build step required.
+      </p>
+      
+      <nav>
+        <ul class="list pl0">
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Button</span>
+            <span class="f6 gray ml2">- Polymorphic button/anchor component</span>
+          </li>
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Disclosure</span>
+            <span class="f6 gray ml2">- Expandable content with aria-expanded</span>
+          </li>
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Dialog</span>
+            <span class="f6 gray ml2">- Modal dialog with focus management</span>
+          </li>
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Tabs</span>
+            <span class="f6 gray ml2">- Accessible tabbed interface</span>
+          </li>
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Tooltip</span>
+            <span class="f6 gray ml2">- Positioned tooltip with delay logic</span>
+          </li>
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Menu</span>
+            <span class="f6 gray ml2">- Positioned menu with keyboard navigation</span>
+          </li>
+          <li class="pv2">
+            <span class="gray">[Coming Soon]</span>
+            <span class="ml2">Autocomplete</span>
+            <span class="f6 gray ml2">- Text input with filtering and selection</span>
+          </li>
+        </ul>
+      </nav>
+    </section>
+
+    <section class="demo-section pv4">
+      <h2 class="f3 fw6 mb3">Philosophy</h2>
+      <ul class="lh-copy pl3">
+        <li class="mb2"><strong>Platform-native.</strong> Web Components extend the DOM rather than replacing it.</li>
+        <li class="mb2"><strong>AI-native.</strong> The entire framework fits in a single LLM context window.</li>
+        <li class="mb2"><strong>Framework-agnostic.</strong> Works with React, Vue, Svelte, Angular, or vanilla HTML.</li>
+        <li class="mb2"><strong>No-pinionated.</strong> Provides behavior and accessibility. You provide appearance.</li>
+        <li class="mb2"><strong>Readable source.</strong> Every component fits in a single file. Implementation is documentation.</li>
+      </ul>
+    </section>
+
+    <section class="demo-section pv4">
+      <h2 class="f3 fw6 mb3">Quick Start</h2>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code># Install via npm
+npm install @yetzirah/core
+
+# With React wrappers
+npm install @yetzirah/core @yetzirah/react</code></pre>
+
+      <h3 class="f5 fw6 mt4 mb2">Vanilla HTML</h3>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script type="module" src="https://cdn.yetzirah.dev/core.js"&gt;&lt;/script&gt;
+
+&lt;ytz-button href="/dashboard" class="ph3 pv2 br2 white bg-blue"&gt;
+  Go to Dashboard
+&lt;/ytz-button&gt;</code></pre>
+
+      <h3 class="f5 fw6 mt4 mb2">React</h3>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Button } from '@yetzirah/react'
+
+function App() {
+  return (
+    &lt;Button href="/dashboard" className="ph3 pv2 br2 white bg-blue"&gt;
+      Go to Dashboard
+    &lt;/Button&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      Yetzirah - The world of formation.
+      <a href="https://github.com/grimoire-intelligence/yetzirah" class="link blue">GitHub</a>
+    </p>
+  </footer>
+</body>
+</html>

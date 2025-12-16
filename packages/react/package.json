@@ -1,0 +1,45 @@
+{
+  "name": "@yetzirah/react",
+  "version": "0.1.0",
+  "description": "React wrappers for Yetzirah Web Components",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "keywords": [
+    "react",
+    "web-components",
+    "ui",
+    "accessibility",
+    "yetzirah"
+  ],
+  "author": "Grimoire Intelligence",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
+    "directory": "packages/react"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "@yetzirah/core": "workspace:*"
+  },
+  "sideEffects": false
+}

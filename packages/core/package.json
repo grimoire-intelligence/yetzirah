@@ -1,0 +1,74 @@
+{
+  "name": "@yetzirah/core",
+  "version": "0.1.0",
+  "description": "Web Components for behavioral UI patterns - zero dependencies, framework-agnostic",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./button": {
+      "types": "./dist/button.d.ts",
+      "import": "./dist/button.js",
+      "require": "./dist/button.cjs"
+    },
+    "./disclosure": {
+      "types": "./dist/disclosure.d.ts",
+      "import": "./dist/disclosure.js",
+      "require": "./dist/disclosure.cjs"
+    },
+    "./dialog": {
+      "types": "./dist/dialog.d.ts",
+      "import": "./dist/dialog.js",
+      "require": "./dist/dialog.cjs"
+    },
+    "./tabs": {
+      "types": "./dist/tabs.d.ts",
+      "import": "./dist/tabs.js",
+      "require": "./dist/tabs.cjs"
+    },
+    "./tooltip": {
+      "types": "./dist/tooltip.d.ts",
+      "import": "./dist/tooltip.js",
+      "require": "./dist/tooltip.cjs"
+    },
+    "./menu": {
+      "types": "./dist/menu.d.ts",
+      "import": "./dist/menu.js",
+      "require": "./dist/menu.cjs"
+    },
+    "./autocomplete": {
+      "types": "./dist/autocomplete.d.ts",
+      "import": "./dist/autocomplete.js",
+      "require": "./dist/autocomplete.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch"
+  },
+  "keywords": [
+    "web-components",
+    "ui",
+    "accessibility",
+    "a11y",
+    "material",
+    "headless"
+  ],
+  "author": "Grimoire Intelligence",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
+    "directory": "packages/core"
+  },
+  "sideEffects": false
+}

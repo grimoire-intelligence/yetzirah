@@ -1,2 +1,23 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+*.tgz
+
 # Lemegeton local state
 .lemegeton/
+
+# Claude Code local config
+.claude/
+.mcp.json
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
