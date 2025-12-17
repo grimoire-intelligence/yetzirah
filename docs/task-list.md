@@ -890,7 +890,7 @@ Derive from Listbox: add trigger button that shows selected value and opens list
 ---
 pr_id: PR-027
 title: Select React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
