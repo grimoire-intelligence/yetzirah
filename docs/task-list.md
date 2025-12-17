@@ -1222,17 +1222,17 @@ Create static HTML demo page showing popover component with various content.
 ---
 ## Block 13: Final Documentation & Verification (Depends on all components)
 
-### PR-038: MUI Rosetta Stone Documentation
+### PR-038: README & MUI Rosetta Stone Documentation
 ---
 pr_id: PR-038
-title: MUI Rosetta Stone Documentation
+title: README & MUI Rosetta Stone Documentation
 cold_state: new
 priority: medium
 complexity:
-  score: 4
-  estimated_minutes: 90
+  score: 5
+  estimated_minutes: 120
   suggested_model: sonnet
-  rationale: Comprehensive migration guide, many code examples
+  rationale: Comprehensive README plus migration guide, many code examples
 dependencies:
   - PR-004
   - PR-007
@@ -1247,12 +1247,29 @@ dependencies:
   - PR-034
   - PR-037
 estimated_files:
+  - path: README.md
+    action: create
+    description: Project README with philosophy, components, and structure
   - path: demos/rosetta.html
     action: create
     description: MUI to Yetzirah migration guide
 ---
 **Description:**
-Create comprehensive MUI → Yetzirah migration guide. Component mapping table, prop → class translations, code examples for each component, common patterns. Include "just use native HTML" guidance for form elements that MUI abstracts but the platform already handles.
+Create project README and comprehensive MUI → Yetzirah migration guide.
+
+**README.md should include:**
+- Design philosophy (platform-native, AI-native, framework-agnostic, no-pinionated, readable source)
+- Tier 1 components shipped in Phase 1 (Button, Disclosure, Dialog, Tabs, Tooltip, Menu, Autocomplete) and derived components (Listbox, Select, Accordion, Drawer, Popover)
+- What we deliberately did NOT ship (Tier 2, Tier 3, non-goals like theming, animation, form validation)
+- Package structure (`@yetzirah/core`, `@yetzirah/react`, `demos/`)
+- Quick start / installation
+- Link to MUI Rosetta Stone (`demos/rosetta.html`)
+
+**Rosetta Stone (demos/rosetta.html) should include:**
+- Component mapping table (MUI → Yetzirah equivalents)
+- Prop → Tachyons class translations (variant, size, color)
+- Code examples for each component
+- Common patterns
 
 **Form element mappings to include:**
 - `<TextField multiline>` → `<textarea class="input-reset pa2 ba b--light-gray br2">`
@@ -1268,7 +1285,11 @@ Create comprehensive MUI → Yetzirah migration guide. Component mapping table, 
 - `<ToggleGroup>` (multi) → `<fieldset>` + checkboxes (independent via checkbox)
 
 **Acceptance Criteria:**
-- [ ] All MUI components mapped to Yetzirah equivalents
+- [ ] README.md created with design philosophy from PRD
+- [ ] README lists Tier 1 components and what was deliberately excluded
+- [ ] README documents package structure
+- [ ] README links to MUI Rosetta Stone
+- [ ] All MUI components mapped to Yetzirah equivalents in rosetta.html
 - [ ] Prop translations documented (variant, size, color → Tachyons)
 - [ ] Form element mappings documented (Textarea, RadioGroup, Checkbox, FormControl, etc.)
 - [ ] Side-by-side code examples
@@ -1278,7 +1299,7 @@ Create comprehensive MUI → Yetzirah migration guide. Component mapping table, 
 ---
 pr_id: PR-039
 title: Final Bundle Optimization & Verification
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1330,7 +1351,7 @@ PR-001 (Setup)
         └── PR-023 → PR-024 → PR-025 (Listbox)
             └── PR-026 → PR-027 → PR-028 (Select)
 
-PR-038 (Rosetta) ← All demo PRs
+PR-038 (README + Rosetta) ← All demo PRs
 PR-039 (Optimization) ← All demo PRs
 ```
 ---
