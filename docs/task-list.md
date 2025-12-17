@@ -767,7 +767,7 @@ Create static HTML demo page showing autocomplete component with various configu
 ---
 pr_id: PR-023
 title: Listbox Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1264,6 +1264,8 @@ Create comprehensive MUI → Yetzirah migration guide. Component mapping table, 
 - `<Radio>` → `<input type="radio">`
 - `<Checkbox>` → `<input type="checkbox">`
 - `<FormControlLabel>` → `<label class="flex items-center gap2">` wrapping input
+- `<ToggleGroup>` (single) → `<fieldset>` + radio buttons with shared `name` (mutex via radio)
+- `<ToggleGroup>` (multi) → `<fieldset>` + checkboxes (independent via checkbox)
 
 **Acceptance Criteria:**
 - [ ] All MUI components mapped to Yetzirah equivalents
