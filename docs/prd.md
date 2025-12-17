@@ -6,7 +6,9 @@
 
 ## Philosophy
 
-The Motherfucking Website is right: most of the problems we have with webpages are problems we've created for ourselves.
+**HTML is good—stop overcomplicating it.**
+**CSS is good—stop obfuscating it.**
+**Material is good—stop bloating it.**
 
 HTML already has buttons, inputs, forms, and semantic structure. CSS already has layout, typography, and spacing. The browser already handles focus, scrolling, and events. We don't need to reinvent these. We need to fill the gaps.
 
@@ -217,8 +219,11 @@ Edge case: supplying both `href` and `onclick` renders an `<a>` with the click h
 |-----------|---------|-----------------|
 | **Toggle/Switch** | `<ytz-toggle>` | Checkbox semantics with aria-checked |
 | **Slider** | `<ytz-slider>` | aria-slider, keyboard control, range support |
+| **Chip** | `<ytz-chip>` | Deletable tag/label with keyboard support. `deletable` attribute shows × button, dispatches `delete` event. Future: drag API for reordering, chip input for tag entry. ~30 lines. |
 | **IconButton** | `<ytz-icon-button>` | Button variant requiring aria-label, optional integrated tooltip |
 | **DataGrid** | `<ytz-datagrid>` | Virtual scroll, sort, filter, keyboard nav. Exports to Excel and CSV. No pivot tables—YAGNI. |
+| **Dark Theme CSS** | `dark.css` | Optional override stylesheet using CSS custom properties. `[data-theme="dark"]` selector remaps Tachyons color classes. Respects `prefers-color-scheme: dark` by default. No JS runtime—pure CSS. Toggle manually via `document.documentElement.dataset.theme = 'dark'`. |
+| **Theme Toggle** | `<ytz-theme-toggle>` | Wraps `<ytz-toggle>` with theme-switching behavior: reads `prefers-color-scheme` on init, persists user preference to `localStorage`, toggles `data-theme` attribute on `<html>`, dispatches `themechange` events. Depends on Toggle. |
 
 ### Tier 3: Not Needed
 
@@ -537,7 +542,7 @@ Maps MUI components to Yetzirah equivalents. Ships in package, lives at `docs.ye
 | `<Switch>` | `<Toggle>` / `<ytz-toggle>` |
 | `<Slider>` | `<Slider>` / `<ytz-slider>` |
 | `<Avatar>` | `<img>` + Tachyons (see below) |
-| `<Chip>` | `<span class="f6 ph2 pv1 br-pill bg-light-gray">` |
+| `<Chip>` | `<Chip>` / `<ytz-chip>` (deletable) or `<span class="f6 ph2 pv1 br-pill bg-light-gray">` |
 | `<Badge>` | Relative parent + absolute `<span>` |
 | `<Divider>` | `<hr class="bt b--light-gray">` |
 | `<List>` | `<ul class="list pl0">` |
