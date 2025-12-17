@@ -800,7 +800,7 @@ Derive from Autocomplete: remove text input and filtering. Pure keyboard-navigab
 ---
 pr_id: PR-024
 title: Listbox React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
