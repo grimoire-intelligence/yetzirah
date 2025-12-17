@@ -5,6 +5,9 @@
 import { jest } from '@jest/globals'
 import './menu.js'
 
+// Helper to wait for setTimeout(0) to complete
+const nextTick = () => new Promise(resolve => setTimeout(resolve, 0))
+
 describe('YtzMenu', () => {
   beforeEach(() => {
     document.body.innerHTML = ''
@@ -148,7 +151,7 @@ describe('YtzMenu', () => {
       expect(menu.open).toBe(false)
     })
 
-    test('closes on click outside', () => {
+    test('closes on click outside', async () => {
       document.body.innerHTML = `
         <div id="outside">Outside</div>
         <ytz-menu>
@@ -158,6 +161,7 @@ describe('YtzMenu', () => {
       `
       const menu = document.querySelector('ytz-menu')
       menu.open = true
+      await nextTick() // Wait for click-outside handler to be set up
 
       document.querySelector('#outside').click()
 

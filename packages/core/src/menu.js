@@ -41,6 +41,8 @@ class YtzMenu extends HTMLElement {
   #keyNav = null
   /** @type {ReturnType<typeof clickOutside>|null} */
   #clickOutsideHandler = null
+  /** @type {number} */
+  #lastCloseTime = 0
 
   connectedCallback() {
     this.#setup()
@@ -128,17 +130,45 @@ class YtzMenu extends HTMLElement {
 
   #showMenu() {
     if (!this.#trigger || !this.#popup) return
+    // Prevent re-opening if we just closed (e.g., click-outside + toggle in same event)
+    if (performance.now() - this.#lastCloseTime < 10) {
+      // Remove attribute to keep state consistent since we're blocking the open
+      this.removeAttribute('open')
+      return
+    }
 
+    // Pre-position as fixed but invisible to get correct layout
+    this.#popup.style.position = 'fixed'
+    this.#popup.style.visibility = 'hidden'
     this.#popup.hidden = false
+
+    // Force synchronous reflow so popup has layout dimensions
+    void this.#popup.offsetHeight
+
+    // Calculate and apply position
+    const basePlacement = this.placement.split('-')[0] || 'bottom'
+    const { x, y } = position(this.#trigger, this.#popup, {
+      placement: basePlacement,
+      offset: 4
+    })
+    this.#popup.style.left = `${x}px`
+    this.#popup.style.top = `${y}px`
+
+    // Now make visible
+    this.#popup.style.visibility = ''
     this.#trigger.setAttribute('aria-expanded', 'true')
-    this.#updatePosition()
 
     const firstItem = this.#popup.querySelector('ytz-menuitem:not([disabled])')
     firstItem?.focus()
 
-    this.#clickOutsideHandler = clickOutside(this.#popup, () => {
-      this.open = false
-    }, { ignore: this.#trigger })
+    // Defer click-outside setup to next event loop tick to avoid triggering on same click
+    setTimeout(() => {
+      // Only set up if still open (user might have closed it already)
+      if (!this.open) return
+      this.#clickOutsideHandler = clickOutside(this.#popup, () => {
+        this.open = false
+      }, { ignore: this.#trigger })
+    }, 0)
 
     window.addEventListener('scroll', this.#updatePosition, { passive: true, capture: true })
     window.addEventListener('resize', this.#updatePosition, { passive: true })
@@ -148,6 +178,9 @@ class YtzMenu extends HTMLElement {
 
   #hideMenu() {
     if (!this.#trigger || !this.#popup) return
+
+    // Record close time to prevent re-opening in the same event
+    this.#lastCloseTime = performance.now()
 
     this.#popup.hidden = true
     this.#trigger.setAttribute('aria-expanded', 'false')
