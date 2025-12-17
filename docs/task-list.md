@@ -210,7 +210,7 @@ Create static HTML demo page showing all button variants. Complete JSDoc documen
 ---
 pr_id: PR-006
 title: Disclosure React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -243,7 +243,7 @@ Create React wrapper for `<ytz-disclosure>`. Sync open prop to attribute, provid
 ---
 pr_id: PR-007
 title: Disclosure Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -271,7 +271,7 @@ Create static HTML demo page showing disclosure component usage with various con
 ---
 pr_id: PR-008
 title: Dialog Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -310,7 +310,7 @@ Implement `<ytz-dialog>` - modal dialog with focus management. Features: focus t
 ---
 pr_id: PR-009
 title: Dialog React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -343,7 +343,7 @@ Create React wrapper for `<ytz-dialog>`. Sync open prop, provide onClose callbac
 ---
 pr_id: PR-010
 title: Dialog Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -371,7 +371,7 @@ Create static HTML demo page showing dialog component with various configuration
 ---
 pr_id: PR-011
 title: Tabs Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -408,7 +408,7 @@ Implement `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`. Features: aria-tablist/ta
 ---
 pr_id: PR-012
 title: Tabs React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -441,7 +441,7 @@ Create React wrappers for `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`.
 ---
 pr_id: PR-013
 title: Tabs Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -469,7 +469,7 @@ Create static HTML demo page showing tabs component with various configurations.
 ---
 pr_id: PR-014
 title: Tooltip Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -509,7 +509,7 @@ Implement `<ytz-tooltip>` - positioned tooltip with delay logic. Features: posit
 ---
 pr_id: PR-015
 title: Tooltip React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -541,7 +541,7 @@ Create React wrapper for `<ytz-tooltip>`.
 ---
 pr_id: PR-016
 title: Tooltip Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -569,7 +569,7 @@ Create static HTML demo page showing tooltip component with various positions an
 ---
 pr_id: PR-017
 title: Menu Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -608,7 +608,7 @@ Implement `<ytz-menu>`, `<ytz-menuitem>`. Features: positioning relative to trig
 ---
 pr_id: PR-018
 title: Menu React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -641,7 +641,7 @@ Create React wrappers for `<ytz-menu>`, `<ytz-menuitem>`.
 ---
 pr_id: PR-019
 title: Menu Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -669,7 +669,7 @@ Create static HTML demo page showing menu component with various configurations.
 ---
 pr_id: PR-020
 title: Autocomplete Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 6
@@ -705,7 +705,7 @@ Implement `<ytz-autocomplete>` - the most complex Tier 1 component. Features: te
 ---
 pr_id: PR-021
 title: Autocomplete React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -739,7 +739,7 @@ Create React wrapper for `<ytz-autocomplete>`.
 ---
 pr_id: PR-022
 title: Autocomplete Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -767,7 +767,7 @@ Create static HTML demo page showing autocomplete component with various configu
 ---
 pr_id: PR-023
 title: Listbox Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -800,7 +800,7 @@ Derive from Autocomplete: remove text input and filtering. Pure keyboard-navigab
 ---
 pr_id: PR-024
 title: Listbox React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -832,7 +832,7 @@ Create React wrapper for `<ytz-listbox>`.
 ---
 pr_id: PR-025
 title: Listbox Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -857,7 +857,7 @@ Create static HTML demo page showing listbox component.
 ---
 pr_id: PR-026
 title: Select Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -890,7 +890,7 @@ Derive from Listbox: add trigger button that shows selected value and opens list
 ---
 pr_id: PR-027
 title: Select React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -922,7 +922,7 @@ Create React wrapper for `<ytz-select>`.
 ---
 pr_id: PR-028
 title: Select Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -949,7 +949,7 @@ Create static HTML demo page showing select component.
 ---
 pr_id: PR-029
 title: Accordion Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -982,7 +982,7 @@ Derive from Disclosure: coordinated disclosures with optional exclusive mode (on
 ---
 pr_id: PR-030
 title: Accordion React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -1014,7 +1014,7 @@ Create React wrappers for `<ytz-accordion>`, `<ytz-accordion-item>`.
 ---
 pr_id: PR-031
 title: Accordion Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -1041,7 +1041,7 @@ Create static HTML demo page showing accordion component.
 ---
 pr_id: PR-032
 title: Drawer Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1074,7 +1074,7 @@ Derive from Dialog: slide-in positioning from screen edge. Supports left/right/t
 ---
 pr_id: PR-033
 title: Drawer React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -1106,7 +1106,7 @@ Create React wrapper for `<ytz-drawer>`.
 ---
 pr_id: PR-034
 title: Drawer Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -1133,7 +1133,7 @@ Create static HTML demo page showing drawer component from all edges.
 ---
 pr_id: PR-035
 title: Popover Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1167,7 +1167,7 @@ Derive from Tooltip: click-triggered (not hover), supports richer content, stays
 ---
 pr_id: PR-036
 title: Popover React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -1199,7 +1199,7 @@ Create React wrapper for `<ytz-popover>`.
 ---
 pr_id: PR-037
 title: Popover Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -1252,11 +1252,25 @@ estimated_files:
     description: MUI to Yetzirah migration guide
 ---
 **Description:**
-Create comprehensive MUI → Yetzirah migration guide. Component mapping table, prop → class translations, code examples for each component, common patterns.
+Create comprehensive MUI → Yetzirah migration guide. Component mapping table, prop → class translations, code examples for each component, common patterns. Include "just use native HTML" guidance for form elements that MUI abstracts but the platform already handles.
+
+**Form element mappings to include:**
+- `<TextField multiline>` → `<textarea class="input-reset pa2 ba b--light-gray br2">`
+- `<FormControl>` → `<div>` or `<fieldset>`
+- `<FormGroup>` → `<fieldset>` with `<legend>`
+- `<FormLabel>` → `<label>`
+- `<FormHelperText>` → `<p class="f7 gray mt1">` or `<small>`
+- `<RadioGroup>` → `<fieldset>` + radios with shared `name`
+- `<Radio>` → `<input type="radio">`
+- `<Checkbox>` → `<input type="checkbox">`
+- `<FormControlLabel>` → `<label class="flex items-center gap2">` wrapping input
+- `<ToggleGroup>` (single) → `<fieldset>` + radio buttons with shared `name` (mutex via radio)
+- `<ToggleGroup>` (multi) → `<fieldset>` + checkboxes (independent via checkbox)
 
 **Acceptance Criteria:**
 - [ ] All MUI components mapped to Yetzirah equivalents
 - [ ] Prop translations documented (variant, size, color → Tachyons)
+- [ ] Form element mappings documented (Textarea, RadioGroup, Checkbox, FormControl, etc.)
 - [ ] Side-by-side code examples
 - [ ] Works when opened directly in browser
 ---

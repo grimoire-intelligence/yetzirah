@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Listbox Component - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+    ytz-listbox {
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      max-height: 200px;
+      overflow-y: auto;
+    }
+    ytz-listbox:focus-within {
+      outline: 2px solid #357edd;
+      outline-offset: 2px;
+    }
+    ytz-listbox[disabled] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    ytz-option {
+      display: block;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+    ytz-option:hover,
+    ytz-option:focus {
+      background: #f0f0f0;
+      outline: none;
+    }
+    ytz-option[selected] {
+      background: #e3f2fd;
+    }
+    ytz-option[disabled] {
+      color: #999;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Listbox</h1>
+    <p class="f5 lh-copy gray mt0">
+      Keyboard-navigable list selection. Supports single and multi-select modes.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Navigate with arrow keys. Select with Enter or Space.
+      </p>
+
+      <ytz-listbox class="w-100 mw5">
+        <ytz-option value="apple">Apple</ytz-option>
+        <ytz-option value="banana">Banana</ytz-option>
+        <ytz-option value="cherry">Cherry</ytz-option>
+        <ytz-option value="date">Date</ytz-option>
+        <ytz-option value="elderberry">Elderberry</ytz-option>
+      </ytz-listbox>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-listbox&gt;
+  &lt;ytz-option value="apple"&gt;Apple&lt;/ytz-option&gt;
+  &lt;ytz-option value="banana"&gt;Banana&lt;/ytz-option&gt;
+  &lt;ytz-option value="cherry"&gt;Cherry&lt;/ytz-option&gt;
+&lt;/ytz-listbox&gt;</code></pre>
+    </section>
+
+    <!-- Multi-Select -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Multi-Select</h2>
+      <p class="lh-copy mb3">
+        Add <code class="bg-near-white ph1">multiple</code> to allow multiple selections.
+      </p>
+
+      <ytz-listbox multiple class="w-100 mw5">
+        <ytz-option value="red">Red</ytz-option>
+        <ytz-option value="green">Green</ytz-option>
+        <ytz-option value="blue">Blue</ytz-option>
+        <ytz-option value="yellow">Yellow</ytz-option>
+      </ytz-listbox>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-listbox multiple&gt;
+  &lt;ytz-option value="red"&gt;Red&lt;/ytz-option&gt;
+  &lt;ytz-option value="green"&gt;Green&lt;/ytz-option&gt;
+  &lt;ytz-option value="blue"&gt;Blue&lt;/ytz-option&gt;
+&lt;/ytz-listbox&gt;</code></pre>
+    </section>
+
+    <!-- Pre-selected Options -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Pre-selected Options</h2>
+      <p class="lh-copy mb3">
+        Add <code class="bg-near-white ph1">selected</code> attribute to pre-select options.
+      </p>
+
+      <ytz-listbox class="w-100 mw5">
+        <ytz-option value="draft">Draft</ytz-option>
+        <ytz-option value="review" selected>In Review</ytz-option>
+        <ytz-option value="approved">Approved</ytz-option>
+        <ytz-option value="published">Published</ytz-option>
+      </ytz-listbox>
+    </section>
+
+    <!-- Disabled Options -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Disabled Options</h2>
+      <p class="lh-copy mb3">
+        Individual options can be disabled.
+      </p>
+
+      <ytz-listbox class="w-100 mw5">
+        <ytz-option value="free">Free Tier</ytz-option>
+        <ytz-option value="pro">Pro Tier</ytz-option>
+        <ytz-option value="enterprise" disabled>Enterprise (Contact Sales)</ytz-option>
+      </ytz-listbox>
+    </section>
+
+    <!-- Disabled Listbox -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Disabled Listbox</h2>
+      <p class="lh-copy mb3">
+        Entire listbox can be disabled.
+      </p>
+
+      <ytz-listbox disabled class="w-100 mw5">
+        <ytz-option value="a">Option A</ytz-option>
+        <ytz-option value="b">Option B</ytz-option>
+        <ytz-option value="c">Option C</ytz-option>
+      </ytz-listbox>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+
+      <div class="mb3">
+        <button onclick="document.getElementById('prog-listbox').value = 'banana'"
+                class="ph3 pv2 br2 bg-blue white bn pointer mr2">
+          Set Banana
+        </button>
+        <button onclick="document.getElementById('prog-listbox').clear()"
+                class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer mr2">
+          Clear
+        </button>
+        <button onclick="alert('Value: ' + document.getElementById('prog-listbox').value)"
+                class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer">
+          Get Value
+        </button>
+      </div>
+
+      <ytz-listbox id="prog-listbox" class="w-100 mw5">
+        <ytz-option value="apple">Apple</ytz-option>
+        <ytz-option value="banana">Banana</ytz-option>
+        <ytz-option value="cherry">Cherry</ytz-option>
+      </ytz-listbox>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>const listbox = document.querySelector('ytz-listbox')
+
+listbox.value = 'apple'    // Set value programmatically
+listbox.clear()            // Clear all selections
+listbox.selectAll()        // Select all (multi-select only)
+console.log(listbox.value) // Get current value</code></pre>
+    </section>
+
+    <!-- Keyboard Navigation -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Keyboard Support</h2>
+      <table class="w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Arrow Down</kbd></td>
+            <td class="pa2">Move to next option</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Arrow Up</kbd></td>
+            <td class="pa2">Move to previous option</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Home</kbd></td>
+            <td class="pa2">Move to first option</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">End</kbd></td>
+            <td class="pa2">Move to last option</td>
+          </tr>
+          <tr>
+            <td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Enter</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">Space</kbd></td>
+            <td class="pa2">Select / toggle focused option</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- API Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>multiple</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2">Allow multiple selections</td>
+          </tr>
+          <tr>
+            <td class="pa2"><code>disabled</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2">Disable all interaction</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Detail</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>change</code></td>
+            <td class="pa2"><code>{ value, option }</code></td>
+            <td class="pa2">Selection changed</td>
+          </tr>
+          <tr>
+            <td class="pa2"><code>clear</code></td>
+            <td class="pa2">-</td>
+            <td class="pa2">Selection cleared</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Properties</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Property</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>value</code></td>
+            <td class="pa2">string | string[]</td>
+            <td class="pa2">Get/set selected value(s)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>options</code></td>
+            <td class="pa2">HTMLElement[]</td>
+            <td class="pa2">All option elements</td>
+          </tr>
+          <tr>
+            <td class="pa2"><code>selectedOptions</code></td>
+            <td class="pa2">HTMLElement[]</td>
+            <td class="pa2">Selected option elements</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Methods</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Method</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>clear()</code></td>
+            <td class="pa2">Clear all selections</td>
+          </tr>
+          <tr>
+            <td class="pa2"><code>selectAll()</code></td>
+            <td class="pa2">Select all options (multi-select only)</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Listbox, Option } from '@yetzirah/react'
+
+// Single-select
+function StatusPicker() {
+  const [status, setStatus] = useState('draft')
+
+  return (
+    &lt;Listbox value={status} onChange={setStatus}&gt;
+      &lt;Option value="draft"&gt;Draft&lt;/Option&gt;
+      &lt;Option value="review"&gt;In Review&lt;/Option&gt;
+      &lt;Option value="published"&gt;Published&lt;/Option&gt;
+    &lt;/Listbox&gt;
+  )
+}
+
+// Multi-select
+function TagPicker() {
+  const [tags, setTags] = useState([])
+
+  return (
+    &lt;Listbox multiple value={tags} onChange={setTags}&gt;
+      &lt;Option value="urgent"&gt;Urgent&lt;/Option&gt;
+      &lt;Option value="bug"&gt;Bug&lt;/Option&gt;
+      &lt;Option value="feature"&gt;Feature&lt;/Option&gt;
+    &lt;/Listbox&gt;
+  )
+}</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Migrating from MUI List</h2>
+
+      <table class="w-100 collapse ba b--light-gray mb4">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl bb b--light-gray">MUI</th>
+            <th class="pa2 tl bb b--light-gray">Yetzirah</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pa2 bb b--light-gray"><code>&lt;List&gt;</code> + selection logic</td>
+            <td class="pa2 bb b--light-gray"><code>&lt;Listbox&gt;</code> / <code>&lt;ytz-listbox&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray"><code>&lt;ListItem&gt;</code></td>
+            <td class="pa2 bb b--light-gray"><code>&lt;Option&gt;</code> / <code>&lt;ytz-option&gt;</code></td>
+          </tr>
+          <tr>
+            <td class="pa2 bb b--light-gray"><code>selected</code> prop + state</td>
+            <td class="pa2 bb b--light-gray"><code>value</code> + <code>onChange</code></td>
+          </tr>
+          <tr>
+            <td class="pa2"><code>onClick</code> handler</td>
+            <td class="pa2">Built-in selection</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
