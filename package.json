@@ -6,10 +6,13 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
+    "build:cdn": "pnpm --filter @yetzirah/core build:cdn",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
     "lint": "eslint packages/*/src/**/*.js",
     "format": "prettier --write \"packages/*/src/**/*.js\"",
-    "clean": "pnpm -r exec rm -rf dist"
+    "clean": "pnpm -r exec rm -rf dist",
+    "size": "pnpm build && node scripts/check-size.js",
+    "size:report": "pnpm build && node scripts/check-size.js --report"
   },
   "repository": {
     "type": "git",

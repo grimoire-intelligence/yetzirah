@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MUI Rosetta Stone - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <style>
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+    .comparison-panel {
+      background: #f4f5f5;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .comparison-header {
+      background: #e0e0e0;
+      padding: 0.5rem 1rem;
+      font-weight: 600;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .comparison-header.mui {
+      background: #1976d2;
+      color: white;
+    }
+    .comparison-header.ytz {
+      background: #2e7d32;
+      color: white;
+    }
+    .comparison-content {
+      padding: 1rem;
+    }
+    .quick-ref {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    .quick-ref th,
+    .quick-ref td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .quick-ref th {
+      background: #f4f5f5;
+      font-weight: 600;
+    }
+    .quick-ref code {
+      background: #e0e0e0;
+      padding: 0.125rem 0.375rem;
+      border-radius: 2px;
+      font-size: 0.875rem;
+    }
+    .key-diff {
+      background: #fff3e0;
+      border-left: 4px solid #ff9800;
+      padding: 0.75rem 1rem;
+      margin: 1rem 0;
+    }
+    .philosophy-box {
+      background: #e8f5e9;
+      border-left: 4px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">MUI Rosetta Stone</h1>
+    <p class="f5 lh-copy gray mt0">
+      A comprehensive migration guide from Material UI to Yetzirah.
+    </p>
+  </header>
+
+  <main>
+    <!-- Philosophy -->
+    <section class="demo-section pv4">
+      <h2 class="f3 fw6 mb3">Philosophy Difference</h2>
+
+      <div class="philosophy-box">
+        <p class="ma0 lh-copy mb3">
+          <strong>MUI:</strong> Fully-styled components with extensive theming API.
+          Behavior and appearance are bundled together.
+        </p>
+        <p class="ma0 lh-copy">
+          <strong>Yetzirah:</strong> Unstyled components providing only behavior and accessibility.
+          You bring your own styles via utility classes (Tachyons) or custom CSS.
+        </p>
+      </div>
+
+      <h3 class="f5 fw6 mb2 mt4">What Changes</h3>
+      <ul class="lh-copy pl3">
+        <li class="mb2"><strong>No <code>sx</code> prop</strong> &mdash; Use CSS classes instead</li>
+        <li class="mb2"><strong>No theme provider</strong> &mdash; Colors and spacing are CSS concerns</li>
+        <li class="mb2"><strong>No <code>variant</code> props</strong> &mdash; Style variants are CSS classes</li>
+        <li class="mb2"><strong>No wrapper components</strong> &mdash; Many MUI wrappers (DialogTitle, DialogContent) become plain HTML with classes</li>
+        <li class="mb2"><strong>Simpler event signatures</strong> &mdash; <code>onChange(value)</code> instead of <code>onChange(event, value)</code></li>
+      </ul>
+
+      <h3 class="f5 fw6 mb2 mt4">What Stays the Same</h3>
+      <ul class="lh-copy pl3">
+        <li class="mb2">Full ARIA compliance and keyboard navigation</li>
+        <li class="mb2">Controlled/uncontrolled component patterns</li>
+        <li class="mb2">Core component concepts (Dialog, Tabs, Menu, etc.)</li>
+        <li class="mb2">React hook-style APIs in the React wrapper</li>
+      </ul>
+    </section>
+
+    <!-- Quick Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f3 fw6 mb3">Quick Reference</h2>
+      <p class="lh-copy mb3">Component name mapping at a glance.</p>
+
+      <div class="overflow-auto">
+        <table class="quick-ref">
+          <thead>
+            <tr>
+              <th>MUI Component</th>
+              <th>Yetzirah Component</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>&lt;Button&gt;</code></td>
+              <td><code>&lt;ytz-button&gt;</code></td>
+              <td>Polymorphic: renders <code>&lt;a&gt;</code> when <code>href</code> provided</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Dialog&gt;</code></td>
+              <td><code>&lt;ytz-dialog&gt;</code></td>
+              <td>DialogTitle, DialogContent, DialogActions become plain HTML</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Drawer&gt;</code></td>
+              <td><code>&lt;ytz-drawer&gt;</code></td>
+              <td>Same <code>anchor</code> prop, <code>static</code> replaces <code>variant="persistent"</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Tabs&gt;</code></td>
+              <td><code>&lt;ytz-tabs&gt;</code></td>
+              <td>Uses string IDs instead of numeric indices</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Tab&gt;</code></td>
+              <td><code>&lt;ytz-tab&gt;</code></td>
+              <td><code>panel</code> attribute links to tabpanel</td>
+            </tr>
+            <tr>
+              <td><code>&lt;TabPanel&gt;</code></td>
+              <td><code>&lt;ytz-tabpanel&gt;</code></td>
+              <td>Child of tabs container, not separate</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Menu&gt;</code></td>
+              <td><code>&lt;ytz-menu&gt;</code></td>
+              <td>Trigger inside component with <code>slot="trigger"</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;MenuItem&gt;</code></td>
+              <td><code>&lt;ytz-menuitem&gt;</code></td>
+              <td>Uses <code>select</code> event instead of <code>onClick</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Accordion&gt;</code></td>
+              <td><code>&lt;ytz-accordion&gt;</code></td>
+              <td><code>exclusive</code> attribute for single-open mode</td>
+            </tr>
+            <tr>
+              <td><code>&lt;AccordionSummary&gt;</code></td>
+              <td><code>&lt;button&gt;</code></td>
+              <td>First child of accordion-item</td>
+            </tr>
+            <tr>
+              <td><code>&lt;AccordionDetails&gt;</code></td>
+              <td><code>&lt;div&gt;</code></td>
+              <td>Second child of accordion-item</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Autocomplete&gt;</code></td>
+              <td><code>&lt;ytz-autocomplete&gt;</code></td>
+              <td>Simplified options format: <code>{value, label}</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Select&gt;</code></td>
+              <td><code>&lt;ytz-select&gt;</code></td>
+              <td>Options are <code>&lt;ytz-option&gt;</code> children</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Popover&gt;</code></td>
+              <td><code>&lt;ytz-popover&gt;</code></td>
+              <td>Trigger inside component, no <code>anchorEl</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Tooltip&gt;</code></td>
+              <td><code>&lt;ytz-tooltip&gt;</code></td>
+              <td>Content via <code>content</code> attribute or slot</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Collapse&gt;</code></td>
+              <td><code>&lt;ytz-disclosure&gt;</code></td>
+              <td>Standalone expandable section</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Button -->
+    <section class="demo-section pv4" id="button">
+      <h2 class="f3 fw6 mb3">Button</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Button variant="contained" color="primary"&gt;
+  Submit
+&lt;/Button&gt;
+
+&lt;Button variant="outlined" color="secondary"&gt;
+  Cancel
+&lt;/Button&gt;
+
+&lt;Button variant="text"&gt;
+  Learn More
+&lt;/Button&gt;
+
+&lt;Button component={Link} to="/dashboard"&gt;
+  Dashboard
+&lt;/Button&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;ytz-button class="ph3 pv2 br2 bn white bg-blue"&gt;
+  Submit
+&lt;/ytz-button&gt;
+
+&lt;ytz-button class="ph3 pv2 br2 ba b--purple purple"&gt;
+  Cancel
+&lt;/ytz-button&gt;
+
+&lt;ytz-button class="ph3 pv2 bn blue"&gt;
+  Learn More
+&lt;/ytz-button&gt;
+
+&lt;ytz-button href="/dashboard"&gt;
+  Dashboard
+&lt;/ytz-button&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> No <code>variant</code> or <code>color</code> props.
+        Style variations are CSS classes. <code>href</code> attribute makes it render as <code>&lt;a&gt;</code>.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>variant="contained"</code></td><td><code>class="bn white bg-blue"</code></td></tr>
+          <tr><td><code>variant="outlined"</code></td><td><code>class="ba b--blue blue"</code></td></tr>
+          <tr><td><code>variant="text"</code></td><td><code>class="bn blue"</code></td></tr>
+          <tr><td><code>component={Link} to="/x"</code></td><td><code>href="/x"</code></td></tr>
+          <tr><td><code>disabled</code></td><td><code>disabled class="o-50"</code></td></tr>
+          <tr><td><code>size="small"</code></td><td><code>class="f6 ph2 pv1"</code></td></tr>
+          <tr><td><code>size="large"</code></td><td><code>class="f4 ph4 pv3"</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Dialog -->
+    <section class="demo-section pv4" id="dialog">
+      <h2 class="f3 fw6 mb3">Dialog</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Dialog open={open} onClose={handleClose}&gt;
+  &lt;DialogTitle&gt;Confirm Action&lt;/DialogTitle&gt;
+  &lt;DialogContent&gt;
+    Are you sure you want to proceed?
+  &lt;/DialogContent&gt;
+  &lt;DialogActions&gt;
+    &lt;Button onClick={handleClose}&gt;Cancel&lt;/Button&gt;
+    &lt;Button onClick={handleConfirm}&gt;Confirm&lt;/Button&gt;
+  &lt;/DialogActions&gt;
+&lt;/Dialog&gt;
+
+&lt;Dialog disableBackdropClick&gt;
+  ...
+&lt;/Dialog&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Dialog open={open} onClose={handleClose}&gt;
+  &lt;div className="pa4 bg-white br3"&gt;
+    &lt;h2 className="f4 fw6 mt0"&gt;Confirm Action&lt;/h2&gt;
+    &lt;p className="lh-copy"&gt;
+      Are you sure you want to proceed?
+    &lt;/p&gt;
+    &lt;div className="flex justify-end"&gt;
+      &lt;Button onClick={handleClose}&gt;Cancel&lt;/Button&gt;
+      &lt;Button onClick={handleConfirm}&gt;Confirm&lt;/Button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/Dialog&gt;
+
+&lt;Dialog static&gt;
+  ...
+&lt;/Dialog&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> DialogTitle, DialogContent, DialogActions become plain HTML with classes.
+        Use <code>static</code> attribute instead of <code>disableBackdropClick</code>.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;DialogTitle&gt;</code></td><td><code>&lt;h2&gt;</code> with classes</td></tr>
+          <tr><td><code>&lt;DialogContent&gt;</code></td><td><code>&lt;div&gt;</code> with classes</td></tr>
+          <tr><td><code>&lt;DialogActions&gt;</code></td><td><code>&lt;div class="flex justify-end"&gt;</code></td></tr>
+          <tr><td><code>disableBackdropClick</code></td><td><code>static</code></td></tr>
+          <tr><td><code>TransitionComponent</code></td><td>CSS via dialog.css</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Drawer -->
+    <section class="demo-section pv4" id="drawer">
+      <h2 class="f3 fw6 mb3">Drawer</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Drawer
+  open={open}
+  onClose={handleClose}
+  anchor="left"
+  variant="temporary"
+&gt;
+  &lt;List&gt;
+    &lt;ListItem&gt;Home&lt;/ListItem&gt;
+    &lt;ListItem&gt;About&lt;/ListItem&gt;
+  &lt;/List&gt;
+&lt;/Drawer&gt;
+
+&lt;Drawer variant="persistent"&gt;
+  ...
+&lt;/Drawer&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Drawer
+  open={open}
+  onClose={handleClose}
+  anchor="left"
+&gt;
+  &lt;nav className="w5 bg-white pa4"&gt;
+    &lt;a href="/home"&gt;Home&lt;/a&gt;
+    &lt;a href="/about"&gt;About&lt;/a&gt;
+  &lt;/nav&gt;
+&lt;/Drawer&gt;
+
+&lt;Drawer static&gt;
+  ...
+&lt;/Drawer&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>anchor="left"</code></td><td><code>anchor="left"</code> (same)</td></tr>
+          <tr><td><code>variant="temporary"</code></td><td>(default behavior)</td></tr>
+          <tr><td><code>variant="persistent"</code></td><td><code>static</code></td></tr>
+          <tr><td><code>ModalProps</code></td><td>Behavior built-in</td></tr>
+          <tr><td><code>SlideProps</code></td><td>CSS animations (user-provided)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Tabs -->
+    <section class="demo-section pv4" id="tabs">
+      <h2 class="f3 fw6 mb3">Tabs</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Tabs value={value} onChange={handleChange}&gt;
+  &lt;Tab label="Account" /&gt;
+  &lt;Tab label="Password" /&gt;
+&lt;/Tabs&gt;
+&lt;TabPanel value={value} index={0}&gt;
+  Account settings...
+&lt;/TabPanel&gt;
+&lt;TabPanel value={value} index={1}&gt;
+  Password settings...
+&lt;/TabPanel&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Tabs value={value} onChange={setValue}&gt;
+  &lt;Tab panel="account"&gt;Account&lt;/Tab&gt;
+  &lt;Tab panel="password"&gt;Password&lt;/Tab&gt;
+  &lt;TabPanel id="account"&gt;
+    Account settings...
+  &lt;/TabPanel&gt;
+  &lt;TabPanel id="password"&gt;
+    Password settings...
+  &lt;/TabPanel&gt;
+&lt;/Tabs&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> Uses string IDs to link tabs and panels, not numeric indices.
+        TabPanels are children of the Tabs container. <code>onChange</code> receives value directly.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>value={0}</code> (index)</td><td><code>value="panel-id"</code> (string)</td></tr>
+          <tr><td><code>onChange={(e, val) => ...}</code></td><td><code>onChange={val => ...}</code></td></tr>
+          <tr><td><code>&lt;Tab label="..." /&gt;</code></td><td><code>&lt;Tab panel="id"&gt;...&lt;/Tab&gt;</code></td></tr>
+          <tr><td><code>&lt;TabPanel value={v} index={0}&gt;</code></td><td><code>&lt;TabPanel id="..."&gt;</code></td></tr>
+          <tr><td><code>variant="scrollable"</code></td><td>CSS <code>overflow-x: auto</code></td></tr>
+          <tr><td><code>orientation="vertical"</code></td><td><code>orientation="vertical"</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Menu -->
+    <section class="demo-section pv4" id="menu">
+      <h2 class="f3 fw6 mb3">Menu</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>const [anchorEl, setAnchorEl] = useState(null)
+const open = Boolean(anchorEl)
+
+&lt;Button onClick={(e) =&gt; setAnchorEl(e.currentTarget)}&gt;
+  Open Menu
+&lt;/Button&gt;
+&lt;Menu
+  anchorEl={anchorEl}
+  open={open}
+  onClose={() =&gt; setAnchorEl(null)}
+&gt;
+  &lt;MenuItem onClick={handleEdit}&gt;Edit&lt;/MenuItem&gt;
+  &lt;MenuItem onClick={handleDelete}&gt;Delete&lt;/MenuItem&gt;
+&lt;/Menu&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// No anchorEl state needed!
+
+&lt;Menu&gt;
+  &lt;button slot="trigger"&gt;Open Menu&lt;/button&gt;
+  &lt;MenuItem onSelect={handleEdit}&gt;Edit&lt;/MenuItem&gt;
+  &lt;MenuItem onSelect={handleDelete}&gt;Delete&lt;/MenuItem&gt;
+&lt;/Menu&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> Trigger is inside the component with <code>slot="trigger"</code>.
+        No <code>anchorEl</code> state management needed. Uses <code>select</code> event instead of <code>onClick</code>.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Separate <code>anchorEl</code> state</td><td>Trigger inside with <code>slot="trigger"</code></td></tr>
+          <tr><td><code>onClick</code> on MenuItem</td><td><code>select</code> event / <code>onSelect</code></td></tr>
+          <tr><td><code>anchorOrigin</code> / <code>transformOrigin</code></td><td><code>placement</code> attribute</td></tr>
+          <tr><td><code>TransitionComponent</code></td><td>CSS on <code>[role="menu"]</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Accordion -->
+    <section class="demo-section pv4" id="accordion">
+      <h2 class="f3 fw6 mb3">Accordion</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Accordion
+  expanded={expanded === 'panel1'}
+  onChange={handleChange('panel1')}
+&gt;
+  &lt;AccordionSummary expandIcon={&lt;ExpandMore /&gt;}&gt;
+    Section 1
+  &lt;/AccordionSummary&gt;
+  &lt;AccordionDetails&gt;
+    Content for section 1
+  &lt;/AccordionDetails&gt;
+&lt;/Accordion&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Accordion exclusive&gt;
+  &lt;AccordionItem
+    open={expanded === 'panel1'}
+    onToggle={(open) =&gt; {...}}
+  &gt;
+    &lt;button&gt;
+      Section 1
+      &lt;span className="ytz-disclosure-icon"&gt;...&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;div&gt;&lt;div&gt;Content for section 1&lt;/div&gt;&lt;/div&gt;
+  &lt;/AccordionItem&gt;
+&lt;/Accordion&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;Accordion&gt;</code></td><td><code>&lt;ytz-accordion&gt;</code></td></tr>
+          <tr><td><code>&lt;AccordionSummary&gt;</code></td><td><code>&lt;button&gt;</code> (first child)</td></tr>
+          <tr><td><code>&lt;AccordionDetails&gt;</code></td><td><code>&lt;div&gt;</code> (second child)</td></tr>
+          <tr><td><code>expanded={true}</code></td><td><code>open</code> attribute</td></tr>
+          <tr><td><code>onChange={(e, exp) => ...}</code></td><td><code>toggle</code> event</td></tr>
+          <tr><td><code>expandIcon</code></td><td><code>ytz-disclosure-icon</code> class</td></tr>
+          <tr><td><code>TransitionProps</code></td><td>CSS via disclosure.css</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Autocomplete -->
+    <section class="demo-section pv4" id="autocomplete">
+      <h2 class="f3 fw6 mb3">Autocomplete</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Autocomplete
+  options={fruits}
+  getOptionLabel={(o) =&gt; o.label}
+  value={value}
+  onChange={(e, v) =&gt; setValue(v)}
+  renderInput={(params) =&gt; (
+    &lt;TextField
+      {...params}
+      label="Select fruit"
+    /&gt;
+  )}
+/&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Autocomplete
+  options={fruits}
+  value={value}
+  onChange={setValue}
+  placeholder="Select fruit"
+/&gt;
+
+// Or with Option children
+&lt;Autocomplete value={value} onChange={setValue}&gt;
+  &lt;Option value="apple"&gt;Apple&lt;/Option&gt;
+  &lt;Option value="banana"&gt;Banana&lt;/Option&gt;
+&lt;/Autocomplete&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> No <code>renderInput</code> prop - just use <code>placeholder</code>.
+        Options use <code>{value, label}</code> format. <code>onChange</code> receives value directly.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>getOptionLabel</code></td><td>Use <code>label</code> property</td></tr>
+          <tr><td><code>onChange={(e, v) => ...}</code></td><td><code>onChange={v => ...}</code></td></tr>
+          <tr><td><code>renderInput</code></td><td><code>placeholder</code> + CSS</td></tr>
+          <tr><td><code>renderOption</code></td><td><code>&lt;Option&gt;</code> children</td></tr>
+          <tr><td><code>getOptionDisabled</code></td><td><code>disabled</code> property</td></tr>
+          <tr><td><code>filterOptions</code></td><td><code>filter={false}</code> + custom</td></tr>
+          <tr><td><code>multiple</code></td><td><code>multiple</code></td></tr>
+          <tr><td><code>loading</code></td><td><code>loading</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Select -->
+    <section class="demo-section pv4" id="select">
+      <h2 class="f3 fw6 mb3">Select</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;FormControl&gt;
+  &lt;InputLabel&gt;Status&lt;/InputLabel&gt;
+  &lt;Select
+    value={status}
+    onChange={(e) =&gt; setStatus(e.target.value)}
+    label="Status"
+  &gt;
+    &lt;MenuItem value="draft"&gt;Draft&lt;/MenuItem&gt;
+    &lt;MenuItem value="review"&gt;In Review&lt;/MenuItem&gt;
+    &lt;MenuItem value="published"&gt;Published&lt;/MenuItem&gt;
+  &lt;/Select&gt;
+&lt;/FormControl&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Select
+  value={status}
+  onChange={setStatus}
+  placeholder="Status"
+&gt;
+  &lt;Option value="draft"&gt;Draft&lt;/Option&gt;
+  &lt;Option value="review"&gt;In Review&lt;/Option&gt;
+  &lt;Option value="published"&gt;Published&lt;/Option&gt;
+&lt;/Select&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> No FormControl/InputLabel wrapper needed.
+        Uses <code>&lt;Option&gt;</code> instead of <code>&lt;MenuItem&gt;</code>.
+        <code>onChange</code> receives value directly, not event.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;MenuItem&gt;</code></td><td><code>&lt;ytz-option&gt;</code></td></tr>
+          <tr><td><code>onChange={(e) => setValue(e.target.value)}</code></td><td><code>onChange={setValue}</code></td></tr>
+          <tr><td><code>&lt;InputLabel&gt;</code></td><td><code>placeholder</code></td></tr>
+          <tr><td><code>multiple</code></td><td><code>multiple</code></td></tr>
+          <tr><td><code>disabled</code></td><td><code>disabled</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Popover -->
+    <section class="demo-section pv4" id="popover">
+      <h2 class="f3 fw6 mb3">Popover</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Button onClick={handleClick}&gt;
+  Open Popover
+&lt;/Button&gt;
+&lt;Popover
+  open={open}
+  anchorEl={anchorEl}
+  onClose={handleClose}
+  anchorOrigin={{
+    vertical: 'bottom',
+    horizontal: 'left',
+  }}
+&gt;
+  &lt;Box sx={{ p: 2 }}&gt;
+    Popover content
+  &lt;/Box&gt;
+&lt;/Popover&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Popover
+  open={open}
+  onOpenChange={setOpen}
+  placement="bottom"
+&gt;
+  &lt;button&gt;Open Popover&lt;/button&gt;
+  &lt;div className="pa3"&gt;
+    Popover content
+  &lt;/div&gt;
+&lt;/Popover&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> Trigger is the first child, no <code>anchorEl</code> needed.
+        Uses <code>placement</code> string instead of <code>anchorOrigin</code> object.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>anchorEl</code></td><td>First child (trigger)</td></tr>
+          <tr><td><code>onClose</code></td><td><code>onOpenChange</code> / <code>onHide</code></td></tr>
+          <tr><td><code>anchorOrigin</code></td><td><code>placement</code></td></tr>
+          <tr><td><code>transformOrigin</code></td><td>CSS transforms</td></tr>
+          <tr><td><code>TransitionComponent</code></td><td>CSS transitions</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Tooltip -->
+    <section class="demo-section pv4" id="tooltip">
+      <h2 class="f3 fw6 mb3">Tooltip</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Tooltip title="Delete item" placement="top"&gt;
+  &lt;IconButton&gt;
+    &lt;DeleteIcon /&gt;
+  &lt;/IconButton&gt;
+&lt;/Tooltip&gt;
+
+&lt;Tooltip
+  title="Info"
+  enterDelay={500}
+  leaveDelay={200}
+&gt;
+  &lt;span&gt;Hover me&lt;/span&gt;
+&lt;/Tooltip&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;ytz-tooltip content="Delete item" placement="top"&gt;
+  &lt;button&gt;
+    &lt;DeleteIcon /&gt;
+  &lt;/button&gt;
+&lt;/ytz-tooltip&gt;
+
+&lt;ytz-tooltip
+  content="Info"
+  delay="500"
+&gt;
+  &lt;span&gt;Hover me&lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+        </div>
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>title="..."</code></td><td><code>content="..."</code></td></tr>
+          <tr><td><code>placement</code></td><td><code>placement</code> (same)</td></tr>
+          <tr><td><code>enterDelay</code></td><td><code>delay</code></td></tr>
+          <tr><td><code>arrow</code></td><td>CSS (user-provided)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Common Patterns -->
+    <section class="demo-section pv4" id="patterns">
+      <h2 class="f3 fw6 mb3">Common Patterns</h2>
+
+      <h3 class="f5 fw6 mb2 mt4">Styling Variants</h3>
+      <p class="lh-copy mb3">
+        MUI uses props for variants; Yetzirah uses CSS classes.
+      </p>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Size variants via prop
+&lt;Button size="small"&gt;Small&lt;/Button&gt;
+&lt;Button size="medium"&gt;Medium&lt;/Button&gt;
+&lt;Button size="large"&gt;Large&lt;/Button&gt;
+
+// Color variants via prop
+&lt;Button color="primary"&gt;Primary&lt;/Button&gt;
+&lt;Button color="secondary"&gt;Secondary&lt;/Button&gt;
+&lt;Button color="error"&gt;Error&lt;/Button&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah (Tachyons)</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Size variants via classes
+&lt;ytz-button class="f6 ph2 pv1"&gt;Small&lt;/ytz-button&gt;
+&lt;ytz-button class="f5 ph3 pv2"&gt;Medium&lt;/ytz-button&gt;
+&lt;ytz-button class="f4 ph4 pv3"&gt;Large&lt;/ytz-button&gt;
+
+// Color variants via classes
+&lt;ytz-button class="white bg-blue"&gt;Primary&lt;/ytz-button&gt;
+&lt;ytz-button class="white bg-purple"&gt;Secondary&lt;/ytz-button&gt;
+&lt;ytz-button class="white bg-red"&gt;Error&lt;/ytz-button&gt;</code></pre>
+        </div>
+      </div>
+
+      <h3 class="f5 fw6 mb2 mt4">Event Handling</h3>
+      <p class="lh-copy mb3">
+        MUI callbacks receive events; Yetzirah callbacks receive values directly.
+      </p>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// MUI event signatures
+&lt;Tabs onChange={(event, value) =&gt; setValue(value)}&gt;
+
+&lt;Select onChange={(event) =&gt; setValue(event.target.value)}&gt;
+
+&lt;Autocomplete onChange={(event, value) =&gt; setValue(value)}&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Yetzirah - value directly
+&lt;Tabs onChange={setValue}&gt;
+
+&lt;Select onChange={setValue}&gt;
+
+&lt;Autocomplete onChange={setValue}&gt;</code></pre>
+        </div>
+      </div>
+
+      <h3 class="f5 fw6 mb2 mt4">Controlled Components</h3>
+      <p class="lh-copy mb3">
+        Both libraries support controlled/uncontrolled patterns.
+      </p>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Controlled
+&lt;Dialog open={open} onClose={handleClose}&gt;
+
+// Uncontrolled (less common in MUI)
+// Usually requires ref access</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Controlled
+&lt;Dialog open={open} onClose={handleClose}&gt;
+
+// Uncontrolled - manages own state
+&lt;Dialog&gt;
+  &lt;button onClick="this.closest('ytz-dialog').close()"&gt;
+    Close
+  &lt;/button&gt;
+&lt;/Dialog&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- CSS Required -->
+    <section class="demo-section pv4" id="css">
+      <h2 class="f3 fw6 mb3">Required CSS</h2>
+      <p class="lh-copy mb3">
+        Since Yetzirah is unstyled, you must provide positioning and appearance CSS.
+        Optional stylesheets are available for common behaviors.
+      </p>
+
+      <h3 class="f5 fw6 mb2 mt4">Optional Stylesheets</h3>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mb3"><code>// Animation and positioning helpers
+import '@yetzirah/core/button.css'     // Hover/click feedback
+import '@yetzirah/core/dialog.css'     // Overlay positioning, fade-in
+import '@yetzirah/core/disclosure.css' // Expand/collapse animation</code></pre>
+
+      <h3 class="f5 fw6 mb2 mt4">User-Provided CSS</h3>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Dialog backdrop */
+ytz-dialog {
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Drawer positioning */
+ytz-drawer {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Menu popup */
+ytz-menu [role="menu"] {
+  background: white;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Tooltip appearance */
+ytz-tooltip [role="tooltip"] {
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+}</code></pre>
+    </section>
+
+    <!-- Tachyons Cheatsheet -->
+    <section class="demo-section pv4" id="tachyons">
+      <h2 class="f3 fw6 mb3">Tachyons Quick Reference</h2>
+      <p class="lh-copy mb3">
+        Common Tachyons classes for styling Yetzirah components.
+      </p>
+
+      <div class="overflow-auto">
+        <table class="quick-ref">
+          <thead>
+            <tr>
+              <th>Category</th>
+              <th>Classes</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="3" class="fw6 bg-near-white">Spacing</td></tr>
+            <tr><td>Padding</td><td><code>pa2 pa3 pa4</code></td><td>All sides</td></tr>
+            <tr><td>Padding H</td><td><code>ph2 ph3 ph4</code></td><td>Horizontal</td></tr>
+            <tr><td>Padding V</td><td><code>pv2 pv3 pv4</code></td><td>Vertical</td></tr>
+            <tr><td>Margin</td><td><code>ma2 mb3 mt4</code></td><td>All/bottom/top</td></tr>
+
+            <tr><td colspan="3" class="fw6 bg-near-white">Colors</td></tr>
+            <tr><td>Text</td><td><code>blue red green gray white</code></td><td>Text color</td></tr>
+            <tr><td>Background</td><td><code>bg-blue bg-red bg-white</code></td><td>Background</td></tr>
+            <tr><td>Border</td><td><code>b--blue b--gray b--light-gray</code></td><td>Border color</td></tr>
+
+            <tr><td colspan="3" class="fw6 bg-near-white">Borders</td></tr>
+            <tr><td>All</td><td><code>ba</code></td><td>Border all</td></tr>
+            <tr><td>None</td><td><code>bn</code></td><td>Border none</td></tr>
+            <tr><td>Radius</td><td><code>br2 br3 br-100</code></td><td>Border radius</td></tr>
+
+            <tr><td colspan="3" class="fw6 bg-near-white">Layout</td></tr>
+            <tr><td>Flexbox</td><td><code>flex items-center justify-between</code></td><td>Flex container</td></tr>
+            <tr><td>Width</td><td><code>w-100 w5 w-50</code></td><td>Width</td></tr>
+            <tr><td>Display</td><td><code>db dn dib</code></td><td>Block/none/inline-block</td></tr>
+
+            <tr><td colspan="3" class="fw6 bg-near-white">Typography</td></tr>
+            <tr><td>Size</td><td><code>f4 f5 f6</code></td><td>Font size</td></tr>
+            <tr><td>Weight</td><td><code>fw5 fw6</code></td><td>Font weight</td></tr>
+            <tr><td>Line height</td><td><code>lh-copy lh-title</code></td><td>Line height</td></tr>
+
+            <tr><td colspan="3" class="fw6 bg-near-white">States</td></tr>
+            <tr><td>Opacity</td><td><code>o-50</code></td><td>50% opacity (disabled)</td></tr>
+            <tr><td>Pointer</td><td><code>pointer</code></td><td>Cursor pointer</td></tr>
+            <tr><td>Shadow</td><td><code>shadow-1 shadow-2</code></td><td>Box shadow</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
