@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autocomplete Component - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    /* Demo layout */
+    .demo-section {
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .demo-section:last-child {
+      border-bottom: none;
+    }
+
+    /* Basic autocomplete styling - users customize this */
+    ytz-autocomplete {
+      display: inline-block;
+      position: relative;
+    }
+
+    ytz-autocomplete [role="listbox"] {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+
+    ytz-option {
+      display: block;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+    }
+
+    ytz-option:hover,
+    ytz-option:focus {
+      background-color: #f4f4f4;
+      outline: none;
+    }
+
+    ytz-option[selected] {
+      background-color: #e6f2ff;
+    }
+
+    ytz-option[disabled] {
+      color: #999;
+      cursor: not-allowed;
+    }
+
+    /* Ensure hidden attribute works even with display classes */
+    [hidden] {
+      display: none !important;
+    }
+
+    /* Loading slot styling - positioned in dropdown area */
+    ytz-autocomplete [slot="loading"] {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      margin-top: 4px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      min-width: 100%;
+      z-index: 1000;
+    }
+
+    /* Multi-select chips styling */
+    .selected-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.5rem;
+      background: #e0e0e0;
+      border-radius: 1rem;
+      font-size: 0.875rem;
+    }
+
+    .chip-remove {
+      margin-left: 0.25rem;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 1rem;
+      height: 1rem;
+      border: 2px solid #ccc;
+      border-top-color: #333;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Autocomplete</h1>
+    <p class="f5 lh-copy gray mt0">
+      Text input with filterable dropdown selection. Supports single and multi-select
+      modes with async loading.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Type to filter options. Use arrow keys to navigate, Enter to select,
+        and Escape to close.
+      </p>
+
+      <div class="mb3">
+        <ytz-autocomplete>
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Select a fruit...">
+          <ytz-option value="apple">Apple</ytz-option>
+          <ytz-option value="banana">Banana</ytz-option>
+          <ytz-option value="cherry">Cherry</ytz-option>
+          <ytz-option value="date">Date</ytz-option>
+          <ytz-option value="elderberry">Elderberry</ytz-option>
+          <ytz-option value="fig">Fig</ytz-option>
+          <ytz-option value="grape">Grape</ytz-option>
+        </ytz-autocomplete>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-autocomplete&gt;
+  &lt;input slot="input" placeholder="Select a fruit..."&gt;
+  &lt;ytz-option value="apple"&gt;Apple&lt;/ytz-option&gt;
+  &lt;ytz-option value="banana"&gt;Banana&lt;/ytz-option&gt;
+  &lt;ytz-option value="cherry"&gt;Cherry&lt;/ytz-option&gt;
+&lt;/ytz-autocomplete&gt;</code></pre>
+    </section>
+
+    <!-- Keyboard Navigation -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Keyboard Navigation</h2>
+      <p class="lh-copy mb3">
+        Full keyboard accessibility following the ARIA combobox pattern:
+      </p>
+      <ul class="lh-copy pl3 mb3">
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Arrow Down</kbd> - Open listbox / move to next option</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Arrow Up</kbd> - Move to previous option</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Enter</kbd> - Select focused option</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Space</kbd> - Select focused option (when on option)</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Escape</kbd> - Close listbox</li>
+        <li><kbd class="ph2 pv1 bg-light-gray br1 f6">Tab</kbd> - Return focus to input</li>
+      </ul>
+
+      <div class="mb3 pa3 bg-near-white br2">
+        <p class="f6 gray mb2">Try keyboard navigation:</p>
+        <ytz-autocomplete>
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Type or press arrow down...">
+          <ytz-option value="red">Red</ytz-option>
+          <ytz-option value="orange">Orange</ytz-option>
+          <ytz-option value="yellow">Yellow</ytz-option>
+          <ytz-option value="green">Green</ytz-option>
+          <ytz-option value="blue">Blue</ytz-option>
+          <ytz-option value="indigo">Indigo</ytz-option>
+          <ytz-option value="violet">Violet</ytz-option>
+        </ytz-autocomplete>
+      </div>
+    </section>
+
+    <!-- Multi-Select Mode -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Multi-Select Mode</h2>
+      <p class="lh-copy mb3">
+        Add the <code class="bg-near-white ph1">multiple</code> attribute to allow
+        selecting multiple options. The listbox stays open after selection.
+      </p>
+
+      <div class="mb3">
+        <div id="multi-chips" class="selected-chips"></div>
+        <ytz-autocomplete id="multi-autocomplete" multiple>
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Select tags...">
+          <ytz-option value="javascript">JavaScript</ytz-option>
+          <ytz-option value="typescript">TypeScript</ytz-option>
+          <ytz-option value="react">React</ytz-option>
+          <ytz-option value="vue">Vue</ytz-option>
+          <ytz-option value="angular">Angular</ytz-option>
+          <ytz-option value="svelte">Svelte</ytz-option>
+          <ytz-option value="nodejs">Node.js</ytz-option>
+        </ytz-autocomplete>
+      </div>
+
+      <script>
+        const multiAutocomplete = document.getElementById('multi-autocomplete')
+        const multiChips = document.getElementById('multi-chips')
+
+        multiAutocomplete.addEventListener('change', (e) => {
+          const values = e.detail.value
+          multiChips.innerHTML = values.map(v =>
+            `<span class="chip">${v} <span class="chip-remove" data-value="${v}">&times;</span></span>`
+          ).join('')
+        })
+
+        multiChips.addEventListener('click', (e) => {
+          if (e.target.classList.contains('chip-remove')) {
+            const value = e.target.dataset.value
+            const current = multiAutocomplete.value
+            multiAutocomplete.value = current.filter(v => v !== value)
+            multiChips.innerHTML = multiAutocomplete.value.map(v =>
+              `<span class="chip">${v} <span class="chip-remove" data-value="${v}">&times;</span></span>`
+            ).join('')
+          }
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-autocomplete multiple&gt;
+  &lt;input slot="input" placeholder="Select tags..."&gt;
+  &lt;ytz-option value="javascript"&gt;JavaScript&lt;/ytz-option&gt;
+  &lt;ytz-option value="typescript"&gt;TypeScript&lt;/ytz-option&gt;
+  &lt;ytz-option value="react"&gt;React&lt;/ytz-option&gt;
+&lt;/ytz-autocomplete&gt;
+
+&lt;script&gt;
+autocomplete.addEventListener('change', (e) =&gt; {
+  console.log('Selected:', e.detail.value) // Array of values
+})
+&lt;/script&gt;</code></pre>
+    </section>
+
+    <!-- Async Loading -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Async Loading</h2>
+      <p class="lh-copy mb3">
+        For server-side filtering, disable local filtering with
+        <code class="bg-near-white ph1">filter="false"</code> and use the
+        <code class="bg-near-white ph1">loading</code> attribute while fetching.
+      </p>
+
+      <div class="mb3">
+        <ytz-autocomplete id="async-autocomplete" filter="false">
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Search users...">
+          <span slot="loading" class="pa2 tc db">
+            <span class="spinner"></span> Loading...
+          </span>
+        </ytz-autocomplete>
+      </div>
+
+      <script type="module">
+        // Import ensures component is defined before this runs
+        import '../packages/core/dist/index.js'
+
+        // Simulated user data (in real app, this comes from an API)
+        const allUsers = [
+          { id: 1, name: 'Alice Johnson' },
+          { id: 2, name: 'Bob Smith' },
+          { id: 3, name: 'Charlie Brown' },
+          { id: 4, name: 'Diana Prince' },
+          { id: 5, name: 'Edward Norton' },
+          { id: 6, name: 'Fiona Apple' },
+          { id: 7, name: 'George Lucas' },
+          { id: 8, name: 'Hannah Montana' }
+        ]
+
+        const asyncAutocomplete = document.getElementById('async-autocomplete')
+        // Ensure element is upgraded before using component methods
+        customElements.upgrade(asyncAutocomplete)
+        const asyncInput = asyncAutocomplete.querySelector('input')
+        let debounceTimer
+
+        // Listen directly on the native input element
+        asyncInput.addEventListener('input', (e) => {
+          clearTimeout(debounceTimer)
+          const query = e.target.value.toLowerCase()
+
+          if (!query) {
+            asyncAutocomplete.setOptions([])
+            asyncAutocomplete.loading = false
+            asyncAutocomplete.open = false
+            return
+          }
+
+          // Show loading state
+          asyncAutocomplete.loading = true
+          asyncAutocomplete.open = true
+
+          // Simulate API call with 500ms delay
+          debounceTimer = setTimeout(() => {
+            const filtered = allUsers.filter(u =>
+              u.name.toLowerCase().includes(query)
+            )
+            asyncAutocomplete.setOptions(
+              filtered.map(u => ({ value: String(u.id), label: u.name }))
+            )
+            asyncAutocomplete.loading = false
+            if (filtered.length > 0) {
+              asyncAutocomplete.open = true
+            }
+          }, 500)
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-autocomplete id="async" filter="false"&gt;
+  &lt;input slot="input" placeholder="Search users..."&gt;
+  &lt;span slot="loading"&gt;Loading...&lt;/span&gt;
+&lt;/ytz-autocomplete&gt;
+
+&lt;script&gt;
+const ac = document.getElementById('async')
+
+ac.addEventListener('input-change', async (e) =&gt; {
+  const query = e.detail.value
+  if (!query) return
+
+  ac.loading = true
+  const users = await fetchUsers(query)
+  ac.setOptions(users.map(u =&gt; ({
+    value: u.id,
+    label: u.name
+  })))
+  ac.loading = false
+})
+&lt;/script&gt;</code></pre>
+    </section>
+
+    <!-- Disabled Options -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Disabled Options</h2>
+      <p class="lh-copy mb3">
+        Add the <code class="bg-near-white ph1">disabled</code> attribute to make
+        options unselectable.
+      </p>
+
+      <div class="mb3">
+        <ytz-autocomplete>
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Select a plan...">
+          <ytz-option value="free">Free Plan</ytz-option>
+          <ytz-option value="basic">Basic Plan</ytz-option>
+          <ytz-option value="pro">Pro Plan</ytz-option>
+          <ytz-option value="enterprise" disabled>Enterprise (Contact Sales)</ytz-option>
+        </ytz-autocomplete>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-autocomplete&gt;
+  &lt;input slot="input" placeholder="Select a plan..."&gt;
+  &lt;ytz-option value="free"&gt;Free Plan&lt;/ytz-option&gt;
+  &lt;ytz-option value="basic"&gt;Basic Plan&lt;/ytz-option&gt;
+  &lt;ytz-option value="pro"&gt;Pro Plan&lt;/ytz-option&gt;
+  &lt;ytz-option value="enterprise" disabled&gt;
+    Enterprise (Contact Sales)
+  &lt;/ytz-option&gt;
+&lt;/ytz-autocomplete&gt;</code></pre>
+    </section>
+
+    <!-- Pre-selected Value -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Pre-selected Value</h2>
+      <p class="lh-copy mb3">
+        Add the <code class="bg-near-white ph1">selected</code> attribute to options
+        or set the <code class="bg-near-white ph1">value</code> property programmatically.
+      </p>
+
+      <div class="mb3">
+        <ytz-autocomplete id="preselected-autocomplete">
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Select country..." value="United States">
+          <ytz-option value="us" selected>United States</ytz-option>
+          <ytz-option value="uk">United Kingdom</ytz-option>
+          <ytz-option value="ca">Canada</ytz-option>
+          <ytz-option value="au">Australia</ytz-option>
+          <ytz-option value="de">Germany</ytz-option>
+        </ytz-autocomplete>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;!-- Via attribute --&gt;
+&lt;ytz-autocomplete&gt;
+  &lt;input slot="input" value="United States"&gt;
+  &lt;ytz-option value="us" selected&gt;United States&lt;/ytz-option&gt;
+  ...
+&lt;/ytz-autocomplete&gt;
+
+&lt;!-- Via JavaScript --&gt;
+&lt;script&gt;
+autocomplete.value = 'us'
+autocomplete.inputValue = 'United States'
+&lt;/script&gt;</code></pre>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+      <p class="lh-copy mb3">
+        Control the autocomplete via JavaScript using methods and properties.
+      </p>
+
+      <div class="mb3">
+        <button onclick="document.getElementById('prog-autocomplete').show()"
+                class="ph3 pv2 br2 bg-blue white bn pointer mr2">
+          Open
+        </button>
+        <button onclick="document.getElementById('prog-autocomplete').hide()"
+                class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer mr2">
+          Close
+        </button>
+        <button onclick="document.getElementById('prog-autocomplete').clear()"
+                class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer mr2">
+          Clear
+        </button>
+        <button onclick="alert('Value: ' + document.getElementById('prog-autocomplete').value)"
+                class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer">
+          Get Value
+        </button>
+      </div>
+
+      <div class="mb3">
+        <ytz-autocomplete id="prog-autocomplete">
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Controlled autocomplete...">
+          <ytz-option value="one">Option One</ytz-option>
+          <ytz-option value="two">Option Two</ytz-option>
+          <ytz-option value="three">Option Three</ytz-option>
+        </ytz-autocomplete>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const ac = document.getElementById('my-autocomplete')
+
+// Methods
+ac.show()      // Open the listbox
+ac.hide()      // Close the listbox
+ac.toggle()    // Toggle open/closed
+ac.clear()     // Clear selection and input
+
+// Properties
+ac.value                // Get/set selected value(s)
+ac.inputValue           // Get/set input text
+ac.open = true          // Open listbox
+ac.loading = true       // Show loading state
+
+// Dynamic options
+ac.setOptions([
+  { value: 'a', label: 'Option A' },
+  { value: 'b', label: 'Option B', disabled: true }
+])</code></pre>
+    </section>
+
+    <!-- Custom Rendering -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Custom Rendering</h2>
+      <p class="lh-copy mb3">
+        Options can contain any HTML content for custom rendering with icons,
+        descriptions, or other elements.
+      </p>
+
+      <style>
+        #custom-autocomplete ytz-option {
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+        .option-icon {
+          width: 2rem;
+          height: 2rem;
+          border-radius: 50%;
+          background: #e0e0e0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1rem;
+        }
+        .option-content {
+          flex: 1;
+        }
+        .option-label {
+          font-weight: 500;
+        }
+        .option-desc {
+          font-size: 0.75rem;
+          color: #666;
+        }
+      </style>
+
+      <div class="mb3">
+        <ytz-autocomplete id="custom-autocomplete">
+          <input slot="input" class="pa2 br2 ba b--light-gray w5" placeholder="Select a team member...">
+          <ytz-option value="alice">
+            <span class="option-icon">A</span>
+            <span class="option-content">
+              <span class="option-label">Alice Johnson</span>
+              <span class="option-desc db">Engineering Lead</span>
+            </span>
+          </ytz-option>
+          <ytz-option value="bob">
+            <span class="option-icon">B</span>
+            <span class="option-content">
+              <span class="option-label">Bob Smith</span>
+              <span class="option-desc db">Product Manager</span>
+            </span>
+          </ytz-option>
+          <ytz-option value="charlie">
+            <span class="option-icon">C</span>
+            <span class="option-content">
+              <span class="option-label">Charlie Brown</span>
+              <span class="option-desc db">Designer</span>
+            </span>
+          </ytz-option>
+        </ytz-autocomplete>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-autocomplete&gt;
+  &lt;input slot="input" placeholder="Select..."&gt;
+  &lt;ytz-option value="alice"&gt;
+    &lt;img src="avatar.jpg" class="w2 h2 br-100"&gt;
+    &lt;div&gt;
+      &lt;div class="fw5"&gt;Alice Johnson&lt;/div&gt;
+      &lt;div class="f7 gray"&gt;Engineering Lead&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/ytz-option&gt;
+&lt;/ytz-autocomplete&gt;</code></pre>
+    </section>
+
+    <!-- API Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Autocomplete Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Default</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>open</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2"><code>false</code></td>
+            <td class="pa2">Controls listbox visibility</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>multiple</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2"><code>false</code></td>
+            <td class="pa2">Enable multi-select mode</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>loading</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2"><code>false</code></td>
+            <td class="pa2">Show loading state</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>filter</code></td>
+            <td class="pa2">String</td>
+            <td class="pa2"><code>"true"</code></td>
+            <td class="pa2">Enable local filtering ("false" disables)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Option Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>value</code></td>
+            <td class="pa2">String</td>
+            <td class="pa2">Option value (defaults to text content)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>disabled</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2">Make option unselectable</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>selected</code></td>
+            <td class="pa2">Boolean</td>
+            <td class="pa2">Mark option as selected</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Methods</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Method</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>show()</code></td>
+            <td class="pa2">Open the listbox</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>hide()</code></td>
+            <td class="pa2">Close the listbox</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>toggle()</code></td>
+            <td class="pa2">Toggle listbox open/closed</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>clear()</code></td>
+            <td class="pa2">Clear selection and input value</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>setOptions(options)</code></td>
+            <td class="pa2">Set options programmatically</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Properties</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Property</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>value</code></td>
+            <td class="pa2">string | string[]</td>
+            <td class="pa2">Selected value(s)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>inputValue</code></td>
+            <td class="pa2">string</td>
+            <td class="pa2">Current input text</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Event</th>
+            <th class="pa2 tl">Detail</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>change</code></td>
+            <td class="pa2"><code>{ value, option }</code></td>
+            <td class="pa2">Fired when selection changes</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>input-change</code></td>
+            <td class="pa2"><code>{ value }</code></td>
+            <td class="pa2">Fired when input text changes</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>open</code></td>
+            <td class="pa2">-</td>
+            <td class="pa2">Fired when listbox opens</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>close</code></td>
+            <td class="pa2">-</td>
+            <td class="pa2">Fired when listbox closes</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>clear</code></td>
+            <td class="pa2">-</td>
+            <td class="pa2">Fired when cleared</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Slots</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Slot</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>input</code></td>
+            <td class="pa2">The text input element</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>loading</code></td>
+            <td class="pa2">Content shown during loading state</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">ARIA</h3>
+      <ul class="lh-copy pl3 mb4">
+        <li>Input gets <code class="bg-near-white ph1">role="combobox"</code></li>
+        <li>Input gets <code class="bg-near-white ph1">aria-autocomplete="list"</code></li>
+        <li>Input gets <code class="bg-near-white ph1">aria-expanded</code> (true/false)</li>
+        <li>Input gets <code class="bg-near-white ph1">aria-controls</code> pointing to listbox</li>
+        <li>Listbox gets <code class="bg-near-white ph1">role="listbox"</code></li>
+        <li>Listbox gets <code class="bg-near-white ph1">aria-multiselectable</code> in multi-select mode</li>
+        <li>Options get <code class="bg-near-white ph1">role="option"</code></li>
+        <li>Options get <code class="bg-near-white ph1">aria-selected</code> (true/false)</li>
+      </ul>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Autocomplete, Option } from '@yetzirah/react'
+
+// Basic usage with options prop
+function FruitPicker() {
+  const [fruit, setFruit] = useState('')
+
+  return (
+    &lt;Autocomplete
+      value={fruit}
+      onChange={setFruit}
+      placeholder="Select a fruit..."
+      options={[
+        { value: 'apple', label: 'Apple' },
+        { value: 'banana', label: 'Banana' },
+        { value: 'cherry', label: 'Cherry' }
+      ]}
+    /&gt;
+  )
+}
+
+// Multi-select
+function TagSelector() {
+  const [tags, setTags] = useState([])
+
+  return (
+    &lt;Autocomplete
+      multiple
+      value={tags}
+      onChange={setTags}
+      placeholder="Add tags..."
+      options={availableTags}
+    /&gt;
+  )
+}
+
+// With Option children for custom rendering
+function UserPicker() {
+  const [userId, setUserId] = useState('')
+
+  return (
+    &lt;Autocomplete
+      value={userId}
+      onChange={setUserId}
+      placeholder="Select user..."
+    &gt;
+      &lt;Option value="1"&gt;
+        &lt;img src="alice.jpg" /&gt; Alice
+      &lt;/Option&gt;
+      &lt;Option value="2"&gt;
+        &lt;img src="bob.jpg" /&gt; Bob
+      &lt;/Option&gt;
+    &lt;/Autocomplete&gt;
+  )
+}
+
+// Async loading
+function AsyncSearch() {
+  const [options, setOptions] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  const handleInputChange = async (query) =&gt; {
+    if (!query) return
+    setLoading(true)
+    const results = await searchAPI(query)
+    setOptions(results)
+    setLoading(false)
+  }
+
+  return (
+    &lt;Autocomplete
+      filter={false}
+      loading={loading}
+      onInputChange={handleInputChange}
+      options={options}
+      placeholder="Search..."
+      loadingContent={&lt;Spinner /&gt;}
+    /&gt;
+  )
+}</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Migrating from MUI Autocomplete</h2>
+
+      <div class="flex flex-wrap nl2 nr2 mb4">
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">MUI</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Autocomplete
+  options={fruits}
+  getOptionLabel={(o) =&gt; o.label}
+  value={value}
+  onChange={(e, v) =&gt; setValue(v)}
+  renderInput={(params) =&gt; (
+    &lt;TextField
+      {...params}
+      label="Select fruit"
+    /&gt;
+  )}
+/&gt;</code></pre>
+        </div>
+        <div class="w-50-ns w-100 ph2 mb3">
+          <h4 class="f6 fw6 mb2 gray ttu">Yetzirah</h4>
+          <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Autocomplete
+  options={fruits}
+  value={value}
+  onChange={setValue}
+  placeholder="Select fruit"
+/&gt;</code></pre>
+        </div>
+      </div>
+
+      <h4 class="f6 fw6 mb2">Prop Mapping</h4>
+      <table class="collapse ba b--light-gray w-100 mb3">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">MUI Prop</th>
+            <th class="pa2 tl">Yetzirah Equivalent</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>options</code></td>
+            <td class="pa2"><code>options</code> (simplified: <code>{value, label}</code>)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>getOptionLabel</code></td>
+            <td class="pa2">Use <code>label</code> property in options</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>value</code></td>
+            <td class="pa2"><code>value</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>onChange</code></td>
+            <td class="pa2"><code>onChange</code> (receives value directly)</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>onInputChange</code></td>
+            <td class="pa2"><code>onInputChange</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>multiple</code></td>
+            <td class="pa2"><code>multiple</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>loading</code></td>
+            <td class="pa2"><code>loading</code></td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>filterOptions</code></td>
+            <td class="pa2"><code>filter={false}</code> + custom filtering</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>renderInput</code></td>
+            <td class="pa2"><code>placeholder</code> + CSS styling</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>renderOption</code></td>
+            <td class="pa2"><code>&lt;Option&gt;</code> children with custom HTML</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>getOptionDisabled</code></td>
+            <td class="pa2"><code>disabled</code> property in options</td>
+          </tr>
+          <tr class="bb b--light-gray">
+            <td class="pa2"><code>freeSolo</code></td>
+            <td class="pa2">Handle manually (input accepts any value)</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h4 class="f6 fw6 mb2">Key Differences</h4>
+      <ul class="lh-copy pl3">
+        <li class="mb2"><strong>Simpler API:</strong> No <code>renderInput</code> prop - just use <code>placeholder</code></li>
+        <li class="mb2"><strong>Options format:</strong> Use <code>{ value, label }</code> instead of custom objects</li>
+        <li class="mb2"><strong>onChange signature:</strong> Receives value directly, not <code>(event, value)</code></li>
+        <li class="mb2"><strong>Styling:</strong> CSS classes (Tachyons) instead of <code>sx</code> prop</li>
+        <li class="mb2"><strong>Custom rendering:</strong> Use <code>&lt;Option&gt;</code> children for full control</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

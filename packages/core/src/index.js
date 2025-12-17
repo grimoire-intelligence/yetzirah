@@ -17,7 +17,7 @@ export { YtzTabs, YtzTab, YtzTabPanel } from './tabs.js'
 export { YtzTooltip } from './tooltip.js'
 export { YtzPopover } from './popover.js'
 export { YtzMenu, YtzMenuItem } from './menu.js'
-// export { YtzAutocomplete } from './autocomplete.js'
+export { YtzAutocomplete, YtzOption } from './autocomplete.js'
 
 /**
  * Yetzirah version
