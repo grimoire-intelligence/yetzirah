@@ -1226,7 +1226,7 @@ Create static HTML demo page showing popover component with various content.
 ---
 pr_id: PR-038
 title: README & MUI Rosetta Stone Documentation
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 5
