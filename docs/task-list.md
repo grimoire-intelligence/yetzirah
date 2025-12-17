@@ -832,7 +832,7 @@ Create React wrapper for `<ytz-listbox>`.
 ---
 pr_id: PR-025
 title: Listbox Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
