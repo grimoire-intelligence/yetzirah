@@ -79,7 +79,7 @@ class YtzAutocomplete extends HTMLElement {
 
   /** @returns {boolean} */
   get filter() { return this.getAttribute('filter') !== 'false' }
-  set filter(v) { this.setAttribute('filter', v ? 'true' : 'false') }
+  set filter(v) { this.setAttribute('filter', (v && v !== 'false') ? 'true' : 'false') }
 
   /** @returns {string|string[]} */
   get value() {

@@ -52,6 +52,25 @@
       cursor: not-allowed;
     }
 
+    /* Ensure hidden attribute works even with display classes */
+    [hidden] {
+      display: none !important;
+    }
+
+    /* Loading slot styling - positioned in dropdown area */
+    ytz-autocomplete [slot="loading"] {
+      position: absolute;
+      left: 0;
+      top: 100%;
+      margin-top: 4px;
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      min-width: 100%;
+      z-index: 1000;
+    }
+
     /* Multi-select chips styling */
     .selected-chips {
       display: flex;
@@ -240,11 +259,11 @@ autocomplete.addEventListener('change', (e) =&gt; {
         </ytz-autocomplete>
       </div>
 
-      <script>
-        const asyncAutocomplete = document.getElementById('async-autocomplete')
-        let debounceTimer
+      <script type="module">
+        // Import ensures component is defined before this runs
+        import '../packages/core/dist/index.js'
 
-        // Simulated user data
+        // Simulated user data (in real app, this comes from an API)
         const allUsers = [
           { id: 1, name: 'Alice Johnson' },
           { id: 2, name: 'Bob Smith' },
@@ -256,17 +275,27 @@ autocomplete.addEventListener('change', (e) =&gt; {
           { id: 8, name: 'Hannah Montana' }
         ]
 
-        asyncAutocomplete.addEventListener('input-change', (e) => {
+        const asyncAutocomplete = document.getElementById('async-autocomplete')
+        // Ensure element is upgraded before using component methods
+        customElements.upgrade(asyncAutocomplete)
+        const asyncInput = asyncAutocomplete.querySelector('input')
+        let debounceTimer
+
+        // Listen directly on the native input element
+        asyncInput.addEventListener('input', (e) => {
           clearTimeout(debounceTimer)
-          const query = e.detail.value.toLowerCase()
+          const query = e.target.value.toLowerCase()
 
           if (!query) {
             asyncAutocomplete.setOptions([])
+            asyncAutocomplete.loading = false
+            asyncAutocomplete.open = false
             return
           }
 
           // Show loading state
           asyncAutocomplete.loading = true
+          asyncAutocomplete.open = true
 
           // Simulate API call with 500ms delay
           debounceTimer = setTimeout(() => {
@@ -277,6 +306,9 @@ autocomplete.addEventListener('change', (e) =&gt; {
               filtered.map(u => ({ value: String(u.id), label: u.name }))
             )
             asyncAutocomplete.loading = false
+            if (filtered.length > 0) {
+              asyncAutocomplete.open = true
+            }
           }, 500)
         })
       </script>
