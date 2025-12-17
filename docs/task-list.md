@@ -857,7 +857,7 @@ Create static HTML demo page showing listbox component.
 ---
 pr_id: PR-026
 title: Select Component (Core)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3

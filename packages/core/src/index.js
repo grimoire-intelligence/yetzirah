@@ -19,6 +19,7 @@ export { YtzPopover } from './popover.js'
 export { YtzMenu, YtzMenuItem } from './menu.js'
 export { YtzAutocomplete, YtzOption } from './autocomplete.js'
 export { YtzListbox } from './listbox.js'
+export { YtzSelect } from './select.js'
 
 /**
  * Yetzirah version
