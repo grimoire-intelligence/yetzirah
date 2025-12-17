@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Select Component - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-section { border-bottom: 1px solid #e0e0e0; }
+    .demo-section:last-child { border-bottom: none; }
+    ytz-select { display: inline-block; position: relative; }
+    ytz-select [slot="trigger"] {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      min-width: 150px;
+      text-align: left;
+    }
+    ytz-select [slot="trigger"]:focus { outline: 2px solid #357edd; outline-offset: 2px; }
+    ytz-select [slot="trigger"][disabled] { opacity: 0.5; cursor: not-allowed; }
+    ytz-select [role="listbox"] {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      max-height: 200px;
+      overflow-y: auto;
+      z-index: 1000;
+    }
+    ytz-option { display: block; padding: 0.5rem 1rem; cursor: pointer; }
+    ytz-option:hover, ytz-option:focus { background: #f0f0f0; outline: none; }
+    ytz-option[selected] { background: #e3f2fd; }
+    ytz-option[disabled] { color: #999; cursor: not-allowed; }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb5">
+    <nav class="mb3"><a href="index.html" class="link blue">&larr; All Components</a></nav>
+    <h1 class="f2 fw6 mb2">Select</h1>
+    <p class="f5 lh-copy gray mt0">Dropdown select with trigger button and listbox. Classic dropdown pattern.</p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">Click the trigger to open, select an option to close.</p>
+
+      <ytz-select placeholder="Select a fruit...">
+        <ytz-option value="apple">Apple</ytz-option>
+        <ytz-option value="banana">Banana</ytz-option>
+        <ytz-option value="cherry">Cherry</ytz-option>
+        <ytz-option value="date">Date</ytz-option>
+      </ytz-select>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-select placeholder="Select a fruit..."&gt;
+  &lt;ytz-option value="apple"&gt;Apple&lt;/ytz-option&gt;
+  &lt;ytz-option value="banana"&gt;Banana&lt;/ytz-option&gt;
+  &lt;ytz-option value="cherry"&gt;Cherry&lt;/ytz-option&gt;
+&lt;/ytz-select&gt;</code></pre>
+    </section>
+
+    <!-- Multi-Select -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Multi-Select</h2>
+      <p class="lh-copy mb3">Add <code class="bg-near-white ph1">multiple</code> to allow multiple selections.</p>
+
+      <ytz-select multiple placeholder="Select colors...">
+        <ytz-option value="red">Red</ytz-option>
+        <ytz-option value="green">Green</ytz-option>
+        <ytz-option value="blue">Blue</ytz-option>
+        <ytz-option value="yellow">Yellow</ytz-option>
+      </ytz-select>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-select multiple placeholder="Select colors..."&gt;
+  &lt;ytz-option value="red"&gt;Red&lt;/ytz-option&gt;
+  &lt;ytz-option value="green"&gt;Green&lt;/ytz-option&gt;
+  &lt;ytz-option value="blue"&gt;Blue&lt;/ytz-option&gt;
+&lt;/ytz-select&gt;</code></pre>
+    </section>
+
+    <!-- Pre-selected -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Pre-selected Value</h2>
+
+      <ytz-select>
+        <ytz-option value="draft">Draft</ytz-option>
+        <ytz-option value="review" selected>In Review</ytz-option>
+        <ytz-option value="published">Published</ytz-option>
+      </ytz-select>
+    </section>
+
+    <!-- Disabled Options -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Disabled Options</h2>
+
+      <ytz-select placeholder="Select a plan...">
+        <ytz-option value="free">Free</ytz-option>
+        <ytz-option value="pro">Pro</ytz-option>
+        <ytz-option value="enterprise" disabled>Enterprise (Contact Sales)</ytz-option>
+      </ytz-select>
+    </section>
+
+    <!-- Disabled Select -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Disabled Select</h2>
+
+      <ytz-select disabled placeholder="Cannot interact">
+        <ytz-option value="a">Option A</ytz-option>
+        <ytz-option value="b">Option B</ytz-option>
+      </ytz-select>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+
+      <div class="mb3">
+        <button onclick="document.getElementById('prog-select').show()" class="ph3 pv2 br2 bg-blue white bn pointer mr2">Open</button>
+        <button onclick="document.getElementById('prog-select').hide()" class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer mr2">Close</button>
+        <button onclick="document.getElementById('prog-select').value = 'banana'" class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer mr2">Set Banana</button>
+        <button onclick="document.getElementById('prog-select').clear()" class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer mr2">Clear</button>
+        <button onclick="alert('Value: ' + document.getElementById('prog-select').value)" class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer">Get Value</button>
+      </div>
+
+      <ytz-select id="prog-select" placeholder="Controlled select">
+        <ytz-option value="apple">Apple</ytz-option>
+        <ytz-option value="banana">Banana</ytz-option>
+        <ytz-option value="cherry">Cherry</ytz-option>
+      </ytz-select>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>const select = document.querySelector('ytz-select')
+
+select.show()           // Open dropdown
+select.hide()           // Close dropdown
+select.toggle()         // Toggle open/closed
+select.clear()          // Clear selection
+select.value = 'apple'  // Set value programmatically</code></pre>
+    </section>
+
+    <!-- Keyboard Navigation -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Keyboard Support</h2>
+      <table class="w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-light-gray">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bb b--light-gray"><td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Enter</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">Space</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">Arrow Down</kbd></td><td class="pa2">Open dropdown (on trigger)</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Arrow Down</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">Arrow Up</kbd></td><td class="pa2">Navigate options</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Enter</kbd> / <kbd class="ph2 pv1 bg-near-white br1 f6">Space</kbd></td><td class="pa2">Select option</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Escape</kbd></td><td class="pa2">Close dropdown</td></tr>
+          <tr><td class="pa2"><kbd class="ph2 pv1 bg-near-white br1 f6">Tab</kbd></td><td class="pa2">Close and return to trigger</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- API Reference -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">API Reference</h2>
+
+      <h3 class="f5 fw6 mb2">Attributes</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead><tr class="bg-light-gray"><th class="pa2 tl">Attribute</th><th class="pa2 tl">Type</th><th class="pa2 tl">Description</th></tr></thead>
+        <tbody>
+          <tr class="bb b--light-gray"><td class="pa2"><code>open</code></td><td class="pa2">Boolean</td><td class="pa2">Controls dropdown visibility</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><code>multiple</code></td><td class="pa2">Boolean</td><td class="pa2">Allow multiple selections</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><code>disabled</code></td><td class="pa2">Boolean</td><td class="pa2">Disable all interaction</td></tr>
+          <tr><td class="pa2"><code>placeholder</code></td><td class="pa2">String</td><td class="pa2">Trigger placeholder text</td></tr>
+        </tbody>
+      </table>
+
+      <h3 class="f5 fw6 mb2">Events</h3>
+      <table class="collapse ba b--light-gray w-100 mb4">
+        <thead><tr class="bg-light-gray"><th class="pa2 tl">Event</th><th class="pa2 tl">Detail</th><th class="pa2 tl">Description</th></tr></thead>
+        <tbody>
+          <tr class="bb b--light-gray"><td class="pa2"><code>change</code></td><td class="pa2"><code>{ value, option }</code></td><td class="pa2">Selection changed</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><code>open</code></td><td class="pa2">-</td><td class="pa2">Dropdown opened</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2"><code>close</code></td><td class="pa2">-</td><td class="pa2">Dropdown closed</td></tr>
+          <tr><td class="pa2"><code>clear</code></td><td class="pa2">-</td><td class="pa2">Selection cleared</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
+import { Select, Option } from '@yetzirah/react'
+
+function StatusPicker() {
+  const [status, setStatus] = useState('')
+
+  return (
+    &lt;Select value={status} onChange={setStatus} placeholder="Select status..."&gt;
+      &lt;Option value="draft"&gt;Draft&lt;/Option&gt;
+      &lt;Option value="review"&gt;In Review&lt;/Option&gt;
+      &lt;Option value="published"&gt;Published&lt;/Option&gt;
+    &lt;/Select&gt;
+  )
+}
+
+// Multi-select
+function TagPicker() {
+  const [tags, setTags] = useState([])
+
+  return (
+    &lt;Select multiple value={tags} onChange={setTags}&gt;
+      &lt;Option value="urgent"&gt;Urgent&lt;/Option&gt;
+      &lt;Option value="bug"&gt;Bug&lt;/Option&gt;
+      &lt;Option value="feature"&gt;Feature&lt;/Option&gt;
+    &lt;/Select&gt;
+  )
+}</code></pre>
+    </section>
+
+    <!-- Listbox vs Select -->
+    <section class="demo-section pv4">
+      <h2 class="f4 fw6 mb3">Listbox vs Select</h2>
+      <table class="w-100 collapse ba b--light-gray">
+        <thead><tr class="bg-light-gray"><th class="pa2 tl">Feature</th><th class="pa2 tl">Listbox</th><th class="pa2 tl">Select</th></tr></thead>
+        <tbody>
+          <tr class="bb b--light-gray"><td class="pa2">Visibility</td><td class="pa2">Always visible</td><td class="pa2">Dropdown (opens/closes)</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2">Trigger</td><td class="pa2">None</td><td class="pa2">Button showing selection</td></tr>
+          <tr class="bb b--light-gray"><td class="pa2">Use case</td><td class="pa2">Settings panels, forms</td><td class="pa2">Compact selection, toolbars</td></tr>
+          <tr><td class="pa2">Space</td><td class="pa2">Takes inline space</td><td class="pa2">Compact trigger, dropdown overlays</td></tr>
+        </tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray"><a href="index.html" class="link blue">Back to all components</a></p>
+  </footer>
+</body>
+</html>

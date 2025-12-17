@@ -922,7 +922,7 @@ Create React wrapper for `<ytz-select>`.
 ---
 pr_id: PR-028
 title: Select Documentation & Demo
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
