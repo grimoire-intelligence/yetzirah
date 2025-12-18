@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chip - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    /* Basic chip styling */
+    ytz-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      background: #e0e0e0;
+      font-size: 0.875rem;
+      line-height: 1.5;
+    }
+    ytz-chip[disabled] {
+      opacity: 0.5;
+    }
+    ytz-chip .ytz-chip-delete {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      padding: 0;
+      margin-left: 0.25rem;
+      border: none;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.15);
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      color: inherit;
+    }
+    ytz-chip .ytz-chip-delete:hover {
+      background: rgba(0,0,0,0.25);
+    }
+    ytz-chip .ytz-chip-delete:disabled {
+      cursor: not-allowed;
+    }
+    /* Color variants */
+    .chip-primary { background: #357edd; color: white; }
+    .chip-success { background: #19a974; color: white; }
+    .chip-warning { background: #ff6300; color: white; }
+    .chip-error { background: #ff4136; color: white; }
+    .chip-outlined {
+      background: transparent;
+      border: 1px solid currentColor;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Chip</h1>
+    <p class="f5 lh-copy gray mt0">
+      Deletable tag/label component with keyboard support.
+      Useful for displaying tags, selections, or filters.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        A simple chip displays a label or tag.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-chip>JavaScript</ytz-chip>
+        <ytz-chip>TypeScript</ytz-chip>
+        <ytz-chip>React</ytz-chip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-chip&gt;JavaScript&lt;/ytz-chip&gt;
+&lt;ytz-chip&gt;TypeScript&lt;/ytz-chip&gt;
+&lt;ytz-chip&gt;React&lt;/ytz-chip&gt;</code></pre>
+    </section>
+
+    <!-- Deletable Chips -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Deletable Chips</h2>
+      <p class="lh-copy mb3">
+        Add the <code>deletable</code> attribute to show a delete button.
+        Press Delete or Backspace to remove when focused.
+      </p>
+
+      <div class="demo-row mb3" id="deletable-demo">
+        <ytz-chip deletable>React</ytz-chip>
+        <ytz-chip deletable>Vue</ytz-chip>
+        <ytz-chip deletable>Svelte</ytz-chip>
+        <ytz-chip deletable>Angular</ytz-chip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-chip deletable&gt;React&lt;/ytz-chip&gt;
+&lt;ytz-chip deletable&gt;Vue&lt;/ytz-chip&gt;</code></pre>
+
+      <script>
+        document.getElementById('deletable-demo').addEventListener('delete', (e) => {
+          e.detail.chip.remove()
+        })
+      </script>
+    </section>
+
+    <!-- Disabled State -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Disabled State</h2>
+      <p class="lh-copy mb3">
+        Disabled chips cannot be deleted.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-chip disabled>Locked Tag</ytz-chip>
+        <ytz-chip deletable disabled>Can't Delete</ytz-chip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-chip disabled&gt;Locked Tag&lt;/ytz-chip&gt;
+&lt;ytz-chip deletable disabled&gt;Can't Delete&lt;/ytz-chip&gt;</code></pre>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Color Variants</h2>
+      <p class="lh-copy mb3">
+        Style chips with Tachyons or custom CSS classes.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-chip class="chip-primary" deletable>Primary</ytz-chip>
+        <ytz-chip class="chip-success" deletable>Success</ytz-chip>
+        <ytz-chip class="chip-warning" deletable>Warning</ytz-chip>
+        <ytz-chip class="chip-error" deletable>Error</ytz-chip>
+      </div>
+
+      <h3 class="f5 fw6 mt4 mb2">Outlined Variant</h3>
+      <div class="demo-row mb3">
+        <ytz-chip class="chip-outlined blue" deletable>Primary</ytz-chip>
+        <ytz-chip class="chip-outlined green" deletable>Success</ytz-chip>
+        <ytz-chip class="chip-outlined orange" deletable>Warning</ytz-chip>
+        <ytz-chip class="chip-outlined red" deletable>Error</ytz-chip>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-chip class="chip-primary" deletable&gt;Primary&lt;/ytz-chip&gt;
+&lt;ytz-chip class="chip-outlined blue" deletable&gt;Outlined&lt;/ytz-chip&gt;</code></pre>
+    </section>
+
+    <!-- Event Handling -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Event Handling</h2>
+      <p class="lh-copy mb3">
+        Listen for the <code>delete</code> event to handle chip removal.
+        The event's <code>detail.chip</code> contains the chip element.
+      </p>
+
+      <div class="demo-row mb3" id="event-demo">
+        <ytz-chip deletable>Click X to delete</ytz-chip>
+      </div>
+      <p id="delete-status" class="f6 gray">Click the delete button...</p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const container = document.querySelector('.chip-container')
+container.addEventListener('delete', (e) => {
+  const chip = e.detail.chip
+  console.log('Deleting:', chip.textContent)
+  chip.remove()
+})</code></pre>
+
+      <script>
+        document.getElementById('event-demo').addEventListener('delete', (e) => {
+          document.getElementById('delete-status').textContent =
+            'Deleted: ' + e.detail.chip.textContent.replace('×', '').trim()
+          e.detail.chip.remove()
+        })
+      </script>
+    </section>
+
+    <!-- Chip Group Example -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Chip Group (Tags Input)</h2>
+      <p class="lh-copy mb3">
+        Build a tags input by combining chips with an input field.
+      </p>
+
+      <div class="pa3 ba b--light-gray br2 mb3">
+        <div class="demo-row mb2" id="tags-container">
+          <ytz-chip deletable>design</ytz-chip>
+          <ytz-chip deletable>frontend</ytz-chip>
+        </div>
+        <input
+          type="text"
+          id="tag-input"
+          placeholder="Add tag and press Enter"
+          class="input-reset ba b--light-gray pa2 br2 w-100"
+        >
+      </div>
+
+      <script>
+        const tagsContainer = document.getElementById('tags-container')
+        const tagInput = document.getElementById('tag-input')
+
+        tagInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && tagInput.value.trim()) {
+            const chip = document.createElement('ytz-chip')
+            chip.setAttribute('deletable', '')
+            chip.textContent = tagInput.value.trim()
+            tagsContainer.appendChild(chip)
+            tagInput.value = ''
+          }
+        })
+
+        tagsContainer.addEventListener('delete', (e) => {
+          e.detail.chip.remove()
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>input.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter' && input.value.trim()) {
+    const chip = document.createElement('ytz-chip')
+    chip.setAttribute('deletable', '')
+    chip.textContent = input.value.trim()
+    container.appendChild(chip)
+    input.value = ''
+  }
+})</code></pre>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        Chip accessibility features:
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li>Delete button has <code>aria-label="Delete"</code></li>
+        <li>Keyboard support: Delete/Backspace removes focused chip</li>
+        <li>Delete button is properly disabled when chip is disabled</li>
+      </ul>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Delete</td><td class="pa2">Delete chip (when deletable)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Backspace</td><td class="pa2">Delete chip (when deletable)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Tab</td><td class="pa2">Navigate between chips</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Chip label="Tag" /&gt;</td>
+              <td class="pa2 code">&lt;ytz-chip&gt;Tag&lt;/ytz-chip&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Chip onDelete={...} /&gt;</td>
+              <td class="pa2 code">&lt;ytz-chip deletable&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Chip disabled /&gt;</td>
+              <td class="pa2 code">&lt;ytz-chip disabled&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Chip variant="outlined" /&gt;</td>
+              <td class="pa2 code">&lt;ytz-chip class="chip-outlined"&gt;</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Chip } from '@yetzirah/react'
+
+function TagList() {
+  const [tags, setTags] = useState(['React', 'Vue', 'Svelte'])
+
+  const handleDelete = (index) => {
+    setTags(tags.filter((_, i) => i !== index))
+  }
+
+  return (
+    &lt;div&gt;
+      {tags.map((tag, i) =&gt; (
+        &lt;Chip
+          key={tag}
+          deletable
+          onDelete={() =&gt; handleDelete(i)}
+        &gt;
+          {tag}
+        &lt;/Chip&gt;
+      ))}
+    &lt;/div&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
