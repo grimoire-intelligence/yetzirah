@@ -21,10 +21,19 @@ import { createVirtualScroller } from './utils/virtual-scroll.js'
  */
 class YtzDatagridColumn extends HTMLElement {
   get field() { return this.getAttribute('field') || '' }
+  set field(val) { this.setAttribute('field', val) }
+
   get header() { return this.getAttribute('header') || this.field }
+  set header(val) { this.setAttribute('header', val) }
+
   get sortable() { return this.hasAttribute('sortable') }
+  set sortable(val) { val ? this.setAttribute('sortable', '') : this.removeAttribute('sortable') }
+
   get filterable() { return this.hasAttribute('filterable') }
+  set filterable(val) { val ? this.setAttribute('filterable', '') : this.removeAttribute('filterable') }
+
   get width() { return this.getAttribute('width') || 'auto' }
+  set width(val) { this.setAttribute('width', val) }
 }
 
 customElements.define('ytz-datagrid-column', YtzDatagridColumn)
