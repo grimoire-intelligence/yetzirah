@@ -1,1364 +1,760 @@
-# Task List for Yetzirah Phase 1 (Core + React)
+# Task List for Yetzirah Phase 1.5 (Tier 2 Components)
 
 ## Orchestration Metadata
 **Generated for:** Lemegeton v1.0+
-**Estimated Total Complexity:** 118
+**Estimated Total Complexity:** 78
 **Recommended Agent Configuration:**
 - Haiku agents: 3 (for complexity 1-3)
 - Sonnet agents: 2 (for complexity 4-7)
-- Opus agents: 0 (for complexity 8-10)
+- Opus agents: 1 (for complexity 8-10 - DataGrid)
 ---
-## Block 0: Foundation (No dependencies)
+## Block 0: Simple Components (No dependencies beyond Tier 1)
 
-### PR-001: Project Setup & Monorepo Structure
+### PR-040: Toggle/Switch Component (Core)
 ---
-pr_id: PR-001
-title: Project Setup & Monorepo Structure
-cold_state: completed
-priority: critical
+pr_id: PR-040
+title: Toggle/Switch Component (Core)
+cold_state: ready
+priority: high
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Checkbox semantics with visual switch, aria-checked, <100 lines
+dependencies: []
+estimated_files:
+  - path: packages/core/src/toggle.js
+    action: create
+    description: ytz-toggle Web Component implementation
+  - path: packages/core/src/toggle.test.js
+    action: create
+    description: Toggle component tests
+  - path: packages/core/src/index.js
+    action: modify
+    description: Export toggle component
+---
+**Description:**
+Implement `<ytz-toggle>` - a switch/toggle control with checkbox semantics. Renders as a visually styled toggle but maintains proper checkbox accessibility. Uses `aria-checked` for state, supports `checked` attribute, dispatches `change` event.
+
+**Acceptance Criteria:**
+- [ ] `checked` attribute toggles state
+- [ ] `aria-checked` reflects state
+- [ ] Keyboard accessible (Space to toggle)
+- [ ] `change` event dispatched
+- [ ] `disabled` attribute support
+- [ ] < 100 lines
+---
+### PR-041: Toggle React Wrapper
+---
+pr_id: PR-041
+title: Toggle React Wrapper
+cold_state: ready
+priority: high
+complexity:
+  score: 2
+  estimated_minutes: 20
+  suggested_model: haiku
+  rationale: Thin wrapper with checked/onChange props
+dependencies:
+  - PR-040
+estimated_files:
+  - path: packages/react/src/toggle.js
+    action: create
+    description: React wrapper for ytz-toggle
+  - path: packages/react/src/toggle.test.js
+    action: create
+    description: React wrapper tests
+  - path: packages/react/src/index.js
+    action: modify
+    description: Export Toggle component
+---
+**Description:**
+Create React wrapper for `<ytz-toggle>`. Bridge checked prop to attribute, provide onChange callback.
+
+**Acceptance Criteria:**
+- [ ] `checked` prop synced to attribute
+- [ ] `onChange` callback
+- [ ] `disabled` prop support
+- [ ] Ref forwarding
+- [ ] < 50 lines
+---
+### PR-042: Toggle Documentation & Demo
+---
+pr_id: PR-042
+title: Toggle Documentation & Demo
+cold_state: ready
+priority: medium
+complexity:
+  score: 2
+  estimated_minutes: 25
+  suggested_model: haiku
+  rationale: Static HTML demo page
+dependencies:
+  - PR-041
+estimated_files:
+  - path: demos/toggle.html
+    action: create
+    description: Static HTML demo showing toggle variants
+---
+**Description:**
+Create static HTML demo page showing toggle component with various states and configurations.
+
+**Acceptance Criteria:**
+- [ ] Demo shows: basic toggle, disabled, with labels
+- [ ] Works when opened directly in browser
+- [ ] JSDoc complete
+---
+### PR-043: Chip Component (Core)
+---
+pr_id: PR-043
+title: Chip Component (Core)
+cold_state: ready
+priority: high
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Deletable tag with keyboard support, ~30 lines per PRD
+dependencies: []
+estimated_files:
+  - path: packages/core/src/chip.js
+    action: create
+    description: ytz-chip Web Component implementation
+  - path: packages/core/src/chip.test.js
+    action: create
+    description: Chip component tests
+  - path: packages/core/src/index.js
+    action: modify
+    description: Export chip component
+---
+**Description:**
+Implement `<ytz-chip>` - a deletable tag/label component. `deletable` attribute shows delete button (x), dispatches `delete` event when clicked or Backspace/Delete pressed while focused. Future consideration: drag API for reordering, chip input for tag entry.
+
+**Acceptance Criteria:**
+- [ ] Renders as inline tag/label
+- [ ] `deletable` attribute shows x button
+- [ ] `delete` event dispatched on x click
+- [ ] Keyboard: Backspace/Delete triggers delete when focused
+- [ ] `disabled` attribute support
+- [ ] < 50 lines
+---
+### PR-044: Chip React Wrapper
+---
+pr_id: PR-044
+title: Chip React Wrapper
+cold_state: ready
+priority: high
+complexity:
+  score: 2
+  estimated_minutes: 20
+  suggested_model: haiku
+  rationale: Thin wrapper
+dependencies:
+  - PR-043
+estimated_files:
+  - path: packages/react/src/chip.js
+    action: create
+    description: React wrapper for ytz-chip
+  - path: packages/react/src/chip.test.js
+    action: create
+    description: React wrapper tests
+  - path: packages/react/src/index.js
+    action: modify
+    description: Export Chip component
+---
+**Description:**
+Create React wrapper for `<ytz-chip>`.
+
+**Acceptance Criteria:**
+- [ ] `deletable` prop
+- [ ] `onDelete` callback
+- [ ] Ref forwarding
+- [ ] < 50 lines
+---
+### PR-045: Chip Documentation & Demo
+---
+pr_id: PR-045
+title: Chip Documentation & Demo
+cold_state: ready
+priority: medium
+complexity:
+  score: 2
+  estimated_minutes: 25
+  suggested_model: haiku
+  rationale: Static HTML demo page
+dependencies:
+  - PR-044
+estimated_files:
+  - path: demos/chip.html
+    action: create
+    description: Static HTML demo showing chip variants
+---
+**Description:**
+Create static HTML demo page showing chip component with various configurations.
+
+**Acceptance Criteria:**
+- [ ] Demo shows: basic chip, deletable, disabled, styled variants
+- [ ] Works when opened directly in browser
+- [ ] JSDoc complete
+---
+## Block 1: IconButton (Depends on Tier 1 Button + Tooltip)
+
+### PR-046: IconButton Component (Core)
+---
+pr_id: PR-046
+title: IconButton Component (Core)
+cold_state: ready
+priority: high
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Button variant with aria-label requirement, optional tooltip integration
+dependencies: []
+estimated_files:
+  - path: packages/core/src/icon-button.js
+    action: create
+    description: ytz-icon-button Web Component implementation
+  - path: packages/core/src/icon-button.test.js
+    action: create
+    description: IconButton component tests
+  - path: packages/core/src/index.js
+    action: modify
+    description: Export icon-button component
+---
+**Description:**
+Implement `<ytz-icon-button>` - a button variant specifically for icon-only buttons. Requires `aria-label` attribute for accessibility (warns in dev if missing). Optionally integrates with tooltip to show label on hover. Extends Button behavior with icon-specific defaults.
+
+**Acceptance Criteria:**
+- [ ] `aria-label` required (console warning if missing)
+- [ ] Icon content displayed (slotted)
+- [ ] Optional `tooltip` attribute enables tooltip showing aria-label
+- [ ] Keyboard accessible
+- [ ] < 100 lines
+---
+### PR-047: IconButton React Wrapper
+---
+pr_id: PR-047
+title: IconButton React Wrapper
+cold_state: ready
+priority: high
+complexity:
+  score: 2
+  estimated_minutes: 20
+  suggested_model: haiku
+  rationale: Thin wrapper
+dependencies:
+  - PR-046
+estimated_files:
+  - path: packages/react/src/icon-button.js
+    action: create
+    description: React wrapper for ytz-icon-button
+  - path: packages/react/src/icon-button.test.js
+    action: create
+    description: React wrapper tests
+  - path: packages/react/src/index.js
+    action: modify
+    description: Export IconButton component
+---
+**Description:**
+Create React wrapper for `<ytz-icon-button>`.
+
+**Acceptance Criteria:**
+- [ ] `aria-label` prop (required)
+- [ ] `tooltip` prop
+- [ ] `onClick` prop
+- [ ] Ref forwarding
+- [ ] < 50 lines
+---
+### PR-048: IconButton Documentation & Demo
+---
+pr_id: PR-048
+title: IconButton Documentation & Demo
+cold_state: ready
+priority: medium
+complexity:
+  score: 2
+  estimated_minutes: 25
+  suggested_model: haiku
+  rationale: Static HTML demo page
+dependencies:
+  - PR-047
+estimated_files:
+  - path: demos/icon-button.html
+    action: create
+    description: Static HTML demo showing icon-button variants
+---
+**Description:**
+Create static HTML demo page showing icon-button component with various icons and tooltip.
+
+**Acceptance Criteria:**
+- [ ] Demo shows: basic icon button, with tooltip, various sizes
+- [ ] Works when opened directly in browser
+- [ ] JSDoc complete
+---
+## Block 2: Slider (Complex accessibility)
+
+### PR-049: Slider Component (Core)
+---
+pr_id: PR-049
+title: Slider Component (Core)
+cold_state: ready
+priority: high
+complexity:
+  score: 5
+  estimated_minutes: 90
+  suggested_model: sonnet
+  rationale: aria-slider, keyboard control, range support, thumb positioning
+dependencies: []
+estimated_files:
+  - path: packages/core/src/slider.js
+    action: create
+    description: ytz-slider Web Component implementation
+  - path: packages/core/src/slider.test.js
+    action: create
+    description: Slider component tests
+  - path: packages/core/src/index.js
+    action: modify
+    description: Export slider component
+---
+**Description:**
+Implement `<ytz-slider>` - accessible range slider with full keyboard control. Supports single value and range (two thumbs) modes. Uses `role="slider"` with proper ARIA attributes (`aria-valuemin`, `aria-valuemax`, `aria-valuenow`, `aria-valuetext`).
+
+**Acceptance Criteria:**
+- [ ] `min`, `max`, `value` attributes
+- [ ] `step` attribute for discrete steps
+- [ ] Range mode with `range` attribute (two thumbs)
+- [ ] Keyboard: Arrow keys, Home/End, Page Up/Down
+- [ ] `change` and `input` events (input for live, change for committed)
+- [ ] Proper ARIA slider pattern
+- [ ] < 200 lines
+---
+### PR-050: Slider React Wrapper
+---
+pr_id: PR-050
+title: Slider React Wrapper
+cold_state: ready
+priority: high
+complexity:
+  score: 2
+  estimated_minutes: 25
+  suggested_model: haiku
+  rationale: Thin wrapper with value/onChange
+dependencies:
+  - PR-049
+estimated_files:
+  - path: packages/react/src/slider.js
+    action: create
+    description: React wrapper for ytz-slider
+  - path: packages/react/src/slider.test.js
+    action: create
+    description: React wrapper tests
+  - path: packages/react/src/index.js
+    action: modify
+    description: Export Slider component
+---
+**Description:**
+Create React wrapper for `<ytz-slider>`.
+
+**Acceptance Criteria:**
+- [ ] `value` and `onChange` props
+- [ ] `onInput` for live updates
+- [ ] `min`, `max`, `step` props
+- [ ] Ref forwarding
+- [ ] < 50 lines
+---
+### PR-051: Slider Documentation & Demo
+---
+pr_id: PR-051
+title: Slider Documentation & Demo
+cold_state: ready
+priority: medium
+complexity:
+  score: 2
+  estimated_minutes: 30
+  suggested_model: haiku
+  rationale: Static HTML demo page with range examples
+dependencies:
+  - PR-050
+estimated_files:
+  - path: demos/slider.html
+    action: create
+    description: Static HTML demo showing slider variants
+---
+**Description:**
+Create static HTML demo page showing slider component with various configurations.
+
+**Acceptance Criteria:**
+- [ ] Demo shows: basic slider, with steps, range mode, disabled
+- [ ] Works when opened directly in browser
+- [ ] JSDoc complete
+---
+## Block 3: Theme System (CSS + Toggle)
+
+### PR-052: Dark Theme CSS
+---
+pr_id: PR-052
+title: Dark Theme CSS
+cold_state: ready
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Pure CSS, no JS, custom properties remapping
+dependencies: []
+estimated_files:
+  - path: packages/core/src/dark.css
+    action: create
+    description: Dark theme override stylesheet
+  - path: packages/core/package.json
+    action: modify
+    description: Export dark.css
+---
+**Description:**
+Create optional dark theme stylesheet using CSS custom properties. `[data-theme="dark"]` selector remaps Tachyons color classes. Respects `prefers-color-scheme: dark` by default via `@media` query. No JS runtime - pure CSS. User toggles manually via `document.documentElement.dataset.theme = 'dark'`.
+
+**Acceptance Criteria:**
+- [ ] `[data-theme="dark"]` selector works
+- [ ] `@media (prefers-color-scheme: dark)` fallback
+- [ ] Tachyons color classes remapped (bg-white → dark equivalent, etc.)
+- [ ] No JavaScript required
+- [ ] < 100 lines
+---
+### PR-053: Theme Toggle Component (Core)
+---
+pr_id: PR-053
+title: Theme Toggle Component (Core)
+cold_state: ready
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Wraps Toggle with theme-switching behavior
+dependencies:
+  - PR-040
+  - PR-052
+estimated_files:
+  - path: packages/core/src/theme-toggle.js
+    action: create
+    description: ytz-theme-toggle Web Component implementation
+  - path: packages/core/src/theme-toggle.test.js
+    action: create
+    description: Theme toggle component tests
+  - path: packages/core/src/index.js
+    action: modify
+    description: Export theme-toggle component
+---
+**Description:**
+Implement `<ytz-theme-toggle>` - wraps `<ytz-toggle>` with theme-switching behavior. Reads `prefers-color-scheme` on init, persists user preference to `localStorage`, toggles `data-theme` attribute on `<html>`, dispatches `themechange` events.
+
+**Acceptance Criteria:**
+- [ ] Reads `prefers-color-scheme` on init
+- [ ] Persists preference to `localStorage`
+- [ ] Toggles `data-theme` on document root
+- [ ] `themechange` event with detail `{ theme: 'dark' | 'light' }`
+- [ ] Uses ytz-toggle internally
+- [ ] < 100 lines
+---
+### PR-054: Theme Toggle React Wrapper
+---
+pr_id: PR-054
+title: Theme Toggle React Wrapper
+cold_state: ready
+priority: medium
+complexity:
+  score: 2
+  estimated_minutes: 20
+  suggested_model: haiku
+  rationale: Thin wrapper
+dependencies:
+  - PR-053
+estimated_files:
+  - path: packages/react/src/theme-toggle.js
+    action: create
+    description: React wrapper for ytz-theme-toggle
+  - path: packages/react/src/theme-toggle.test.js
+    action: create
+    description: React wrapper tests
+  - path: packages/react/src/index.js
+    action: modify
+    description: Export ThemeToggle component
+---
+**Description:**
+Create React wrapper for `<ytz-theme-toggle>`.
+
+**Acceptance Criteria:**
+- [ ] `onThemeChange` callback
+- [ ] Ref forwarding
+- [ ] < 50 lines
+---
+### PR-055: Theme System Documentation & Demo
+---
+pr_id: PR-055
+title: Theme System Documentation & Demo
+cold_state: ready
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Demo showing dark.css + theme-toggle integration
+dependencies:
+  - PR-054
+estimated_files:
+  - path: demos/theme.html
+    action: create
+    description: Static HTML demo showing theme system
+---
+**Description:**
+Create static HTML demo page showing dark theme CSS and theme toggle component working together.
+
+**Acceptance Criteria:**
+- [ ] Demo shows theme toggle in action
+- [ ] Dark theme applied correctly
+- [ ] localStorage persistence demonstrated
+- [ ] Works when opened directly in browser
+---
+## Block 4: DataGrid (Most complex Tier 2 component)
+
+### PR-056: DataGrid Component (Core)
+---
+pr_id: PR-056
+title: DataGrid Component (Core)
+cold_state: ready
+priority: high
+complexity:
+  score: 8
+  estimated_minutes: 240
+  suggested_model: opus
+  rationale: Virtual scroll, sort, filter, keyboard nav, export - most complex component
+dependencies: []
+estimated_files:
+  - path: packages/core/src/datagrid.js
+    action: create
+    description: ytz-datagrid Web Component implementation
+  - path: packages/core/src/datagrid.test.js
+    action: create
+    description: DataGrid component tests
+  - path: packages/core/src/utils/virtual-scroll.js
+    action: create
+    description: Internal virtual scroll utility
+  - path: packages/core/src/index.js
+    action: modify
+    description: Export datagrid component
+---
+**Description:**
+Implement `<ytz-datagrid>` - data table with virtual scrolling for large datasets. Features: column sorting (click header), column filtering, keyboard navigation (arrow keys, Enter to edit), export to CSV and Excel (XLSX). No pivot tables - YAGNI.
+
+**Virtual Scroll Requirements:**
+- Only render visible rows plus buffer
+- Smooth scrolling with row recycling
+- Handle variable row heights if needed
+
+**Keyboard Navigation:**
+- Arrow keys move between cells
+- Enter to select/edit
+- Tab moves between focusable cells
+- Home/End for row navigation
+
+**Export:**
+- CSV export (native)
+- Excel export (simple XLSX, consider SheetJS for robust support)
+
+**Acceptance Criteria:**
+- [ ] Virtual scrolling works with 10,000+ rows
+- [ ] Column sorting (ascending/descending/none)
+- [ ] Column filtering (text input per column)
+- [ ] Keyboard navigation
+- [ ] CSV export
+- [ ] Excel/XLSX export
+- [ ] ARIA grid pattern
+- [ ] < 400 lines (including virtual scroll utility)
+---
+### PR-057: DataGrid React Wrapper
+---
+pr_id: PR-057
+title: DataGrid React Wrapper
+cold_state: ready
+priority: high
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: More complex wrapper due to data/columns props
+dependencies:
+  - PR-056
+estimated_files:
+  - path: packages/react/src/datagrid.js
+    action: create
+    description: React wrapper for ytz-datagrid
+  - path: packages/react/src/datagrid.test.js
+    action: create
+    description: React wrapper tests
+  - path: packages/react/src/index.js
+    action: modify
+    description: Export DataGrid component
+---
+**Description:**
+Create React wrapper for `<ytz-datagrid>`.
+
+**Acceptance Criteria:**
+- [ ] `data` prop (array of objects)
+- [ ] `columns` prop (column definitions)
+- [ ] `onSort`, `onFilter` callbacks
+- [ ] `onExport` callback
+- [ ] Ref forwarding
+- [ ] < 75 lines
+---
+### PR-058: DataGrid Documentation & Demo
+---
+pr_id: PR-058
+title: DataGrid Documentation & Demo
+cold_state: ready
+priority: medium
 complexity:
   score: 4
   estimated_minutes: 60
   suggested_model: sonnet
-  rationale: Multiple config files, tooling setup, requires understanding of monorepo patterns
-dependencies: []
-estimated_files:
-  - path: package.json
-    action: create
-    description: Root workspace config with pnpm workspaces
-  - path: pnpm-workspace.yaml
-    action: create
-    description: Workspace package definitions
-  - path: tsconfig.json
-    action: create
-    description: Base TypeScript config for JSDoc support
-  - path: .eslintrc.js
-    action: create
-    description: ESLint configuration
-  - path: .prettierrc
-    action: create
-    description: Prettier configuration
-  - path: packages/core/package.json
-    action: create
-    description: Core package manifest
-  - path: packages/core/tsup.config.js
-    action: create
-    description: tsup bundler config for core
-  - path: packages/core/src/index.js
-    action: create
-    description: Core package entry point
-  - path: packages/react/package.json
-    action: create
-    description: React wrapper package manifest
-  - path: packages/react/tsup.config.js
-    action: create
-    description: tsup bundler config for react
-  - path: packages/react/src/index.js
-    action: create
-    description: React package entry point
-  - path: demos/index.html
-    action: create
-    description: Demo index page
-  - path: jest.config.js
-    action: create
-    description: Jest configuration with jsdom
----
-**Description:**
-Initialize monorepo with pnpm workspaces. Configure tsup for both packages (ESM + CJS outputs, .d.ts generation from JSDoc). Configure Jest with jsdom for Web Component testing. Create demos/ directory structure for static HTML demos.
-
-**Acceptance Criteria:**
-- [ ] `pnpm build` produces ESM + CJS bundles for both packages
-- [ ] `pnpm test` runs Jest successfully
-- [ ] TypeScript declarations generated from JSDoc
-- [ ] Demo index page loads in browser
----
-## Block 1: Simple Components (Depends on PR-001)
-
-### PR-002: Button Component (Core)
----
-pr_id: PR-002
-title: Button Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Simple polymorphic element, no utilities needed, <50 lines
+  rationale: Complex demo with large dataset, export examples
 dependencies:
-  - PR-001
+  - PR-057
 estimated_files:
-  - path: packages/core/src/button.js
+  - path: demos/datagrid.html
     action: create
-    description: ytz-button Web Component implementation
-  - path: packages/core/src/button.test.js
-    action: create
-    description: Button component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export button component
+    description: Static HTML demo showing datagrid with large dataset
 ---
 **Description:**
-Implement `<ytz-button>` - polymorphic button/anchor based on props. `href` attribute renders `<a>`, `onclick` renders `<button>`. Default classes prepended based on rendered element.
+Create static HTML demo page showing datagrid component with realistic data.
 
 **Acceptance Criteria:**
-- [ ] Renders correct element based on attributes
-- [ ] Prepends default classes per PRD spec
-- [ ] User classes preserved and appended
-- [ ] Accessible (correct semantics, no ARIA needed)
-- [ ] < 50 lines implementation
----
-### PR-005: Disclosure Component (Core)
----
-pr_id: PR-005
-title: Disclosure Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: Simple aria-expanded toggle, no shared utilities, <100 lines
-dependencies:
-  - PR-001
-estimated_files:
-  - path: packages/core/src/disclosure.js
-    action: create
-    description: ytz-disclosure Web Component implementation
-  - path: packages/core/src/disclosure.test.js
-    action: create
-    description: Disclosure component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export disclosure component
----
-**Description:**
-Implement `<ytz-disclosure>` - expandable content with aria-expanded. `open` attribute controls visibility. Dispatches `toggle` event on state change. Animation-friendly (CSS can hook into open/closed states).
-
-**Acceptance Criteria:**
-- [ ] `open` attribute toggles content visibility
-- [ ] Correct ARIA attributes (aria-expanded, aria-controls)
-- [ ] `toggle` event dispatched
-- [ ] Keyboard accessible (Enter/Space on trigger)
-- [ ] < 100 lines
----
-## Block 2: Button Wrapper & Docs (Depends on PR-002)
-
-### PR-003: Button React Wrapper
----
-pr_id: PR-003
-title: Button React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper, <50 lines, straightforward event bridging
-dependencies:
-  - PR-002
-estimated_files:
-  - path: packages/react/src/button.js
-    action: create
-    description: React wrapper for ytz-button
-  - path: packages/react/src/button.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Button component
----
-**Description:**
-Create React wrapper for `<ytz-button>`. Bridge onClick prop to element, handle href, pass through className, support ref forwarding.
-
-**Acceptance Criteria:**
-- [ ] `onClick` prop bridged to element
-- [ ] `href` prop handled correctly
-- [ ] `className` passed through
-- [ ] Ref forwarding works
-- [ ] < 50 lines
----
-### PR-004: Button Documentation & Demo
----
-pr_id: PR-004
-title: Button Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Static HTML demo page, documentation examples
-dependencies:
-  - PR-003
-estimated_files:
-  - path: demos/button.html
-    action: create
-    description: Static HTML demo showing all button variants
----
-**Description:**
-Create static HTML demo page showing all button variants. Complete JSDoc documentation with examples.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: link-button, action-button, styled variants
-- [ ] Works when opened directly in browser (no build)
-- [ ] JSDoc complete with examples
----
-## Block 3: Disclosure Wrapper & Docs (Depends on PR-005)
-
-### PR-006: Disclosure React Wrapper
----
-pr_id: PR-006
-title: Disclosure React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper, <50 lines
-dependencies:
-  - PR-005
-estimated_files:
-  - path: packages/react/src/disclosure.js
-    action: create
-    description: React wrapper for ytz-disclosure
-  - path: packages/react/src/disclosure.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Disclosure component
----
-**Description:**
-Create React wrapper for `<ytz-disclosure>`. Sync open prop to attribute, provide onToggle callback, support ref forwarding.
-
-**Acceptance Criteria:**
-- [ ] `open` prop synced to attribute
-- [ ] `onToggle` callback
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-007: Disclosure Documentation & Demo
----
-pr_id: PR-007
-title: Disclosure Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-006
-estimated_files:
-  - path: demos/disclosure.html
-    action: create
-    description: Static HTML demo showing disclosure variants
----
-**Description:**
-Create static HTML demo page showing disclosure component usage with various content types.
-
-**Acceptance Criteria:**
-- [ ] Demo shows basic disclosure, nested content, animation examples
+- [ ] Demo shows: sorting, filtering, virtual scroll with 1000+ rows
+- [ ] Export buttons for CSV and Excel
 - [ ] Works when opened directly in browser
 - [ ] JSDoc complete
 ---
-## Block 4: Dialog with Focus Trap (Depends on PR-001)
+## Block 5: Final Documentation & Verification
 
-### PR-008: Dialog Component (Core)
+### PR-059: Tier 2 README Update & Rosetta Stone Additions
 ---
-pr_id: PR-008
-title: Dialog Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 5
-  estimated_minutes: 90
-  suggested_model: sonnet
-  rationale: Focus trap utility, scroll lock, WCAG compliance, <200 lines total
-dependencies:
-  - PR-001
-estimated_files:
-  - path: packages/core/src/dialog.js
-    action: create
-    description: ytz-dialog Web Component implementation
-  - path: packages/core/src/dialog.test.js
-    action: create
-    description: Dialog component tests
-  - path: packages/core/src/utils/focus-trap.js
-    action: create
-    description: Internal focus trap utility
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export dialog component
----
-**Description:**
-Implement `<ytz-dialog>` - modal dialog with focus management. Features: focus trap while open, restore focus to trigger on close, Escape to close, backdrop click to close (configurable via `static` attribute), body scroll lock, aria-modal, role="dialog".
-
-**Acceptance Criteria:**
-- [ ] Focus trapped within dialog
-- [ ] Escape closes dialog
-- [ ] Focus restored on close
-- [ ] Scroll locked on body
-- [ ] `close` event dispatched
-- [ ] WCAG 2.1 AA compliant
-- [ ] < 200 lines
----
-### PR-009: Dialog React Wrapper
----
-pr_id: PR-009
-title: Dialog React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Thin wrapper with open/onClose props
-dependencies:
-  - PR-008
-estimated_files:
-  - path: packages/react/src/dialog.js
-    action: create
-    description: React wrapper for ytz-dialog
-  - path: packages/react/src/dialog.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Dialog component
----
-**Description:**
-Create React wrapper for `<ytz-dialog>`. Sync open prop, provide onClose callback, render children correctly.
-
-**Acceptance Criteria:**
-- [ ] `open` prop synced
-- [ ] `onClose` callback
-- [ ] Children rendered correctly
-- [ ] < 50 lines
----
-### PR-010: Dialog Documentation & Demo
----
-pr_id: PR-010
-title: Dialog Documentation & Demo
-cold_state: completed
+pr_id: PR-059
+title: Tier 2 README Update & Rosetta Stone Additions
+cold_state: ready
 priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-009
-estimated_files:
-  - path: demos/dialog.html
-    action: create
-    description: Static HTML demo showing dialog variants
----
-**Description:**
-Create static HTML demo page showing dialog component with various configurations.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic dialog, static (non-dismissible), nested dialogs
-- [ ] Works when opened directly in browser
-- [ ] JSDoc complete
----
-## Block 5: Tabs with Key Navigation (Depends on PR-001)
-
-### PR-011: Tabs Component (Core)
----
-pr_id: PR-011
-title: Tabs Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 5
-  estimated_minutes: 90
-  suggested_model: sonnet
-  rationale: Multiple elements (tabs, tab, tabpanel), keyboard navigation utility, roving tabindex
-dependencies:
-  - PR-001
-estimated_files:
-  - path: packages/core/src/tabs.js
-    action: create
-    description: ytz-tabs, ytz-tab, ytz-tabpanel Web Components
-  - path: packages/core/src/tabs.test.js
-    action: create
-    description: Tabs component tests
-  - path: packages/core/src/utils/key-nav.js
-    action: create
-    description: Internal keyboard navigation utility
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export tabs components
----
-**Description:**
-Implement `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`. Features: aria-tablist/tab/tabpanel roles, keyboard arrow navigation (left/right), roving tabindex, aria-selected on active tab, aria-controls/aria-labelledby linking.
-
-**Acceptance Criteria:**
-- [ ] Arrow keys navigate tabs
-- [ ] Only active tab in tab order
-- [ ] Correct ARIA roles and states
-- [ ] `change` event on tab switch
-- [ ] < 200 lines total
----
-### PR-012: Tabs React Wrapper
----
-pr_id: PR-012
-title: Tabs React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Multiple component wrappers but still thin
-dependencies:
-  - PR-011
-estimated_files:
-  - path: packages/react/src/tabs.js
-    action: create
-    description: React wrappers for tabs components
-  - path: packages/react/src/tabs.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Tabs, Tab, TabPanel components
----
-**Description:**
-Create React wrappers for `<ytz-tabs>`, `<ytz-tab>`, `<ytz-tabpanel>`.
-
-**Acceptance Criteria:**
-- [ ] All three components wrapped
-- [ ] `onChange` callback on Tabs
-- [ ] Ref forwarding
-- [ ] < 50 lines per component
----
-### PR-013: Tabs Documentation & Demo
----
-pr_id: PR-013
-title: Tabs Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-012
-estimated_files:
-  - path: demos/tabs.html
-    action: create
-    description: Static HTML demo showing tabs variants
----
-**Description:**
-Create static HTML demo page showing tabs component with various configurations.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic tabs, vertical tabs, dynamic content
-- [ ] Works when opened directly in browser
-- [ ] JSDoc complete
----
-## Block 6: Tooltip with Positioning (Depends on PR-001)
-
-### PR-014: Tooltip Component (Core)
----
-pr_id: PR-014
-title: Tooltip Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 5
-  estimated_minutes: 90
-  suggested_model: sonnet
-  rationale: Positioning utility (<100 lines), delay logic, touch handling
-dependencies:
-  - PR-001
-estimated_files:
-  - path: packages/core/src/tooltip.js
-    action: create
-    description: ytz-tooltip Web Component implementation
-  - path: packages/core/src/tooltip.test.js
-    action: create
-    description: Tooltip component tests
-  - path: packages/core/src/utils/position.js
-    action: create
-    description: Internal positioning utility
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export tooltip component
----
-**Description:**
-Implement `<ytz-tooltip>` - positioned tooltip with delay logic. Features: positioning relative to trigger (top/bottom/left/right), flip when near viewport edge, show/hide delays, aria-describedby linking, hover/focus/touch handling, role="tooltip".
-
-**Acceptance Criteria:**
-- [ ] Correct positioning with flip
-- [ ] Delay logic works
-- [ ] Shows on hover/focus
-- [ ] Hides on mouseleave/blur
-- [ ] Touch support
-- [ ] ARIA correct
-- [ ] < 200 lines (excluding position utility)
-- [ ] Position utility < 100 lines
----
-### PR-015: Tooltip React Wrapper
----
-pr_id: PR-015
-title: Tooltip React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Thin wrapper
-dependencies:
-  - PR-014
-estimated_files:
-  - path: packages/react/src/tooltip.js
-    action: create
-    description: React wrapper for ytz-tooltip
-  - path: packages/react/src/tooltip.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Tooltip component
----
-**Description:**
-Create React wrapper for `<ytz-tooltip>`.
-
-**Acceptance Criteria:**
-- [ ] Props passed through correctly
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-016: Tooltip Documentation & Demo
----
-pr_id: PR-016
-title: Tooltip Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-015
-estimated_files:
-  - path: demos/tooltip.html
-    action: create
-    description: Static HTML demo showing tooltip variants
----
-**Description:**
-Create static HTML demo page showing tooltip component with various positions and triggers.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: all positions, focus trigger, custom delays
-- [ ] Works when opened directly in browser
-- [ ] JSDoc complete
----
-## Block 7: Menu (Depends on PR-011 keyNav, PR-014 position)
-
-### PR-017: Menu Component (Core)
----
-pr_id: PR-017
-title: Menu Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 5
-  estimated_minutes: 90
-  suggested_model: sonnet
-  rationale: Combines positioning + keyboard nav + click outside utility
-dependencies:
-  - PR-011
-  - PR-014
-estimated_files:
-  - path: packages/core/src/menu.js
-    action: create
-    description: ytz-menu, ytz-menuitem Web Components
-  - path: packages/core/src/menu.test.js
-    action: create
-    description: Menu component tests
-  - path: packages/core/src/utils/click-outside.js
-    action: create
-    description: Internal click outside utility
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export menu components
----
-**Description:**
-Implement `<ytz-menu>`, `<ytz-menuitem>`. Features: positioning relative to trigger, keyboard navigation (up/down arrows, Home/End), click outside to close, focus management, aria-menu/menuitem roles.
-
-**Acceptance Criteria:**
-- [ ] Opens on trigger click
-- [ ] Keyboard navigation
-- [ ] Click outside closes
-- [ ] Focus returns to trigger
-- [ ] ARIA correct
-- [ ] < 200 lines
----
-### PR-018: Menu React Wrapper
----
-pr_id: PR-018
-title: Menu React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Thin wrapper for menu components
-dependencies:
-  - PR-017
-estimated_files:
-  - path: packages/react/src/menu.js
-    action: create
-    description: React wrappers for menu components
-  - path: packages/react/src/menu.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Menu, MenuItem components
----
-**Description:**
-Create React wrappers for `<ytz-menu>`, `<ytz-menuitem>`.
-
-**Acceptance Criteria:**
-- [ ] Both components wrapped
-- [ ] `onClose` callback
-- [ ] Ref forwarding
-- [ ] < 50 lines per component
----
-### PR-019: Menu Documentation & Demo
----
-pr_id: PR-019
-title: Menu Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 30
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-018
-estimated_files:
-  - path: demos/menu.html
-    action: create
-    description: Static HTML demo showing menu variants
----
-**Description:**
-Create static HTML demo page showing menu component with various configurations.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic menu, icon menu, grouped items
-- [ ] Works when opened directly in browser
-- [ ] JSDoc complete
----
-## Block 8: Autocomplete (Depends on PR-017 - uses all utilities)
-
-### PR-020: Autocomplete Component (Core)
----
-pr_id: PR-020
-title: Autocomplete Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 6
-  estimated_minutes: 120
-  suggested_model: sonnet
-  rationale: Most complex Tier 1 component, combines all utilities, multi-select mode
-dependencies:
-  - PR-017
-estimated_files:
-  - path: packages/core/src/autocomplete.js
-    action: create
-    description: ytz-autocomplete Web Component implementation
-  - path: packages/core/src/autocomplete.test.js
-    action: create
-    description: Autocomplete component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export autocomplete component
----
-**Description:**
-Implement `<ytz-autocomplete>` - the most complex Tier 1 component. Features: text input with filtering, keyboard navigation (up/down), single and multi-select modes, aria-combobox pattern, async loading support (loading state), click outside to close.
-
-**Acceptance Criteria:**
-- [ ] Filters options as user types
-- [ ] Keyboard navigation works
-- [ ] Single select mode
-- [ ] Multi-select mode
-- [ ] Async loading state
-- [ ] WCAG combobox pattern
-- [ ] < 200 lines
----
-### PR-021: Autocomplete React Wrapper
----
-pr_id: PR-021
-title: Autocomplete React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 35
-  suggested_model: haiku
-  rationale: Slightly more complex due to options handling
-dependencies:
-  - PR-020
-estimated_files:
-  - path: packages/react/src/autocomplete.js
-    action: create
-    description: React wrapper for ytz-autocomplete
-  - path: packages/react/src/autocomplete.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Autocomplete component
----
-**Description:**
-Create React wrapper for `<ytz-autocomplete>`.
-
-**Acceptance Criteria:**
-- [ ] `value` and `onChange` props
-- [ ] `options` prop handling
-- [ ] `multiple` prop
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-022: Autocomplete Documentation & Demo
----
-pr_id: PR-022
-title: Autocomplete Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: More complex demo with async examples
-dependencies:
-  - PR-021
-estimated_files:
-  - path: demos/autocomplete.html
-    action: create
-    description: Static HTML demo showing autocomplete variants
----
-**Description:**
-Create static HTML demo page showing autocomplete component with various configurations.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic, multi-select, async loading, custom rendering
-- [ ] Works when opened directly in browser
-- [ ] JSDoc complete
----
-## Block 9: Derived Components - Listbox & Select (Depends on PR-020)
-
-### PR-023: Listbox Component (Core)
----
-pr_id: PR-023
-title: Listbox Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: Derived from Autocomplete - remove text input and filtering
-dependencies:
-  - PR-020
-estimated_files:
-  - path: packages/core/src/listbox.js
-    action: create
-    description: ytz-listbox Web Component implementation
-  - path: packages/core/src/listbox.test.js
-    action: create
-    description: Listbox component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export listbox component
----
-**Description:**
-Derive from Autocomplete: remove text input and filtering. Pure keyboard-navigable list selection.
-
-**Acceptance Criteria:**
-- [ ] Keyboard navigation
-- [ ] Single/multi-select modes
-- [ ] ARIA listbox pattern
-- [ ] < 150 lines
----
-### PR-024: Listbox React Wrapper
----
-pr_id: PR-024
-title: Listbox React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper
-dependencies:
-  - PR-023
-estimated_files:
-  - path: packages/react/src/listbox.js
-    action: create
-    description: React wrapper for ytz-listbox
-  - path: packages/react/src/listbox.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Listbox component
----
-**Description:**
-Create React wrapper for `<ytz-listbox>`.
-
-**Acceptance Criteria:**
-- [ ] Props passed through
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-025: Listbox Documentation & Demo
----
-pr_id: PR-025
-title: Listbox Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-024
-estimated_files:
-  - path: demos/listbox.html
-    action: create
-    description: Static HTML demo showing listbox variants
----
-**Description:**
-Create static HTML demo page showing listbox component.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: single-select, multi-select
-- [ ] Works when opened directly in browser
----
-### PR-026: Select Component (Core)
----
-pr_id: PR-026
-title: Select Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: Derived from Listbox - add trigger button
-dependencies:
-  - PR-023
-estimated_files:
-  - path: packages/core/src/select.js
-    action: create
-    description: ytz-select Web Component implementation
-  - path: packages/core/src/select.test.js
-    action: create
-    description: Select component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export select component
----
-**Description:**
-Derive from Listbox: add trigger button that shows selected value and opens listbox.
-
-**Acceptance Criteria:**
-- [ ] Trigger button shows selected value
-- [ ] Opens listbox on click/Enter/Space
-- [ ] ARIA combobox pattern (button variant)
-- [ ] < 150 lines
----
-### PR-027: Select React Wrapper
----
-pr_id: PR-027
-title: Select React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper
-dependencies:
-  - PR-026
-estimated_files:
-  - path: packages/react/src/select.js
-    action: create
-    description: React wrapper for ytz-select
-  - path: packages/react/src/select.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Select component
----
-**Description:**
-Create React wrapper for `<ytz-select>`.
-
-**Acceptance Criteria:**
-- [ ] `value` and `onChange` props
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-028: Select Documentation & Demo
----
-pr_id: PR-028
-title: Select Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-027
-estimated_files:
-  - path: demos/select.html
-    action: create
-    description: Static HTML demo showing select variants
----
-**Description:**
-Create static HTML demo page showing select component.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic select, with placeholder, disabled
-- [ ] Works when opened directly in browser
----
-## Block 10: Derived Components - Accordion (Depends on PR-005)
-
-### PR-029: Accordion Component (Core)
----
-pr_id: PR-029
-title: Accordion Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: Derived from Disclosure - coordinated disclosures, exclusive mode
-dependencies:
-  - PR-005
-estimated_files:
-  - path: packages/core/src/accordion.js
-    action: create
-    description: ytz-accordion, ytz-accordion-item Web Components
-  - path: packages/core/src/accordion.test.js
-    action: create
-    description: Accordion component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export accordion components
----
-**Description:**
-Derive from Disclosure: coordinated disclosures with optional exclusive mode (only one open at a time).
-
-**Acceptance Criteria:**
-- [ ] Multiple disclosures coordinated
-- [ ] `exclusive` attribute for single-open mode
-- [ ] ARIA accordion pattern
-- [ ] < 150 lines
----
-### PR-030: Accordion React Wrapper
----
-pr_id: PR-030
-title: Accordion React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper
-dependencies:
-  - PR-029
-estimated_files:
-  - path: packages/react/src/accordion.js
-    action: create
-    description: React wrappers for accordion components
-  - path: packages/react/src/accordion.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Accordion, AccordionItem components
----
-**Description:**
-Create React wrappers for `<ytz-accordion>`, `<ytz-accordion-item>`.
-
-**Acceptance Criteria:**
-- [ ] Both components wrapped
-- [ ] Ref forwarding
-- [ ] < 50 lines per component
----
-### PR-031: Accordion Documentation & Demo
----
-pr_id: PR-031
-title: Accordion Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-030
-estimated_files:
-  - path: demos/accordion.html
-    action: create
-    description: Static HTML demo showing accordion variants
----
-**Description:**
-Create static HTML demo page showing accordion component.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic accordion, exclusive mode
-- [ ] Works when opened directly in browser
----
-## Block 11: Derived Components - Drawer (Depends on PR-008)
-
-### PR-032: Drawer Component (Core)
----
-pr_id: PR-032
-title: Drawer Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: Derived from Dialog - slide-in positioning, edge anchoring
-dependencies:
-  - PR-008
-estimated_files:
-  - path: packages/core/src/drawer.js
-    action: create
-    description: ytz-drawer Web Component implementation
-  - path: packages/core/src/drawer.test.js
-    action: create
-    description: Drawer component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export drawer component
----
-**Description:**
-Derive from Dialog: slide-in positioning from screen edge. Supports left/right/top/bottom anchoring via `anchor` attribute.
-
-**Acceptance Criteria:**
-- [ ] Inherits all Dialog behavior
-- [ ] `anchor` attribute (left/right/top/bottom)
-- [ ] CSS-friendly for slide animations
-- [ ] < 100 lines (reuses Dialog internals)
----
-### PR-033: Drawer React Wrapper
----
-pr_id: PR-033
-title: Drawer React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper
-dependencies:
-  - PR-032
-estimated_files:
-  - path: packages/react/src/drawer.js
-    action: create
-    description: React wrapper for ytz-drawer
-  - path: packages/react/src/drawer.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Drawer component
----
-**Description:**
-Create React wrapper for `<ytz-drawer>`.
-
-**Acceptance Criteria:**
-- [ ] `open`, `onClose`, `anchor` props
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-034: Drawer Documentation & Demo
----
-pr_id: PR-034
-title: Drawer Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-033
-estimated_files:
-  - path: demos/drawer.html
-    action: create
-    description: Static HTML demo showing drawer variants
----
-**Description:**
-Create static HTML demo page showing drawer component from all edges.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: left, right, top, bottom drawers
-- [ ] Works when opened directly in browser
----
-## Block 12: Derived Components - Popover (Depends on PR-014)
-
-### PR-035: Popover Component (Core)
----
-pr_id: PR-035
-title: Popover Component (Core)
-cold_state: completed
-priority: high
-complexity:
-  score: 3
-  estimated_minutes: 45
-  suggested_model: haiku
-  rationale: Derived from Tooltip - click-triggered, richer content
-dependencies:
-  - PR-014
-estimated_files:
-  - path: packages/core/src/popover.js
-    action: create
-    description: ytz-popover Web Component implementation
-  - path: packages/core/src/popover.test.js
-    action: create
-    description: Popover component tests
-  - path: packages/core/src/index.js
-    action: modify
-    description: Export popover component
----
-**Description:**
-Derive from Tooltip: click-triggered (not hover), supports richer content, stays open until dismissed.
-
-**Acceptance Criteria:**
-- [ ] Click to open (not hover)
-- [ ] Click outside to close
-- [ ] Escape to close
-- [ ] Positioning inherited from Tooltip
-- [ ] < 100 lines
----
-### PR-036: Popover React Wrapper
----
-pr_id: PR-036
-title: Popover React Wrapper
-cold_state: completed
-priority: high
-complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Thin wrapper
-dependencies:
-  - PR-035
-estimated_files:
-  - path: packages/react/src/popover.js
-    action: create
-    description: React wrapper for ytz-popover
-  - path: packages/react/src/popover.test.js
-    action: create
-    description: React wrapper tests
-  - path: packages/react/src/index.js
-    action: modify
-    description: Export Popover component
----
-**Description:**
-Create React wrapper for `<ytz-popover>`.
-
-**Acceptance Criteria:**
-- [ ] `open`, `onClose` props
-- [ ] Ref forwarding
-- [ ] < 50 lines
----
-### PR-037: Popover Documentation & Demo
----
-pr_id: PR-037
-title: Popover Documentation & Demo
-cold_state: completed
-priority: medium
-complexity:
-  score: 2
-  estimated_minutes: 25
-  suggested_model: haiku
-  rationale: Static HTML demo page
-dependencies:
-  - PR-036
-estimated_files:
-  - path: demos/popover.html
-    action: create
-    description: Static HTML demo showing popover variants
----
-**Description:**
-Create static HTML demo page showing popover component with various content.
-
-**Acceptance Criteria:**
-- [ ] Demo shows: basic popover, with form, with actions
-- [ ] Works when opened directly in browser
----
-## Block 13: Final Documentation & Verification (Depends on all components)
-
-### PR-038: README & MUI Rosetta Stone Documentation
----
-pr_id: PR-038
-title: README & MUI Rosetta Stone Documentation
-cold_state: completed
-priority: medium
-complexity:
-  score: 5
-  estimated_minutes: 120
-  suggested_model: sonnet
-  rationale: Comprehensive README plus migration guide, many code examples
-dependencies:
-  - PR-004
-  - PR-007
-  - PR-010
-  - PR-013
-  - PR-016
-  - PR-019
-  - PR-022
-  - PR-025
-  - PR-028
-  - PR-031
-  - PR-034
-  - PR-037
-estimated_files:
-  - path: README.md
-    action: create
-    description: Project README with philosophy, components, and structure
-  - path: demos/rosetta.html
-    action: create
-    description: MUI to Yetzirah migration guide
----
-**Description:**
-Create project README and comprehensive MUI → Yetzirah migration guide.
-
-**README.md should include:**
-- Design philosophy (platform-native, AI-native, framework-agnostic, no-pinionated, readable source)
-- Tier 1 components shipped in Phase 1 (Button, Disclosure, Dialog, Tabs, Tooltip, Menu, Autocomplete) and derived components (Listbox, Select, Accordion, Drawer, Popover)
-- What we deliberately did NOT ship (Tier 2, Tier 3, non-goals like theming, animation, form validation)
-- Package structure (`@yetzirah/core`, `@yetzirah/react`, `demos/`)
-- Quick start / installation
-- Link to MUI Rosetta Stone (`demos/rosetta.html`)
-
-**Rosetta Stone (demos/rosetta.html) should include:**
-- Component mapping table (MUI → Yetzirah equivalents)
-- Prop → Tachyons class translations (variant, size, color)
-- Code examples for each component
-- Common patterns
-
-**Form element mappings to include:**
-- `<TextField multiline>` → `<textarea class="input-reset pa2 ba b--light-gray br2">`
-- `<FormControl>` → `<div>` or `<fieldset>`
-- `<FormGroup>` → `<fieldset>` with `<legend>`
-- `<FormLabel>` → `<label>`
-- `<FormHelperText>` → `<p class="f7 gray mt1">` or `<small>`
-- `<RadioGroup>` → `<fieldset>` + radios with shared `name`
-- `<Radio>` → `<input type="radio">`
-- `<Checkbox>` → `<input type="checkbox">`
-- `<FormControlLabel>` → `<label class="flex items-center gap2">` wrapping input
-- `<ToggleGroup>` (single) → `<fieldset>` + radio buttons with shared `name` (mutex via radio)
-- `<ToggleGroup>` (multi) → `<fieldset>` + checkboxes (independent via checkbox)
-
-**Acceptance Criteria:**
-- [ ] README.md created with design philosophy from PRD
-- [ ] README lists Tier 1 components and what was deliberately excluded
-- [ ] README documents package structure
-- [ ] README links to MUI Rosetta Stone
-- [ ] All MUI components mapped to Yetzirah equivalents in rosetta.html
-- [ ] Prop translations documented (variant, size, color → Tachyons)
-- [ ] Form element mappings documented (Textarea, RadioGroup, Checkbox, FormControl, etc.)
-- [ ] Side-by-side code examples
-- [ ] Works when opened directly in browser
----
-### PR-039: Final Bundle Optimization & Verification
----
-pr_id: PR-039
-title: Final Bundle Optimization & Verification
-cold_state: completed
-priority: high
 complexity:
   score: 3
   estimated_minutes: 60
   suggested_model: haiku
-  rationale: Bundle analysis and verification, no new code
+  rationale: Update existing docs with Tier 2 components
 dependencies:
-  - PR-004
-  - PR-007
-  - PR-010
-  - PR-013
-  - PR-016
-  - PR-019
-  - PR-022
-  - PR-025
-  - PR-028
-  - PR-031
-  - PR-034
-  - PR-037
+  - PR-042
+  - PR-045
+  - PR-048
+  - PR-051
+  - PR-055
+  - PR-058
+estimated_files:
+  - path: README.md
+    action: modify
+    description: Add Tier 2 components section
+  - path: demos/rosetta.html
+    action: modify
+    description: Add Tier 2 MUI mappings
+---
+**Description:**
+Update README.md and MUI Rosetta Stone with Tier 2 component documentation.
+
+**New MUI Mappings:**
+- `<Switch>` → `<Toggle>` / `<ytz-toggle>`
+- `<Slider>` → `<Slider>` / `<ytz-slider>`
+- `<Chip>` (deletable) → `<Chip>` / `<ytz-chip>`
+- `<IconButton>` → `<IconButton>` / `<ytz-icon-button>`
+- `<DataGrid>` → `<DataGrid>` / `<ytz-datagrid>`
+
+**Acceptance Criteria:**
+- [ ] README lists Tier 2 components
+- [ ] Rosetta Stone updated with Tier 2 mappings
+- [ ] Prop translations documented
+---
+### PR-060: Tier 2 Bundle Verification
+---
+pr_id: PR-060
+title: Tier 2 Bundle Verification
+cold_state: ready
+priority: high
+complexity:
+  score: 2
+  estimated_minutes: 30
+  suggested_model: haiku
+  rationale: Bundle size check after Tier 2 additions
+dependencies:
+  - PR-042
+  - PR-045
+  - PR-048
+  - PR-051
+  - PR-055
+  - PR-058
 estimated_files:
   - path: package.json
     action: modify
-    description: Add bundle size check scripts
+    description: Update bundle size thresholds if needed
 ---
 **Description:**
-Verify total core bundle < 10kb gzipped. Verify each wrapper < 50 lines per component. Tree-shaking verification. CDN-ready single file bundle.
+Verify bundle sizes remain reasonable after Tier 2 additions. DataGrid may increase bundle significantly - document separately.
 
 **Acceptance Criteria:**
-- [ ] Core bundle < 10kb gzipped
-- [ ] Individual component imports work
-- [ ] No dependencies in core package.json
+- [ ] Core bundle (without DataGrid) < 15kb gzipped
+- [ ] DataGrid as separate entry point
 - [ ] Tree-shaking verified
+- [ ] Individual component imports work
 ---
 ## Dependency Graph
 
 ```
-PR-001 (Setup)
-├── PR-002 → PR-003 → PR-004 (Button)
-├── PR-005 → PR-006 → PR-007 (Disclosure)
-│   └── PR-029 → PR-030 → PR-031 (Accordion)
-├── PR-008 → PR-009 → PR-010 (Dialog)
-│   └── PR-032 → PR-033 → PR-034 (Drawer)
-├── PR-011 → PR-012 → PR-013 (Tabs)
-├── PR-014 → PR-015 → PR-016 (Tooltip)
-│   └── PR-035 → PR-036 → PR-037 (Popover)
-└── PR-017 (Menu, needs PR-011 + PR-014)
-    └── PR-018 → PR-019
-    └── PR-020 → PR-021 → PR-022 (Autocomplete)
-        └── PR-023 → PR-024 → PR-025 (Listbox)
-            └── PR-026 → PR-027 → PR-028 (Select)
+Block 0 (No deps):
+├── PR-040 → PR-041 → PR-042 (Toggle)
+├── PR-043 → PR-044 → PR-045 (Chip)
+└── PR-046 → PR-047 → PR-048 (IconButton)
 
-PR-038 (README + Rosetta) ← All demo PRs
-PR-039 (Optimization) ← All demo PRs
+Block 1 (Slider):
+└── PR-049 → PR-050 → PR-051 (Slider)
+
+Block 2 (Theme):
+├── PR-052 (Dark CSS, no deps)
+└── PR-053 → PR-054 → PR-055 (Theme Toggle, needs PR-040 + PR-052)
+
+Block 3 (DataGrid):
+└── PR-056 → PR-057 → PR-058 (DataGrid)
+
+Block 4 (Final):
+├── PR-059 (Docs) ← All demo PRs
+└── PR-060 (Verification) ← All demo PRs
 ```
+---
+## Parallel Execution Strategy
+
+**Wave 1 (fully parallel):**
+- PR-040 (Toggle Core)
+- PR-043 (Chip Core)
+- PR-046 (IconButton Core)
+- PR-049 (Slider Core)
+- PR-052 (Dark CSS)
+- PR-056 (DataGrid Core) - longest, start early
+
+**Wave 2 (after Wave 1 completes):**
+- PR-041, PR-044, PR-047, PR-050, PR-053, PR-054, PR-057 (all wrappers)
+
+**Wave 3 (after Wave 2 completes):**
+- PR-042, PR-045, PR-048, PR-051, PR-055, PR-058 (all demos)
+
+**Wave 4 (after Wave 3 completes):**
+- PR-059, PR-060 (final docs and verification)
 ---
 ## Notes
 
-- **Utilities are internal**: `position()`, `focusTrap()`, `clickOutside()`, `keyNav()` live in `packages/core/src/utils/` but are not exported
-- **JSDoc everywhere**: All public APIs documented with JSDoc for .d.ts generation
-- **Static demos**: Each demo is a standalone HTML file that works without build step
-- **< 200 lines per component**: If implementation exceeds this, reconsider complexity
-- **< 50 lines per wrapper**: React wrappers should be thin
+- **DataGrid is optional:** If bundle size is a concern, DataGrid can be shipped as a separate package (`@yetzirah/datagrid`)
+- **Theme system is opt-in:** Users who don't need dark mode don't pay for it
+- **Tier 2 components build on Tier 1 utilities:** position(), keyNav(), clickOutside() already exist
+- **< 50 lines per wrapper rule still applies:** Except DataGrid which may need up to 75 lines
+- **Excel export consideration:** May use SheetJS (Apache 2.0) or implement minimal XLSX ourselves

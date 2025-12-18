@@ -12,12 +12,14 @@
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./cdn": {
+      "import": "./dist/yetzirah.js"
+    },
     "./button": {
       "types": "./dist/button.d.ts",
       "import": "./dist/button.js",
       "require": "./dist/button.cjs"
     },
-    "./button.css": "./button.css",
     "./disclosure": {
       "types": "./dist/disclosure.d.ts",
       "import": "./dist/disclosure.js",
@@ -47,7 +49,35 @@
       "types": "./dist/autocomplete.d.ts",
       "import": "./dist/autocomplete.js",
       "require": "./dist/autocomplete.cjs"
-    }
+    },
+    "./listbox": {
+      "types": "./dist/listbox.d.ts",
+      "import": "./dist/listbox.js",
+      "require": "./dist/listbox.cjs"
+    },
+    "./select": {
+      "types": "./dist/select.d.ts",
+      "import": "./dist/select.js",
+      "require": "./dist/select.cjs"
+    },
+    "./accordion": {
+      "types": "./dist/accordion.d.ts",
+      "import": "./dist/accordion.js",
+      "require": "./dist/accordion.cjs"
+    },
+    "./drawer": {
+      "types": "./dist/drawer.d.ts",
+      "import": "./dist/drawer.js",
+      "require": "./dist/drawer.cjs"
+    },
+    "./popover": {
+      "types": "./dist/popover.d.ts",
+      "import": "./dist/popover.js",
+      "require": "./dist/popover.cjs"
+    },
+    "./button.css": "./button.css",
+    "./disclosure.css": "./disclosure.css",
+    "./dialog.css": "./dialog.css"
   },
   "files": [
     "dist",
@@ -55,6 +85,7 @@
   ],
   "scripts": {
     "build": "tsup",
+    "build:cdn": "tsup --config tsup.cdn.config.js",
     "dev": "tsup --watch"
   },
   "keywords": [
