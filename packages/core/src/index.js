@@ -20,6 +20,11 @@ export { YtzMenu, YtzMenuItem } from './menu.js'
 export { YtzAutocomplete, YtzOption } from './autocomplete.js'
 export { YtzListbox } from './listbox.js'
 export { YtzSelect } from './select.js'
+export { YtzToggle } from './toggle.js'
+export { YtzChip } from './chip.js'
+export { YtzIconButton } from './icon-button.js'
+export { YtzSlider } from './slider.js'
+export { YtzDatagrid, YtzDatagridColumn } from './datagrid.js'
 
 /**
  * Yetzirah version

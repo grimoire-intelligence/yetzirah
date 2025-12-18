@@ -14,7 +14,7 @@
 ---
 pr_id: PR-040
 title: Toggle/Switch Component (Core)
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 3
