@@ -31,3 +31,4 @@ export { YtzDatagrid, YtzDatagridColumn } from './datagrid.js'
  * @type {string}
  */
 export const VERSION = '0.1.0'
+export { YtzThemeToggle } from './theme-toggle.js'
