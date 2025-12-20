@@ -1,19 +1,40 @@
 # Yetzirah
 
-Unstyled, accessible Web Components with React wrappers. Behavior and accessibility without opinionated styling.
+Unstyled, accessible Web Components with framework wrappers for React, Vue, Svelte, and Angular. Behavior and accessibility without opinionated styling.
 
 ## Installation
 
+### Vanilla HTML (Web Components)
+```bash
+npm install @yetzirah/core
+```
+
+### React
 ```bash
 npm install @yetzirah/core @yetzirah/react
 ```
 
+### Vue 3
+```bash
+npm install @yetzirah/core @yetzirah/vue
+```
+
+### Svelte
+```bash
+npm install @yetzirah/core @yetzirah/svelte
+```
+
+### Angular
+```bash
+npm install @yetzirah/core @yetzirah/angular
+```
+
 ## Philosophy
 
-- **Unstyled by default** - You bring your own CSS (Tachyons, Tailwind, custom)
+- **Unstyled by default** - You bring your own CSS (Tachyons, custom styles, etc.)
 - **Accessibility first** - Full ARIA compliance, keyboard navigation built-in
-- **Web Components** - Framework-agnostic, works anywhere
-- **React wrappers** - Familiar API for React developers
+- **Web Components** - Framework-agnostic core, works anywhere
+- **Framework wrappers** - Idiomatic APIs for React, Vue, Svelte, and Angular
 - **Tiny bundles** - Tree-shakeable, no runtime CSS-in-JS
 
 ## Components
@@ -37,14 +58,16 @@ npm install @yetzirah/core @yetzirah/react
 
 ### Tier 2 (Extended)
 
-| Component | Web Component | React | Description |
-|-----------|--------------|-------|-------------|
-| Toggle | `<ytz-toggle>` | `<Toggle>` | Switch with checkbox semantics |
-| Chip | `<ytz-chip>` | `<Chip>` | Deletable tag/label |
-| IconButton | `<ytz-icon-button>` | `<IconButton>` | Icon-only button with tooltip |
-| Slider | `<ytz-slider>` | `<Slider>` | Range input with keyboard support |
-| DataGrid | `<ytz-datagrid>` | `<DataGrid>` | Virtual-scrolling data table |
-| ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | Dark/light mode toggle |
+| Component | Web Component | React | Vue | Svelte | Angular | Description |
+|-----------|--------------|-------|-----|--------|---------|-------------|
+| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` | Switch with checkbox semantics |
+| Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` | Deletable tag/label |
+| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` | Icon-only button with tooltip |
+| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` | Range input with keyboard support |
+| DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` | Virtual-scrolling data table |
+| ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` | Dark/light mode toggle |
+
+> **Note:** Vue, Svelte, and Angular wrappers for Tier 2 components are in development. Tier 1 framework wrappers coming in a future release.
 
 ## Usage
 
@@ -102,6 +125,90 @@ function App() {
       </Dialog>
     </>
   )
+}
+```
+
+### Vue 3
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { Toggle, Slider, ThemeToggle } from '@yetzirah/vue'
+
+const enabled = ref(false)
+const volume = ref(50)
+</script>
+
+<template>
+  <label class="flex items-center mb3">
+    <Toggle v-model:checked="enabled" />
+    <span class="ml2">Enable notifications</span>
+  </label>
+
+  <label class="db mb3">
+    <span class="db mb2">Volume: {{ volume }}%</span>
+    <Slider v-model="volume" :min="0" :max="100" />
+  </label>
+
+  <ThemeToggle @themechange="(e) => console.log(e.detail.theme)" />
+</template>
+```
+
+### Svelte
+
+```svelte
+<script>
+  import { Toggle, Slider, ThemeToggle } from '@yetzirah/svelte'
+
+  let enabled = false
+  let volume = 50
+</script>
+
+<label class="flex items-center mb3">
+  <Toggle bind:checked={enabled} />
+  <span class="ml2">Enable notifications</span>
+</label>
+
+<label class="db mb3">
+  <span class="db mb2">Volume: {volume}%</span>
+  <Slider bind:value={volume} min={0} max={100} />
+</label>
+
+<ThemeToggle on:themechange={(e) => console.log(e.detail.theme)} />
+```
+
+### Angular
+
+```typescript
+// app.component.ts
+import { Component } from '@angular/core'
+import { FormsModule } from '@angular/forms'
+import { Toggle, Slider, ThemeToggle } from '@yetzirah/angular'
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Toggle, Slider, ThemeToggle],
+  template: `
+    <label class="flex items-center mb3">
+      <ytz-toggle [(ngModel)]="enabled"></ytz-toggle>
+      <span class="ml2">Enable notifications</span>
+    </label>
+
+    <label class="db mb3">
+      <span class="db mb2">Volume: {{ volume }}%</span>
+      <ytz-slider [(ngModel)]="volume" [min]="0" [max]="100"></ytz-slider>
+    </label>
+
+    <ytz-theme-toggle (themeChange)="onThemeChange($event)"></ytz-theme-toggle>
+  `
+})
+export class AppComponent {
+  enabled = false
+  volume = 50
+
+  onThemeChange(event: CustomEvent) {
+    console.log(event.detail.theme)
+  }
 }
 ```
 
