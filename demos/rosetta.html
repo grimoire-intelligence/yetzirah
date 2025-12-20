@@ -123,6 +123,18 @@
         <li class="mb2">Core component concepts (Dialog, Tabs, Menu, etc.)</li>
         <li class="mb2">React hook-style APIs in the React wrapper</li>
       </ul>
+
+      <h3 class="f5 fw6 mb2 mt4">React Wrappers Preserve MUI Idiom</h3>
+      <p class="lh-copy mb3">
+        The React examples in this guide use capitalized components like <code>&lt;Dialog&gt;</code>,
+        <code>&lt;Tabs&gt;</code>, and <code>&lt;Button&gt;</code>. These are the <code>@yetzirah/react</code>
+        wrappers, which intentionally mirror MUI's naming conventions for minimal migration friction.
+      </p>
+      <p class="lh-copy mb3">
+        Under the hood, they render the Web Components (<code>&lt;ytz-dialog&gt;</code>,
+        <code>&lt;ytz-tabs&gt;</code>, <code>&lt;ytz-button&gt;</code>). For vanilla HTML,
+        you use the Web Components directly.
+      </p>
     </section>
 
     <!-- Quick Reference -->
@@ -225,6 +237,134 @@
       </div>
     </section>
 
+    <!-- Layout Wrappers -->
+    <section class="demo-section pv4" id="layout">
+      <h2 class="f3 fw6 mb3">Layout Wrappers (Just HTML)</h2>
+      <p class="lh-copy mb3">
+        These MUI components have no behavioral complexity—they're styling abstractions over basic HTML.
+        Replace them with semantic elements and Tachyons classes.
+      </p>
+
+      <div class="overflow-auto">
+        <table class="quick-ref">
+          <thead>
+            <tr>
+              <th>MUI</th>
+              <th>HTML + Tachyons</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td colspan="2" class="fw6 bg-near-white">Container Elements</td></tr>
+            <tr>
+              <td><code>&lt;Box&gt;</code></td>
+              <td><code>&lt;div&gt;</code> — it's literally a div</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Box sx={{ p: 2, m: 1 }}&gt;</code></td>
+              <td><code>&lt;div class="pa2 ma1"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Paper elevation={2}&gt;</code></td>
+              <td><code>&lt;div class="bg-white shadow-2 br2"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Card&gt;</code></td>
+              <td><code>&lt;div class="bg-white shadow-1 br2 pa3"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Container maxWidth="md"&gt;</code></td>
+              <td><code>&lt;div class="mw7 center ph3"&gt;</code></td>
+            </tr>
+
+            <tr><td colspan="2" class="fw6 bg-near-white">Flex Layout</td></tr>
+            <tr>
+              <td><code>&lt;Stack spacing={2}&gt;</code></td>
+              <td><code>&lt;div class="flex flex-column gap2"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Stack direction="row" spacing={3}&gt;</code></td>
+              <td><code>&lt;div class="flex flex-row gap3"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Stack alignItems="center"&gt;</code></td>
+              <td><code>&lt;div class="flex items-center"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Grid container spacing={2}&gt;</code></td>
+              <td><code>&lt;div class="flex flex-wrap nl2 nr2"&gt;</code> (children get <code>ph2</code>)</td>
+            </tr>
+
+            <tr><td colspan="2" class="fw6 bg-near-white">Typography</td></tr>
+            <tr>
+              <td><code>&lt;Typography variant="h1"&gt;</code></td>
+              <td><code>&lt;h1 class="f-headline fw6"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Typography variant="h4"&gt;</code></td>
+              <td><code>&lt;h4 class="f2 fw6"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Typography variant="body1"&gt;</code></td>
+              <td><code>&lt;p class="f5 lh-copy"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Typography variant="caption"&gt;</code></td>
+              <td><code>&lt;span class="f7 gray"&gt;</code></td>
+            </tr>
+
+            <tr><td colspan="2" class="fw6 bg-near-white">Simple Elements</td></tr>
+            <tr>
+              <td><code>&lt;Divider&gt;</code></td>
+              <td><code>&lt;hr class="bt b--light-gray mv3"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Link href="..."&gt;</code></td>
+              <td><code>&lt;a href="..." class="link blue"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;List&gt;</code></td>
+              <td><code>&lt;ul class="list pl0"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;ListItem&gt;</code></td>
+              <td><code>&lt;li class="pa2 bb b--light-gray"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Avatar src="..."&gt;</code></td>
+              <td><code>&lt;img class="br-100 w2 h2"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Avatar&gt;AB&lt;/Avatar&gt;</code></td>
+              <td><code>&lt;div class="br-100 w2 h2 flex items-center justify-center bg-blue white"&gt;AB&lt;/div&gt;</code></td>
+            </tr>
+
+            <tr><td colspan="2" class="fw6 bg-near-white">Feedback Elements</td></tr>
+            <tr>
+              <td><code>&lt;Alert severity="error"&gt;</code></td>
+              <td><code>&lt;div role="alert" class="pa3 br2 bg-washed-red dark-red"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Alert severity="success"&gt;</code></td>
+              <td><code>&lt;div role="alert" class="pa3 br2 bg-washed-green dark-green"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Skeleton variant="rect"&gt;</code></td>
+              <td><code>&lt;div class="bg-light-gray br2 h2 w-100 animate-pulse"&gt;</code></td>
+            </tr>
+            <tr>
+              <td><code>&lt;Badge badgeContent={4}&gt;</code></td>
+              <td><code>&lt;div class="relative"&gt;...&lt;span class="absolute top-0 right-0 ..."&gt;4&lt;/span&gt;&lt;/div&gt;</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="key-diff mt3">
+        <strong>Key Insight:</strong> These components exist in MUI to provide consistent theming via the <code>sx</code> prop.
+        With utility CSS, you don't need a runtime abstraction—the classes <em>are</em> the design system.
+      </div>
+    </section>
+
     <!-- Button -->
     <section class="demo-section pv4" id="button">
       <h2 class="f3 fw6 mb3">Button</h2>
@@ -250,27 +390,27 @@
         </div>
         <div class="comparison-panel">
           <div class="comparison-header ytz">Yetzirah</div>
-          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;ytz-button class="ph3 pv2 br2 bn white bg-blue"&gt;
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Button className="ph3 pv2 br2 bn white bg-blue"&gt;
   Submit
-&lt;/ytz-button&gt;
+&lt;/Button&gt;
 
-&lt;ytz-button class="ph3 pv2 br2 ba b--purple purple"&gt;
+&lt;Button className="ph3 pv2 br2 ba b--purple purple"&gt;
   Cancel
-&lt;/ytz-button&gt;
+&lt;/Button&gt;
 
-&lt;ytz-button class="ph3 pv2 bn blue"&gt;
+&lt;Button className="ph3 pv2 bn blue"&gt;
   Learn More
-&lt;/ytz-button&gt;
+&lt;/Button&gt;
 
-&lt;ytz-button href="/dashboard"&gt;
+&lt;Button href="/dashboard"&gt;
   Dashboard
-&lt;/ytz-button&gt;</code></pre>
+&lt;/Button&gt;</code></pre>
         </div>
       </div>
 
       <div class="key-diff">
         <strong>Key Difference:</strong> No <code>variant</code> or <code>color</code> props.
-        Style variations are CSS classes. <code>href</code> attribute makes it render as <code>&lt;a&gt;</code>.
+        Style variations are CSS classes. <code>href</code> prop makes it render as <code>&lt;a&gt;</code>.
       </div>
 
       <table class="quick-ref mt3">
@@ -811,14 +951,14 @@ const open = Boolean(anchorEl)
         <div class="comparison-panel">
           <div class="comparison-header ytz">Yetzirah (Tachyons)</div>
           <pre class="comparison-content f6 ma0 overflow-auto"><code>// Size variants via classes
-&lt;ytz-button class="f6 ph2 pv1"&gt;Small&lt;/ytz-button&gt;
-&lt;ytz-button class="f5 ph3 pv2"&gt;Medium&lt;/ytz-button&gt;
-&lt;ytz-button class="f4 ph4 pv3"&gt;Large&lt;/ytz-button&gt;
+&lt;Button className="f6 ph2 pv1"&gt;Small&lt;/Button&gt;
+&lt;Button className="f5 ph3 pv2"&gt;Medium&lt;/Button&gt;
+&lt;Button className="f4 ph4 pv3"&gt;Large&lt;/Button&gt;
 
 // Color variants via classes
-&lt;ytz-button class="white bg-blue"&gt;Primary&lt;/ytz-button&gt;
-&lt;ytz-button class="white bg-purple"&gt;Secondary&lt;/ytz-button&gt;
-&lt;ytz-button class="white bg-red"&gt;Error&lt;/ytz-button&gt;</code></pre>
+&lt;Button className="white bg-blue"&gt;Primary&lt;/Button&gt;
+&lt;Button className="white bg-purple"&gt;Secondary&lt;/Button&gt;
+&lt;Button className="white bg-red"&gt;Error&lt;/Button&gt;</code></pre>
         </div>
       </div>
 

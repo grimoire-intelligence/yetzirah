@@ -221,7 +221,7 @@ Edge case: supplying both `href` and `onclick` renders an `<a>` with the click h
 | **Slider** | `<ytz-slider>` | aria-slider, keyboard control, range support |
 | **Chip** | `<ytz-chip>` | Deletable tag/label with keyboard support. `deletable` attribute shows × button, dispatches `delete` event. Future: drag API for reordering, chip input for tag entry. ~30 lines. |
 | **IconButton** | `<ytz-icon-button>` | Button variant requiring aria-label, optional integrated tooltip |
-| **DataGrid** | `<ytz-datagrid>` | Virtual scroll, sort, filter, keyboard nav. Exports to Excel and CSV. No pivot tables—YAGNI. |
+| **DataGrid** | `<ytz-datagrid>` | Virtual scroll, sort, filter, keyboard nav, CSV export. No pivot tables—YAGNI. |
 | **Dark Theme CSS** | `dark.css` | Optional override stylesheet using CSS custom properties. `[data-theme="dark"]` selector remaps Tachyons color classes. Respects `prefers-color-scheme: dark` by default. No JS runtime—pure CSS. Toggle manually via `document.documentElement.dataset.theme = 'dark'`. |
 | **Theme Toggle** | `<ytz-theme-toggle>` | Wraps `<ytz-toggle>` with theme-switching behavior: reads `prefers-color-scheme` on init, persists user preference to `localStorage`, toggles `data-theme` attribute on `<html>`, dispatches `themechange` events. Depends on Toggle. |
 
@@ -1193,7 +1193,7 @@ Yetzirah + Tachyons isn't just smaller for users—it's smaller for LLMs. This h
 
 | Component | Market | Yetzirah Approach |
 |-----------|--------|-------------------|
-| DataGrid | AG Grid, MUI X ($588/dev/yr) | YAGNI: virtual scroll, sort, filter, inline edit. No pivot tables. |
+| DataGrid | AG Grid, MUI X ($588/dev/yr) | YAGNI: virtual scroll, sort, filter, inline edit, XLSX export (custom zero-dependency implementation). No pivot tables. |
 | DatePicker | MUI X | Progressive enhancement over `<input type="date">` |
 | Charts | Recharts, Victory | 5 chart types covering 95% of dashboards |
 

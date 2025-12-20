@@ -139,7 +139,7 @@
         Style chips with Tachyons or custom CSS classes.
       </p>
 
-      <div class="demo-row mb3">
+      <div class="demo-row mb3" id="color-chips">
         <ytz-chip class="chip-primary" deletable>Primary</ytz-chip>
         <ytz-chip class="chip-success" deletable>Success</ytz-chip>
         <ytz-chip class="chip-warning" deletable>Warning</ytz-chip>
@@ -147,12 +147,21 @@
       </div>
 
       <h3 class="f5 fw6 mt4 mb2">Outlined Variant</h3>
-      <div class="demo-row mb3">
+      <div class="demo-row mb3" id="outlined-chips">
         <ytz-chip class="chip-outlined blue" deletable>Primary</ytz-chip>
         <ytz-chip class="chip-outlined green" deletable>Success</ytz-chip>
         <ytz-chip class="chip-outlined orange" deletable>Warning</ytz-chip>
         <ytz-chip class="chip-outlined red" deletable>Error</ytz-chip>
       </div>
+
+      <script>
+        document.getElementById('color-chips').addEventListener('delete', (e) => {
+          e.detail.chip.remove()
+        })
+        document.getElementById('outlined-chips').addEventListener('delete', (e) => {
+          e.detail.chip.remove()
+        })
+      </script>
 
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-chip class="chip-primary" deletable&gt;Primary&lt;/ytz-chip&gt;
 &lt;ytz-chip class="chip-outlined blue" deletable&gt;Outlined&lt;/ytz-chip&gt;</code></pre>

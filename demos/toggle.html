@@ -15,37 +15,8 @@
     }
     /* Basic toggle styling */
     ytz-toggle {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
       cursor: pointer;
       user-select: none;
-    }
-    ytz-toggle::before {
-      content: '';
-      width: 40px;
-      height: 22px;
-      background: #ccc;
-      border-radius: 11px;
-      transition: background 0.2s ease;
-      position: relative;
-    }
-    ytz-toggle::after {
-      content: '';
-      position: absolute;
-      left: 2px;
-      width: 18px;
-      height: 18px;
-      background: white;
-      border-radius: 50%;
-      transition: transform 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
-    }
-    ytz-toggle[aria-checked="true"]::before {
-      background: #357edd;
-    }
-    ytz-toggle[aria-checked="true"]::after {
-      transform: translateX(18px);
     }
     ytz-toggle[aria-disabled="true"] {
       opacity: 0.5;
@@ -59,6 +30,7 @@
       position: relative;
     }
     .toggle-track {
+      display: inline-block;
       width: 40px;
       height: 22px;
       background: #ccc;
@@ -130,11 +102,11 @@
           <ytz-toggle id="checked-toggle" checked>
             <span class="toggle-track"></span>
           </ytz-toggle>
-          <label for="checked-toggle">Dark mode (on)</label>
+          <label for="checked-toggle">Feature enabled</label>
         </div>
       </div>
 
-      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-toggle checked&gt;Dark mode&lt;/ytz-toggle&gt;</code></pre>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-toggle checked&gt;Feature enabled&lt;/ytz-toggle&gt;</code></pre>
     </section>
 
     <!-- Disabled State -->

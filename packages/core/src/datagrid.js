@@ -67,6 +67,10 @@ class YtzDatagrid extends HTMLElement {
   #focusedRow = 0
   /** @type {number} */
   #focusedCol = 0
+  /** @type {Map<string, number>} */
+  #columnWidths = new Map()
+  /** @type {Object|null} */
+  #resizeState = null
 
   connectedCallback() {
     this.#setup()
@@ -75,6 +79,8 @@ class YtzDatagrid extends HTMLElement {
   disconnectedCallback() {
     this.#virtualScroller?.destroy()
     this.removeEventListener('keydown', this.#handleKeydown)
+    document.removeEventListener('mousemove', this.#handleResizeMove)
+    document.removeEventListener('mouseup', this.#handleResizeEnd)
   }
 
   attributeChangedCallback() {
@@ -142,12 +148,31 @@ class YtzDatagrid extends HTMLElement {
       const cell = document.createElement('div')
       cell.className = 'ytz-datagrid-header-cell'
       cell.setAttribute('role', 'columnheader')
-      cell.style.width = col.width
-      cell.textContent = col.header
+      cell.setAttribute('data-field', col.field)
+
+      // Use stored width or fall back to column attribute
+      const storedWidth = this.#columnWidths.get(col.field)
+      if (storedWidth) {
+        cell.style.width = `${storedWidth}px`
+        cell.style.flex = 'none'
+      } else if (col.width && col.width !== 'auto') {
+        cell.style.width = col.width
+        cell.style.flex = 'none'
+      }
+
+      // Create content wrapper to keep text separate from resize handle
+      const content = document.createElement('span')
+      content.className = 'ytz-datagrid-header-content'
+      content.textContent = col.header
+      cell.appendChild(content)
 
       if (col.sortable) {
         cell.classList.add('ytz-datagrid-sortable')
-        cell.addEventListener('click', () => this.#handleSort(col.field))
+        cell.addEventListener('click', (e) => {
+          // Don't sort when clicking resize handle
+          if (e.target.classList.contains('ytz-datagrid-resize-handle')) return
+          this.#handleSort(col.field)
+        })
 
         // Add sort indicator
         const indicator = document.createElement('span')
@@ -156,7 +181,7 @@ class YtzDatagrid extends HTMLElement {
           indicator.textContent = this.#sortState.direction === 'asc' ? ' \u25B2' : ' \u25BC'
           cell.setAttribute('aria-sort', this.#sortState.direction === 'asc' ? 'ascending' : 'descending')
         }
-        cell.appendChild(indicator)
+        content.appendChild(indicator)
       }
 
       if (col.filterable) {
@@ -174,7 +199,97 @@ class YtzDatagrid extends HTMLElement {
         cell.appendChild(input)
       }
 
+      // Add resize handle
+      const resizeHandle = document.createElement('div')
+      resizeHandle.className = 'ytz-datagrid-resize-handle'
+      resizeHandle.addEventListener('mousedown', (e) => this.#handleResizeStart(e, col.field, cell))
+      cell.appendChild(resizeHandle)
+
       this.#header.appendChild(cell)
+    })
+  }
+
+  #handleResizeStart(e, field, headerCell) {
+    e.preventDefault()
+    e.stopPropagation()
+
+    const startX = e.clientX
+    const startWidth = headerCell.offsetWidth
+
+    this.#resizeState = { field, startX, startWidth, headerCell }
+
+    document.addEventListener('mousemove', this.#handleResizeMove)
+    document.addEventListener('mouseup', this.#handleResizeEnd)
+
+    // Add resizing class for visual feedback
+    this.classList.add('ytz-datagrid-resizing')
+  }
+
+  #handleResizeMove = (e) => {
+    if (!this.#resizeState) return
+
+    const { field, startX, startWidth, headerCell } = this.#resizeState
+    const delta = e.clientX - startX
+    const newWidth = Math.max(50, startWidth + delta) // Minimum 50px
+
+    // Update header cell width
+    headerCell.style.width = `${newWidth}px`
+    headerCell.style.flex = 'none'
+
+    // Update body cells width
+    this.#columnWidths.set(field, newWidth)
+    this.#updateBodyColumnWidths()
+  }
+
+  #handleResizeEnd = () => {
+    if (this.#resizeState) {
+      this.dispatchEvent(new CustomEvent('columnresize', {
+        bubbles: true,
+        detail: {
+          field: this.#resizeState.field,
+          width: this.#columnWidths.get(this.#resizeState.field)
+        }
+      }))
+    }
+
+    this.#resizeState = null
+    document.removeEventListener('mousemove', this.#handleResizeMove)
+    document.removeEventListener('mouseup', this.#handleResizeEnd)
+    this.classList.remove('ytz-datagrid-resizing')
+  }
+
+  /**
+   * Extract a numeric value from a string, handling currency, percentages, etc.
+   * @param {*} value - The value to parse
+   * @returns {number|null} - The numeric value or null if not parseable
+   */
+  #extractNumber(value) {
+    if (typeof value === 'number') return value
+    if (typeof value !== 'string') return null
+
+    // Remove currency symbols, commas, spaces, and percentage signs
+    const cleaned = value.replace(/[$€£¥,\s%]/g, '')
+
+    // Check if it looks like a number (possibly negative, possibly decimal)
+    if (!/^-?\d+\.?\d*$/.test(cleaned)) return null
+
+    const num = parseFloat(cleaned)
+    return isNaN(num) ? null : num
+  }
+
+  #updateBodyColumnWidths() {
+    const rows = this.querySelectorAll('.ytz-datagrid-row')
+    rows.forEach(row => {
+      this.#columns.forEach((col, colIndex) => {
+        const cell = row.querySelector(`[data-col-index="${colIndex}"]`)
+        if (cell) {
+          const storedWidth = this.#columnWidths.get(col.field)
+          if (storedWidth) {
+            cell.style.width = `${storedWidth}px`
+            cell.style.flex = 'none'
+          }
+        }
+      })
     })
   }
 
@@ -219,7 +334,20 @@ class YtzDatagrid extends HTMLElement {
       result.sort((a, b) => {
         const aVal = a[field] ?? ''
         const bVal = b[field] ?? ''
-        const cmp = String(aVal).localeCompare(String(bVal), undefined, { numeric: true })
+
+        // Try to extract numeric values (handles currency, percentages, etc.)
+        const aNum = this.#extractNumber(aVal)
+        const bNum = this.#extractNumber(bVal)
+
+        let cmp
+        if (aNum !== null && bNum !== null) {
+          // Both values are numeric - compare as numbers
+          cmp = aNum - bNum
+        } else {
+          // Fall back to string comparison
+          cmp = String(aVal).localeCompare(String(bVal), undefined, { numeric: true })
+        }
+
         return direction === 'asc' ? cmp : -cmp
       })
     }
@@ -258,14 +386,32 @@ class YtzDatagrid extends HTMLElement {
       const cell = document.createElement('div')
       cell.className = 'ytz-datagrid-cell'
       cell.setAttribute('role', 'gridcell')
-      cell.style.width = col.width
+
+      // Use stored width or fall back to column attribute
+      const storedWidth = this.#columnWidths.get(col.field)
+      if (storedWidth) {
+        cell.style.width = `${storedWidth}px`
+        cell.style.flex = 'none'
+      } else if (col.width && col.width !== 'auto') {
+        cell.style.width = col.width
+        cell.style.flex = 'none'
+      }
+
       cell.textContent = String(rowData[col.field] ?? '')
       cell.setAttribute('data-col-index', String(colIndex))
       row.appendChild(cell)
     })
 
-    row.addEventListener('click', () => {
+    row.addEventListener('click', (e) => {
       this.#focusedRow = index
+      // Determine which cell was clicked
+      const cell = e.target.closest('.ytz-datagrid-cell')
+      if (cell) {
+        const colIndex = parseInt(cell.getAttribute('data-col-index'), 10)
+        if (!isNaN(colIndex)) {
+          this.#focusedCol = colIndex
+        }
+      }
       this.#updateFocus()
       this.dispatchEvent(new CustomEvent('rowselect', {
         bubbles: true,
@@ -380,33 +526,6 @@ class YtzDatagrid extends HTMLElement {
   downloadCSV(filename = 'data.csv') {
     const csv = this.exportCSV()
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' })
-    const url = URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = url
-    link.download = filename
-    link.click()
-    URL.revokeObjectURL(url)
-  }
-
-  /**
-   * Export data to Excel-compatible format (tab-separated).
-   * @returns {string} TSV string
-   */
-  exportExcel() {
-    const headers = this.#columns.map(col => col.header)
-    const rows = this.#filteredData.map(row => {
-      return this.#columns.map(col => String(row[col.field] ?? '')).join('\t')
-    })
-    return [headers.join('\t'), ...rows].join('\n')
-  }
-
-  /**
-   * Download data as Excel-compatible file.
-   * @param {string} filename - File name (default: 'data.xls')
-   */
-  downloadExcel(filename = 'data.xls') {
-    const tsv = this.exportExcel()
-    const blob = new Blob([tsv], { type: 'application/vnd.ms-excel' })
     const url = URL.createObjectURL(blob)
     const link = document.createElement('a')
     link.href = url

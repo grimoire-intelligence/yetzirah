@@ -29,10 +29,42 @@
       flex: 1;
       min-width: 100px;
       border-right: 1px solid #e0e0e0;
+      position: relative;
     }
 
     .ytz-datagrid-header-cell:last-child {
       border-right: none;
+    }
+
+    .ytz-datagrid-header-content {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 8px;
+    }
+
+    .ytz-datagrid-resize-handle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 6px;
+      height: 100%;
+      cursor: col-resize;
+      background: transparent;
+    }
+
+    .ytz-datagrid-resize-handle:hover {
+      background: #357edd;
+    }
+
+    .ytz-datagrid-resizing {
+      user-select: none;
+      cursor: col-resize;
+    }
+
+    .ytz-datagrid-resizing .ytz-datagrid-resize-handle {
+      background: #357edd;
     }
 
     .ytz-datagrid-sortable {
@@ -158,7 +190,8 @@
         <ytz-datagrid-column field="role" header="Role"></ytz-datagrid-column>
       </ytz-datagrid>
 
-      <script>
+      <script type="module">
+        import '../packages/core/dist/index.js'
         const basicData = [
           { name: 'Alice Johnson', email: 'alice@example.com', role: 'Engineer' },
           { name: 'Bob Smith', email: 'bob@example.com', role: 'Designer' },
@@ -196,7 +229,8 @@
         <ytz-datagrid-column field="city" header="City" sortable></ytz-datagrid-column>
       </ytz-datagrid>
 
-      <script>
+      <script type="module">
+        import '../packages/core/dist/index.js'
         document.getElementById('sort-grid').data = [
           { name: 'Alice', age: 28, city: 'New York' },
           { name: 'Bob', age: 35, city: 'Los Angeles' },
@@ -223,7 +257,8 @@
         <ytz-datagrid-column field="stock" header="Stock" sortable></ytz-datagrid-column>
       </ytz-datagrid>
 
-      <script>
+      <script type="module">
+        import '../packages/core/dist/index.js'
         document.getElementById('filter-grid').data = [
           { product: 'Laptop Pro', category: 'Electronics', price: '$1,299', stock: 45 },
           { product: 'Wireless Mouse', category: 'Electronics', price: '$49', stock: 230 },
@@ -258,7 +293,8 @@
         <ytz-datagrid-column field="salary" header="Salary" sortable></ytz-datagrid-column>
       </ytz-datagrid>
 
-      <script>
+      <script type="module">
+        import '../packages/core/dist/index.js'
         // Generate large dataset
         const firstNames = ['James', 'Mary', 'John', 'Patricia', 'Robert', 'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth']
         const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez']
@@ -283,19 +319,22 @@
     <section class="demo-section">
       <h2 class="f4 fw6 mb3">Export Features</h2>
       <p class="lh-copy mb3">
-        Export grid data to CSV or Excel formats. Exports respect current filter and sort state.
+        Export grid data to CSV format. Exports respect current filter and sort state.
+      </p>
+      <p class="lh-copy mb3">
+        <strong>Note:</strong> The export buttons below are not part of the DataGrid component—they're
+        <code>&lt;ytz-button&gt;</code> elements that call the grid's <code>downloadCSV()</code> method.
+        You provide the UI (button, icon, menu item, etc.) and style it however you like. The grid
+        just exposes the export behavior.
       </p>
 
       <div class="grid-toolbar">
-        <button onclick="document.getElementById('export-grid').downloadCSV('employees.csv')">
+        <ytz-button onclick="document.getElementById('export-grid').downloadCSV('employees.csv')">
           Export CSV
-        </button>
-        <button onclick="document.getElementById('export-grid').downloadExcel('employees.xls')">
-          Export Excel
-        </button>
-        <button onclick="alert(document.getElementById('export-grid').exportCSV())">
+        </ytz-button>
+        <ytz-button onclick="alert(document.getElementById('export-grid').exportCSV())">
           Preview CSV
-        </button>
+        </ytz-button>
       </div>
 
       <ytz-datagrid id="export-grid" class="grid-compact">
@@ -305,7 +344,8 @@
         <ytz-datagrid-column field="startDate" header="Start Date" sortable></ytz-datagrid-column>
       </ytz-datagrid>
 
-      <script>
+      <script type="module">
+        import '../packages/core/dist/index.js'
         document.getElementById('export-grid').data = [
           { name: 'Alice Johnson', title: 'Senior Engineer', department: 'Engineering', startDate: '2020-03-15' },
           { name: 'Bob Smith', title: 'Product Designer', department: 'Design', startDate: '2019-07-22' },
@@ -318,14 +358,8 @@
       <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>// Download as CSV
 grid.downloadCSV('data.csv')
 
-// Download as Excel-compatible file
-grid.downloadExcel('data.xls')
-
 // Get CSV string (for custom processing)
-const csvString = grid.exportCSV()
-
-// Get Excel/TSV string
-const tsvString = grid.exportExcel()</code></pre>
+const csvString = grid.exportCSV()</code></pre>
     </section>
 
     <!-- Keyboard Navigation -->
@@ -369,7 +403,8 @@ const tsvString = grid.exportExcel()</code></pre>
       </ytz-datagrid>
       <p id="events-log" class="f6 gray mt2">Click a row or press Enter...</p>
 
-      <script>
+      <script type="module">
+        import '../packages/core/dist/index.js'
         const eventsGrid = document.getElementById('events-grid')
         eventsGrid.data = [
           { name: 'Task A', status: 'Complete' },
