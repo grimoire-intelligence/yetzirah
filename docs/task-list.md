@@ -14,7 +14,7 @@
 ---
 pr_id: PR-061
 title: Archive Tier 2 Core Task List
-cold_state: pending
+cold_state: completed
 priority: high
 complexity:
   score: 1
