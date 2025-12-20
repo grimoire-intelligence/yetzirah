@@ -231,6 +231,37 @@
               <td><code>&lt;Collapse&gt;</code></td>
               <td><code>&lt;ytz-disclosure&gt;</code></td>
               <td>Standalone expandable section</td>
+            <tr><td colspan="3" class="fw6 bg-near-white">Tier 2 Components</td></tr>
+            <tr>
+              <td><code>&lt;Switch&gt;</code></td>
+              <td><code>&lt;ytz-toggle&gt;</code></td>
+              <td>Checkbox semantics with switch appearance</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Chip&gt;</code></td>
+              <td><code>&lt;ytz-chip&gt;</code></td>
+              <td><code>deletable</code> attribute, <code>delete</code> event</td>
+            </tr>
+            <tr>
+              <td><code>&lt;IconButton&gt;</code></td>
+              <td><code>&lt;ytz-icon-button&gt;</code></td>
+              <td>Requires <code>aria-label</code>, optional tooltip</td>
+            </tr>
+            <tr>
+              <td><code>&lt;Slider&gt;</code></td>
+              <td><code>&lt;ytz-slider&gt;</code></td>
+              <td>Range mode with <code>range</code> attribute</td>
+            </tr>
+            <tr>
+              <td><code>&lt;DataGrid&gt;</code></td>
+              <td><code>&lt;ytz-datagrid&gt;</code></td>
+              <td>Virtual scroll, sorting, filtering, CSV export</td>
+            </tr>
+            <tr>
+              <td>Dark Mode Toggle</td>
+              <td><code>&lt;ytz-theme-toggle&gt;</code></td>
+              <td>Wraps toggle with theme switching + localStorage</td>
+            </tr>
             </tr>
           </tbody>
         </table>
@@ -927,6 +958,321 @@ const open = Boolean(anchorEl)
     </section>
 
     <!-- Common Patterns -->
+
+    <!-- Toggle/Switch -->
+    <section class="demo-section pv4" id="toggle">
+      <h2 class="f3 fw6 mb3">Toggle / Switch</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Switch
+  checked={checked}
+  onChange={(e) =&gt; setChecked(e.target.checked)}
+/&gt;
+
+&lt;FormControlLabel
+  control={&lt;Switch checked={checked} /&gt;}
+  label="Enable notifications"
+/&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Toggle
+  checked={checked}
+  onChange={setChecked}
+/&gt;
+
+&lt;label className="flex items-center"&gt;
+  &lt;Toggle checked={checked} onChange={setChecked} /&gt;
+  &lt;span className="ml2"&gt;Enable notifications&lt;/span&gt;
+&lt;/label&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> <code>onChange</code> receives boolean directly, not event.
+        No FormControlLabel needed—use standard HTML label.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>&lt;Switch&gt;</code></td><td><code>&lt;ytz-toggle&gt;</code></td></tr>
+          <tr><td><code>checked</code></td><td><code>checked</code> (same)</td></tr>
+          <tr><td><code>onChange={(e) =&gt; set(e.target.checked)}</code></td><td><code>onChange={set}</code></td></tr>
+          <tr><td><code>disabled</code></td><td><code>disabled</code> (same)</td></tr>
+          <tr><td><code>&lt;FormControlLabel&gt;</code></td><td><code>&lt;label&gt;</code> with flexbox</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Chip -->
+    <section class="demo-section pv4" id="chip">
+      <h2 class="f3 fw6 mb3">Chip</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Chip label="Tag" /&gt;
+
+&lt;Chip
+  label="Deletable"
+  onDelete={handleDelete}
+/&gt;
+
+&lt;Chip
+  avatar={&lt;Avatar&gt;M&lt;/Avatar&gt;}
+  label="With Avatar"
+/&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Chip&gt;Tag&lt;/Chip&gt;
+
+&lt;Chip
+  deletable
+  onDelete={handleDelete}
+&gt;
+  Deletable
+&lt;/Chip&gt;
+
+&lt;Chip className="flex items-center"&gt;
+  &lt;span className="br-100 w1 h1 bg-blue mr1"&gt;M&lt;/span&gt;
+  With Avatar
+&lt;/Chip&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> Content is children, not <code>label</code> prop.
+        <code>deletable</code> attribute shows delete button. Keyboard support: Backspace/Delete.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>label="..."</code></td><td>Children content</td></tr>
+          <tr><td><code>onDelete</code></td><td><code>deletable</code> + <code>onDelete</code></td></tr>
+          <tr><td><code>avatar</code></td><td>Slotted content with CSS</td></tr>
+          <tr><td><code>variant="outlined"</code></td><td><code>class="ba b--gray"</code></td></tr>
+          <tr><td><code>size="small"</code></td><td><code>class="f7 ph2 pv1"</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- IconButton -->
+    <section class="demo-section pv4" id="iconbutton">
+      <h2 class="f3 fw6 mb3">IconButton</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;IconButton aria-label="delete"&gt;
+  &lt;DeleteIcon /&gt;
+&lt;/IconButton&gt;
+
+&lt;Tooltip title="Settings"&gt;
+  &lt;IconButton&gt;
+    &lt;SettingsIcon /&gt;
+  &lt;/IconButton&gt;
+&lt;/Tooltip&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;IconButton aria-label="delete"&gt;
+  &lt;DeleteIcon /&gt;
+&lt;/IconButton&gt;
+
+&lt;IconButton aria-label="Settings" tooltip&gt;
+  &lt;SettingsIcon /&gt;
+&lt;/IconButton&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> <code>aria-label</code> is required (warns in dev if missing).
+        <code>tooltip</code> attribute enables built-in tooltip showing the aria-label.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>aria-label</code></td><td><code>aria-label</code> (required)</td></tr>
+          <tr><td><code>&lt;Tooltip&gt;</code> wrapper</td><td><code>tooltip</code> attribute</td></tr>
+          <tr><td><code>size="small"</code></td><td><code>class="w1 h1"</code></td></tr>
+          <tr><td><code>color="primary"</code></td><td><code>class="blue"</code></td></tr>
+          <tr><td><code>disabled</code></td><td><code>disabled</code> (same)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Slider -->
+    <section class="demo-section pv4" id="slider">
+      <h2 class="f3 fw6 mb3">Slider</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Slider
+  value={value}
+  onChange={(e, v) =&gt; setValue(v)}
+  min={0}
+  max={100}
+  step={10}
+/&gt;
+
+&lt;Slider
+  value={[20, 80]}
+  onChange={(e, v) =&gt; setRange(v)}
+/&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;Slider
+  value={value}
+  onChange={setValue}
+  min={0}
+  max={100}
+  step={10}
+/&gt;
+
+&lt;Slider
+  range
+  value={[20, 80]}
+  onChange={setRange}
+/&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> <code>onChange</code> receives value directly.
+        Use <code>range</code> attribute for dual-thumb mode.
+        <code>onInput</code> for live updates, <code>onChange</code> for committed value.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>onChange={(e, v) =&gt; ...}</code></td><td><code>onChange={v =&gt; ...}</code></td></tr>
+          <tr><td><code>value={[20, 80]}</code> (array)</td><td><code>range value={[20, 80]}</code></td></tr>
+          <tr><td><code>valueLabelDisplay</code></td><td>CSS pseudo-elements or slot</td></tr>
+          <tr><td><code>marks</code></td><td>CSS styling for marks</td></tr>
+          <tr><td><code>orientation="vertical"</code></td><td><code>orientation="vertical"</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- DataGrid -->
+    <section class="demo-section pv4" id="datagrid">
+      <h2 class="f3 fw6 mb3">DataGrid</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>import { DataGrid } from '@mui/x-data-grid'
+
+&lt;DataGrid
+  rows={rows}
+  columns={columns}
+  pageSize={10}
+  sortModel={sortModel}
+  onSortModelChange={setSortModel}
+/&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;DataGrid
+  data={rows}
+  onSort={handleSort}
+  onFilter={handleFilter}
+&gt;
+  &lt;DataGridColumn field="name" header="Name" /&gt;
+  &lt;DataGridColumn field="email" header="Email" /&gt;
+&lt;/DataGrid&gt;</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> Columns defined as children, not prop.
+        Built-in virtual scrolling (10,000+ rows). Export to CSV via methods.
+        No pagination—virtual scroll handles large datasets.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>rows</code></td><td><code>data</code></td></tr>
+          <tr><td><code>columns</code> (array)</td><td><code>&lt;DataGridColumn&gt;</code> children</td></tr>
+          <tr><td><code>sortModel</code></td><td><code>onSort</code> callback</td></tr>
+          <tr><td><code>filterModel</code></td><td><code>onFilter</code> callback</td></tr>
+          <tr><td><code>pageSize</code></td><td>Virtual scroll (no pagination)</td></tr>
+          <tr><td>Pro: <code>exportCsv()</code></td><td><code>exportCSV()</code></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ThemeToggle -->
+    <section class="demo-section pv4" id="themetoggle">
+      <h2 class="f3 fw6 mb3">Theme Toggle (Dark Mode)</h2>
+
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header mui">MUI</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Custom implementation required
+const [mode, setMode] = useState('light')
+const theme = createTheme({ palette: { mode } })
+
+&lt;ThemeProvider theme={theme}&gt;
+  &lt;CssBaseline /&gt;
+  &lt;Switch
+    checked={mode === 'dark'}
+    onChange={() =&gt; setMode(m =&gt; m === 'light' ? 'dark' : 'light')}
+  /&gt;
+&lt;/ThemeProvider&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header ytz">Yetzirah</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>// Just add the component
+&lt;ThemeToggle /&gt;
+
+// Automatic:
+// - Reads prefers-color-scheme
+// - Persists to localStorage
+// - Sets data-theme on &lt;html&gt;
+// - Dispatches themechange event</code></pre>
+        </div>
+      </div>
+
+      <div class="key-diff">
+        <strong>Key Difference:</strong> Zero configuration. Just add <code>&lt;ytz-theme-toggle&gt;</code>.
+        Works with <code>@yetzirah/core/dark.css</code> for automatic dark mode.
+      </div>
+
+      <table class="quick-ref mt3">
+        <thead>
+          <tr><th>MUI</th><th>Yetzirah</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><code>ThemeProvider</code> + state</td><td><code>&lt;ytz-theme-toggle&gt;</code></td></tr>
+          <tr><td>Manual localStorage</td><td>Automatic persistence</td></tr>
+          <tr><td>Manual <code>prefers-color-scheme</code></td><td>Automatic detection</td></tr>
+          <tr><td>Custom CSS variables</td><td><code>@yetzirah/core/dark.css</code></td></tr>
+          <tr><td>Custom event</td><td><code>themechange</code> event</td></tr>
+        </tbody>
+      </table>
+    </section>
+
     <section class="demo-section pv4" id="patterns">
       <h2 class="f3 fw6 mb3">Common Patterns</h2>
 
