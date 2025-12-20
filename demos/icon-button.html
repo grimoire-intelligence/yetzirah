@@ -186,6 +186,12 @@
       <p class="lh-copy mb3">
         Control size via CSS classes on the wrapper.
       </p>
+      <p class="lh-copy mb3 f6 gray">
+        <strong>Note:</strong> Sizing with custom CSS is straightforward (target
+        <code>.ytz-icon-button-inner</code> and <code>svg</code>). Tachyons is less
+        convenient here since you'd need classes on both the element and the SVG,
+        and Tachyons' sizing scale lacks common icon button sizes like 40px.
+      </p>
 
       <div class="demo-row mb3">
         <ytz-icon-button aria-label="Small button" class="icon-button-small" tooltip>
@@ -297,7 +303,7 @@
             </tr>
             <tr class="bt b--light-gray">
               <td class="pa2 code">size="small"</td>
-              <td class="pa2 code">class="icon-button-small"</td>
+              <td class="pa2">CSS (see Sizes section)</td>
             </tr>
           </tbody>
         </table>

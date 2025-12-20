@@ -121,7 +121,9 @@ class YtzIconButton extends HTMLElement {
     this.#tooltipEl.setAttribute('role', 'tooltip')
 
     // Position tooltip below button
-    const rect = this.getBoundingClientRect()
+    // Use inner button for rect since parent may have display:contents
+    const button = this.querySelector('button.ytz-icon-button-inner')
+    const rect = (button || this).getBoundingClientRect()
     this.#tooltipEl.style.cssText = `
       position: fixed;
       left: ${rect.left + rect.width / 2}px;

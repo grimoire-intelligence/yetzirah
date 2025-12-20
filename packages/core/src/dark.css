@@ -197,3 +197,20 @@
 .ytz-shadow-3 { box-shadow: var(--ytz-shadow-3); }
 .ytz-shadow-4 { box-shadow: var(--ytz-shadow-4); }
 .ytz-shadow-5 { box-shadow: var(--ytz-shadow-5); }
+
+/* Theme-aware overrides for common utility classes */
+[data-theme="dark"] .bg-near-white,
+[data-theme="dark"] .bg-white {
+  background-color: var(--ytz-bg-surface) !important;
+  color: var(--ytz-text);
+}
+[data-theme="dark"] .bg-light-gray {
+  background-color: var(--ytz-bg-elevated) !important;
+  color: var(--ytz-text);
+}
+[data-theme="dark"] .b--light-gray {
+  border-color: var(--ytz-border) !important;
+}
+[data-theme="dark"] .gray {
+  color: var(--ytz-text-secondary) !important;
+}

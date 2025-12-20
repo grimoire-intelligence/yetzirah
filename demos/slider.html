@@ -87,6 +87,22 @@
       background: linear-gradient(to right, #ff6300 var(--slider-percent, 0%), #e0e0e0 var(--slider-percent, 0%));
     }
     .slider-warning .ytz-slider-thumb { background: #ff6300; }
+    /* Dynamic color - grades from green to yellow to orange to red */
+    .slider-dynamic .ytz-slider-track {
+      background: linear-gradient(to right,
+        #19a974 0%,
+        #ffcc00 40%,
+        #ff6300 70%,
+        #ff4136 100%
+      );
+    }
+    .slider-dynamic .ytz-slider-thumb {
+      background: color-mix(
+        in oklch,
+        #19a974 calc(100% - var(--slider-percent, 0%)),
+        #ff4136 var(--slider-percent, 0%)
+      );
+    }
   </style>
 </head>
 <body class="sans-serif pa4 mw8 center">
@@ -257,6 +273,46 @@
 }
 .slider-success .ytz-slider-thumb {
   background: #19a974;
+}</code></pre>
+    </section>
+
+    <!-- Dynamic Color -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Dynamic Color</h2>
+      <p class="lh-copy mb3">
+        Use CSS to grade the slider color based on value. The <code>--slider-percent</code>
+        custom property updates live as the slider moves.
+      </p>
+
+      <div class="demo-row mb3">
+        <label class="f6 w4">Intensity:</label>
+        <ytz-slider id="dynamic-slider" class="slider-dynamic" min="0" max="100" value="25"></ytz-slider>
+        <span id="dynamic-value" class="f5">25%</span>
+      </div>
+
+      <script>
+        document.getElementById('dynamic-slider').addEventListener('change', (e) => {
+          document.getElementById('dynamic-value').textContent = e.detail.value + '%'
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Track shows full gradient */
+.slider-dynamic .ytz-slider-track {
+  background: linear-gradient(to right,
+    #19a974 0%,    /* green */
+    #ffcc00 40%,   /* yellow */
+    #ff6300 70%,   /* orange */
+    #ff4136 100%   /* red */
+  );
+}
+
+/* Thumb color interpolates based on position */
+.slider-dynamic .ytz-slider-thumb {
+  background: color-mix(
+    in oklch,
+    #19a974 calc(100% - var(--slider-percent)),
+    #ff4136 var(--slider-percent)
+  );
 }</code></pre>
     </section>
 
