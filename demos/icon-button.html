@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IconButton - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    /* Icon button styling */
+    ytz-icon-button {
+      display: contents;
+    }
+    ytz-icon-button .ytz-icon-button-inner {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      transition: background 0.15s ease;
+    }
+    ytz-icon-button .ytz-icon-button-inner:hover {
+      background: rgba(0,0,0,0.08);
+    }
+    ytz-icon-button .ytz-icon-button-inner:active {
+      background: rgba(0,0,0,0.12);
+    }
+    ytz-icon-button .ytz-icon-button-inner:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    ytz-icon-button .ytz-icon-button-inner:disabled:hover {
+      background: transparent;
+    }
+    ytz-icon-button svg {
+      width: 24px;
+      height: 24px;
+    }
+    /* Tooltip styling */
+    .ytz-icon-button-tooltip {
+      padding: 0.25rem 0.5rem;
+      background: #333;
+      color: white;
+      font-size: 0.75rem;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    /* Size variants */
+    .icon-button-small .ytz-icon-button-inner {
+      width: 32px;
+      height: 32px;
+    }
+    .icon-button-small svg {
+      width: 18px;
+      height: 18px;
+    }
+    .icon-button-large .ytz-icon-button-inner {
+      width: 48px;
+      height: 48px;
+    }
+    .icon-button-large svg {
+      width: 28px;
+      height: 28px;
+    }
+    /* Color variants */
+    .icon-button-primary .ytz-icon-button-inner { color: #357edd; }
+    .icon-button-error .ytz-icon-button-inner { color: #ff4136; }
+    .icon-button-success .ytz-icon-button-inner { color: #19a974; }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">IconButton</h1>
+    <p class="f5 lh-copy gray mt0">
+      Icon-only button requiring <code>aria-label</code> for accessibility.
+      Includes optional built-in tooltip support.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Always provide an <code>aria-label</code> for screen readers.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-icon-button aria-label="Search" onclick="alert('Search clicked')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Settings" onclick="alert('Settings clicked')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Close" onclick="alert('Close clicked')">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </ytz-icon-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-icon-button aria-label="Search" onclick="handleSearch()"&gt;
+  &lt;svg&gt;...&lt;/svg&gt;
+&lt;/ytz-icon-button&gt;</code></pre>
+    </section>
+
+    <!-- With Tooltip -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">With Tooltip</h2>
+      <p class="lh-copy mb3">
+        Add the <code>tooltip</code> attribute to show a tooltip on hover/focus
+        using the <code>aria-label</code> text.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-icon-button aria-label="Edit" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Delete" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Download" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+          </svg>
+        </ytz-icon-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-icon-button aria-label="Edit" tooltip&gt;
+  &lt;svg&gt;...&lt;/svg&gt;
+&lt;/ytz-icon-button&gt;</code></pre>
+    </section>
+
+    <!-- Disabled State -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Disabled State</h2>
+      <p class="lh-copy mb3">
+        Disabled icon buttons are non-interactive.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-icon-button aria-label="Save" disabled>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-3m-1 4l-3 3m0 0l-3-3m3 3V4" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Print" disabled tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+          </svg>
+        </ytz-icon-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-icon-button aria-label="Save" disabled&gt;
+  &lt;svg&gt;...&lt;/svg&gt;
+&lt;/ytz-icon-button&gt;</code></pre>
+    </section>
+
+    <!-- Sizes -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Sizes</h2>
+      <p class="lh-copy mb3">
+        Control size via CSS classes on the wrapper.
+      </p>
+      <p class="lh-copy mb3 f6 gray">
+        <strong>Note:</strong> Sizing with custom CSS is straightforward (target
+        <code>.ytz-icon-button-inner</code> and <code>svg</code>). Tachyons is less
+        convenient here since you'd need classes on both the element and the SVG,
+        and Tachyons' sizing scale lacks common icon button sizes like 40px.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-icon-button aria-label="Small button" class="icon-button-small" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Medium button (default)" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Large button" class="icon-button-large" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </ytz-icon-button>
+      </div>
+
+      <table class="f6 w-100 collapse ba b--light-gray mb3">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Size</th>
+            <th class="pa2 tl">CSS Class</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Small (32px)</td><td class="pa2 code">icon-button-small</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Medium (40px)</td><td class="pa2 code">(default)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Large (48px)</td><td class="pa2 code">icon-button-large</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Colors -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Colors</h2>
+      <p class="lh-copy mb3">
+        Apply color classes to customize the icon color.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-icon-button aria-label="Primary action" class="icon-button-primary" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Success action" class="icon-button-success" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+          </svg>
+        </ytz-icon-button>
+
+        <ytz-icon-button aria-label="Delete action" class="icon-button-error" tooltip>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+          </svg>
+        </ytz-icon-button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>.icon-button-primary .ytz-icon-button-inner { color: #357edd; }
+.icon-button-success .ytz-icon-button-inner { color: #19a974; }
+.icon-button-error .ytz-icon-button-inner { color: #ff4136; }</code></pre>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        <strong>Important:</strong> Always provide <code>aria-label</code> since there's no visible text.
+        A console warning appears if the label is missing.
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li><code>aria-label</code> on inner button for screen readers</li>
+        <li>Tooltip uses <code>role="tooltip"</code></li>
+        <li>Focus-visible styles for keyboard navigation</li>
+        <li>Console warning if aria-label is missing</li>
+      </ul>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;IconButton&gt;&lt;Icon /&gt;&lt;/IconButton&gt;</td>
+              <td class="pa2 code">&lt;ytz-icon-button aria-label="..."&gt;&lt;svg&gt;...&lt;/svg&gt;&lt;/ytz-icon-button&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;IconButton disabled&gt;</td>
+              <td class="pa2 code">&lt;ytz-icon-button disabled&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Tooltip title="..."&gt;&lt;IconButton&gt;</td>
+              <td class="pa2 code">&lt;ytz-icon-button tooltip&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">size="small"</td>
+              <td class="pa2">CSS (see Sizes section)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { IconButton } from '@yetzirah/react'
+import { SearchIcon, SettingsIcon } from './icons'
+
+function Toolbar() {
+  return (
+    &lt;div&gt;
+      &lt;IconButton aria-label="Search" onClick={handleSearch}&gt;
+        &lt;SearchIcon /&gt;
+      &lt;/IconButton&gt;
+
+      &lt;IconButton aria-label="Settings" tooltip&gt;
+        &lt;SettingsIcon /&gt;
+      &lt;/IconButton&gt;
+
+      &lt;IconButton aria-label="Disabled" disabled&gt;
+        &lt;SettingsIcon /&gt;
+      &lt;/IconButton&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

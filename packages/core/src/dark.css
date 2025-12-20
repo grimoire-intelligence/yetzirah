@@ -1,0 +1,216 @@
+/**
+ * Yetzirah Dark Theme
+ *
+ * Override stylesheet using CSS custom properties.
+ * Applies when [data-theme="dark"] is set on any ancestor element.
+ * Respects prefers-color-scheme: dark by default.
+ *
+ * Usage:
+ * 1. Import: @import '@yetzirah/core/dark.css';
+ * 2. Toggle manually: document.documentElement.dataset.theme = 'dark';
+ *
+ * @module @yetzirah/core/dark
+ */
+
+/* System preference detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    /* Background colors */
+    --ytz-bg: #121212;
+    --ytz-bg-surface: #1e1e1e;
+    --ytz-bg-elevated: #2d2d2d;
+    --ytz-bg-hover: #3d3d3d;
+    --ytz-bg-active: #4d4d4d;
+
+    /* Text colors */
+    --ytz-text: #e0e0e0;
+    --ytz-text-secondary: #a0a0a0;
+    --ytz-text-disabled: #666666;
+    --ytz-text-inverse: #121212;
+
+    /* Border colors */
+    --ytz-border: #404040;
+    --ytz-border-subtle: #2d2d2d;
+    --ytz-border-focus: #6b9fff;
+
+    /* Primary colors */
+    --ytz-primary: #6b9fff;
+    --ytz-primary-hover: #85b0ff;
+    --ytz-primary-active: #4d85ff;
+    --ytz-primary-text: #121212;
+
+    /* Secondary colors */
+    --ytz-secondary: #bb86fc;
+    --ytz-secondary-hover: #c9a0fc;
+    --ytz-secondary-active: #a66ff7;
+
+    /* Status colors */
+    --ytz-success: #66bb6a;
+    --ytz-success-bg: #1b3d1c;
+    --ytz-warning: #ffa726;
+    --ytz-warning-bg: #3d2e1b;
+    --ytz-error: #ef5350;
+    --ytz-error-bg: #3d1b1b;
+    --ytz-info: #42a5f5;
+    --ytz-info-bg: #1b2d3d;
+
+    /* Shadow (darker, more subtle) */
+    --ytz-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4);
+    --ytz-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.5);
+    --ytz-shadow-3: 0 6px 12px rgba(0, 0, 0, 0.6);
+    --ytz-shadow-4: 0 10px 20px rgba(0, 0, 0, 0.7);
+    --ytz-shadow-5: 0 15px 30px rgba(0, 0, 0, 0.8);
+
+    /* Focus ring */
+    --ytz-focus-ring: 0 0 0 2px var(--ytz-border-focus);
+
+    /* Tachyons color overrides for dark mode */
+    /* These remap common Tachyons color classes */
+
+    /* Background remappings */
+    color-scheme: dark;
+  }
+}
+
+/* Explicit dark theme via data attribute */
+[data-theme="dark"] {
+  /* Background colors */
+  --ytz-bg: #121212;
+  --ytz-bg-surface: #1e1e1e;
+  --ytz-bg-elevated: #2d2d2d;
+  --ytz-bg-hover: #3d3d3d;
+  --ytz-bg-active: #4d4d4d;
+
+  /* Text colors */
+  --ytz-text: #e0e0e0;
+  --ytz-text-secondary: #a0a0a0;
+  --ytz-text-disabled: #666666;
+  --ytz-text-inverse: #121212;
+
+  /* Border colors */
+  --ytz-border: #404040;
+  --ytz-border-subtle: #2d2d2d;
+  --ytz-border-focus: #6b9fff;
+
+  /* Primary colors */
+  --ytz-primary: #6b9fff;
+  --ytz-primary-hover: #85b0ff;
+  --ytz-primary-active: #4d85ff;
+  --ytz-primary-text: #121212;
+
+  /* Secondary colors */
+  --ytz-secondary: #bb86fc;
+  --ytz-secondary-hover: #c9a0fc;
+  --ytz-secondary-active: #a66ff7;
+
+  /* Status colors */
+  --ytz-success: #66bb6a;
+  --ytz-success-bg: #1b3d1c;
+  --ytz-warning: #ffa726;
+  --ytz-warning-bg: #3d2e1b;
+  --ytz-error: #ef5350;
+  --ytz-error-bg: #3d1b1b;
+  --ytz-info: #42a5f5;
+  --ytz-info-bg: #1b2d3d;
+
+  /* Shadow (darker, more subtle) */
+  --ytz-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.4);
+  --ytz-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.5);
+  --ytz-shadow-3: 0 6px 12px rgba(0, 0, 0, 0.6);
+  --ytz-shadow-4: 0 10px 20px rgba(0, 0, 0, 0.7);
+  --ytz-shadow-5: 0 15px 30px rgba(0, 0, 0, 0.8);
+
+  /* Focus ring */
+  --ytz-focus-ring: 0 0 0 2px var(--ytz-border-focus);
+
+  color-scheme: dark;
+}
+
+/* Light theme default values (for reference and explicit light mode) */
+:root,
+[data-theme="light"] {
+  /* Background colors */
+  --ytz-bg: #ffffff;
+  --ytz-bg-surface: #f5f5f5;
+  --ytz-bg-elevated: #ffffff;
+  --ytz-bg-hover: #eeeeee;
+  --ytz-bg-active: #e0e0e0;
+
+  /* Text colors */
+  --ytz-text: #212121;
+  --ytz-text-secondary: #666666;
+  --ytz-text-disabled: #9e9e9e;
+  --ytz-text-inverse: #ffffff;
+
+  /* Border colors */
+  --ytz-border: #e0e0e0;
+  --ytz-border-subtle: #f0f0f0;
+  --ytz-border-focus: #1976d2;
+
+  /* Primary colors */
+  --ytz-primary: #1976d2;
+  --ytz-primary-hover: #1565c0;
+  --ytz-primary-active: #0d47a1;
+  --ytz-primary-text: #ffffff;
+
+  /* Secondary colors */
+  --ytz-secondary: #9c27b0;
+  --ytz-secondary-hover: #7b1fa2;
+  --ytz-secondary-active: #6a1b9a;
+
+  /* Status colors */
+  --ytz-success: #2e7d32;
+  --ytz-success-bg: #e8f5e9;
+  --ytz-warning: #f57c00;
+  --ytz-warning-bg: #fff3e0;
+  --ytz-error: #c62828;
+  --ytz-error-bg: #ffebee;
+  --ytz-info: #0288d1;
+  --ytz-info-bg: #e1f5fe;
+
+  /* Shadow */
+  --ytz-shadow-1: 0 1px 3px rgba(0, 0, 0, 0.12);
+  --ytz-shadow-2: 0 3px 6px rgba(0, 0, 0, 0.16);
+  --ytz-shadow-3: 0 6px 12px rgba(0, 0, 0, 0.18);
+  --ytz-shadow-4: 0 10px 20px rgba(0, 0, 0, 0.2);
+  --ytz-shadow-5: 0 15px 30px rgba(0, 0, 0, 0.22);
+
+  /* Focus ring */
+  --ytz-focus-ring: 0 0 0 2px var(--ytz-border-focus);
+
+  color-scheme: light;
+}
+
+/* Utility classes that use the theme variables */
+.ytz-bg { background-color: var(--ytz-bg); }
+.ytz-bg-surface { background-color: var(--ytz-bg-surface); }
+.ytz-bg-elevated { background-color: var(--ytz-bg-elevated); }
+.ytz-text { color: var(--ytz-text); }
+.ytz-text-secondary { color: var(--ytz-text-secondary); }
+.ytz-border { border-color: var(--ytz-border); }
+.ytz-primary { color: var(--ytz-primary); }
+.ytz-bg-primary { background-color: var(--ytz-primary); color: var(--ytz-primary-text); }
+.ytz-secondary { color: var(--ytz-secondary); }
+.ytz-bg-secondary { background-color: var(--ytz-secondary); }
+.ytz-shadow-1 { box-shadow: var(--ytz-shadow-1); }
+.ytz-shadow-2 { box-shadow: var(--ytz-shadow-2); }
+.ytz-shadow-3 { box-shadow: var(--ytz-shadow-3); }
+.ytz-shadow-4 { box-shadow: var(--ytz-shadow-4); }
+.ytz-shadow-5 { box-shadow: var(--ytz-shadow-5); }
+
+/* Theme-aware overrides for common utility classes */
+[data-theme="dark"] .bg-near-white,
+[data-theme="dark"] .bg-white {
+  background-color: var(--ytz-bg-surface) !important;
+  color: var(--ytz-text);
+}
+[data-theme="dark"] .bg-light-gray {
+  background-color: var(--ytz-bg-elevated) !important;
+  color: var(--ytz-text);
+}
+[data-theme="dark"] .b--light-gray {
+  border-color: var(--ytz-border) !important;
+}
+[data-theme="dark"] .gray {
+  color: var(--ytz-text-secondary) !important;
+}

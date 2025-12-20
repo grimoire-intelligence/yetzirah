@@ -75,12 +75,39 @@
       "import": "./dist/popover.js",
       "require": "./dist/popover.cjs"
     },
+    "./toggle": {
+      "types": "./dist/toggle.d.ts",
+      "import": "./dist/toggle.js",
+      "require": "./dist/toggle.cjs"
+    },
+    "./chip": {
+      "types": "./dist/chip.d.ts",
+      "import": "./dist/chip.js",
+      "require": "./dist/chip.cjs"
+    },
+    "./icon-button": {
+      "types": "./dist/icon-button.d.ts",
+      "import": "./dist/icon-button.js",
+      "require": "./dist/icon-button.cjs"
+    },
+    "./slider": {
+      "types": "./dist/slider.d.ts",
+      "import": "./dist/slider.js",
+      "require": "./dist/slider.cjs"
+    },
+    "./datagrid": {
+      "types": "./dist/datagrid.d.ts",
+      "import": "./dist/datagrid.js",
+      "require": "./dist/datagrid.cjs"
+    },
+    "./dark.css": "./src/dark.css",
     "./button.css": "./button.css",
     "./disclosure.css": "./disclosure.css",
     "./dialog.css": "./dialog.css"
   },
   "files": [
     "dist",
+    "src/dark.css",
     "*.css"
   ],
   "scripts": {

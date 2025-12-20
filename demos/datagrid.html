@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DataGrid - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-section { margin-bottom: 3rem; }
+
+    /* DataGrid styling */
+    ytz-datagrid {
+      display: block;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .ytz-datagrid-header {
+      display: flex;
+      background: #f5f5f5;
+      border-bottom: 2px solid #e0e0e0;
+      font-weight: 600;
+    }
+
+    .ytz-datagrid-header-cell {
+      padding: 0.75rem 1rem;
+      flex: 1;
+      min-width: 100px;
+      border-right: 1px solid #e0e0e0;
+      position: relative;
+    }
+
+    .ytz-datagrid-header-cell:last-child {
+      border-right: none;
+    }
+
+    .ytz-datagrid-header-content {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      padding-right: 8px;
+    }
+
+    .ytz-datagrid-resize-handle {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 6px;
+      height: 100%;
+      cursor: col-resize;
+      background: transparent;
+    }
+
+    .ytz-datagrid-resize-handle:hover {
+      background: #357edd;
+    }
+
+    .ytz-datagrid-resizing {
+      user-select: none;
+      cursor: col-resize;
+    }
+
+    .ytz-datagrid-resizing .ytz-datagrid-resize-handle {
+      background: #357edd;
+    }
+
+    .ytz-datagrid-sortable {
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .ytz-datagrid-sortable:hover {
+      background: #eee;
+    }
+
+    .ytz-datagrid-sort-indicator {
+      margin-left: 0.25rem;
+      color: #357edd;
+    }
+
+    .ytz-datagrid-filter {
+      display: block;
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 0.25rem 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 0.8rem;
+    }
+
+    .ytz-datagrid-viewport {
+      height: 400px;
+      overflow-y: auto;
+    }
+
+    .ytz-datagrid-body {
+      position: relative;
+    }
+
+    .ytz-datagrid-row {
+      display: flex;
+      border-bottom: 1px solid #e0e0e0;
+    }
+
+    .ytz-datagrid-row:hover {
+      background: #f8f8f8;
+    }
+
+    .ytz-datagrid-row-focused {
+      background: #e3f2fd !important;
+    }
+
+    .ytz-datagrid-cell {
+      padding: 0.75rem 1rem;
+      flex: 1;
+      min-width: 100px;
+      border-right: 1px solid #e0e0e0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .ytz-datagrid-cell:last-child {
+      border-right: none;
+    }
+
+    .ytz-datagrid-cell-focused {
+      outline: 2px solid #357edd;
+      outline-offset: -2px;
+    }
+
+    /* Smaller grid */
+    .grid-compact .ytz-datagrid-header-cell,
+    .grid-compact .ytz-datagrid-cell {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.875rem;
+    }
+
+    .grid-compact .ytz-datagrid-viewport {
+      height: 300px;
+    }
+
+    /* Toolbar */
+    .grid-toolbar {
+      display: flex;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .grid-toolbar button {
+      padding: 0.5rem 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+    }
+
+    .grid-toolbar button:hover {
+      background: #f5f5f5;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw9 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">DataGrid</h1>
+    <p class="f5 lh-copy gray mt0">
+      High-performance data grid with virtual scrolling, sorting, filtering,
+      keyboard navigation, and export capabilities.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Define columns with <code>&lt;ytz-datagrid-column&gt;</code> elements,
+        then set data via JavaScript.
+      </p>
+
+      <ytz-datagrid id="basic-grid">
+        <ytz-datagrid-column field="name" header="Name"></ytz-datagrid-column>
+        <ytz-datagrid-column field="email" header="Email"></ytz-datagrid-column>
+        <ytz-datagrid-column field="role" header="Role"></ytz-datagrid-column>
+      </ytz-datagrid>
+
+      <script type="module">
+        import '../packages/core/dist/index.js'
+        const basicData = [
+          { name: 'Alice Johnson', email: 'alice@example.com', role: 'Engineer' },
+          { name: 'Bob Smith', email: 'bob@example.com', role: 'Designer' },
+          { name: 'Carol White', email: 'carol@example.com', role: 'Manager' },
+          { name: 'David Brown', email: 'david@example.com', role: 'Engineer' },
+          { name: 'Eve Davis', email: 'eve@example.com', role: 'Designer' }
+        ]
+        document.getElementById('basic-grid').data = basicData
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-datagrid id="grid"&gt;
+  &lt;ytz-datagrid-column field="name" header="Name"&gt;&lt;/ytz-datagrid-column&gt;
+  &lt;ytz-datagrid-column field="email" header="Email"&gt;&lt;/ytz-datagrid-column&gt;
+&lt;/ytz-datagrid&gt;
+
+&lt;script&gt;
+  document.getElementById('grid').data = [
+    { name: 'Alice', email: 'alice@example.com' },
+    { name: 'Bob', email: 'bob@example.com' }
+  ]
+&lt;/script&gt;</code></pre>
+    </section>
+
+    <!-- Sorting -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Sorting</h2>
+      <p class="lh-copy mb3">
+        Add the <code>sortable</code> attribute to enable column sorting.
+        Click a header to sort (ascending → descending → none).
+      </p>
+
+      <ytz-datagrid id="sort-grid">
+        <ytz-datagrid-column field="name" header="Name" sortable></ytz-datagrid-column>
+        <ytz-datagrid-column field="age" header="Age" sortable></ytz-datagrid-column>
+        <ytz-datagrid-column field="city" header="City" sortable></ytz-datagrid-column>
+      </ytz-datagrid>
+
+      <script type="module">
+        import '../packages/core/dist/index.js'
+        document.getElementById('sort-grid').data = [
+          { name: 'Alice', age: 28, city: 'New York' },
+          { name: 'Bob', age: 35, city: 'Los Angeles' },
+          { name: 'Carol', age: 42, city: 'Chicago' },
+          { name: 'David', age: 31, city: 'Houston' },
+          { name: 'Eve', age: 26, city: 'Phoenix' }
+        ]
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-datagrid-column field="name" header="Name" sortable&gt;&lt;/ytz-datagrid-column&gt;</code></pre>
+    </section>
+
+    <!-- Filtering -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Filtering</h2>
+      <p class="lh-copy mb3">
+        Add the <code>filterable</code> attribute to show filter inputs in column headers.
+      </p>
+
+      <ytz-datagrid id="filter-grid" class="grid-compact">
+        <ytz-datagrid-column field="product" header="Product" filterable sortable></ytz-datagrid-column>
+        <ytz-datagrid-column field="category" header="Category" filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="price" header="Price" sortable></ytz-datagrid-column>
+        <ytz-datagrid-column field="stock" header="Stock" sortable></ytz-datagrid-column>
+      </ytz-datagrid>
+
+      <script type="module">
+        import '../packages/core/dist/index.js'
+        document.getElementById('filter-grid').data = [
+          { product: 'Laptop Pro', category: 'Electronics', price: '$1,299', stock: 45 },
+          { product: 'Wireless Mouse', category: 'Electronics', price: '$49', stock: 230 },
+          { product: 'Office Chair', category: 'Furniture', price: '$299', stock: 18 },
+          { product: 'Standing Desk', category: 'Furniture', price: '$599', stock: 12 },
+          { product: 'Monitor 27"', category: 'Electronics', price: '$349', stock: 67 },
+          { product: 'Keyboard RGB', category: 'Electronics', price: '$129', stock: 156 },
+          { product: 'Desk Lamp', category: 'Furniture', price: '$79', stock: 89 },
+          { product: 'Webcam HD', category: 'Electronics', price: '$89', stock: 203 }
+        ]
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-datagrid-column field="product" header="Product" filterable&gt;&lt;/ytz-datagrid-column&gt;</code></pre>
+    </section>
+
+    <!-- Large Dataset with Virtual Scrolling -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Large Dataset (Virtual Scrolling)</h2>
+      <p class="lh-copy mb3">
+        The grid efficiently handles large datasets using virtual scrolling.
+        Only visible rows are rendered in the DOM.
+      </p>
+
+      <p class="f6 gray mb2" id="large-grid-info">Loading 10,000 rows...</p>
+
+      <ytz-datagrid id="large-grid" row-height="40">
+        <ytz-datagrid-column field="id" header="ID" sortable width="80px"></ytz-datagrid-column>
+        <ytz-datagrid-column field="firstName" header="First Name" sortable filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="lastName" header="Last Name" sortable filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="email" header="Email" filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="department" header="Department" sortable filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="salary" header="Salary" sortable></ytz-datagrid-column>
+      </ytz-datagrid>
+
+      <script type="module">
+        import '../packages/core/dist/index.js'
+        // Generate large dataset
+        const firstNames = ['James', 'Mary', 'John', 'Patricia', 'Robert', 'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth']
+        const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez']
+        const departments = ['Engineering', 'Sales', 'Marketing', 'HR', 'Finance', 'Operations', 'Legal', 'Support']
+
+        const largeData = Array.from({ length: 10000 }, (_, i) => ({
+          id: i + 1,
+          firstName: firstNames[Math.floor(Math.random() * firstNames.length)],
+          lastName: lastNames[Math.floor(Math.random() * lastNames.length)],
+          email: `user${i + 1}@company.com`,
+          department: departments[Math.floor(Math.random() * departments.length)],
+          salary: '$' + (50000 + Math.floor(Math.random() * 100000)).toLocaleString()
+        }))
+
+        const largeGrid = document.getElementById('large-grid')
+        largeGrid.data = largeData
+        document.getElementById('large-grid-info').textContent = '10,000 rows loaded (virtual scrolling active)'
+      </script>
+    </section>
+
+    <!-- Export Features -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Export Features</h2>
+      <p class="lh-copy mb3">
+        Export grid data to CSV format. Exports respect current filter and sort state.
+      </p>
+      <p class="lh-copy mb3">
+        <strong>Note:</strong> The export buttons below are not part of the DataGrid component—they're
+        <code>&lt;ytz-button&gt;</code> elements that call the grid's <code>downloadCSV()</code> method.
+        You provide the UI (button, icon, menu item, etc.) and style it however you like. The grid
+        just exposes the export behavior.
+      </p>
+
+      <div class="grid-toolbar">
+        <ytz-button onclick="document.getElementById('export-grid').downloadCSV('employees.csv')">
+          Export CSV
+        </ytz-button>
+        <ytz-button onclick="alert(document.getElementById('export-grid').exportCSV())">
+          Preview CSV
+        </ytz-button>
+      </div>
+
+      <ytz-datagrid id="export-grid" class="grid-compact">
+        <ytz-datagrid-column field="name" header="Name" sortable filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="title" header="Title" filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="department" header="Department" sortable filterable></ytz-datagrid-column>
+        <ytz-datagrid-column field="startDate" header="Start Date" sortable></ytz-datagrid-column>
+      </ytz-datagrid>
+
+      <script type="module">
+        import '../packages/core/dist/index.js'
+        document.getElementById('export-grid').data = [
+          { name: 'Alice Johnson', title: 'Senior Engineer', department: 'Engineering', startDate: '2020-03-15' },
+          { name: 'Bob Smith', title: 'Product Designer', department: 'Design', startDate: '2019-07-22' },
+          { name: 'Carol White', title: 'Engineering Manager', department: 'Engineering', startDate: '2018-01-10' },
+          { name: 'David Brown', title: 'Sales Lead', department: 'Sales', startDate: '2021-05-01' },
+          { name: 'Eve Davis', title: 'Marketing Specialist', department: 'Marketing', startDate: '2022-02-14' }
+        ]
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>// Download as CSV
+grid.downloadCSV('data.csv')
+
+// Get CSV string (for custom processing)
+const csvString = grid.exportCSV()</code></pre>
+    </section>
+
+    <!-- Keyboard Navigation -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Keyboard Navigation</h2>
+      <p class="lh-copy mb3">
+        Full keyboard support for accessible data browsing.
+      </p>
+
+      <table class="f6 w-100 collapse ba b--light-gray mb3">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Arrow Down</td><td class="pa2">Move to next row</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Arrow Up</td><td class="pa2">Move to previous row</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Arrow Right</td><td class="pa2">Move to next cell</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Arrow Left</td><td class="pa2">Move to previous cell</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Page Down</td><td class="pa2">Move 10 rows down</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Page Up</td><td class="pa2">Move 10 rows up</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Home</td><td class="pa2">Go to first cell (Ctrl+Home: first row)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">End</td><td class="pa2">Go to last cell (Ctrl+End: last row)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Enter</td><td class="pa2">Activate row (fires rowactivate event)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Events -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Events</h2>
+      <p class="lh-copy mb3">
+        The grid dispatches events for row selection, activation, and sorting.
+      </p>
+
+      <ytz-datagrid id="events-grid" class="grid-compact">
+        <ytz-datagrid-column field="name" header="Name" sortable></ytz-datagrid-column>
+        <ytz-datagrid-column field="status" header="Status"></ytz-datagrid-column>
+      </ytz-datagrid>
+      <p id="events-log" class="f6 gray mt2">Click a row or press Enter...</p>
+
+      <script type="module">
+        import '../packages/core/dist/index.js'
+        const eventsGrid = document.getElementById('events-grid')
+        eventsGrid.data = [
+          { name: 'Task A', status: 'Complete' },
+          { name: 'Task B', status: 'In Progress' },
+          { name: 'Task C', status: 'Pending' }
+        ]
+
+        eventsGrid.addEventListener('rowselect', (e) => {
+          document.getElementById('events-log').textContent =
+            `Selected: ${e.detail.row.name} (row ${e.detail.index})`
+        })
+
+        eventsGrid.addEventListener('rowactivate', (e) => {
+          document.getElementById('events-log').textContent =
+            `Activated: ${e.detail.row.name}`
+        })
+
+        eventsGrid.addEventListener('sort', (e) => {
+          if (e.detail.field) {
+            document.getElementById('events-log').textContent =
+              `Sorted by: ${e.detail.field} (${e.detail.direction})`
+          } else {
+            document.getElementById('events-log').textContent = 'Sort cleared'
+          }
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>grid.addEventListener('rowselect', (e) => {
+  console.log('Selected:', e.detail.row, 'at index', e.detail.index)
+})
+
+grid.addEventListener('rowactivate', (e) => {
+  console.log('Activated:', e.detail.row)
+})
+
+grid.addEventListener('sort', (e) => {
+  console.log('Sort:', e.detail.field, e.detail.direction)
+})</code></pre>
+    </section>
+
+    <!-- Column Configuration -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Column Configuration</h2>
+      <p class="lh-copy mb3">
+        Configure columns with various attributes.
+      </p>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Attribute</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2 code">field</td><td class="pa2">string</td><td class="pa2">Data property to display</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">header</td><td class="pa2">string</td><td class="pa2">Column header text (defaults to field)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">sortable</td><td class="pa2">boolean</td><td class="pa2">Enable sorting on this column</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">filterable</td><td class="pa2">boolean</td><td class="pa2">Show filter input in header</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">width</td><td class="pa2">string</td><td class="pa2">Column width (CSS value)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Grid Properties -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Grid Properties</h2>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Attribute/Property</th>
+            <th class="pa2 tl">Type</th>
+            <th class="pa2 tl">Description</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2 code">data</td><td class="pa2">Array</td><td class="pa2">Grid data (JS property only)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">row-height</td><td class="pa2">number</td><td class="pa2">Row height in pixels (default: 40)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">sortState</td><td class="pa2">Object</td><td class="pa2">Current sort state (read-only)</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2 code">filteredData</td><td class="pa2">Array</td><td class="pa2">Filtered/sorted data (read-only)</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">MUI DataGrid Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI DataGrid</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">rows={data}</td>
+              <td class="pa2 code">grid.data = data</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">columns={[{field, headerName}]}</td>
+              <td class="pa2 code">&lt;ytz-datagrid-column field header&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">sortable: true</td>
+              <td class="pa2 code">sortable attribute</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">filterModel</td>
+              <td class="pa2 code">filterable attribute (built-in)</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">onRowClick</td>
+              <td class="pa2 code">rowselect event</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">exportDataAsCsv()</td>
+              <td class="pa2 code">downloadCSV() / exportCSV()</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { DataGrid, DataGridColumn } from '@yetzirah/react'
+
+function EmployeeTable() {
+  const [employees, setEmployees] = useState([])
+
+  useEffect(() => {
+    fetch('/api/employees').then(r => r.json()).then(setEmployees)
+  }, [])
+
+  return (
+    &lt;DataGrid
+      data={employees}
+      rowHeight={40}
+      onRowSelect={(e) =&gt; console.log('Selected:', e.detail.row)}
+      onSort={(e) =&gt; console.log('Sorted:', e.detail)}
+    &gt;
+      &lt;DataGridColumn field="id" header="ID" width="80px" /&gt;
+      &lt;DataGridColumn field="name" header="Name" sortable filterable /&gt;
+      &lt;DataGridColumn field="email" header="Email" filterable /&gt;
+      &lt;DataGridColumn field="department" header="Department" sortable /&gt;
+    &lt;/DataGrid&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

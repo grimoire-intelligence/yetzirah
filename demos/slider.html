@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slider - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    /* Slider styling */
+    ytz-slider {
+      display: block;
+      position: relative;
+      height: 40px;
+      width: 200px;
+      cursor: pointer;
+    }
+    ytz-slider[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .ytz-slider-track {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, #357edd var(--slider-percent, 0%), #e0e0e0 var(--slider-percent, 0%));
+      border-radius: 2px;
+      transform: translateY(-50%);
+    }
+    .ytz-slider-thumb {
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: #357edd;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: box-shadow 0.15s ease;
+    }
+    ytz-slider:hover .ytz-slider-thumb {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    ytz-slider:focus {
+      outline: none;
+    }
+    ytz-slider:focus .ytz-slider-thumb {
+      box-shadow: 0 0 0 3px rgba(53, 126, 221, 0.3);
+    }
+    /* Size variants */
+    .slider-small {
+      height: 32px;
+      width: 150px;
+    }
+    .slider-small .ytz-slider-track {
+      height: 3px;
+    }
+    .slider-small .ytz-slider-thumb {
+      width: 16px;
+      height: 16px;
+    }
+    .slider-large {
+      height: 48px;
+      width: 300px;
+    }
+    .slider-large .ytz-slider-track {
+      height: 6px;
+    }
+    .slider-large .ytz-slider-thumb {
+      width: 24px;
+      height: 24px;
+    }
+    /* Color variants */
+    .slider-success .ytz-slider-track {
+      background: linear-gradient(to right, #19a974 var(--slider-percent, 0%), #e0e0e0 var(--slider-percent, 0%));
+    }
+    .slider-success .ytz-slider-thumb { background: #19a974; }
+    .slider-warning .ytz-slider-track {
+      background: linear-gradient(to right, #ff6300 var(--slider-percent, 0%), #e0e0e0 var(--slider-percent, 0%));
+    }
+    .slider-warning .ytz-slider-thumb { background: #ff6300; }
+    /* Dynamic color - grades from green to yellow to orange to red */
+    .slider-dynamic .ytz-slider-track {
+      background: linear-gradient(to right,
+        #19a974 0%,
+        #ffcc00 40%,
+        #ff6300 70%,
+        #ff4136 100%
+      );
+    }
+    .slider-dynamic .ytz-slider-thumb {
+      background: color-mix(
+        in oklch,
+        #19a974 calc(100% - var(--slider-percent, 0%)),
+        #ff4136 var(--slider-percent, 0%)
+      );
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Slider</h1>
+    <p class="f5 lh-copy gray mt0">
+      Accessible slider/range component with keyboard control, touch support,
+      and customizable min/max/step values.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        A simple slider with default range 0-100.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-slider id="basic-slider" min="0" max="100" value="50"></ytz-slider>
+        <span id="basic-value" class="f5">50</span>
+      </div>
+
+      <script>
+        document.getElementById('basic-slider').addEventListener('change', (e) => {
+          document.getElementById('basic-value').textContent = e.detail.value
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-slider min="0" max="100" value="50"&gt;&lt;/ytz-slider&gt;</code></pre>
+    </section>
+
+    <!-- With Step -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">With Step</h2>
+      <p class="lh-copy mb3">
+        Use the <code>step</code> attribute to control increment size.
+      </p>
+
+      <div class="demo-row mb3">
+        <label class="f6 w3">Step 10:</label>
+        <ytz-slider id="step-slider" min="0" max="100" value="50" step="10"></ytz-slider>
+        <span id="step-value" class="f5">50</span>
+      </div>
+
+      <div class="demo-row mb3">
+        <label class="f6 w3">Step 25:</label>
+        <ytz-slider id="step25-slider" min="0" max="100" value="50" step="25"></ytz-slider>
+        <span id="step25-value" class="f5">50</span>
+      </div>
+
+      <script>
+        document.getElementById('step-slider').addEventListener('change', (e) => {
+          document.getElementById('step-value').textContent = e.detail.value
+        })
+        document.getElementById('step25-slider').addEventListener('change', (e) => {
+          document.getElementById('step25-value').textContent = e.detail.value
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-slider min="0" max="100" value="50" step="10"&gt;&lt;/ytz-slider&gt;</code></pre>
+    </section>
+
+    <!-- Custom Range -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Custom Range</h2>
+      <p class="lh-copy mb3">
+        Set custom min/max values for different use cases.
+      </p>
+
+      <div class="demo-row mb3">
+        <label class="f6 w4">Temperature:</label>
+        <ytz-slider id="temp-slider" min="-20" max="50" value="20"></ytz-slider>
+        <span id="temp-value" class="f5">20°C</span>
+      </div>
+
+      <div class="demo-row mb3">
+        <label class="f6 w4">Volume:</label>
+        <ytz-slider id="vol-slider" min="0" max="11" value="5" step="1"></ytz-slider>
+        <span id="vol-value" class="f5">5</span>
+      </div>
+
+      <script>
+        document.getElementById('temp-slider').addEventListener('change', (e) => {
+          document.getElementById('temp-value').textContent = e.detail.value + '°C'
+        })
+        document.getElementById('vol-slider').addEventListener('change', (e) => {
+          document.getElementById('vol-value').textContent = e.detail.value
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;!-- Temperature range -20 to 50 --&gt;
+&lt;ytz-slider min="-20" max="50" value="20"&gt;&lt;/ytz-slider&gt;
+
+&lt;!-- Volume goes to 11 --&gt;
+&lt;ytz-slider min="0" max="11" value="5"&gt;&lt;/ytz-slider&gt;</code></pre>
+    </section>
+
+    <!-- Disabled State -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Disabled State</h2>
+      <p class="lh-copy mb3">
+        Disabled sliders cannot be interacted with.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-slider min="0" max="100" value="75" disabled></ytz-slider>
+        <span class="f5 gray">75 (disabled)</span>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-slider min="0" max="100" value="75" disabled&gt;&lt;/ytz-slider&gt;</code></pre>
+    </section>
+
+    <!-- Sizes -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Sizes</h2>
+      <p class="lh-copy mb3">
+        Control size via CSS classes.
+      </p>
+
+      <div class="mb3">
+        <div class="demo-row mb2">
+          <label class="f6 w3">Small:</label>
+          <ytz-slider class="slider-small" min="0" max="100" value="30"></ytz-slider>
+        </div>
+        <div class="demo-row mb2">
+          <label class="f6 w3">Default:</label>
+          <ytz-slider min="0" max="100" value="50"></ytz-slider>
+        </div>
+        <div class="demo-row mb2">
+          <label class="f6 w3">Large:</label>
+          <ytz-slider class="slider-large" min="0" max="100" value="70"></ytz-slider>
+        </div>
+      </div>
+    </section>
+
+    <!-- Colors -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Colors</h2>
+      <p class="lh-copy mb3">
+        Apply color classes for different contexts.
+      </p>
+
+      <div class="mb3">
+        <div class="demo-row mb2">
+          <label class="f6 w3">Primary:</label>
+          <ytz-slider min="0" max="100" value="60"></ytz-slider>
+        </div>
+        <div class="demo-row mb2">
+          <label class="f6 w3">Success:</label>
+          <ytz-slider class="slider-success" min="0" max="100" value="80"></ytz-slider>
+        </div>
+        <div class="demo-row mb2">
+          <label class="f6 w3">Warning:</label>
+          <ytz-slider class="slider-warning" min="0" max="100" value="40"></ytz-slider>
+        </div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>.slider-success .ytz-slider-track {
+  background: linear-gradient(to right,
+    #19a974 var(--slider-percent),
+    #e0e0e0 var(--slider-percent)
+  );
+}
+.slider-success .ytz-slider-thumb {
+  background: #19a974;
+}</code></pre>
+    </section>
+
+    <!-- Dynamic Color -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Dynamic Color</h2>
+      <p class="lh-copy mb3">
+        Use CSS to grade the slider color based on value. The <code>--slider-percent</code>
+        custom property updates live as the slider moves.
+      </p>
+
+      <div class="demo-row mb3">
+        <label class="f6 w4">Intensity:</label>
+        <ytz-slider id="dynamic-slider" class="slider-dynamic" min="0" max="100" value="25"></ytz-slider>
+        <span id="dynamic-value" class="f5">25%</span>
+      </div>
+
+      <script>
+        document.getElementById('dynamic-slider').addEventListener('change', (e) => {
+          document.getElementById('dynamic-value').textContent = e.detail.value + '%'
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Track shows full gradient */
+.slider-dynamic .ytz-slider-track {
+  background: linear-gradient(to right,
+    #19a974 0%,    /* green */
+    #ffcc00 40%,   /* yellow */
+    #ff6300 70%,   /* orange */
+    #ff4136 100%   /* red */
+  );
+}
+
+/* Thumb color interpolates based on position */
+.slider-dynamic .ytz-slider-thumb {
+  background: color-mix(
+    in oklch,
+    #19a974 calc(100% - var(--slider-percent)),
+    #ff4136 var(--slider-percent)
+  );
+}</code></pre>
+    </section>
+
+    <!-- Keyboard Navigation -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Keyboard Navigation</h2>
+      <p class="lh-copy mb3">
+        Full keyboard support for accessibility.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-slider id="kb-slider" min="0" max="100" value="50" step="5"></ytz-slider>
+        <span id="kb-value" class="f5">50</span>
+        <span class="f6 gray">Focus and use arrow keys</span>
+      </div>
+
+      <script>
+        document.getElementById('kb-slider').addEventListener('change', (e) => {
+          document.getElementById('kb-value').textContent = e.detail.value
+        })
+      </script>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Arrow Right/Up</td><td class="pa2">Increase by step</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Arrow Left/Down</td><td class="pa2">Decrease by step</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Page Up</td><td class="pa2">Increase by 10× step</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Page Down</td><td class="pa2">Decrease by 10× step</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Home</td><td class="pa2">Go to minimum</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">End</td><td class="pa2">Go to maximum</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+      <p class="lh-copy mb3">
+        Control slider value via JavaScript.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-slider id="prog-slider" min="0" max="100" value="50"></ytz-slider>
+        <span id="prog-value" class="f5">50</span>
+      </div>
+      <div class="demo-row mb3">
+        <button onclick="document.getElementById('prog-slider').value = 0" class="ph3 pv2 br2 bn white bg-gray pointer">
+          Min
+        </button>
+        <button onclick="document.getElementById('prog-slider').value = 50" class="ph3 pv2 br2 bn white bg-blue pointer">
+          Middle
+        </button>
+        <button onclick="document.getElementById('prog-slider').value = 100" class="ph3 pv2 br2 bn white bg-green pointer">
+          Max
+        </button>
+      </div>
+
+      <script>
+        const progSlider = document.getElementById('prog-slider')
+        progSlider.addEventListener('change', (e) => {
+          document.getElementById('prog-value').textContent = e.detail.value
+        })
+        // Also update on programmatic changes
+        new MutationObserver(() => {
+          document.getElementById('prog-value').textContent = progSlider.value
+        }).observe(progSlider, { attributes: true, attributeFilter: ['value'] })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// Set value
+slider.value = 75
+
+// Get value
+console.log(slider.value)
+
+// Get/set other properties
+slider.min = 0
+slider.max = 200
+slider.step = 5
+slider.disabled = true</code></pre>
+    </section>
+
+    <!-- ARIA Attributes -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        The slider automatically manages ARIA attributes:
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li><code>role="slider"</code> - Identifies as a slider</li>
+        <li><code>aria-valuemin</code> - Minimum value</li>
+        <li><code>aria-valuemax</code> - Maximum value</li>
+        <li><code>aria-valuenow</code> - Current value</li>
+        <li><code>aria-disabled</code> - Disabled state</li>
+        <li><code>tabindex="0"</code> - Makes it focusable</li>
+      </ul>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Slider value={50} /&gt;</td>
+              <td class="pa2 code">&lt;ytz-slider value="50"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">min={0} max={100}</td>
+              <td class="pa2 code">min="0" max="100"</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">step={10}</td>
+              <td class="pa2 code">step="10"</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">disabled</td>
+              <td class="pa2 code">disabled</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">onChange={(e, val) =&gt; ...}</td>
+              <td class="pa2 code">@change="e.detail.value"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Slider } from '@yetzirah/react'
+
+function VolumeControl() {
+  const [volume, setVolume] = useState(50)
+
+  return (
+    &lt;div&gt;
+      &lt;Slider
+        min={0}
+        max={100}
+        value={volume}
+        onChange={(e) =&gt; setVolume(e.detail.value)}
+      /&gt;
+      &lt;span&gt;{volume}%&lt;/span&gt;
+    &lt;/div&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

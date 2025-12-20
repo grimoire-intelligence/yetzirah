@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Toggle - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    /* Basic toggle styling */
+    ytz-toggle {
+      cursor: pointer;
+      user-select: none;
+    }
+    ytz-toggle[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    /* Wrapper for toggle positioning */
+    .toggle-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      position: relative;
+    }
+    .toggle-track {
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track {
+      background: #357edd;
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track::after {
+      transform: translateX(18px);
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Toggle</h1>
+    <p class="f5 lh-copy gray mt0">
+      Switch/toggle component with checkbox semantics and <code>aria-checked</code>.
+      Supports keyboard navigation (Space/Enter to toggle).
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        A simple toggle with a text label. Click or press Space/Enter to toggle.
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="basic-toggle">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="basic-toggle">Enable notifications</label>
+        </div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-toggle&gt;Enable notifications&lt;/ytz-toggle&gt;</code></pre>
+    </section>
+
+    <!-- Initially Checked -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Initially Checked</h2>
+      <p class="lh-copy mb3">
+        Set the <code>checked</code> attribute for initial on state.
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="checked-toggle" checked>
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="checked-toggle">Feature enabled</label>
+        </div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-toggle checked&gt;Feature enabled&lt;/ytz-toggle&gt;</code></pre>
+    </section>
+
+    <!-- Disabled State -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Disabled State</h2>
+      <p class="lh-copy mb3">
+        Disabled toggles cannot be interacted with.
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="disabled-off" disabled>
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="disabled-off" class="gray">Premium feature (disabled)</label>
+        </div>
+
+        <div class="toggle-wrapper">
+          <ytz-toggle id="disabled-on" checked disabled>
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="disabled-on" class="gray">Locked setting (disabled, on)</label>
+        </div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-toggle disabled&gt;Premium feature&lt;/ytz-toggle&gt;
+&lt;ytz-toggle checked disabled&gt;Locked setting&lt;/ytz-toggle&gt;</code></pre>
+    </section>
+
+    <!-- Event Handling -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Event Handling</h2>
+      <p class="lh-copy mb3">
+        Listen for the <code>change</code> event to respond to toggle changes.
+        The event's <code>detail.checked</code> property contains the new state.
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="event-toggle">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="event-toggle">Toggle me</label>
+        </div>
+        <span id="toggle-status" class="f6 gray">Status: off</span>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const toggle = document.querySelector('ytz-toggle')
+toggle.addEventListener('change', (e) => {
+  console.log('Checked:', e.detail.checked)
+})</code></pre>
+
+      <script>
+        document.getElementById('event-toggle').addEventListener('change', (e) => {
+          document.getElementById('toggle-status').textContent =
+            'Status: ' + (e.detail.checked ? 'on' : 'off')
+        })
+      </script>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+      <p class="lh-copy mb3">
+        Control the toggle state via JavaScript using the <code>checked</code> property
+        or the <code>toggle()</code> method.
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="prog-toggle">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="prog-toggle">Controlled toggle</label>
+        </div>
+        <button onclick="document.getElementById('prog-toggle').checked = true" class="ph3 pv2 br2 bn white bg-blue pointer">
+          Turn On
+        </button>
+        <button onclick="document.getElementById('prog-toggle').checked = false" class="ph3 pv2 br2 bn white bg-gray pointer">
+          Turn Off
+        </button>
+        <button onclick="document.getElementById('prog-toggle').toggle()" class="ph3 pv2 br2 ba b--blue blue bg-white pointer">
+          Toggle
+        </button>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// Set state directly
+toggle.checked = true
+toggle.checked = false
+
+// Toggle current state
+toggle.toggle()</code></pre>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        The toggle automatically manages ARIA attributes:
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li><code>role="switch"</code> - Identifies as a switch control</li>
+        <li><code>aria-checked</code> - Reflects current state</li>
+        <li><code>aria-disabled</code> - Reflects disabled state</li>
+        <li><code>tabindex="0"</code> - Makes it focusable</li>
+      </ul>
+
+      <table class="f6 w-100 collapse ba b--light-gray">
+        <thead>
+          <tr class="bg-near-white">
+            <th class="pa2 tl">Key</th>
+            <th class="pa2 tl">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="bt b--light-gray"><td class="pa2">Space</td><td class="pa2">Toggle state</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Enter</td><td class="pa2">Toggle state</td></tr>
+          <tr class="bt b--light-gray"><td class="pa2">Tab</td><td class="pa2">Move to next focusable element</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Styling Guide -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Styling Guide</h2>
+      <p class="lh-copy mb3">
+        Style toggles using <code>aria-checked</code> and <code>aria-disabled</code> selectors.
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Custom toggle track */
+ytz-toggle .toggle-track {
+  width: 40px;
+  height: 22px;
+  background: #ccc;
+  border-radius: 11px;
+  transition: background 0.2s ease;
+}
+
+ytz-toggle[aria-checked="true"] .toggle-track {
+  background: #357edd;
+}
+
+ytz-toggle[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Switch /&gt;</td>
+              <td class="pa2 code">&lt;ytz-toggle&gt;&lt;/ytz-toggle&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Switch checked /&gt;</td>
+              <td class="pa2 code">&lt;ytz-toggle checked&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Switch disabled /&gt;</td>
+              <td class="pa2 code">&lt;ytz-toggle disabled&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">onChange={(e) =&gt; ...}</td>
+              <td class="pa2 code">@change="e.detail.checked"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Toggle } from '@yetzirah/react'
+
+function App() {
+  const [isOn, setIsOn] = useState(false)
+
+  return (
+    &lt;&gt;
+      {/* Controlled */}
+      &lt;Toggle
+        checked={isOn}
+        onChange={(e) =&gt; setIsOn(e.detail.checked)}
+      &gt;
+        Dark mode
+      &lt;/Toggle&gt;
+
+      {/* Uncontrolled */}
+      &lt;Toggle defaultChecked&gt;
+        Enable notifications
+      &lt;/Toggle&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Theme Toggle - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <link rel="stylesheet" href="../packages/core/src/dark.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    /* Toggle track styling (same as toggle demo) */
+    ytz-toggle, ytz-theme-toggle {
+      cursor: pointer;
+      user-select: none;
+    }
+    .toggle-wrapper {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .toggle-track {
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track {
+      background: #357edd;
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track::after {
+      transform: translateX(18px);
+    }
+
+    /* Theme-aware demo panel */
+    .theme-preview {
+      background: var(--ytz-bg);
+      color: var(--ytz-text);
+      border: 1px solid var(--ytz-border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    .theme-preview-card {
+      background: var(--ytz-bg-surface);
+      border: 1px solid var(--ytz-border-subtle);
+      border-radius: 6px;
+      padding: 1rem;
+      box-shadow: var(--ytz-shadow-2);
+    }
+    .theme-preview .btn-primary {
+      background: var(--ytz-primary);
+      color: var(--ytz-primary-text);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .theme-preview .btn-primary:hover {
+      background: var(--ytz-primary-hover);
+    }
+    .theme-preview .text-secondary {
+      color: var(--ytz-text-secondary);
+    }
+    .theme-preview .status-success {
+      background: var(--ytz-success-bg);
+      color: var(--ytz-success);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .theme-preview .status-warning {
+      background: var(--ytz-warning-bg);
+      color: var(--ytz-warning);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+    .theme-preview .status-error {
+      background: var(--ytz-error-bg);
+      color: var(--ytz-error);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+    }
+
+    /* Variable display */
+    .var-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 0.5rem;
+    }
+    .var-swatch {
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-size: 0.625rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Theme Toggle</h1>
+    <p class="f5 lh-copy gray mt0">
+      Dark mode toggle with persistence, system preference detection, and CSS custom properties.
+    </p>
+  </header>
+
+  <main>
+    <!-- Live Demo -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Live Demo</h2>
+      <p class="lh-copy mb3">
+        Toggle dark mode to see the preview panel update. Your preference is saved to localStorage.
+      </p>
+
+      <div class="demo-row mb4">
+        <div class="toggle-wrapper">
+          <ytz-theme-toggle id="main-toggle">
+            <span class="toggle-track"></span>
+          </ytz-theme-toggle>
+          <span>Dark mode</span>
+        </div>
+        <span id="theme-status" class="f6 gray">Theme: light</span>
+      </div>
+
+      <script>
+        document.getElementById('main-toggle').addEventListener('themechange', (e) => {
+          document.getElementById('theme-status').textContent = 'Theme: ' + e.detail.theme
+        })
+        // Initialize status
+        setTimeout(() => {
+          const toggle = document.getElementById('main-toggle')
+          document.getElementById('theme-status').textContent = 'Theme: ' + toggle.theme
+        }, 0)
+      </script>
+
+      <div class="theme-preview mb3">
+        <h3 class="f5 fw6 mt0 mb3">Preview Panel</h3>
+        <div class="theme-preview-card mb3">
+          <p class="mt0 mb2">This card uses theme-aware CSS variables.</p>
+          <p class="text-secondary mt0 mb3 f6">Secondary text adapts to the theme.</p>
+          <button class="btn-primary">Primary Button</button>
+        </div>
+        <div class="flex gap3 flex-wrap">
+          <span class="status-success f6">Success</span>
+          <span class="status-warning f6">Warning</span>
+          <span class="status-error f6">Error</span>
+        </div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-theme-toggle&gt;
+  &lt;span class="toggle-track"&gt;&lt;/span&gt;
+&lt;/ytz-theme-toggle&gt;</code></pre>
+    </section>
+
+    <!-- How It Works -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">How It Works</h2>
+      <p class="lh-copy mb3">
+        The theme toggle manages theme state by:
+      </p>
+
+      <ol class="lh-copy pl3 mb3">
+        <li>Adding <code>data-theme="dark"</code> to <code>&lt;html&gt;</code> when enabled</li>
+        <li>Adding <code>.dark-mode</code> class to <code>&lt;html&gt;</code> for simpler CSS targeting</li>
+        <li>Saving preference to localStorage (configurable)</li>
+        <li>Respecting <code>prefers-color-scheme: dark</code> when no preference is saved</li>
+      </ol>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Target dark mode in CSS */
+[data-theme="dark"] .my-component {
+  background: #1e1e1e;
+}
+
+/* Or use the class */
+.dark-mode .my-component {
+  background: #1e1e1e;
+}</code></pre>
+    </section>
+
+    <!-- CSS Variables -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">CSS Variables</h2>
+      <p class="lh-copy mb3">
+        Import <code>dark.css</code> to get theme-aware CSS custom properties.
+        These variables automatically update when the theme changes.
+      </p>
+
+      <h3 class="f5 fw6 mb2">Backgrounds</h3>
+      <div class="var-grid mb3">
+        <div class="var-swatch" style="background: var(--ytz-bg); color: var(--ytz-text); border: 1px solid var(--ytz-border);">--ytz-bg</div>
+        <div class="var-swatch" style="background: var(--ytz-bg-surface); color: var(--ytz-text); border: 1px solid var(--ytz-border);">--ytz-bg-surface</div>
+        <div class="var-swatch" style="background: var(--ytz-bg-elevated); color: var(--ytz-text); border: 1px solid var(--ytz-border);">--ytz-bg-elevated</div>
+        <div class="var-swatch" style="background: var(--ytz-bg-hover); color: var(--ytz-text); border: 1px solid var(--ytz-border);">--ytz-bg-hover</div>
+      </div>
+
+      <h3 class="f5 fw6 mb2">Text</h3>
+      <div class="var-grid mb3">
+        <div class="var-swatch" style="background: var(--ytz-bg); color: var(--ytz-text); border: 1px solid var(--ytz-border);">--ytz-text</div>
+        <div class="var-swatch" style="background: var(--ytz-bg); color: var(--ytz-text-secondary); border: 1px solid var(--ytz-border);">--ytz-text-secondary</div>
+        <div class="var-swatch" style="background: var(--ytz-bg); color: var(--ytz-text-disabled); border: 1px solid var(--ytz-border);">--ytz-text-disabled</div>
+      </div>
+
+      <h3 class="f5 fw6 mb2">Colors</h3>
+      <div class="var-grid mb3">
+        <div class="var-swatch" style="background: var(--ytz-primary); color: var(--ytz-primary-text);">--ytz-primary</div>
+        <div class="var-swatch" style="background: var(--ytz-secondary); color: white;">--ytz-secondary</div>
+        <div class="var-swatch" style="background: var(--ytz-success); color: white;">--ytz-success</div>
+        <div class="var-swatch" style="background: var(--ytz-warning); color: black;">--ytz-warning</div>
+        <div class="var-swatch" style="background: var(--ytz-error); color: white;">--ytz-error</div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Import the theme CSS */
+@import '@yetzirah/core/dark.css';
+
+/* Use variables in your styles */
+.my-card {
+  background: var(--ytz-bg-surface);
+  color: var(--ytz-text);
+  border: 1px solid var(--ytz-border);
+  box-shadow: var(--ytz-shadow-2);
+}</code></pre>
+    </section>
+
+    <!-- Persistence Options -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Persistence Options</h2>
+      <p class="lh-copy mb3">
+        Control how theme preference is stored.
+      </p>
+
+      <h3 class="f5 fw6 mb2">Custom Storage Key</h3>
+      <p class="lh-copy mb3 f6">
+        Use <code>storage-key</code> to customize the localStorage key (default: <code>yetzirah-theme</code>).
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-theme-toggle storage-key="my-app-theme" no-persist>
+            <span class="toggle-track"></span>
+          </ytz-theme-toggle>
+          <span>Custom key (demo only, no persist)</span>
+        </div>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-theme-toggle storage-key="my-app-theme"&gt;
+  ...
+&lt;/ytz-theme-toggle&gt;</code></pre>
+
+      <h3 class="f5 fw6 mb2 mt4">Disable Persistence</h3>
+      <p class="lh-copy mb3 f6">
+        Use <code>no-persist</code> to disable localStorage. Theme resets on page reload.
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-theme-toggle no-persist&gt;
+  ...
+&lt;/ytz-theme-toggle&gt;</code></pre>
+    </section>
+
+    <!-- Programmatic Control -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Programmatic Control</h2>
+      <p class="lh-copy mb3">
+        Control the theme via JavaScript.
+      </p>
+
+      <div class="demo-row mb3">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="prog-toggle" onclick="document.getElementById('main-toggle').toggle()">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <span>Control main toggle</span>
+        </div>
+      </div>
+
+      <script>
+        // Keep prog-toggle in sync with main-toggle
+        document.getElementById('main-toggle').addEventListener('themechange', (e) => {
+          const progToggle = document.getElementById('prog-toggle')
+          if (e.detail.isDark) {
+            progToggle.setAttribute('checked', '')
+          } else {
+            progToggle.removeAttribute('checked')
+          }
+        })
+        // Initialize sync
+        setTimeout(() => {
+          const mainToggle = document.getElementById('main-toggle')
+          const progToggle = document.getElementById('prog-toggle')
+          if (mainToggle.isDark) {
+            progToggle.setAttribute('checked', '')
+          }
+        }, 0)
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>const toggle = document.querySelector('ytz-theme-toggle')
+
+// Set theme
+toggle.theme = 'dark'
+toggle.theme = 'light'
+
+// Toggle
+toggle.toggle()
+
+// Read current state
+console.log(toggle.theme)   // 'light' or 'dark'
+console.log(toggle.isDark)  // true or false
+
+// Listen for changes
+toggle.addEventListener('themechange', (e) => {
+  console.log(e.detail.theme)   // 'light' or 'dark'
+  console.log(e.detail.isDark)  // true or false
+})</code></pre>
+    </section>
+
+    <!-- System Preference -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">System Preference</h2>
+      <p class="lh-copy mb3">
+        When no preference is saved, the toggle respects <code>prefers-color-scheme: dark</code>.
+        If the user changes their system preference, the theme updates automatically
+        (unless they've explicitly chosen a theme).
+      </p>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* dark.css also supports system preference directly */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ytz-bg: #121212;
+    /* ... dark theme variables */
+  }
+}</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">ThemeProvider + createTheme</td>
+              <td class="pa2 code">CSS variables + dark.css</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">useTheme() hook</td>
+              <td class="pa2 code">themeToggle.theme / themeToggle.isDark</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">theme.palette.mode</td>
+              <td class="pa2 code">document.documentElement.dataset.theme</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">theme.palette.primary.main</td>
+              <td class="pa2 code">var(--ytz-primary)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { ThemeToggle } from '@yetzirah/react'
+import '@yetzirah/core/dark.css'
+
+function App() {
+  return (
+    &lt;&gt;
+      &lt;ThemeToggle
+        onThemeChange={(e) =&gt; console.log(e.detail.theme)}
+      &gt;
+        Dark mode
+      &lt;/ThemeToggle&gt;
+
+      {/* Your themed content */}
+      &lt;div className="theme-aware-content"&gt;
+        ...
+      &lt;/div&gt;
+    &lt;/&gt;
+  )
+}
+
+// Access theme state
+const toggle = useRef()
+toggle.current.theme      // 'light' or 'dark'
+toggle.current.isDark     // boolean
+toggle.current.toggle()   // switch themes</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
