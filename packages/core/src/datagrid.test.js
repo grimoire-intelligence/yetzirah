@@ -228,24 +228,7 @@ describe('YtzDatagrid', () => {
     })
   })
 
-  describe('Excel export', () => {
-    test('exportExcel generates tab-separated values', () => {
-      document.body.innerHTML = `
-        <ytz-datagrid>
-          <ytz-datagrid-column field="name" header="Name"></ytz-datagrid-column>
-          <ytz-datagrid-column field="email" header="Email"></ytz-datagrid-column>
-        </ytz-datagrid>
-      `
-      const grid = document.querySelector('ytz-datagrid')
-      grid.data = sampleData
-
-      const tsv = grid.exportExcel()
-      const lines = tsv.split('\n')
-
-      expect(lines[0]).toBe('Name\tEmail')
-      expect(lines[1]).toBe('Alice\talice@example.com')
-    })
-  })
+  // Note: Excel export is available in the premium version only
 
   describe('keyboard navigation', () => {
     test('ArrowDown moves focus down', async () => {
