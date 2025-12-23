@@ -216,15 +216,39 @@ export class AppComponent {
 
 ## Styling
 
-Yetzirah components are unstyled. Use utility classes or custom CSS:
+Yetzirah components are unstyled by design. We recommend **[Tachyons](https://tachyons.io/)** as the ideal pairing:
+
+### Why Tachyons?
+
+| Benefit | Details |
+|---------|---------|
+| **Tiny bundle** | ~15KB gzipped for the entire library |
+| **No build step** | CDN or npm, works immediately |
+| **Composable** | Utility classes combine to create any design |
+| **Material-ready** | Easy to replicate Material Design with utilities |
+
+**Total stack size** with Tachyons:
+- Yetzirah Core + React: ~15KB
+- Tachyons CSS: ~15KB
+- **Total: ~30KB** (vs 150KB+ for Material UI)
+
+### Example: Material-style Button
 
 ```html
-<!-- Tachyons -->
-<ytz-button class="ph3 pv2 br2 bn white bg-blue pointer">
+<!-- Tachyons utilities replicate Material Design -->
+<ytz-button class="ph3 pv2 br2 bn white bg-blue pointer shadow-1 hover-shadow-2">
   Submit
 </ytz-button>
 
-<!-- Custom CSS -->
+<!-- Outlined variant -->
+<ytz-button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">
+  Cancel
+</ytz-button>
+```
+
+### Alternative: Custom CSS
+
+```html
 <style>
   .my-button {
     padding: 0.5rem 1rem;
