@@ -1,10 +1,6 @@
-/** @type {import('@sveltejs/kit').Config} */
+/** @type {import('@sveltejs/package').Config} */
 const config = {
-  kit: {
-    files: {
-      lib: 'src'
-    }
-  }
+  // No preprocessors needed for basic TypeScript
 }
 
 export default config

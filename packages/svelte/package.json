@@ -3,12 +3,14 @@
   "version": "0.1.0",
   "description": "Svelte wrappers for Yetzirah Web Components",
   "type": "module",
+  "svelte": "./dist/index.js",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
@@ -17,8 +19,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch"
+    "build": "svelte-package -i src -o dist",
+    "dev": "svelte-package -i src -o dist --watch"
   },
   "keywords": [
     "svelte",
@@ -40,5 +42,10 @@
   "dependencies": {
     "@yetzirah/core": "workspace:*"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "@sveltejs/package": "^2.5.7",
+    "svelte": "^5.46.0",
+    "typescript": "^5.0.0"
+  }
 }

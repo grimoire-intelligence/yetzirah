@@ -41,5 +41,8 @@
   "dependencies": {
     "@yetzirah/core": "workspace:*"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "devDependencies": {
+    "esbuild-plugin-vue3": "^0.5.1"
+  }
 }

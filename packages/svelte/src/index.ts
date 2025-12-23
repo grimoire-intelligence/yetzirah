@@ -13,5 +13,10 @@
 // Re-export core version
 export { VERSION } from '@yetzirah/core'
 
-// Placeholder for future Svelte component wrappers
-// Components will be added in subsequent PRs
+// Tier 2 component wrappers
+export { default as Toggle } from './Toggle.svelte'
+export { default as Chip } from './Chip.svelte'
+export { default as IconButton } from './IconButton.svelte'
+export { default as Slider } from './Slider.svelte'
+export { default as ThemeToggle } from './ThemeToggle.svelte'
+export { default as DataGrid } from './DataGrid.svelte'
