@@ -493,7 +493,7 @@ Create Svelte wrapper for ytz-theme-toggle. Forward storageKey and noPersist pro
 ---
 pr_id: PR-075
 title: Svelte DataGrid Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 3
