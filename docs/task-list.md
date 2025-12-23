@@ -289,7 +289,7 @@ Create Vue 3 wrapper for ytz-datagrid. Handle data array prop via property sette
 ---
 pr_id: PR-069
 title: Svelte Package Setup
-cold_state: ready
+cold_state: completed
 priority: critical
 complexity:
   score: 4
