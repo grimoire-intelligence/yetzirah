@@ -98,9 +98,6 @@ estimated_files:
   - path: packages/vue/src/Toggle.vue
     action: create
     description: Toggle component with v-model support
-  - path: packages/vue/src/Toggle.test.ts
-    action: create
-    description: Toggle wrapper tests
   - path: packages/vue/src/index.ts
     action: modify
     description: Export Toggle component
@@ -131,9 +128,6 @@ estimated_files:
   - path: packages/vue/src/Chip.vue
     action: create
     description: Chip component with delete event
-  - path: packages/vue/src/Chip.test.ts
-    action: create
-    description: Chip wrapper tests
   - path: packages/vue/src/index.ts
     action: modify
     description: Export Chip component
@@ -164,9 +158,6 @@ estimated_files:
   - path: packages/vue/src/IconButton.vue
     action: create
     description: IconButton component
-  - path: packages/vue/src/IconButton.test.ts
-    action: create
-    description: IconButton wrapper tests
   - path: packages/vue/src/index.ts
     action: modify
     description: Export IconButton component
@@ -197,9 +188,6 @@ estimated_files:
   - path: packages/vue/src/Slider.vue
     action: create
     description: Slider component with v-model support
-  - path: packages/vue/src/Slider.test.ts
-    action: create
-    description: Slider wrapper tests
   - path: packages/vue/src/index.ts
     action: modify
     description: Export Slider component
@@ -230,9 +218,6 @@ estimated_files:
   - path: packages/vue/src/ThemeToggle.vue
     action: create
     description: ThemeToggle component
-  - path: packages/vue/src/ThemeToggle.test.ts
-    action: create
-    description: ThemeToggle wrapper tests
   - path: packages/vue/src/index.ts
     action: modify
     description: Export ThemeToggle component
@@ -266,9 +251,6 @@ estimated_files:
   - path: packages/vue/src/DataGridColumn.vue
     action: create
     description: DataGridColumn component
-  - path: packages/vue/src/DataGrid.test.ts
-    action: create
-    description: DataGrid wrapper tests
   - path: packages/vue/src/index.ts
     action: modify
     description: Export DataGrid and DataGridColumn components
@@ -341,9 +323,6 @@ estimated_files:
   - path: packages/svelte/src/Toggle.svelte
     action: create
     description: Toggle component with bind:checked
-  - path: packages/svelte/src/Toggle.test.ts
-    action: create
-    description: Toggle wrapper tests
   - path: packages/svelte/src/index.ts
     action: modify
     description: Export Toggle component
@@ -374,9 +353,6 @@ estimated_files:
   - path: packages/svelte/src/Chip.svelte
     action: create
     description: Chip component
-  - path: packages/svelte/src/Chip.test.ts
-    action: create
-    description: Chip wrapper tests
   - path: packages/svelte/src/index.ts
     action: modify
     description: Export Chip component
@@ -407,9 +383,6 @@ estimated_files:
   - path: packages/svelte/src/IconButton.svelte
     action: create
     description: IconButton component
-  - path: packages/svelte/src/IconButton.test.ts
-    action: create
-    description: IconButton wrapper tests
   - path: packages/svelte/src/index.ts
     action: modify
     description: Export IconButton component
@@ -440,9 +413,6 @@ estimated_files:
   - path: packages/svelte/src/Slider.svelte
     action: create
     description: Slider component with bind:value
-  - path: packages/svelte/src/Slider.test.ts
-    action: create
-    description: Slider wrapper tests
   - path: packages/svelte/src/index.ts
     action: modify
     description: Export Slider component
@@ -473,9 +443,6 @@ estimated_files:
   - path: packages/svelte/src/ThemeToggle.svelte
     action: create
     description: ThemeToggle component
-  - path: packages/svelte/src/ThemeToggle.test.ts
-    action: create
-    description: ThemeToggle wrapper tests
   - path: packages/svelte/src/index.ts
     action: modify
     description: Export ThemeToggle component
@@ -509,9 +476,6 @@ estimated_files:
   - path: packages/svelte/src/DataGridColumn.svelte
     action: create
     description: DataGridColumn component
-  - path: packages/svelte/src/DataGrid.test.ts
-    action: create
-    description: DataGrid wrapper tests
   - path: packages/svelte/src/index.ts
     action: modify
     description: Export DataGrid and DataGridColumn
@@ -589,9 +553,6 @@ estimated_files:
   - path: packages/angular/src/lib/toggle/toggle.component.ts
     action: create
     description: Toggle component with ControlValueAccessor
-  - path: packages/angular/src/lib/toggle/toggle.component.spec.ts
-    action: create
-    description: Toggle wrapper tests
   - path: packages/angular/src/public-api.ts
     action: modify
     description: Export Toggle component
@@ -624,9 +585,6 @@ estimated_files:
   - path: packages/angular/src/lib/chip/chip.component.ts
     action: create
     description: Chip component
-  - path: packages/angular/src/lib/chip/chip.component.spec.ts
-    action: create
-    description: Chip wrapper tests
   - path: packages/angular/src/public-api.ts
     action: modify
     description: Export Chip component
@@ -658,9 +616,6 @@ estimated_files:
   - path: packages/angular/src/lib/icon-button/icon-button.component.ts
     action: create
     description: IconButton component
-  - path: packages/angular/src/lib/icon-button/icon-button.component.spec.ts
-    action: create
-    description: IconButton wrapper tests
   - path: packages/angular/src/public-api.ts
     action: modify
     description: Export IconButton component
@@ -691,9 +646,6 @@ estimated_files:
   - path: packages/angular/src/lib/slider/slider.component.ts
     action: create
     description: Slider component with ControlValueAccessor
-  - path: packages/angular/src/lib/slider/slider.component.spec.ts
-    action: create
-    description: Slider wrapper tests
   - path: packages/angular/src/public-api.ts
     action: modify
     description: Export Slider component
@@ -725,9 +677,6 @@ estimated_files:
   - path: packages/angular/src/lib/theme-toggle/theme-toggle.component.ts
     action: create
     description: ThemeToggle component
-  - path: packages/angular/src/lib/theme-toggle/theme-toggle.component.spec.ts
-    action: create
-    description: ThemeToggle wrapper tests
   - path: packages/angular/src/public-api.ts
     action: modify
     description: Export ThemeToggle component
@@ -761,9 +710,6 @@ estimated_files:
   - path: packages/angular/src/lib/datagrid/datagrid-column.component.ts
     action: create
     description: DataGridColumn component
-  - path: packages/angular/src/lib/datagrid/datagrid.component.spec.ts
-    action: create
-    description: DataGrid wrapper tests
   - path: packages/angular/src/public-api.ts
     action: modify
     description: Export DataGrid and DataGridColumn
@@ -779,24 +725,87 @@ Create Angular wrapper for ytz-datagrid. Handle data array via property binding 
 - [ ] OnPush change detection
 - [ ] < 75 lines per component
 ---
-## Block 4: Documentation & Verification
+## Block 4: Testing, Documentation & Verification
 
-### PR-083: Framework Wrapper Demos
+### PR-083: Framework Wrapper Tests & Demos
 ---
 pr_id: PR-083
-title: Framework Wrapper Demos
+title: Framework Wrapper Tests & Demos
 cold_state: ready
-priority: medium
+priority: high
 complexity:
-  score: 4
-  estimated_minutes: 60
+  score: 5
+  estimated_minutes: 120
   suggested_model: sonnet
-  rationale: Demo pages for each framework showing integration
+  rationale: Test infrastructure setup for 3 frameworks + tests for 18 components + demo pages
 dependencies:
   - PR-068
   - PR-075
   - PR-082
 estimated_files:
+  - path: packages/vue/vitest.config.ts
+    action: create
+    description: Vitest config for Vue tests
+  - path: packages/vue/src/__tests__/Toggle.test.ts
+    action: create
+    description: Vue Toggle tests
+  - path: packages/vue/src/__tests__/Chip.test.ts
+    action: create
+    description: Vue Chip tests
+  - path: packages/vue/src/__tests__/IconButton.test.ts
+    action: create
+    description: Vue IconButton tests
+  - path: packages/vue/src/__tests__/Slider.test.ts
+    action: create
+    description: Vue Slider tests
+  - path: packages/vue/src/__tests__/ThemeToggle.test.ts
+    action: create
+    description: Vue ThemeToggle tests
+  - path: packages/vue/src/__tests__/DataGrid.test.ts
+    action: create
+    description: Vue DataGrid tests
+  - path: packages/svelte/vitest.config.ts
+    action: create
+    description: Vitest config for Svelte tests
+  - path: packages/svelte/src/__tests__/Toggle.test.ts
+    action: create
+    description: Svelte Toggle tests
+  - path: packages/svelte/src/__tests__/Chip.test.ts
+    action: create
+    description: Svelte Chip tests
+  - path: packages/svelte/src/__tests__/IconButton.test.ts
+    action: create
+    description: Svelte IconButton tests
+  - path: packages/svelte/src/__tests__/Slider.test.ts
+    action: create
+    description: Svelte Slider tests
+  - path: packages/svelte/src/__tests__/ThemeToggle.test.ts
+    action: create
+    description: Svelte ThemeToggle tests
+  - path: packages/svelte/src/__tests__/DataGrid.test.ts
+    action: create
+    description: Svelte DataGrid tests
+  - path: packages/angular/jest.config.js
+    action: create
+    description: Jest config for Angular tests
+  - path: packages/angular/src/lib/toggle.component.spec.ts
+    action: create
+    description: Angular Toggle tests
+  - path: packages/angular/src/lib/chip.component.spec.ts
+    action: create
+    description: Angular Chip tests
+  - path: packages/angular/src/lib/icon-button.component.spec.ts
+    action: create
+    description: Angular IconButton tests
+  - path: packages/angular/src/lib/slider.component.spec.ts
+    action: create
+    description: Angular Slider tests
+  - path: packages/angular/src/lib/theme-toggle.component.spec.ts
+    action: create
+    description: Angular ThemeToggle tests
+  - path: packages/angular/src/lib/datagrid.component.spec.ts
+    action: create
+    description: Angular DataGrid tests
   - path: demos/vue/index.html
     action: create
     description: Vue demo page with CDN Vue + Yetzirah
@@ -811,9 +820,28 @@ estimated_files:
     description: Framework comparison demo page
 ---
 **Description:**
-Create demo pages showing framework wrappers in action. Include examples of v-model (Vue), bind: (Svelte), and ngModel/reactive forms (Angular).
+Set up test infrastructure for all framework packages and create comprehensive tests for each component wrapper. Also create demo pages showing framework wrappers in action.
+
+**Test Infrastructure:**
+- Vue: Vitest + @vue/test-utils + happy-dom
+- Svelte: Vitest + @testing-library/svelte + happy-dom
+- Angular: Jest + @angular/testing + jest-preset-angular
+
+**Test Coverage Per Component:**
+- Rendering with default props
+- Two-way binding (v-model / bind: / ngModel)
+- Event forwarding to parent
+- Props/attributes passed to web component
+- Disabled state behavior
 
 **Acceptance Criteria:**
+- [ ] Vue test infrastructure configured
+- [ ] Svelte test infrastructure configured
+- [ ] Angular test infrastructure configured
+- [ ] All 6 Vue components have tests
+- [ ] All 6 Svelte components have tests
+- [ ] All 6 Angular components have tests
+- [ ] `pnpm test` runs all framework tests
 - [ ] Vue demo with v-model examples
 - [ ] Svelte demo with bind: examples
 - [ ] Angular demo with forms examples
@@ -838,22 +866,23 @@ estimated_files:
     description: Add framework wrapper documentation
   - path: packages/vue/README.md
     action: modify
-    description: Complete Vue package docs
+    description: Complete Vue package docs with test instructions
   - path: packages/svelte/README.md
     action: modify
-    description: Complete Svelte package docs
+    description: Complete Svelte package docs with test instructions
   - path: packages/angular/README.md
     action: modify
-    description: Complete Angular package docs
+    description: Complete Angular package docs with test instructions
 ---
 **Description:**
-Update main README.md and individual package READMEs to document framework wrapper usage. Include installation, v-model/bind:/ngModel examples, and API reference.
+Update main README.md and individual package READMEs to document framework wrapper usage. Include installation, v-model/bind:/ngModel examples, API reference, and test instructions.
 
 **Acceptance Criteria:**
 - [ ] Main README lists all framework packages
 - [ ] Installation instructions for each framework
 - [ ] Usage examples with framework idioms
 - [ ] API reference for each component
+- [ ] Test instructions for each package
 ---
 ### PR-085: Bundle Verification for All Frameworks
 ---
@@ -925,7 +954,7 @@ PR-076 (Angular Setup) <- PR-061
   └── PR-082 (Angular DataGrid) <- PR-076
 
 Block 4 (Final - after all frameworks):
-PR-083 (Demos) <- PR-068, PR-075, PR-082
+PR-083 (Tests & Demos) <- PR-068, PR-075, PR-082
 PR-084 (README) <- PR-083
 PR-085 (Bundle Verification) <- PR-084
 ```
@@ -946,7 +975,7 @@ Svelte (6): PR-070, PR-071, PR-072, PR-073, PR-074, PR-075
 Angular (6): PR-077, PR-078, PR-079, PR-080, PR-081, PR-082
 
 **Wave 4 (sequential):**
-- PR-083 (Demos) - depends on all DataGrid wrappers
+- PR-083 (Tests & Demos) - depends on all DataGrid wrappers
 - PR-084 (README)
 - PR-085 (Bundle Verification)
 
