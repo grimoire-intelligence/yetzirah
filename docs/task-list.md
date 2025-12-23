@@ -1442,7 +1442,7 @@ Create Angular wrapper for popover component. Support [(open)] binding.
 ---
 pr_id: PR-122
 title: Framework Wrapper Tests for Tier 1 Components
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
