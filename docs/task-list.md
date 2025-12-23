@@ -731,7 +731,7 @@ Create Angular wrapper for ytz-datagrid. Handle data array via property binding 
 ---
 pr_id: PR-083
 title: Framework Wrapper Tests & Demos
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 5
