@@ -54,7 +54,143 @@ All components are exported as named exports, enabling tree-shaking:
 
 ```typescript
 // Only imports the specific components you need
-import { YtzButton, YtzDialog } from '@grimoire/yetzirah-vue'
+import { Button, Dialog, Select } from '@grimoire/yetzirah-vue'
+```
+
+## Available Components (Tier 1)
+
+All Tier 1 core components are available with full Vue 3 support:
+
+| Component | Import | v-model Support |
+|-----------|--------|-----------------|
+| Button | `Button` | - |
+| Dialog | `Dialog` | `v-model:open` |
+| Drawer | `Drawer` | `v-model:open` |
+| Tabs | `Tabs`, `TabList`, `Tab`, `TabPanel` | - |
+| Menu | `Menu`, `MenuItem`, `MenuTrigger` | - |
+| Accordion | `Accordion`, `AccordionItem` | - |
+| Disclosure | `Disclosure` | `v-model:open` |
+| Tooltip | `Tooltip` | - |
+| Popover | `Popover` | `v-model:open` |
+| Autocomplete | `Autocomplete`, `AutocompleteOption` | `v-model` |
+| Listbox | `Listbox`, `ListboxOption` | `v-model` |
+| Select | `Select`, `SelectOption` | `v-model` |
+
+### Dialog
+
+```vue
+<script setup>
+import { Dialog, Button } from '@grimoire/yetzirah-vue'
+import { ref } from 'vue'
+
+const isOpen = ref(false)
+</script>
+
+<template>
+  <Button @click="isOpen = true">Open Dialog</Button>
+
+  <Dialog v-model:open="isOpen">
+    <div class="pa4 bg-white br3">
+      <h2>Dialog Title</h2>
+      <p>Dialog content goes here.</p>
+      <Button @click="isOpen = false">Close</Button>
+    </div>
+  </Dialog>
+</template>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `false` | v-model:open binding |
+| `static` | `boolean` | `false` | Prevent backdrop dismiss |
+
+### Select
+
+```vue
+<script setup>
+import { Select, SelectOption } from '@grimoire/yetzirah-vue'
+import { ref } from 'vue'
+
+const selected = ref('')
+</script>
+
+<template>
+  <Select v-model="selected" placeholder="Choose an option...">
+    <SelectOption value="1">Option 1</SelectOption>
+    <SelectOption value="2">Option 2</SelectOption>
+    <SelectOption value="3">Option 3</SelectOption>
+  </Select>
+</template>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `modelValue` | `string \| string[]` | `''` | v-model binding |
+| `multiple` | `boolean` | `false` | Enable multi-select |
+| `disabled` | `boolean` | `false` | Disable the select |
+| `placeholder` | `string` | - | Placeholder text |
+
+### Tabs
+
+```vue
+<script setup>
+import { Tabs, TabList, Tab, TabPanel } from '@grimoire/yetzirah-vue'
+</script>
+
+<template>
+  <Tabs>
+    <TabList>
+      <Tab>Tab 1</Tab>
+      <Tab>Tab 2</Tab>
+      <Tab>Tab 3</Tab>
+    </TabList>
+    <TabPanel>Content for Tab 1</TabPanel>
+    <TabPanel>Content for Tab 2</TabPanel>
+    <TabPanel>Content for Tab 3</TabPanel>
+  </Tabs>
+</template>
+```
+
+### Menu
+
+```vue
+<script setup>
+import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire/yetzirah-vue'
+</script>
+
+<template>
+  <Menu>
+    <MenuTrigger>
+      <Button>Open Menu</Button>
+    </MenuTrigger>
+    <MenuItem @click="handleEdit">Edit</MenuItem>
+    <MenuItem @click="handleDelete">Delete</MenuItem>
+  </Menu>
+</template>
+```
+
+### Autocomplete
+
+```vue
+<script setup>
+import { Autocomplete, AutocompleteOption } from '@grimoire/yetzirah-vue'
+import { ref } from 'vue'
+
+const value = ref('')
+const options = ['Apple', 'Banana', 'Cherry', 'Date']
+</script>
+
+<template>
+  <Autocomplete v-model="value" placeholder="Search fruits...">
+    <AutocompleteOption
+      v-for="option in options"
+      :key="option"
+      :value="option"
+    >
+      {{ option }}
+    </AutocompleteOption>
+  </Autocomplete>
+</template>
 ```
 
 ## Available Components (Tier 2)

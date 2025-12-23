@@ -52,6 +52,122 @@ Svelte's compiler has first-class Web Component support:
 
 Our wrappers are intentionally minimal, primarily providing TypeScript definitions and following Svelte conventions.
 
+## Available Components (Tier 1)
+
+All Tier 1 core components are available with Svelte-idiomatic bindings:
+
+| Component | Import | Binding Support |
+|-----------|--------|-----------------|
+| Button | `Button` | - |
+| Dialog | `Dialog` | `bind:open` |
+| Drawer | `Drawer` | `bind:open` |
+| Tabs | `Tabs`, `TabList`, `Tab`, `TabPanel` | - |
+| Menu | `Menu`, `MenuItem`, `MenuTrigger` | - |
+| Accordion | `Accordion`, `AccordionItem` | - |
+| Disclosure | `Disclosure` | `bind:open` |
+| Tooltip | `Tooltip` | - |
+| Popover | `Popover` | `bind:open` |
+| Autocomplete | `Autocomplete`, `AutocompleteOption` | `bind:value` |
+| Listbox | `Listbox`, `ListboxOption` | `bind:value` |
+| Select | `Select`, `SelectOption` | `bind:value` |
+
+### Dialog
+
+```svelte
+<script>
+  import { Dialog, Button } from '@grimoire/yetzirah-svelte'
+  let isOpen = false
+</script>
+
+<Button on:click={() => isOpen = true}>Open Dialog</Button>
+
+<Dialog bind:open={isOpen}>
+  <div class="pa4 bg-white br3">
+    <h2>Dialog Title</h2>
+    <p>Dialog content goes here.</p>
+    <Button on:click={() => isOpen = false}>Close</Button>
+  </div>
+</Dialog>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `open` | `boolean` | `false` | Two-way bindable open state |
+| `isStatic` | `boolean` | `false` | Prevent backdrop dismiss |
+
+### Select
+
+```svelte
+<script>
+  import { Select, SelectOption } from '@grimoire/yetzirah-svelte'
+  let selected = ''
+</script>
+
+<Select bind:value={selected} placeholder="Choose an option...">
+  <SelectOption value="1">Option 1</SelectOption>
+  <SelectOption value="2">Option 2</SelectOption>
+  <SelectOption value="3">Option 3</SelectOption>
+</Select>
+```
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `string \| string[]` | `''` | Two-way bindable value |
+| `multiple` | `boolean` | `false` | Enable multi-select |
+| `disabled` | `boolean` | `false` | Disable the select |
+| `placeholder` | `string` | - | Placeholder text |
+
+### Tabs
+
+```svelte
+<script>
+  import { Tabs, TabList, Tab, TabPanel } from '@grimoire/yetzirah-svelte'
+</script>
+
+<Tabs>
+  <TabList>
+    <Tab>Tab 1</Tab>
+    <Tab>Tab 2</Tab>
+    <Tab>Tab 3</Tab>
+  </TabList>
+  <TabPanel>Content for Tab 1</TabPanel>
+  <TabPanel>Content for Tab 2</TabPanel>
+  <TabPanel>Content for Tab 3</TabPanel>
+</Tabs>
+```
+
+### Menu
+
+```svelte
+<script>
+  import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire/yetzirah-svelte'
+</script>
+
+<Menu>
+  <MenuTrigger>
+    <Button>Open Menu</Button>
+  </MenuTrigger>
+  <MenuItem on:click={handleEdit}>Edit</MenuItem>
+  <MenuItem on:click={handleDelete}>Delete</MenuItem>
+</Menu>
+```
+
+### Autocomplete
+
+```svelte
+<script>
+  import { Autocomplete, AutocompleteOption } from '@grimoire/yetzirah-svelte'
+  let value = ''
+  const options = ['Apple', 'Banana', 'Cherry', 'Date']
+</script>
+
+<Autocomplete bind:value placeholder="Search fruits...">
+  {#each options as option}
+    <AutocompleteOption value={option}>{option}</AutocompleteOption>
+  {/each}
+</Autocomplete>
+```
+
 ## Available Components (Tier 2)
 
 The following Tier 2 components are available with Svelte-idiomatic bindings:
