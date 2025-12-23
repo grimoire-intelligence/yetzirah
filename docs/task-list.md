@@ -43,7 +43,7 @@ Move the completed Tier 2 core + React task list to `docs/old/task-list-tier-2-c
 ---
 pr_id: PR-062
 title: Vue 3 Package Setup
-cold_state: ready
+cold_state: completed
 priority: critical
 complexity:
   score: 4
