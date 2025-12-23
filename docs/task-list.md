@@ -179,7 +179,7 @@ Document and demonstrate import map usage for CDN bundles. Import maps allow bar
 ---
 pr_id: PR-129
 title: CDN Demo Page
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
@@ -213,7 +213,7 @@ Create a comprehensive demo page that loads Yetzirah entirely from CDN with no b
 ---
 pr_id: PR-130
 title: Script Tag Auto-Registration
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -391,7 +391,7 @@ Create integration tests that verify CDN bundles work correctly in a browser env
 ---
 pr_id: PR-135
 title: CDN Hosting Guide
-cold_state: new
+cold_state: completed
 priority: low
 complexity:
   score: 2

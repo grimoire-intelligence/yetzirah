@@ -16,6 +16,8 @@ export default defineConfig({
     'tier1': 'src/tier1.js',
     // Re-export index for tree-shaking
     'index': 'src/cdn-index.js',
+    // Auto-registration entry point for script tag usage
+    'auto': 'src/cdn-entry.js',
     // Tier 1 individual components
     'button': 'src/button.js',
     'disclosure': 'src/disclosure.js',

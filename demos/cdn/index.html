@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yetzirah CDN Demo - All Tier 1 Components</title>
+
+  <!-- Tachyons CSS from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+
+  <!-- Optional Yetzirah stylesheets -->
+  <link rel="stylesheet" href="../../packages/core/dialog.css">
+  <link rel="stylesheet" href="../../packages/core/src/dark.css">
+
+  <!-- Demo-specific styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="sans-serif">
+  <header class="pa4 bg-navy white">
+    <div class="mw8 center">
+      <nav class="mb3">
+        <a href="../index.html" class="link light-blue">&larr; All Demos</a>
+        <span class="mh2 light-gray">|</span>
+        <a href="importmap.html" class="link light-blue">Import Map Demo</a>
+      </nav>
+      <h1 class="f2 fw6 mb2 mt0">Yetzirah CDN Demo</h1>
+      <p class="f5 lh-copy light-gray mt0 mb3">
+        All Tier 1 components loaded from local CDN build. No build step required.
+      </p>
+      <div class="flex items-center gap3">
+        <span class="f6 light-blue">Theme:</span>
+        <ytz-theme-toggle class="flex items-center">
+          <span class="ml2 f6">Dark mode</span>
+        </ytz-theme-toggle>
+      </div>
+    </div>
+  </header>
+
+  <main class="pa4 mw8 center">
+    <!-- Button Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Button</h2>
+      <p class="f5 lh-copy gray mb3">
+        Polymorphic button that renders as &lt;button&gt; or &lt;a&gt; based on href attribute.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-button class="ph3 pv2 br2 bn white bg-blue pointer">
+          Primary Button
+        </ytz-button>
+        <ytz-button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">
+          Secondary Button
+        </ytz-button>
+        <ytz-button href="#dialog" class="ph3 pv2 br2 bn white bg-green pointer">
+          Link Button
+        </ytz-button>
+        <ytz-button disabled class="ph3 pv2 br2 bn white bg-gray">
+          Disabled
+        </ytz-button>
+      </div>
+
+      <pre class="code-block f6"><code>&lt;ytz-button class="ph3 pv2 br2 bn white bg-blue"&gt;Primary&lt;/ytz-button&gt;
+&lt;ytz-button href="/page"&gt;Link Button&lt;/ytz-button&gt;</code></pre>
+    </section>
+
+    <!-- Dialog Component -->
+    <section id="dialog" class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Dialog</h2>
+      <p class="f5 lh-copy gray mb3">
+        Modal dialog with focus trap, scroll lock, and keyboard handling.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <button
+          onclick="document.getElementById('demo-dialog').showModal()"
+          class="ph3 pv2 br2 bn white bg-blue pointer"
+        >
+          Open Dialog
+        </button>
+        <button
+          onclick="document.getElementById('static-dialog').showModal()"
+          class="ph3 pv2 br2 bn white bg-purple pointer"
+        >
+          Static Dialog
+        </button>
+      </div>
+
+      <ytz-dialog id="demo-dialog">
+        <div class="dialog-content pa4 bg-white br3 shadow-2 mw6">
+          <h2 class="f4 fw6 mt0 mb3">Hello from Yetzirah!</h2>
+          <p class="lh-copy mb3">
+            This dialog was loaded from CDN. It has focus trapping, escape-to-close,
+            and backdrop click dismiss.
+          </p>
+          <div class="flex justify-end">
+            <button
+              onclick="this.closest('ytz-dialog').close()"
+              class="ph3 pv2 br2 bn white bg-blue pointer"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </ytz-dialog>
+
+      <ytz-dialog id="static-dialog" static>
+        <div class="dialog-content pa4 bg-white br3 shadow-2 mw6">
+          <h2 class="f4 fw6 mt0 mb3">Static Dialog</h2>
+          <p class="lh-copy mb3">
+            This dialog won't close when clicking the backdrop.
+            You must use the close button or press Escape.
+          </p>
+          <div class="flex gap3 justify-end">
+            <button
+              onclick="this.closest('ytz-dialog').close()"
+              class="ph3 pv2 br2 ba b--gray gray bg-white pointer"
+            >
+              Cancel
+            </button>
+            <button
+              onclick="this.closest('ytz-dialog').close()"
+              class="ph3 pv2 br2 bn white bg-purple pointer"
+            >
+              Confirm
+            </button>
+          </div>
+        </div>
+      </ytz-dialog>
+
+      <pre class="code-block f6 mt3"><code>&lt;ytz-dialog id="my-dialog"&gt;
+  &lt;div class="dialog-content pa4 bg-white br3"&gt;
+    Content here
+  &lt;/div&gt;
+&lt;/ytz-dialog&gt;
+
+document.getElementById('my-dialog').showModal()</code></pre>
+    </section>
+
+    <!-- Drawer Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Drawer</h2>
+      <p class="f5 lh-copy gray mb3">
+        Slide-in panel from any edge with focus trap.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <button
+          onclick="document.getElementById('left-drawer').show()"
+          class="ph3 pv2 br2 bn white bg-blue pointer"
+        >
+          Left Drawer
+        </button>
+        <button
+          onclick="document.getElementById('right-drawer').show()"
+          class="ph3 pv2 br2 bn white bg-green pointer"
+        >
+          Right Drawer
+        </button>
+        <button
+          onclick="document.getElementById('bottom-drawer').show()"
+          class="ph3 pv2 br2 bn white bg-orange pointer"
+        >
+          Bottom Drawer
+        </button>
+      </div>
+
+      <ytz-drawer id="left-drawer" anchor="left">
+        <div class="drawer-content h-100 w5 bg-white pa4">
+          <h3 class="f5 fw6 mt0 mb3">Left Drawer</h3>
+          <nav>
+            <a href="#" class="db pv2 link blue">Dashboard</a>
+            <a href="#" class="db pv2 link blue">Settings</a>
+            <a href="#" class="db pv2 link blue">Profile</a>
+          </nav>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="mt4 ph3 pv2 br2 bn white bg-blue pointer"
+          >
+            Close
+          </button>
+        </div>
+      </ytz-drawer>
+
+      <ytz-drawer id="right-drawer" anchor="right">
+        <div class="drawer-content h-100 w5 bg-white pa4">
+          <h3 class="f5 fw6 mt0 mb3">Right Drawer</h3>
+          <p class="lh-copy">Notification panel or detail view.</p>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="mt4 ph3 pv2 br2 bn white bg-green pointer"
+          >
+            Close
+          </button>
+        </div>
+      </ytz-drawer>
+
+      <ytz-drawer id="bottom-drawer" anchor="bottom">
+        <div class="drawer-content w-100 bg-white pa4" style="height: 300px;">
+          <h3 class="f5 fw6 mt0 mb3">Bottom Drawer</h3>
+          <p class="lh-copy">Mobile-friendly action sheet.</p>
+          <button
+            onclick="this.closest('ytz-drawer').close()"
+            class="mt4 ph3 pv2 br2 bn white bg-orange pointer"
+          >
+            Close
+          </button>
+        </div>
+      </ytz-drawer>
+
+      <pre class="code-block f6 mt3"><code>&lt;ytz-drawer anchor="left"&gt;
+  &lt;div class="drawer-content"&gt;Navigation&lt;/div&gt;
+&lt;/ytz-drawer&gt;</code></pre>
+    </section>
+
+    <!-- Tabs Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Tabs</h2>
+      <p class="f5 lh-copy gray mb3">
+        Accessible tabbed interface with keyboard navigation.
+      </p>
+
+      <ytz-tabs value="overview" class="mb3">
+        <div class="flex bb b--light-gray" role="tablist">
+          <ytz-tab panel="overview" class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue">Overview</ytz-tab>
+          <ytz-tab panel="features" class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue">Features</ytz-tab>
+          <ytz-tab panel="usage" class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue">Usage</ytz-tab>
+        </div>
+        <ytz-tabpanel id="overview" class="pa3 bg-near-white br2 br--bottom">
+          <p class="ma0">Yetzirah is a headless component library built with Web Components.</p>
+        </ytz-tabpanel>
+        <ytz-tabpanel id="features" class="pa3 bg-near-white br2 br--bottom">
+          <ul class="ma0 pl3">
+            <li>Zero dependencies</li>
+            <li>Framework agnostic</li>
+            <li>Accessible by default</li>
+            <li>Minimal bundle size</li>
+          </ul>
+        </ytz-tabpanel>
+        <ytz-tabpanel id="usage" class="pa3 bg-near-white br2 br--bottom">
+          <p class="ma0">Load from CDN, use with any framework, or vanilla JS!</p>
+        </ytz-tabpanel>
+      </ytz-tabs>
+
+      <pre class="code-block f6"><code>&lt;ytz-tabs value="tab1"&gt;
+  &lt;ytz-tab panel="tab1"&gt;Tab 1&lt;/ytz-tab&gt;
+  &lt;ytz-tabpanel id="tab1"&gt;Content&lt;/ytz-tabpanel&gt;
+&lt;/ytz-tabs&gt;</code></pre>
+    </section>
+
+    <!-- Accordion Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Accordion</h2>
+      <p class="f5 lh-copy gray mb3">
+        Coordinated disclosure components with optional exclusive mode.
+      </p>
+
+      <ytz-accordion exclusive class="ba b--light-gray br2 mb3">
+        <ytz-accordion-item class="bb b--light-gray">
+          <button class="w-100 tl pa3 bn bg-transparent pointer f5 fw5">
+            What is Yetzirah?
+          </button>
+          <div class="pa3 pt0 lh-copy">
+            Yetzirah is a headless component library that provides accessible,
+            unstyled Web Components for common UI patterns.
+          </div>
+        </ytz-accordion-item>
+        <ytz-accordion-item class="bb b--light-gray">
+          <button class="w-100 tl pa3 bn bg-transparent pointer f5 fw5">
+            How does it work with CDN?
+          </button>
+          <div class="pa3 pt0 lh-copy">
+            Simply add a script tag pointing to the CDN bundle, and all custom
+            elements are automatically registered. No build step needed!
+          </div>
+        </ytz-accordion-item>
+        <ytz-accordion-item>
+          <button class="w-100 tl pa3 bn bg-transparent pointer f5 fw5">
+            What about styling?
+          </button>
+          <div class="pa3 pt0 lh-copy">
+            Components are unstyled by default. Use Tachyons, your own CSS,
+            or any CSS framework to style them.
+          </div>
+        </ytz-accordion-item>
+      </ytz-accordion>
+
+      <pre class="code-block f6"><code>&lt;ytz-accordion exclusive&gt;
+  &lt;ytz-accordion-item&gt;
+    &lt;button&gt;Question&lt;/button&gt;
+    &lt;div&gt;Answer&lt;/div&gt;
+  &lt;/ytz-accordion-item&gt;
+&lt;/ytz-accordion&gt;</code></pre>
+    </section>
+
+    <!-- Disclosure Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Disclosure</h2>
+      <p class="f5 lh-copy gray mb3">
+        Simple expandable/collapsible content.
+      </p>
+
+      <ytz-disclosure class="mb3">
+        <button class="w-100 tl pa3 ba b--light-gray br2 bg-near-white pointer f5 fw5">
+          Click to expand details
+        </button>
+        <div class="pa3 ba b--light-gray br2 br--bottom bt-0 lh-copy">
+          <p class="mt0">This content is revealed when you click the trigger button.</p>
+          <p class="mb0">Yetzirah handles all the ARIA attributes automatically.</p>
+        </div>
+      </ytz-disclosure>
+
+      <pre class="code-block f6"><code>&lt;ytz-disclosure&gt;
+  &lt;button&gt;Toggle&lt;/button&gt;
+  &lt;div&gt;Hidden content&lt;/div&gt;
+&lt;/ytz-disclosure&gt;</code></pre>
+    </section>
+
+    <!-- Tooltip Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Tooltip</h2>
+      <p class="f5 lh-copy gray mb3">
+        Accessible tooltips with automatic positioning.
+      </p>
+
+      <div class="flex flex-wrap gap4 mb3">
+        <ytz-tooltip placement="top">
+          <button class="ph3 pv2 br2 bn white bg-blue pointer">
+            Hover (top)
+          </button>
+          <span slot="content" class="tooltip-content">
+            Tooltip on top
+          </span>
+        </ytz-tooltip>
+
+        <ytz-tooltip placement="bottom">
+          <button class="ph3 pv2 br2 bn white bg-green pointer">
+            Hover (bottom)
+          </button>
+          <span slot="content" class="tooltip-content">
+            Tooltip on bottom
+          </span>
+        </ytz-tooltip>
+
+        <ytz-tooltip placement="left">
+          <button class="ph3 pv2 br2 bn white bg-purple pointer">
+            Hover (left)
+          </button>
+          <span slot="content" class="tooltip-content">
+            Tooltip on left
+          </span>
+        </ytz-tooltip>
+
+        <ytz-tooltip placement="right" delay="500">
+          <button class="ph3 pv2 br2 bn white bg-orange pointer">
+            Hover (delayed)
+          </button>
+          <span slot="content" class="tooltip-content">
+            500ms delay
+          </span>
+        </ytz-tooltip>
+      </div>
+
+      <pre class="code-block f6"><code>&lt;ytz-tooltip placement="top"&gt;
+  &lt;button&gt;Hover me&lt;/button&gt;
+  &lt;span slot="content"&gt;Tooltip text&lt;/span&gt;
+&lt;/ytz-tooltip&gt;</code></pre>
+    </section>
+
+    <!-- Popover Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Popover</h2>
+      <p class="f5 lh-copy gray mb3">
+        Click-triggered positioned content for menus and forms.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-popover placement="bottom">
+          <button class="ph3 pv2 br2 bn white bg-blue pointer">
+            Click me
+          </button>
+          <div slot="content" class="popover-content pa3 bg-white br2 shadow-2 ba b--light-gray">
+            <p class="mt0 mb2 f6">Popover content here!</p>
+            <button class="f6 ph2 pv1 br2 bn white bg-blue pointer">Action</button>
+          </div>
+        </ytz-popover>
+
+        <ytz-popover placement="right">
+          <button class="ph3 pv2 br2 bn white bg-green pointer">
+            Info popover
+          </button>
+          <div slot="content" class="popover-content pa3 bg-washed-green br2 shadow-1 ba b--light-green">
+            <p class="mt0 mb0 f6 dark-green">Helpful information displayed here.</p>
+          </div>
+        </ytz-popover>
+      </div>
+
+      <pre class="code-block f6"><code>&lt;ytz-popover placement="bottom"&gt;
+  &lt;button&gt;Toggle&lt;/button&gt;
+  &lt;div slot="content"&gt;Popover content&lt;/div&gt;
+&lt;/ytz-popover&gt;</code></pre>
+    </section>
+
+    <!-- Menu Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Menu</h2>
+      <p class="f5 lh-copy gray mb3">
+        Dropdown menu with keyboard navigation and proper ARIA.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-menu>
+          <button slot="trigger" class="ph3 pv2 br2 bn white bg-blue pointer">
+            Actions Menu
+          </button>
+          <ytz-menuitem class="menu-item">Edit</ytz-menuitem>
+          <ytz-menuitem class="menu-item">Duplicate</ytz-menuitem>
+          <ytz-menuitem class="menu-item">Archive</ytz-menuitem>
+          <ytz-menuitem class="menu-item dark-red">Delete</ytz-menuitem>
+        </ytz-menu>
+
+        <ytz-menu>
+          <button slot="trigger" class="ph3 pv2 br2 bn white bg-purple pointer">
+            With Disabled Item
+          </button>
+          <ytz-menuitem class="menu-item">Option 1</ytz-menuitem>
+          <ytz-menuitem class="menu-item" disabled>Disabled Option</ytz-menuitem>
+          <ytz-menuitem class="menu-item">Option 3</ytz-menuitem>
+        </ytz-menu>
+      </div>
+
+      <pre class="code-block f6"><code>&lt;ytz-menu&gt;
+  &lt;button slot="trigger"&gt;Open Menu&lt;/button&gt;
+  &lt;ytz-menuitem&gt;Edit&lt;/ytz-menuitem&gt;
+  &lt;ytz-menuitem&gt;Delete&lt;/ytz-menuitem&gt;
+&lt;/ytz-menu&gt;</code></pre>
+    </section>
+
+    <!-- Autocomplete Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Autocomplete</h2>
+      <p class="f5 lh-copy gray mb3">
+        Text input with filtering and selection.
+      </p>
+
+      <ytz-autocomplete class="dib mb3" style="width: 300px;">
+        <input
+          slot="input"
+          type="text"
+          placeholder="Search fruits..."
+          class="pa2 ba b--light-gray br2 w-100"
+        >
+        <ytz-option value="apple">Apple</ytz-option>
+        <ytz-option value="banana">Banana</ytz-option>
+        <ytz-option value="cherry">Cherry</ytz-option>
+        <ytz-option value="date">Date</ytz-option>
+        <ytz-option value="elderberry">Elderberry</ytz-option>
+        <ytz-option value="fig">Fig</ytz-option>
+        <ytz-option value="grape">Grape</ytz-option>
+      </ytz-autocomplete>
+
+      <pre class="code-block f6"><code>&lt;ytz-autocomplete&gt;
+  &lt;input slot="input" placeholder="Search..."&gt;
+  &lt;ytz-option value="apple"&gt;Apple&lt;/ytz-option&gt;
+  &lt;ytz-option value="banana"&gt;Banana&lt;/ytz-option&gt;
+&lt;/ytz-autocomplete&gt;</code></pre>
+    </section>
+
+    <!-- Select Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Select</h2>
+      <p class="f5 lh-copy gray mb3">
+        Dropdown select with custom trigger.
+      </p>
+
+      <div class="flex flex-wrap gap3 mb3">
+        <ytz-select placeholder="Choose a color" class="dib" style="min-width: 200px;">
+          <ytz-option value="red">Red</ytz-option>
+          <ytz-option value="green">Green</ytz-option>
+          <ytz-option value="blue">Blue</ytz-option>
+          <ytz-option value="yellow">Yellow</ytz-option>
+        </ytz-select>
+
+        <ytz-select placeholder="Multi-select" multiple class="dib" style="min-width: 200px;">
+          <ytz-option value="small">Small</ytz-option>
+          <ytz-option value="medium">Medium</ytz-option>
+          <ytz-option value="large">Large</ytz-option>
+        </ytz-select>
+      </div>
+
+      <pre class="code-block f6"><code>&lt;ytz-select placeholder="Choose..."&gt;
+  &lt;ytz-option value="a"&gt;Option A&lt;/ytz-option&gt;
+  &lt;ytz-option value="b"&gt;Option B&lt;/ytz-option&gt;
+&lt;/ytz-select&gt;</code></pre>
+    </section>
+
+    <!-- Listbox Component -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Listbox</h2>
+      <p class="f5 lh-copy gray mb3">
+        Keyboard-navigable list selection.
+      </p>
+
+      <ytz-listbox class="listbox-demo dib mb3">
+        <ytz-option value="react">React</ytz-option>
+        <ytz-option value="vue">Vue</ytz-option>
+        <ytz-option value="svelte">Svelte</ytz-option>
+        <ytz-option value="angular">Angular</ytz-option>
+        <ytz-option value="solid">Solid</ytz-option>
+      </ytz-listbox>
+
+      <pre class="code-block f6"><code>&lt;ytz-listbox&gt;
+  &lt;ytz-option value="a"&gt;Option A&lt;/ytz-option&gt;
+  &lt;ytz-option value="b"&gt;Option B&lt;/ytz-option&gt;
+&lt;/ytz-listbox&gt;</code></pre>
+    </section>
+
+    <!-- Tier 2 Components Preview -->
+    <section class="demo-section mb5 pb4 bb b--light-gray">
+      <h2 class="f3 fw6 mb3">Tier 2 Components</h2>
+      <p class="f5 lh-copy gray mb3">
+        Additional components included in the full core bundle.
+      </p>
+
+      <div class="flex flex-wrap gap4 items-start">
+        <div>
+          <h4 class="f6 fw6 mb2 gray">Toggle</h4>
+          <ytz-toggle class="toggle-demo" aria-label="Enable feature"></ytz-toggle>
+        </div>
+
+        <div>
+          <h4 class="f6 fw6 mb2 gray">Chip</h4>
+          <div class="flex gap2">
+            <ytz-chip class="chip-demo">Tag 1</ytz-chip>
+            <ytz-chip class="chip-demo" deletable>Deletable</ytz-chip>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="f6 fw6 mb2 gray">Icon Button</h4>
+          <ytz-icon-button aria-label="Settings" tooltip class="icon-btn-demo">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M11.49 3.17c-.38-1.56-2.6-1.56-2.98 0a1.532 1.532 0 01-2.286.948c-1.372-.836-2.942.734-2.106 2.106.54.886.061 2.042-.947 2.287-1.561.379-1.561 2.6 0 2.978a1.532 1.532 0 01.947 2.287c-.836 1.372.734 2.942 2.106 2.106a1.532 1.532 0 012.287.947c.379 1.561 2.6 1.561 2.978 0a1.533 1.533 0 012.287-.947c1.372.836 2.942-.734 2.106-2.106a1.533 1.533 0 01.947-2.287c1.561-.379 1.561-2.6 0-2.978a1.532 1.532 0 01-.947-2.287c.836-1.372-.734-2.942-2.106-2.106a1.532 1.532 0 01-2.287-.947zM10 13a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd"/>
+            </svg>
+          </ytz-icon-button>
+        </div>
+
+        <div class="w-100 w-50-ns">
+          <h4 class="f6 fw6 mb2 gray">Slider</h4>
+          <ytz-slider value="50" min="0" max="100" class="slider-demo w-100"></ytz-slider>
+        </div>
+      </div>
+    </section>
+
+    <!-- Usage Info -->
+    <section class="demo-section mb5">
+      <h2 class="f3 fw6 mb3">Usage</h2>
+
+      <div class="bg-near-white pa4 br2 mb4">
+        <h3 class="f5 fw6 mt0 mb3">Script Tag (Simplest)</h3>
+        <pre class="code-block f6 mb0"><code>&lt;!-- Load all components --&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"&gt;&lt;/script&gt;
+
+&lt;!-- Or just Tier 1 (~6KB gzipped) --&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/tier1.js"&gt;&lt;/script&gt;</code></pre>
+      </div>
+
+      <div class="bg-near-white pa4 br2 mb4">
+        <h3 class="f5 fw6 mt0 mb3">Import Maps (npm-like DX)</h3>
+        <pre class="code-block f6 mb0"><code>&lt;script type="importmap"&gt;
+{
+  "imports": {
+    "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"
+  }
+}
+&lt;/script&gt;
+
+&lt;script type="module"&gt;
+  import 'yetzirah';
+  // All components now available!
+&lt;/script&gt;</code></pre>
+      </div>
+
+      <div class="bg-near-white pa4 br2">
+        <h3 class="f5 fw6 mt0 mb3">Individual Components</h3>
+        <pre class="code-block f6 mb0"><code>&lt;!-- Load only what you need --&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js"&gt;&lt;/script&gt;
+&lt;script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/tabs.js"&gt;&lt;/script&gt;</code></pre>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pa4 bg-near-white bt b--light-gray">
+    <div class="mw8 center">
+      <p class="f6 gray ma0">
+        Yetzirah - CDN Demo |
+        <a href="../index.html" class="link blue">All Demos</a> |
+        <a href="importmap.html" class="link blue">Import Map Demo</a> |
+        <a href="https://github.com/grimoire-intelligence/yetzirah" class="link blue">GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <!-- Load Yetzirah from local CDN build -->
+  <script type="module">
+    import '../../packages/core/cdn/core.js';
+
+    // Log component registration
+    console.log('Yetzirah components loaded from CDN');
+
+    // Demo: Listen for component events
+    document.querySelectorAll('ytz-menu').forEach(menu => {
+      menu.addEventListener('select', e => {
+        console.log('Menu item selected:', e.detail.value);
+      });
+    });
+
+    document.querySelectorAll('ytz-autocomplete').forEach(ac => {
+      ac.addEventListener('change', e => {
+        console.log('Autocomplete changed:', e.detail.value);
+      });
+    });
+
+    document.querySelectorAll('ytz-select').forEach(select => {
+      select.addEventListener('change', e => {
+        console.log('Select changed:', e.detail.value);
+      });
+    });
+
+    document.querySelectorAll('ytz-chip[deletable]').forEach(chip => {
+      chip.addEventListener('delete', e => {
+        e.target.remove();
+        console.log('Chip deleted');
+      });
+    });
+
+    document.querySelectorAll('ytz-slider').forEach(slider => {
+      slider.addEventListener('change', e => {
+        console.log('Slider value:', e.detail.value);
+      });
+    });
+  </script>
+</body>
+</html>
