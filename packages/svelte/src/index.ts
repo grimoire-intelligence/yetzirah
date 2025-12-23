@@ -13,6 +13,29 @@
 // Re-export core version
 export { VERSION } from '@grimoire/yetzirah-core'
 
+// Tier 1 component wrappers
+export { default as Button } from './Button.svelte'
+export { default as Disclosure } from './Disclosure.svelte'
+export { default as Dialog } from './Dialog.svelte'
+export { default as Tabs } from './Tabs.svelte'
+export { default as TabList } from './TabList.svelte'
+export { default as Tab } from './Tab.svelte'
+export { default as TabPanel } from './TabPanel.svelte'
+export { default as Tooltip } from './Tooltip.svelte'
+export { default as Menu } from './Menu.svelte'
+export { default as MenuItem } from './MenuItem.svelte'
+export { default as MenuTrigger } from './MenuTrigger.svelte'
+export { default as Autocomplete } from './Autocomplete.svelte'
+export { default as AutocompleteOption } from './AutocompleteOption.svelte'
+export { default as Listbox } from './Listbox.svelte'
+export { default as ListboxOption } from './ListboxOption.svelte'
+export { default as Select } from './Select.svelte'
+export { default as SelectOption } from './SelectOption.svelte'
+export { default as Accordion } from './Accordion.svelte'
+export { default as AccordionItem } from './AccordionItem.svelte'
+export { default as Drawer } from './Drawer.svelte'
+export { default as Popover } from './Popover.svelte'
+
 // Tier 2 component wrappers
 export { default as Toggle } from './Toggle.svelte'
 export { default as Chip } from './Chip.svelte'
