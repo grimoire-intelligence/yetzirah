@@ -97,6 +97,60 @@ Optimize for buildless and global deployment.
 
 **Target audience:** Developers without build steps, applications serving bandwidth-constrained users.
 
+### Phase 4: Minimalist Framework Extensions
+
+Extend to frameworks that share Yetzirah's philosophy of minimalism, performance, and buildless-friendly development.
+
+#### Solid.js Wrappers (`@grimoire/yetzirah-solid`)
+
+Solid.js developers prioritize fine-grained reactivity and minimal overhead—the same values Yetzirah embodies. The wrapper will be thin, leveraging Solid's excellent Web Component interop.
+
+- Native signal integration for component state
+- Ref forwarding with Solid's reactive primitives
+- Event handler bridging (`on:close` → `addEventListener`)
+- SSR-compatible (Solid Start)
+
+**Why Solid fits:** Solid compiles away the framework, leaving only DOM operations—philosophically aligned with "the platform is sufficient."
+
+#### Alpine.js Plugin (`@grimoire/yetzirah-alpine`)
+
+Alpine.js is the jQuery of the modern era: progressive enhancement without build steps. Its CDN-first distribution makes it a natural complement to Yetzirah's Phase 3 work.
+
+**The problem:** Yetzirah components dispatch `CustomEvent` with data in `event.detail.value`. Alpine expects `event.target.value` (like native form elements). This impedance mismatch requires boilerplate to bridge.
+
+**The solution:** An `x-ytz` directive that harmonizes event handling:
+
+```html
+<!-- Without plugin: manual event.detail extraction -->
+<yz-select @change="value = $event.detail.value">
+
+<!-- With x-ytz: Alpine-native experience -->
+<yz-select x-ytz @change="value = $event.target.value">
+```
+
+**Plugin responsibilities:**
+- `x-ytz` directive: Patches element to expose `event.detail.value` as `event.target.value`
+- `x-ytz:model` directive: Two-way binding for form components (Select, Autocomplete, Toggle)
+- Auto-detection of Yetzirah components (no manual `x-ytz` needed if plugin is loaded)
+- Alpine magics: `$ytz.open()`, `$ytz.close()` for imperative control
+
+**Example:**
+
+```html
+<div x-data="{ country: '' }">
+  <yz-select x-ytz:model="country">
+    <yz-option value="us">United States</yz-option>
+    <yz-option value="uk">United Kingdom</yz-option>
+  </yz-select>
+
+  <p>Selected: <span x-text="country"></span></p>
+</div>
+```
+
+**Target audience:**
+- Solid.js: Performance-obsessed developers who find React too heavy
+- Alpine.js: Server-rendered apps (Rails, Laravel, Django) adding interactivity without SPAs
+
 ---
 
 ## Technical Foundation
@@ -117,8 +171,22 @@ Optimize for buildless and global deployment.
 | `@grimoire/yetzirah-vue` | `v-model` support, `.sync` handling, event mapping |
 | `@grimoire/yetzirah-svelte` | Event forwarding, reactive attribute binding |
 | `@grimoire/yetzirah-angular` | `ControlValueAccessor` for forms, change detection |
+| `@grimoire/yetzirah-solid` | Signal integration, fine-grained reactivity binding |
+| `@grimoire/yetzirah-alpine` | `x-ytz` directive, `event.detail` → `event.target` bridging |
 
 Wrappers are thin. If a wrapper exceeds 50 lines per component, something is wrong.
+
+### No Wrapper Needed
+
+Some frameworks have native Web Component interop and need no wrapper:
+
+| Framework | Why It Works |
+|-----------|--------------|
+| **Lit** | Built on Web Components. Yetzirah elements compose with Lit elements naturally—they're the same technology. |
+| **HTMX** | HTML-centric, attribute-driven. Yetzirah's `<ytz-*>` elements work like any HTML element with `hx-*` attributes. |
+| **Stencil** | Compiles to Web Components. Native interop with other custom elements including Yetzirah. |
+
+These frameworks can import `@grimoire/yetzirah-core` directly and use `<ytz-dialog>`, `<ytz-menu>`, etc. without any bridging code.
 
 ---
 
@@ -1063,6 +1131,8 @@ export const Box = (props) => <div {...props} />
 - Vue 3
 - Svelte 4+
 - Angular 16+
+- Solid.js 1.8+ (Phase 4)
+- Alpine.js 3.x (Phase 4)
 
 ---
 
@@ -1101,6 +1171,13 @@ export const Box = (props) => <div {...props} />
 3. Total Tier 1 < 10kb from CDN
 4. Sub-Saharan Africa load time < 3s on 3G
 
+### Phase 4 (Solid + Alpine)
+1. Solid.js wrappers with native signal integration
+2. Alpine.js plugin with `x-ytz` directive
+3. Two-way binding support (`x-ytz:model`)
+4. CDN distribution for Alpine plugin (no build step required)
+5. Documentation for Rails/Laravel/Django integration patterns
+
 ---
 
 ## Competitive Position
@@ -1113,6 +1190,11 @@ export const Box = (props) => <div {...props} />
 | Vue | Community | ✗ | ✗ | Via wrapper | ✓ |
 | Svelte | Community | ✗ | ✗ | Via wrapper | ✓ |
 | Angular | Community | ✗ | ✗ | Via wrapper | ✓ |
+| Solid | ✗ | ✗ | ✗ | Via wrapper | ✓ (Phase 4) |
+| Alpine | ✗ | ✗ | ✗ | ✗ | ✓ (Phase 4) |
+| Lit | ✗ | ✗ | ✗ | ✓ | ✓ (native) |
+| HTMX | ✗ | ✗ | ✗ | ✗ | ✓ (native) |
+| Stencil | ✗ | ✗ | ✗ | ✓ | ✓ (native) |
 | Vanilla | ✗ | ✗ | ✗ | ✓ | ✓ |
 | CDN-ready | ✗ | ✗ | ✗ | ✓ | ✓ |
 | AI-native | ✗ | Partial | Partial | Partial | ✓ |

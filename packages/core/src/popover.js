@@ -26,6 +26,7 @@
  */
 
 import { position } from './utils/position.js'
+import { register } from './utils/register.js'
 
 let popoverId = 0
 
@@ -237,6 +238,6 @@ class YtzPopover extends HTMLElement {
   }
 }
 
-customElements.define('ytz-popover', YtzPopover)
+register('ytz-popover', YtzPopover)
 
 export { YtzPopover }

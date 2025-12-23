@@ -18,7 +18,9 @@
     "size": "pnpm build && node scripts/check-size.js",
     "size:report": "pnpm build && node scripts/check-size.js --report",
     "check-size": "node scripts/check-size.js",
-    "verify-bundles": "pnpm build && node scripts/check-size.js --generate-report"
+    "verify-bundles": "pnpm build && node scripts/check-size.js --generate-report",
+    "analyze-bundle": "node scripts/analyze-bundle.js",
+    "analyze-bundle:report": "node scripts/analyze-bundle.js --report"
   },
   "repository": {
     "type": "git",

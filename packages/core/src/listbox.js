@@ -4,6 +4,7 @@
  */
 
 import { createKeyNav } from './utils/key-nav.js'
+import { register } from './utils/register.js'
 
 let listboxId = 0
 
@@ -143,6 +144,6 @@ class YtzListbox extends HTMLElement {
   }
 }
 
-customElements.define('ytz-listbox', YtzListbox)
+register('ytz-listbox', YtzListbox)
 
 export { YtzListbox }

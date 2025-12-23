@@ -12,6 +12,10 @@ export default defineConfig({
   entry: {
     // Combined bundle with all components
     'core': 'src/index.js',
+    // Tier 1 only bundle (target: <10KB gzipped)
+    'tier1': 'src/tier1.js',
+    // Re-export index for tree-shaking
+    'index': 'src/cdn-index.js',
     // Tier 1 individual components
     'button': 'src/button.js',
     'disclosure': 'src/disclosure.js',

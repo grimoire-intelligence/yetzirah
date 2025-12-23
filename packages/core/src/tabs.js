@@ -9,6 +9,7 @@
  */
 
 import { createKeyNav } from './utils/key-nav.js'
+import { register } from './utils/register.js'
 
 let tabId = 0
 
@@ -135,8 +136,8 @@ class YtzTabPanel extends HTMLElement {
   }
 }
 
-customElements.define('ytz-tabs', YtzTabs)
-customElements.define('ytz-tab', YtzTab)
-customElements.define('ytz-tabpanel', YtzTabPanel)
+register('ytz-tabs', YtzTabs)
+register('ytz-tab', YtzTab)
+register('ytz-tabpanel', YtzTabPanel)
 
 export { YtzTabs, YtzTab, YtzTabPanel }

@@ -33,6 +33,18 @@ npm install @grimoire/yetzirah-core
 ```
 > Framework packages automatically include the core, so you only need to install `@grimoire/yetzirah-core` directly when using vanilla HTML without a framework.
 
+### No Wrapper Needed
+
+These frameworks have excellent Web Component interop and work with Yetzirah out of the box:
+
+| Framework | Notes |
+|-----------|-------|
+| **Lit** | Built on Web Components—Yetzirah elements compose naturally |
+| **HTMX** | HTML-centric; Yetzirah elements work like any HTML element |
+| **Stencil** | Web Components compiler; native interop with `<ytz-*>` elements |
+
+Just import `@grimoire/yetzirah-core` and use the elements directly.
+
 ## Philosophy
 
 - **Unstyled by default** - You bring your own CSS (Tachyons, custom styles, etc.)

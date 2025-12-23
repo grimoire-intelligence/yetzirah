@@ -4,6 +4,7 @@
  */
 import { position } from './utils/position.js'
 import { createKeyNav } from './utils/key-nav.js'
+import { register } from './utils/register.js'
 
 let selectId = 0
 
@@ -204,5 +205,5 @@ class YtzSelect extends HTMLElement {
   }
 }
 
-customElements.define('ytz-select', YtzSelect)
+register('ytz-select', YtzSelect)
 export { YtzSelect }

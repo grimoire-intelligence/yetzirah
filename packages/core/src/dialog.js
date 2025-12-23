@@ -20,6 +20,7 @@
  */
 
 import { createFocusTrap } from './utils/focus-trap.js'
+import { register } from './utils/register.js'
 
 /** @type {string} Selector for focusable elements */
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -159,6 +160,6 @@ class YtzDialog extends HTMLElement {
   }
 }
 
-customElements.define('ytz-dialog', YtzDialog)
+register('ytz-dialog', YtzDialog)
 
 export { YtzDialog }

@@ -23,6 +23,8 @@
  * </ytz-accordion>
  */
 
+import { register } from './utils/register.js'
+
 let accordionItemId = 0
 
 /**
@@ -193,7 +195,7 @@ class YtzAccordionItem extends HTMLElement {
   }
 }
 
-customElements.define('ytz-accordion', YtzAccordion)
-customElements.define('ytz-accordion-item', YtzAccordionItem)
+register('ytz-accordion', YtzAccordion)
+register('ytz-accordion-item', YtzAccordionItem)
 
 export { YtzAccordion, YtzAccordionItem }

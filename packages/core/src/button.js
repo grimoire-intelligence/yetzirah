@@ -12,6 +12,8 @@
  * <ytz-button onclick="handleSubmit()" class="ph3 pv2 br2 white bg-blue">Submit</ytz-button>
  */
 
+import { register } from './utils/register.js'
+
 /** @type {string} Default classes for anchor elements */
 const ANCHOR_DEFAULTS = 'pointer font-inherit no-underline dib'
 
@@ -68,6 +70,6 @@ class YtzButton extends HTMLElement {
   #contentCache = null
 }
 
-customElements.define('ytz-button', YtzButton)
+register('ytz-button', YtzButton)
 
 export { YtzButton }
