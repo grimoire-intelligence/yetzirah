@@ -7,7 +7,6 @@
 - Haiku agents: 3 (for complexity 1-3)
 - Sonnet agents: 2 (for complexity 4-5)
 ---
-
 ## Block 0: Archive & Preparation
 
 ### PR-061: Archive Tier 2 Core Task List
@@ -38,14 +37,13 @@ Move the completed Tier 2 core + React task list to `docs/old/task-list-tier-2-c
 - [ ] New task list in docs/task-list.md
 - [ ] Git history clean
 ---
-
 ## Block 1: Vue 3 Package Setup & Components
 
 ### PR-062: Vue 3 Package Setup
 ---
 pr_id: PR-062
 title: Vue 3 Package Setup
-cold_state: pending
+cold_state: ready
 priority: critical
 complexity:
   score: 4
@@ -83,12 +81,11 @@ Initialize `@yetzirah/vue` package for Vue 3 wrappers. Configure build to output
 - [ ] Vue 3.3+ peer dependency configured
 - [ ] Tree-shakeable exports
 ---
-
 ### PR-063: Vue Toggle Wrapper
 ---
 pr_id: PR-063
 title: Vue Toggle Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -117,12 +114,11 @@ Create Vue 3 wrapper for ytz-toggle with `v-model:checked` support. Use defineMo
 - [ ] Template ref access to web component
 - [ ] < 50 lines
 ---
-
 ### PR-064: Vue Chip Wrapper
 ---
 pr_id: PR-064
 title: Vue Chip Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -151,12 +147,11 @@ Create Vue 3 wrapper for ytz-chip. Forward deletable and disabled props. Emit de
 - [ ] Slot content passed through
 - [ ] < 50 lines
 ---
-
 ### PR-065: Vue IconButton Wrapper
 ---
 pr_id: PR-065
 title: Vue IconButton Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -185,12 +180,11 @@ Create Vue 3 wrapper for ytz-icon-button. Forward aria-label (required), tooltip
 - [ ] @click event emitted
 - [ ] < 50 lines
 ---
-
 ### PR-066: Vue Slider Wrapper
 ---
 pr_id: PR-066
 title: Vue Slider Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 3
@@ -219,12 +213,11 @@ Create Vue 3 wrapper for ytz-slider with v-model support. Handle number type coe
 - [ ] @input and @change events
 - [ ] < 50 lines
 ---
-
 ### PR-067: Vue ThemeToggle Wrapper
 ---
 pr_id: PR-067
 title: Vue ThemeToggle Wrapper
-cold_state: pending
+cold_state: ready
 priority: medium
 complexity:
   score: 2
@@ -253,12 +246,11 @@ Create Vue 3 wrapper for ytz-theme-toggle. Forward storageKey and noPersist prop
 - [ ] @themechange event emitted
 - [ ] < 50 lines
 ---
-
 ### PR-068: Vue DataGrid Wrapper
 ---
 pr_id: PR-068
 title: Vue DataGrid Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 4
@@ -291,14 +283,13 @@ Create Vue 3 wrapper for ytz-datagrid. Handle data array prop via property sette
 - [ ] @sort, @rowselect, @rowactivate events
 - [ ] < 75 lines per component
 ---
-
 ## Block 2: Svelte 4+ Package Setup & Components
 
 ### PR-069: Svelte Package Setup
 ---
 pr_id: PR-069
 title: Svelte Package Setup
-cold_state: pending
+cold_state: ready
 priority: critical
 complexity:
   score: 4
@@ -333,12 +324,11 @@ Initialize `@yetzirah/svelte` package for Svelte 4+ wrappers. These should be th
 - [ ] Svelte 4+ peer dependency
 - [ ] svelte-package configured
 ---
-
 ### PR-070: Svelte Toggle Wrapper
 ---
 pr_id: PR-070
 title: Svelte Toggle Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -367,12 +357,11 @@ Create Svelte wrapper for ytz-toggle. Use bind:checked for two-way binding. Forw
 - [ ] disabled prop
 - [ ] < 30 lines (thinnest)
 ---
-
 ### PR-071: Svelte Chip Wrapper
 ---
 pr_id: PR-071
 title: Svelte Chip Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 1
@@ -401,12 +390,11 @@ Create Svelte wrapper for ytz-chip. Forward delete event via on:delete. Pass thr
 - [ ] Slot forwarding
 - [ ] < 25 lines
 ---
-
 ### PR-072: Svelte IconButton Wrapper
 ---
 pr_id: PR-072
 title: Svelte IconButton Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 1
@@ -435,12 +423,11 @@ Create Svelte wrapper for ytz-icon-button. Forward aria-label and tooltip props.
 - [ ] on:click event
 - [ ] < 25 lines
 ---
-
 ### PR-073: Svelte Slider Wrapper
 ---
 pr_id: PR-073
 title: Svelte Slider Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -469,12 +456,11 @@ Create Svelte wrapper for ytz-slider. Use bind:value for two-way binding. Forwar
 - [ ] min, max, step props
 - [ ] < 35 lines
 ---
-
 ### PR-074: Svelte ThemeToggle Wrapper
 ---
 pr_id: PR-074
 title: Svelte ThemeToggle Wrapper
-cold_state: pending
+cold_state: ready
 priority: medium
 complexity:
   score: 1
@@ -503,12 +489,11 @@ Create Svelte wrapper for ytz-theme-toggle. Forward storageKey and noPersist pro
 - [ ] on:themechange event
 - [ ] < 30 lines
 ---
-
 ### PR-075: Svelte DataGrid Wrapper
 ---
 pr_id: PR-075
 title: Svelte DataGrid Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 3
@@ -540,14 +525,13 @@ Create Svelte wrapper for ytz-datagrid. Use use:action or bind:this to set data 
 - [ ] on:sort, on:rowselect, on:rowactivate events
 - [ ] < 50 lines per component
 ---
-
 ## Block 3: Angular 16+ Package Setup & Components
 
 ### PR-076: Angular Package Setup
 ---
 pr_id: PR-076
 title: Angular Package Setup
-cold_state: pending
+cold_state: completed
 priority: critical
 complexity:
   score: 5
@@ -588,12 +572,11 @@ Initialize `@yetzirah/angular` package for Angular 16+ wrappers. Use standalone 
 - [ ] CUSTOM_ELEMENTS_SCHEMA applied
 - [ ] Angular 16+ peer dependency
 ---
-
 ### PR-077: Angular Toggle Wrapper with ControlValueAccessor
 ---
 pr_id: PR-077
 title: Angular Toggle Wrapper with ControlValueAccessor
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 4
@@ -624,12 +607,11 @@ Create Angular wrapper for ytz-toggle implementing ControlValueAccessor for Angu
 - [ ] OnPush change detection
 - [ ] < 50 lines
 ---
-
 ### PR-078: Angular Chip Wrapper
 ---
 pr_id: PR-078
 title: Angular Chip Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -659,12 +641,11 @@ Create Angular wrapper for ytz-chip. Use @Input for deletable and disabled. Use 
 - [ ] ng-content for slot
 - [ ] < 50 lines
 ---
-
 ### PR-079: Angular IconButton Wrapper
 ---
 pr_id: PR-079
 title: Angular IconButton Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 2
@@ -693,12 +674,11 @@ Create Angular wrapper for ytz-icon-button. Use @Input for ariaLabel (mapped to 
 - [ ] ng-content for icon
 - [ ] < 50 lines
 ---
-
 ### PR-080: Angular Slider Wrapper with ControlValueAccessor
 ---
 pr_id: PR-080
 title: Angular Slider Wrapper with ControlValueAccessor
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 4
@@ -728,12 +708,11 @@ Create Angular wrapper for ytz-slider implementing ControlValueAccessor. Handle 
 - [ ] (change) and (input) outputs
 - [ ] < 50 lines
 ---
-
 ### PR-081: Angular ThemeToggle Wrapper
 ---
 pr_id: PR-081
 title: Angular ThemeToggle Wrapper
-cold_state: pending
+cold_state: ready
 priority: medium
 complexity:
   score: 2
@@ -762,12 +741,11 @@ Create Angular wrapper for ytz-theme-toggle. Use @Input for storageKey and noPer
 - [ ] @Output() themeChange
 - [ ] < 50 lines
 ---
-
 ### PR-082: Angular DataGrid Wrapper
 ---
 pr_id: PR-082
 title: Angular DataGrid Wrapper
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 5
@@ -801,14 +779,13 @@ Create Angular wrapper for ytz-datagrid. Handle data array via property binding 
 - [ ] OnPush change detection
 - [ ] < 75 lines per component
 ---
-
 ## Block 4: Documentation & Verification
 
 ### PR-083: Framework Wrapper Demos
 ---
 pr_id: PR-083
 title: Framework Wrapper Demos
-cold_state: pending
+cold_state: ready
 priority: medium
 complexity:
   score: 4
@@ -842,12 +819,11 @@ Create demo pages showing framework wrappers in action. Include examples of v-mo
 - [ ] Angular demo with forms examples
 - [ ] Framework comparison page
 ---
-
 ### PR-084: README Update with Framework Support
 ---
 pr_id: PR-084
 title: README Update with Framework Support
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 3
@@ -879,12 +855,11 @@ Update main README.md and individual package READMEs to document framework wrapp
 - [ ] Usage examples with framework idioms
 - [ ] API reference for each component
 ---
-
 ### PR-085: Bundle Verification for All Frameworks
 ---
 pr_id: PR-085
 title: Bundle Verification for All Frameworks
-cold_state: pending
+cold_state: ready
 priority: high
 complexity:
   score: 3
@@ -916,7 +891,6 @@ Verify bundle sizes for all framework packages. Svelte wrappers should be smalle
 - [ ] Tree-shaking verified for each
 - [ ] Individual component imports work
 ---
-
 ## Dependency Graph
 
 ```
