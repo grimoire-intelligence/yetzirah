@@ -250,7 +250,7 @@ Create Vue 3 wrapper for ytz-theme-toggle. Forward storageKey and noPersist prop
 ---
 pr_id: PR-068
 title: Vue DataGrid Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 4
