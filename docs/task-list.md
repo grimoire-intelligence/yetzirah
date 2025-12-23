@@ -712,7 +712,7 @@ Create Angular wrapper for ytz-slider implementing ControlValueAccessor. Handle 
 ---
 pr_id: PR-081
 title: Angular ThemeToggle Wrapper
-cold_state: ready
+cold_state: completed
 priority: medium
 complexity:
   score: 2
