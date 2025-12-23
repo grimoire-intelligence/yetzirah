@@ -678,7 +678,7 @@ Create Angular wrapper for ytz-icon-button. Use @Input for ariaLabel (mapped to 
 ---
 pr_id: PR-080
 title: Angular Slider Wrapper with ControlValueAccessor
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 4
