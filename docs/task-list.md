@@ -328,7 +328,7 @@ Initialize `@yetzirah/svelte` package for Svelte 4+ wrappers. These should be th
 ---
 pr_id: PR-070
 title: Svelte Toggle Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
