@@ -16,12 +16,12 @@ export default defineConfig({
       exclude: ['src/__tests__/**']
     },
     deps: {
-      inline: ['@yetzirah/core']
+      inline: ['@grimoire/yetzirah-core']
     }
   },
   resolve: {
     alias: {
-      '@yetzirah/core': resolve(__dirname, './vitest.mock.ts')
+      '@grimoire/yetzirah-core': resolve(__dirname, './vitest.mock.ts')
     }
   }
 })

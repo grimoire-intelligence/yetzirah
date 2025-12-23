@@ -2,7 +2,7 @@
  * ytz-tooltip - Positioned hint text Web Component.
  * Shows on hover/focus with configurable delay and placement.
  *
- * @module @yetzirah/core/tooltip
+ * @module @grimoire/yetzirah-core/tooltip
  * @example
  * <ytz-tooltip>
  *   <button>Hover me</button>

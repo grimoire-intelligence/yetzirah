@@ -73,7 +73,7 @@ estimated_files:
     description: Vue package documentation
 ---
 **Description:**
-Initialize `@yetzirah/vue` package for Vue 3 wrappers. Configure build to output ESM + CJS with TypeScript declarations. Set up Vue 3.3+ as peer dependency (for defineModel support). Include proper exports for tree-shaking.
+Initialize `@grimoire/yetzirah-vue` package for Vue 3 wrappers. Configure build to output ESM + CJS with TypeScript declarations. Set up Vue 3.3+ as peer dependency (for defineModel support). Include proper exports for tree-shaking.
 
 **Acceptance Criteria:**
 - [ ] `pnpm build` succeeds in packages/vue
@@ -298,7 +298,7 @@ estimated_files:
     description: Svelte package documentation
 ---
 **Description:**
-Initialize `@yetzirah/svelte` package for Svelte 4+ wrappers. These should be the thinnest wrappers since Svelte has excellent Web Component interop. Configure svelte-package for library build.
+Initialize `@grimoire/yetzirah-svelte` package for Svelte 4+ wrappers. These should be the thinnest wrappers since Svelte has excellent Web Component interop. Configure svelte-package for library build.
 
 **Acceptance Criteria:**
 - [ ] `pnpm build` succeeds
@@ -528,7 +528,7 @@ estimated_files:
     description: Angular package documentation
 ---
 **Description:**
-Initialize `@yetzirah/angular` package for Angular 16+ wrappers. Use standalone components (Angular 14+). Configure CUSTOM_ELEMENTS_SCHEMA for Web Component support. Set up ng-packagr for library build.
+Initialize `@grimoire/yetzirah-angular` package for Angular 16+ wrappers. Use standalone components (Angular 14+). Configure CUSTOM_ELEMENTS_SCHEMA for Web Component support. Set up ng-packagr for library build.
 
 **Acceptance Criteria:**
 - [ ] `pnpm build` succeeds with ng-packagr
@@ -909,9 +909,9 @@ estimated_files:
 Verify bundle sizes for all framework packages. Svelte wrappers should be smallest. Vue and Angular should be similar. Ensure tree-shaking works.
 
 **Expected Bundle Sizes (gzipped):**
-- @yetzirah/svelte: < 2kb (thinnest wrappers)
-- @yetzirah/vue: < 4kb
-- @yetzirah/angular: < 5kb (ControlValueAccessor overhead)
+- @grimoire/yetzirah-svelte: < 2kb (thinnest wrappers)
+- @grimoire/yetzirah-vue: < 4kb
+- @grimoire/yetzirah-angular: < 5kb (ControlValueAccessor overhead)
 
 **Acceptance Criteria:**
 - [ ] Svelte bundle < 2kb gzipped
@@ -984,6 +984,6 @@ Angular (6): PR-077, PR-078, PR-079, PR-080, PR-081, PR-082
 - **Svelte wrappers are thinnest:** Svelte's Web Component interop is excellent, wrappers may be <25 lines
 - **Angular has most boilerplate:** ControlValueAccessor requires more code but enables full forms integration
 - **Vue uses defineModel:** Vue 3.4+ defineModel macro simplifies v-model implementation
-- **All packages depend on @yetzirah/core:** Ensure core is built first
+- **All packages depend on @grimoire/yetzirah-core:** Ensure core is built first
 - **Test strategy:** Use testing-library equivalents for each framework (vue-testing-library, svelte-testing-library, @testing-library/angular)
 - **Line limits:** Simple wrappers <50 lines, DataGrid allowed <75 lines

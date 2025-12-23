@@ -1,5 +1,5 @@
 /**
- * @yetzirah/svelte
+ * @grimoire/yetzirah-svelte
  *
  * Svelte wrappers for Yetzirah Web Components.
  * Thin wrappers providing Svelte-idiomatic APIs.
@@ -11,7 +11,7 @@
  */
 
 // Re-export core version
-export { VERSION } from '@yetzirah/core'
+export { VERSION } from '@grimoire/yetzirah-core'
 
 // Tier 2 component wrappers
 export { default as Toggle } from './Toggle.svelte'

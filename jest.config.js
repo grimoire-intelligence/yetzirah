@@ -3,12 +3,17 @@ export default {
   testEnvironment: 'jsdom',
   roots: ['<rootDir>/packages'],
   testMatch: ['**/*.test.js'],
+  testPathIgnorePatterns: [
+    '/node_modules/',
+    '/dist/',
+    '/.svelte-kit/',
+  ],
   moduleFileExtensions: ['js'],
   transform: {
     '^.+\.js$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!@yetzirah)',
+    '/node_modules/(?!@grimoire)',
   ],
   collectCoverageFrom: [
     'packages/*/src/**/*.js',

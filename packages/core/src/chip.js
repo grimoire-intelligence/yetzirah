@@ -2,7 +2,7 @@
  * ytz-chip - Deletable tag/label Web Component.
  * A chip with optional delete button and keyboard support.
  *
- * @module @yetzirah/core/chip
+ * @module @grimoire/yetzirah-core/chip
  * @example
  * <ytz-chip>Tag</ytz-chip>
  *

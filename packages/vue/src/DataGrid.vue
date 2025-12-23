@@ -22,7 +22,7 @@
  * Vue 3 wrapper for ytz-datagrid Web Component.
  * Provides virtual scrolling, sorting, and row selection with full TypeScript support.
  *
- * @module @yetzirah/vue/DataGrid
+ * @module @grimoire/yetzirah-vue/DataGrid
  *
  * @example
  * <template>
@@ -50,7 +50,7 @@
  */
 
 import { ref, watch, nextTick } from 'vue'
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 
 /**
  * Column definition for DataGrid

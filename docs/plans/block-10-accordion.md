@@ -34,7 +34,7 @@ Two related Web Components that work together. The key difference from standalon
  * ytz-accordion - Coordinated disclosure container.
  * Manages multiple accordion items with optional exclusive mode.
  *
- * @module @yetzirah/core/accordion
+ * @module @grimoire/yetzirah-core/accordion
  * @example
  * <ytz-accordion>
  *   <ytz-accordion-item>
@@ -338,7 +338,7 @@ export { YtzAccordion, YtzAccordionItem } from './accordion.js'
 /**
  * React wrappers for ytz-accordion components.
  *
- * @module @yetzirah/react/accordion
+ * @module @grimoire/yetzirah-react/accordion
  * @example
  * <Accordion exclusive>
  *   <AccordionItem open={expanded === 'panel1'} onToggle={(open) => setExpanded(open ? 'panel1' : null)}>
@@ -351,7 +351,7 @@ export { YtzAccordion, YtzAccordionItem } from './accordion.js'
  *   </AccordionItem>
  * </Accordion>
  */
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**
@@ -857,8 +857,8 @@ item.addEventListener('toggle', (e) => {
       <h2 class="f4 fw6 mb3">React Usage</h2>
 
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
-import { Accordion, AccordionItem } from '@yetzirah/react'
-import '@yetzirah/core/disclosure.css' // Optional animations
+import { Accordion, AccordionItem } from '@grimoire/yetzirah-react'
+import '@grimoire/yetzirah-core/disclosure.css' // Optional animations
 
 // Uncontrolled - each item manages its own state
 function FAQ() {

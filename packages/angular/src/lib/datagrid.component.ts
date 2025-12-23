@@ -12,7 +12,7 @@ import {
   OnChanges,
   SimpleChanges
 } from '@angular/core';
-import '@yetzirah/core';
+import '@grimoire/yetzirah-core';
 
 /**
  * Column definition interface for DataGrid columns.

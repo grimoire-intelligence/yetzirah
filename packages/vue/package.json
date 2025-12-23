@@ -1,5 +1,5 @@
 {
-  "name": "@yetzirah/vue",
+  "name": "@grimoire/yetzirah-vue",
   "version": "0.1.0",
   "description": "Vue 3 wrappers for Yetzirah Web Components",
   "type": "module",
@@ -29,6 +29,7 @@
     "web-components",
     "ui",
     "accessibility",
+    "grimoire",
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
@@ -42,7 +43,7 @@
     "vue": ">=3.3.0"
   },
   "dependencies": {
-    "@yetzirah/core": "workspace:*"
+    "@grimoire/yetzirah-core": "workspace:*"
   },
   "sideEffects": false,
   "devDependencies": {

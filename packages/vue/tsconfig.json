@@ -6,7 +6,7 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "paths": {
-      "@yetzirah/core": ["../core/dist/index.d.ts"]
+      "@grimoire/yetzirah-core": ["../core/dist/index.d.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.vue"],

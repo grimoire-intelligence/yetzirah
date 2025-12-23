@@ -6,29 +6,29 @@ Unstyled, accessible Web Components with framework wrappers for React, Vue, Svel
 
 ### Vanilla HTML (Web Components)
 ```bash
-npm install @yetzirah/core
+npm install @grimoire/yetzirah-core
 ```
 
 ### React (18+)
 ```bash
-npm install @yetzirah/core @yetzirah/react
+npm install @grimoire/yetzirah-core @grimoire/yetzirah-react
 ```
 
 ### Vue (3.3+)
 ```bash
-npm install @yetzirah/core @yetzirah/vue
+npm install @grimoire/yetzirah-core @grimoire/yetzirah-vue
 ```
 > Requires Vue 3.3+ for `defineModel` support
 
 ### Svelte (4+)
 ```bash
-npm install @yetzirah/core @yetzirah/svelte
+npm install @grimoire/yetzirah-core @grimoire/yetzirah-svelte
 ```
 > Supports Svelte 4 and 5
 
 ### Angular (16+)
 ```bash
-npm install @yetzirah/core @yetzirah/angular
+npm install @grimoire/yetzirah-core @grimoire/yetzirah-angular
 ```
 > Requires Angular 16+ for standalone components
 
@@ -78,7 +78,7 @@ npm install @yetzirah/core @yetzirah/angular
 
 ```html
 <script type="module">
-  import '@yetzirah/core'
+  import '@grimoire/yetzirah-core'
 </script>
 
 <ytz-dialog id="my-dialog">
@@ -98,7 +98,7 @@ npm install @yetzirah/core @yetzirah/angular
 ### React
 
 ```jsx
-import { Dialog, Button, Toggle, Slider } from '@yetzirah/react'
+import { Dialog, Button, Toggle, Slider } from '@grimoire/yetzirah-react'
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -136,7 +136,7 @@ function App() {
 ```vue
 <script setup>
 import { ref } from 'vue'
-import { Toggle, Slider, ThemeToggle } from '@yetzirah/vue'
+import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-vue'
 
 const enabled = ref(false)
 const volume = ref(50)
@@ -161,7 +161,7 @@ const volume = ref(50)
 
 ```svelte
 <script>
-  import { Toggle, Slider, ThemeToggle } from '@yetzirah/svelte'
+  import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-svelte'
 
   let enabled = false
   let volume = 50
@@ -186,7 +186,7 @@ const volume = ref(50)
 // app.component.ts
 import { Component } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { Toggle, Slider, ThemeToggle } from '@yetzirah/angular'
+import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-angular'
 
 @Component({
   standalone: true,
@@ -241,10 +241,10 @@ Yetzirah components are unstyled. Use utility classes or custom CSS:
 
 ```js
 // Animation and positioning helpers
-import '@yetzirah/core/button.css'     // Hover/click feedback
-import '@yetzirah/core/dialog.css'     // Overlay positioning, fade-in
-import '@yetzirah/core/disclosure.css' // Expand/collapse animation
-import '@yetzirah/core/dark.css'       // Dark theme support
+import '@grimoire/yetzirah-core/button.css'     // Hover/click feedback
+import '@grimoire/yetzirah-core/dialog.css'     // Overlay positioning, fade-in
+import '@grimoire/yetzirah-core/disclosure.css' // Expand/collapse animation
+import '@grimoire/yetzirah-core/dark.css'       // Dark theme support
 ```
 
 ## Dark Mode
@@ -252,7 +252,7 @@ import '@yetzirah/core/dark.css'       // Dark theme support
 Use the ThemeToggle component for automatic dark mode support:
 
 ```html
-<link rel="stylesheet" href="@yetzirah/core/dark.css">
+<link rel="stylesheet" href="@grimoire/yetzirah-core/dark.css">
 <ytz-theme-toggle></ytz-theme-toggle>
 ```
 
@@ -387,19 +387,19 @@ pnpm test
 
 ```bash
 # Vue tests
-pnpm --filter @yetzirah/vue test
+pnpm --filter @grimoire/yetzirah-vue test
 
 # Svelte tests
-pnpm --filter @yetzirah/svelte test
+pnpm --filter @grimoire/yetzirah-svelte test
 
 # Angular tests
-pnpm --filter @yetzirah/angular test
+pnpm --filter @grimoire/yetzirah-angular test
 
 # React tests
-pnpm --filter @yetzirah/react test
+pnpm --filter @grimoire/yetzirah-react test
 
 # Core tests
-pnpm --filter @yetzirah/core test
+pnpm --filter @grimoire/yetzirah-core test
 ```
 
 ### Watch Mode

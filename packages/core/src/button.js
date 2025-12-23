@@ -2,7 +2,7 @@
  * ytz-button - Polymorphic button/anchor Web Component.
  * Renders <a> when href provided, <button> otherwise.
  *
- * @module @yetzirah/core/button
+ * @module @grimoire/yetzirah-core/button
  * @example
  * // Link button
  * <ytz-button href="/dashboard" class="ph3 pv2 br2 white bg-blue">Dashboard</ytz-button>

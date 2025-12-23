@@ -57,10 +57,10 @@ function UncontrolledDisclosure() {
  * React wrapper for ytz-disclosure Web Component.
  * Provides controlled/uncontrolled open state management.
  *
- * @module @yetzirah/react/disclosure
+ * @module @grimoire/yetzirah-react/disclosure
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

@@ -1,5 +1,5 @@
 {
-  "name": "@yetzirah/react",
+  "name": "@grimoire/yetzirah-react",
   "version": "0.1.0",
   "description": "React wrappers for Yetzirah Web Components",
   "type": "module",
@@ -25,6 +25,7 @@
     "web-components",
     "ui",
     "accessibility",
+    "grimoire",
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
@@ -39,7 +40,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@yetzirah/core": "workspace:*"
+    "@grimoire/yetzirah-core": "workspace:*"
   },
   "sideEffects": false
 }

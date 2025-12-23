@@ -92,7 +92,7 @@
         <div class="status">checked: <span id="toggle-status">false</span></div>
       </div>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
-  import { Toggle } from '@yetzirah/svelte'
+  import { Toggle } from '@grimoire/yetzirah-svelte'
   let enabled = false
 &lt;/script&gt;
 
@@ -111,7 +111,7 @@
         <ytz-slider id="svelte-slider" value="50" min="0" max="100"></ytz-slider>
       </div>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
-  import { Slider } from '@yetzirah/svelte'
+  import { Slider } from '@grimoire/yetzirah-svelte'
   let volume = 50
 &lt;/script&gt;
 
@@ -130,7 +130,7 @@
         <div class="status">Click X to remove tags</div>
       </div>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
-  import { Chip } from '@yetzirah/svelte'
+  import { Chip } from '@grimoire/yetzirah-svelte'
   let tags = ['Svelte', 'TypeScript', 'Vite', 'SSR']
 
   const removeTag = (tag) =&gt; {
@@ -155,7 +155,7 @@
         <div class="status">Click the heart to toggle favorite</div>
       </div>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
-  import { IconButton } from '@yetzirah/svelte'
+  import { IconButton } from '@grimoire/yetzirah-svelte'
   let isFavorite = false
 &lt;/script&gt;
 
@@ -180,7 +180,7 @@
         <div class="status">currentTheme: <span id="theme-status">light</span></div>
       </div>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
-  import { ThemeToggle } from '@yetzirah/svelte'
+  import { ThemeToggle } from '@grimoire/yetzirah-svelte'
   let theme = 'light'
 &lt;/script&gt;
 
@@ -203,7 +203,7 @@
         <div class="status">lastAction: <span id="grid-status">No action yet</span></div>
       </div>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
-  import { DataGrid } from '@yetzirah/svelte'
+  import { DataGrid } from '@grimoire/yetzirah-svelte'
 
   const data = [
     { name: 'Rich Harris', framework: 'Svelte', experience: '10+' },

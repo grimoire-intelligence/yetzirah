@@ -1,5 +1,5 @@
 {
-  "name": "@yetzirah/angular",
+  "name": "@grimoire/yetzirah-angular",
   "version": "0.1.0",
   "description": "Angular wrappers for Yetzirah Web Components",
   "type": "module",
@@ -29,6 +29,7 @@
     "web-components",
     "ui",
     "accessibility",
+    "grimoire",
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
@@ -44,7 +45,7 @@
     "@angular/forms": ">=16.0.0"
   },
   "dependencies": {
-    "@yetzirah/core": "workspace:*",
+    "@grimoire/yetzirah-core": "workspace:*",
     "tslib": "^2.6.0"
   },
   "devDependencies": {

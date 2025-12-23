@@ -54,7 +54,7 @@ importers:
 
   packages/angular:
     dependencies:
-      '@yetzirah/core':
+      '@grimoire/yetzirah-core':
         specifier: workspace:*
         version: link:../core
       tslib:
@@ -102,7 +102,7 @@ importers:
 
   packages/react:
     dependencies:
-      '@yetzirah/core':
+      '@grimoire/yetzirah-core':
         specifier: workspace:*
         version: link:../core
       react:
@@ -114,7 +114,7 @@ importers:
 
   packages/svelte:
     dependencies:
-      '@yetzirah/core':
+      '@grimoire/yetzirah-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:
@@ -142,7 +142,7 @@ importers:
 
   packages/vue:
     dependencies:
-      '@yetzirah/core':
+      '@grimoire/yetzirah-core':
         specifier: workspace:*
         version: link:../core
     devDependencies:

@@ -1,5 +1,5 @@
 /**
- * @yetzirah/vue
+ * @grimoire/yetzirah-vue
  *
  * Vue 3 wrappers for Yetzirah Web Components.
  * Provides Vue-idiomatic APIs with full TypeScript support.
@@ -8,7 +8,7 @@
  */
 
 // Re-export core version
-export { VERSION } from '@yetzirah/core'
+export { VERSION } from '@grimoire/yetzirah-core'
 
 // Tier 2 component wrappers
 export { default as Toggle } from './Toggle.vue'

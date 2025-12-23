@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '@yetzirah/core'
+	import '@grimoire/yetzirah-core'
 	import { onMount } from 'svelte'
 
 	/**

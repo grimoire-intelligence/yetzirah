@@ -1261,7 +1261,7 @@ Create project README and comprehensive MUI → Yetzirah migration guide.
 - Design philosophy (platform-native, AI-native, framework-agnostic, no-pinionated, readable source)
 - Tier 1 components shipped in Phase 1 (Button, Disclosure, Dialog, Tabs, Tooltip, Menu, Autocomplete) and derived components (Listbox, Select, Accordion, Drawer, Popover)
 - What we deliberately did NOT ship (Tier 2, Tier 3, non-goals like theming, animation, form validation)
-- Package structure (`@yetzirah/core`, `@yetzirah/react`, `demos/`)
+- Package structure (`@grimoire/yetzirah-core`, `@grimoire/yetzirah-react`, `demos/`)
 - Quick start / installation
 - Link to MUI Rosetta Stone (`demos/rosetta.html`)
 

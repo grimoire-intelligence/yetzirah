@@ -3,7 +3,7 @@
    * Svelte wrapper for ytz-theme-toggle Web Component.
    * Provides theme switching with persistence and system preference detection.
    *
-   * @module @yetzirah/svelte/ThemeToggle
+   * @module @grimoire/yetzirah-svelte/ThemeToggle
    *
    * @example
    * // Basic usage
@@ -20,7 +20,7 @@
    * </ThemeToggle>
    */
 
-  import '@yetzirah/core'
+  import '@grimoire/yetzirah-core'
 
   /**
    * The current theme ('light' or 'dark')

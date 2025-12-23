@@ -2,7 +2,7 @@
  * ytz-menu - Dropdown menu with keyboard navigation.
  * Opens on trigger click, positions relative to trigger, closes on click outside/escape.
  *
- * @module @yetzirah/core/menu
+ * @module @grimoire/yetzirah-core/menu
  * @example
  * <ytz-menu>
  *   <button slot="trigger">Open Menu</button>

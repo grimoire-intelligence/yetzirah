@@ -2,7 +2,7 @@
  * ytz-slider - Slider/Range Web Component.
  * An accessible slider with keyboard control and optional range support.
  *
- * @module @yetzirah/core/slider
+ * @module @grimoire/yetzirah-core/slider
  * @example
  * <ytz-slider min="0" max="100" value="50"></ytz-slider>
  *

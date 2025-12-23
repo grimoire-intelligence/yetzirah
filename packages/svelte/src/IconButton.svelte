@@ -2,10 +2,10 @@
   Svelte wrapper for ytz-icon-button Web Component.
   Provides icon button with required aria-label for accessibility.
 
-  @module @yetzirah/svelte/IconButton
+  @module @grimoire/yetzirah-svelte/IconButton
 -->
 <script>
-  import '@yetzirah/core'
+  import '@grimoire/yetzirah-core'
 
   /**
    * IconButton component - button for icon-only actions.

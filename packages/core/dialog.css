@@ -2,10 +2,10 @@
  * Optional interaction styles for ytz-dialog
  *
  * Import this stylesheet for overlay positioning and fade animations:
- *   import '@yetzirah/core/dialog.css'
+ *   import '@grimoire/yetzirah-core/dialog.css'
  *
  * Or in HTML:
- *   <link rel="stylesheet" href="@yetzirah/core/dialog.css">
+ *   <link rel="stylesheet" href="@grimoire/yetzirah-core/dialog.css">
  *
  * These styles are kept separate because Yetzirah takes no styling opinions.
  * However, overlay positioning and content animations are basic enough

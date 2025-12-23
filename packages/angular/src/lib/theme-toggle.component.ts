@@ -8,7 +8,7 @@ import {
   AfterViewInit,
   OnDestroy
 } from '@angular/core';
-import '@yetzirah/core';
+import '@grimoire/yetzirah-core';
 
 /**
  * Angular wrapper for ytz-theme-toggle Web Component.

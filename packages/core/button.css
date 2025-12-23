@@ -2,10 +2,10 @@
  * Optional interaction styles for ytz-button
  *
  * Import this stylesheet for hover/click feedback:
- *   import '@yetzirah/core/button.css'
+ *   import '@grimoire/yetzirah-core/button.css'
  *
  * Or in HTML:
- *   <link rel="stylesheet" href="@yetzirah/core/button.css">
+ *   <link rel="stylesheet" href="@grimoire/yetzirah-core/button.css">
  *
  * These styles are kept separate because Yetzirah takes no styling opinions.
  * However, tactile feedback is basic enough interaction behavior that most

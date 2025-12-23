@@ -1,15 +1,15 @@
-# @yetzirah/angular
+# @grimoire/yetzirah-angular
 
 Angular wrappers for Yetzirah Web Components - bringing Material Design behavior patterns to Angular 16+.
 
 ## Installation
 
 ```bash
-npm install @yetzirah/angular @yetzirah/core
+npm install @grimoire/yetzirah-angular @grimoire/yetzirah-core
 # or
-pnpm add @yetzirah/angular @yetzirah/core
+pnpm add @grimoire/yetzirah-angular @grimoire/yetzirah-core
 # or
-yarn add @yetzirah/angular @yetzirah/core
+yarn add @grimoire/yetzirah-angular @grimoire/yetzirah-core
 ```
 
 ## Usage
@@ -20,7 +20,7 @@ For apps using Angular's standalone component API:
 
 ```typescript
 import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import '@yetzirah/core'; // Import Web Components
+import '@grimoire/yetzirah-core'; // Import Web Components
 
 @Component({
   selector: 'app-root',
@@ -41,8 +41,8 @@ Alternatively, use the provided helper:
 
 ```typescript
 import { Component } from '@angular/core';
-import { provideYetzirah } from '@yetzirah/angular';
-import '@yetzirah/core';
+import { provideYetzirah } from '@grimoire/yetzirah-angular';
+import '@grimoire/yetzirah-core';
 
 @Component({
   selector: 'app-root',
@@ -60,8 +60,8 @@ For apps still using NgModule:
 ```typescript
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { YetzirahModule } from '@yetzirah/angular';
-import '@yetzirah/core'; // Import Web Components
+import { YetzirahModule } from '@grimoire/yetzirah-angular';
+import '@grimoire/yetzirah-core'; // Import Web Components
 
 @NgModule({
   imports: [
@@ -76,13 +76,13 @@ export class AppModule {}
 
 ### Loading Web Components
 
-You must ensure `@yetzirah/core` is loaded before using the components. There are several ways to do this:
+You must ensure `@grimoire/yetzirah-core` is loaded before using the components. There are several ways to do this:
 
 #### Method 1: Import in main.ts (Recommended)
 
 ```typescript
 // main.ts
-import '@yetzirah/core';
+import '@grimoire/yetzirah-core';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { AppComponent } from './app/app.component';
 
@@ -93,16 +93,16 @@ bootstrapApplication(AppComponent);
 
 ```html
 <!-- index.html -->
-<script type="module" src="https://unpkg.com/@yetzirah/core/dist/yetzirah.js"></script>
+<script type="module" src="https://unpkg.com/@grimoire/yetzirah-core/dist/yetzirah.js"></script>
 ```
 
 #### Method 3: Selective imports
 
 ```typescript
 // Import only the components you need for smaller bundle size
-import '@yetzirah/core/button';
-import '@yetzirah/core/dialog';
-import '@yetzirah/core/tabs';
+import '@grimoire/yetzirah-core/button';
+import '@grimoire/yetzirah-core/dialog';
+import '@grimoire/yetzirah-core/tabs';
 ```
 
 ## Available Components
@@ -150,7 +150,7 @@ Implements `ControlValueAccessor` for Angular forms integration.
 ```typescript
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Toggle } from '@yetzirah/angular';
+import { Toggle } from '@grimoire/yetzirah-angular';
 
 @Component({
   standalone: true,
@@ -179,7 +179,7 @@ export class MyComponent {
 
 ```typescript
 import { Component } from '@angular/core';
-import { Chip } from '@yetzirah/angular';
+import { Chip } from '@grimoire/yetzirah-angular';
 
 @Component({
   standalone: true,
@@ -206,7 +206,7 @@ export class MyComponent {
 
 ```typescript
 import { Component } from '@angular/core';
-import { IconButton } from '@yetzirah/angular';
+import { IconButton } from '@grimoire/yetzirah-angular';
 
 @Component({
   standalone: true,
@@ -235,7 +235,7 @@ Implements `ControlValueAccessor` for Angular forms integration.
 ```typescript
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Slider } from '@yetzirah/angular';
+import { Slider } from '@grimoire/yetzirah-angular';
 
 @Component({
   standalone: true,
@@ -267,7 +267,7 @@ export class MyComponent {
 
 ```typescript
 import { Component } from '@angular/core';
-import { DataGrid, DataGridColumn } from '@yetzirah/angular';
+import { DataGrid, DataGridColumn } from '@grimoire/yetzirah-angular';
 
 @Component({
   standalone: true,
@@ -306,7 +306,7 @@ export class MyComponent {
 
 ```typescript
 import { Component } from '@angular/core';
-import { ThemeToggle } from '@yetzirah/angular';
+import { ThemeToggle } from '@grimoire/yetzirah-angular';
 
 @Component({
   standalone: true,
@@ -372,15 +372,15 @@ Yetzirah components are unstyled by default. Import the optional CSS if desired:
 
 ```typescript
 // main.ts or styles.css
-import '@yetzirah/core/button.css';
-import '@yetzirah/core/dialog.css';
-import '@yetzirah/core/disclosure.css';
+import '@grimoire/yetzirah-core/button.css';
+import '@grimoire/yetzirah-core/dialog.css';
+import '@grimoire/yetzirah-core/disclosure.css';
 ```
 
 Or use the dark theme:
 
 ```typescript
-import '@yetzirah/core/dark.css';
+import '@grimoire/yetzirah-core/dark.css';
 ```
 
 ## Testing

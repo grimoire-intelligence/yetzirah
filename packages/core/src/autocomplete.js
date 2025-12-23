@@ -2,7 +2,7 @@
  * ytz-autocomplete - Text input with filterable dropdown selection.
  * Supports single and multi-select modes with async loading.
  *
- * @module @yetzirah/core/autocomplete
+ * @module @grimoire/yetzirah-core/autocomplete
  * @example
  * <ytz-autocomplete>
  *   <input slot="input" placeholder="Search...">

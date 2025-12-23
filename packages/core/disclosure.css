@@ -2,10 +2,10 @@
  * Optional interaction styles for ytz-disclosure
  *
  * Import this stylesheet for smooth expand/collapse animations:
- *   import '@yetzirah/core/disclosure.css'
+ *   import '@grimoire/yetzirah-core/disclosure.css'
  *
  * Or in HTML:
- *   <link rel="stylesheet" href="@yetzirah/core/disclosure.css">
+ *   <link rel="stylesheet" href="@grimoire/yetzirah-core/disclosure.css">
  *
  * These styles are kept separate because Yetzirah takes no styling opinions.
  * However, animated transitions are basic enough interaction behavior that most

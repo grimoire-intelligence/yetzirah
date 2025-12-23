@@ -1,15 +1,15 @@
-# @yetzirah/vue
+# @grimoire/yetzirah-vue
 
 Vue 3 wrappers for Yetzirah Web Components.
 
 ## Installation
 
 ```bash
-npm install @yetzirah/vue
+npm install @grimoire/yetzirah-vue
 # or
-pnpm add @yetzirah/vue
+pnpm add @grimoire/yetzirah-vue
 # or
-yarn add @yetzirah/vue
+yarn add @grimoire/yetzirah-vue
 ```
 
 ## Requirements
@@ -30,7 +30,7 @@ Yetzirah provides Vue 3 components that wrap the underlying Web Components with 
 
 ```vue
 <script setup lang="ts">
-import { YtzButton, YtzDialog } from '@yetzirah/vue'
+import { YtzButton, YtzDialog } from '@grimoire/yetzirah-vue'
 import { ref } from 'vue'
 
 const isOpen = ref(false)
@@ -54,7 +54,7 @@ All components are exported as named exports, enabling tree-shaking:
 
 ```typescript
 // Only imports the specific components you need
-import { YtzButton, YtzDialog } from '@yetzirah/vue'
+import { YtzButton, YtzDialog } from '@grimoire/yetzirah-vue'
 ```
 
 ## Available Components (Tier 2)
@@ -76,7 +76,7 @@ The following Tier 2 components are available with full Vue 3 support:
 
 ```vue
 <script setup>
-import { Toggle } from '@yetzirah/vue'
+import { Toggle } from '@grimoire/yetzirah-vue'
 import { ref } from 'vue'
 
 const enabled = ref(false)
@@ -101,7 +101,7 @@ const enabled = ref(false)
 
 ```vue
 <script setup>
-import { Chip } from '@yetzirah/vue'
+import { Chip } from '@grimoire/yetzirah-vue'
 </script>
 
 <template>
@@ -122,7 +122,7 @@ import { Chip } from '@yetzirah/vue'
 
 ```vue
 <script setup>
-import { IconButton } from '@yetzirah/vue'
+import { IconButton } from '@grimoire/yetzirah-vue'
 </script>
 
 <template>
@@ -142,7 +142,7 @@ import { IconButton } from '@yetzirah/vue'
 
 ```vue
 <script setup>
-import { Slider } from '@yetzirah/vue'
+import { Slider } from '@grimoire/yetzirah-vue'
 import { ref } from 'vue'
 
 const volume = ref(50)
@@ -171,7 +171,7 @@ const volume = ref(50)
 
 ```vue
 <script setup>
-import { DataGrid, DataGridColumn } from '@yetzirah/vue'
+import { DataGrid, DataGridColumn } from '@grimoire/yetzirah-vue'
 import { ref } from 'vue'
 
 const data = ref([
@@ -205,7 +205,7 @@ const data = ref([
 
 ```vue
 <script setup>
-import { ThemeToggle } from '@yetzirah/vue'
+import { ThemeToggle } from '@grimoire/yetzirah-vue'
 </script>
 
 <template>
@@ -255,7 +255,7 @@ Tests use [Vitest](https://vitest.dev/) with [@vue/test-utils](https://test-util
 This package includes full TypeScript definitions. The types are automatically exported and available when using TypeScript in your Vue project.
 
 ```typescript
-import type { YetzirahComponentProps, ValueProps } from '@yetzirah/vue'
+import type { YetzirahComponentProps, ValueProps } from '@grimoire/yetzirah-vue'
 ```
 
 ## Architecture

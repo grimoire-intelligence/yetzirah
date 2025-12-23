@@ -2,10 +2,10 @@
  * React wrapper for ytz-icon-button Web Component.
  * Provides icon button with required aria-label for accessibility.
  *
- * @module @yetzirah/react/icon-button
+ * @module @grimoire/yetzirah-react/icon-button
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle } from 'react'
 
 /**

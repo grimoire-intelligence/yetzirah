@@ -2,7 +2,7 @@
  * ytz-theme-toggle - Theme switching Web Component.
  * A toggle switch that controls light/dark theme with persistence.
  *
- * @module @yetzirah/core/theme-toggle
+ * @module @grimoire/yetzirah-core/theme-toggle
  * @example
  * <ytz-theme-toggle></ytz-theme-toggle>
  *

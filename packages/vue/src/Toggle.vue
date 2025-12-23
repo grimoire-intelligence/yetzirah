@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-toggle Web Component.
  * Provides v-model:checked for two-way binding with full TypeScript support.
  *
- * @module @yetzirah/vue/Toggle
+ * @module @grimoire/yetzirah-vue/Toggle
  *
  * @example
  * <template>
@@ -30,7 +30,7 @@
  * </template>
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 
 /**
  * Props for the Toggle component

@@ -12,7 +12,7 @@ import {
   forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import '@yetzirah/core';
+import '@grimoire/yetzirah-core';
 
 /**
  * Angular wrapper for ytz-toggle Web Component.

@@ -1,11 +1,11 @@
-# @yetzirah/svelte
+# @grimoire/yetzirah-svelte
 
 Svelte wrappers for Yetzirah Web Components.
 
 ## Installation
 
 ```bash
-pnpm add @yetzirah/svelte @yetzirah/core
+pnpm add @grimoire/yetzirah-svelte @grimoire/yetzirah-core
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ You can use Yetzirah Web Components directly in Svelte:
 
 ```svelte
 <script>
-  import '@yetzirah/core/button'
+  import '@grimoire/yetzirah-core/button'
 </script>
 
 <ytz-button on:click={() => console.log('clicked')}>
@@ -35,7 +35,7 @@ Or use the Svelte wrappers for better type safety:
 
 ```svelte
 <script>
-  import { Button } from '@yetzirah/svelte'
+  import { Button } from '@grimoire/yetzirah-svelte'
 </script>
 
 <Button on:click={() => console.log('clicked')}>
@@ -71,7 +71,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Toggle } from '@yetzirah/svelte'
+  import { Toggle } from '@grimoire/yetzirah-svelte'
   let enabled = false
 </script>
 
@@ -91,7 +91,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Chip } from '@yetzirah/svelte'
+  import { Chip } from '@grimoire/yetzirah-svelte'
 </script>
 
 <Chip deletable on:delete={() => console.log('deleted')}>Tag Name</Chip>
@@ -110,7 +110,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { IconButton } from '@yetzirah/svelte'
+  import { IconButton } from '@grimoire/yetzirah-svelte'
 </script>
 
 <IconButton aria-label="Close" tooltip="Close dialog" on:click={() => console.log('clicked')}>
@@ -128,7 +128,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Slider } from '@yetzirah/svelte'
+  import { Slider } from '@grimoire/yetzirah-svelte'
   let volume = 50
 </script>
 
@@ -152,7 +152,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { DataGrid, DataGridColumn } from '@yetzirah/svelte'
+  import { DataGrid, DataGridColumn } from '@grimoire/yetzirah-svelte'
 
   const data = [
     { id: 1, name: 'Alice', email: 'alice@example.com' },
@@ -183,7 +183,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { ThemeToggle } from '@yetzirah/svelte'
+  import { ThemeToggle } from '@grimoire/yetzirah-svelte'
 </script>
 
 <ThemeToggle storageKey="my-app-theme" on:themechange={(e) => console.log(e.detail)} />

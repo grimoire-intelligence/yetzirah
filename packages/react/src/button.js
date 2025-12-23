@@ -2,10 +2,10 @@
  * React wrapper for ytz-button Web Component.
  * Provides polymorphic button/anchor based on props.
  *
- * @module @yetzirah/react/button
+ * @module @grimoire/yetzirah-react/button
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle } from 'react'
 
 /**

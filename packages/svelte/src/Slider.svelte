@@ -3,13 +3,13 @@
 	 * Svelte wrapper for ytz-slider Web Component.
 	 * Provides bind:value for two-way binding with full Svelte integration.
 	 *
-	 * @module @yetzirah/svelte/Slider
+	 * @module @grimoire/yetzirah-svelte/Slider
 	 *
 	 * @example
 	 * <Slider bind:value={volume} min={0} max={100} />
 	 */
 
-	import '@yetzirah/core'
+	import '@grimoire/yetzirah-core'
 	import { onMount } from 'svelte'
 
 	let element

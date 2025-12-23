@@ -1,5 +1,5 @@
 {
-  "name": "@yetzirah/svelte",
+  "name": "@grimoire/yetzirah-svelte",
   "version": "0.1.0",
   "description": "Svelte wrappers for Yetzirah Web Components",
   "type": "module",
@@ -30,6 +30,7 @@
     "web-components",
     "ui",
     "accessibility",
+    "grimoire",
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
@@ -43,7 +44,7 @@
     "svelte": "^4.0.0 || ^5.0.0"
   },
   "dependencies": {
-    "@yetzirah/core": "workspace:*"
+    "@grimoire/yetzirah-core": "workspace:*"
   },
   "sideEffects": false,
   "devDependencies": {

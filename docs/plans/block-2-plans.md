@@ -31,10 +31,10 @@ Create a thin React wrapper for the `<ytz-button>` Web Component, providing Reac
  * React wrapper for ytz-button Web Component.
  * Provides polymorphic button/anchor based on props.
  * 
- * @module @yetzirah/react/button
+ * @module @grimoire/yetzirah-react/button
  */
 
-import '@yetzirah/core/button.js'
+import '@grimoire/yetzirah-core/button.js'
 import { forwardRef, useRef, useImperativeHandle } from 'react'
 
 /**
@@ -108,7 +108,7 @@ import { Button } from './button.js'
 import { createRef } from 'react'
 
 // Import core component for custom element registration
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 
 describe('Button', () => {
   test('renders children', () => {
@@ -392,7 +392,7 @@ Create a static HTML demo page showing all button variants and complete JSDoc do
     <section class="mb5">
       <h2 class="f4 fw6 mb3">React Usage</h2>
       
-      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Button } from '@yetzirah/react'
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Button } from '@grimoire/yetzirah-react'
 
 function App() {
   const [count, setCount] = useState(0)

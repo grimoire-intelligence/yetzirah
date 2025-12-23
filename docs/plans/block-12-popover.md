@@ -39,7 +39,7 @@ The Popover is structurally similar to Tooltip but with key differences:
  * ytz-popover - Click-triggered positioned content Web Component.
  * Shows interactive content anchored to a trigger element.
  *
- * @module @yetzirah/core/popover
+ * @module @grimoire/yetzirah-core/popover
  * @example
  * <ytz-popover>
  *   <button>Open menu</button>
@@ -408,7 +408,7 @@ export { YtzPopover } from './popover.js'
  * React wrapper for ytz-popover Web Component.
  * Click-triggered positioned content for interactive overlays.
  *
- * @module @yetzirah/react/popover
+ * @module @grimoire/yetzirah-react/popover
  * @example
  * const [open, setOpen] = useState(false)
  *
@@ -420,7 +420,7 @@ export { YtzPopover } from './popover.js'
  *   </div>
  * </Popover>
  */
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**
@@ -896,7 +896,7 @@ popover.open = true  // Property access</code></pre>
       <h2 class="f4 fw6 mb3">React Usage</h2>
 
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { useState } from 'react'
-import { Popover } from '@yetzirah/react'
+import { Popover } from '@grimoire/yetzirah-react'
 
 function App() {
   const [open, setOpen] = useState(false)

@@ -16,7 +16,7 @@
  * Vue 3 wrapper for ytz-slider Web Component.
  * Provides v-model for two-way binding with full TypeScript support.
  *
- * @module @yetzirah/vue/Slider
+ * @module @grimoire/yetzirah-vue/Slider
  *
  * @example
  * <template>
@@ -29,7 +29,7 @@
  * </template>
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 
 /**
  * Props for the Slider component

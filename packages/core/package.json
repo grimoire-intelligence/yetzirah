@@ -1,5 +1,5 @@
 {
-  "name": "@yetzirah/core",
+  "name": "@grimoire/yetzirah-core",
   "version": "0.1.0",
   "description": "Web Components for behavioral UI patterns - zero dependencies, framework-agnostic",
   "type": "module",
@@ -121,7 +121,9 @@
     "accessibility",
     "a11y",
     "material",
-    "headless"
+    "headless",
+    "grimoire",
+    "yetzirah"
   ],
   "author": "Grimoire Intelligence",
   "license": "ISC",

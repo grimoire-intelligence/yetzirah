@@ -127,7 +127,7 @@
       <h3 class="f5 fw6 mb2 mt4">React Wrappers Preserve MUI Idiom</h3>
       <p class="lh-copy mb3">
         The React examples in this guide use capitalized components like <code>&lt;Dialog&gt;</code>,
-        <code>&lt;Tabs&gt;</code>, and <code>&lt;Button&gt;</code>. These are the <code>@yetzirah/react</code>
+        <code>&lt;Tabs&gt;</code>, and <code>&lt;Button&gt;</code>. These are the <code>@grimoire/yetzirah-react</code>
         wrappers, which intentionally mirror MUI's naming conventions for minimal migration friction.
       </p>
       <p class="lh-copy mb3">
@@ -1256,7 +1256,7 @@ const theme = createTheme({ palette: { mode } })
 
       <div class="key-diff">
         <strong>Key Difference:</strong> Zero configuration. Just add <code>&lt;ytz-theme-toggle&gt;</code>.
-        Works with <code>@yetzirah/core/dark.css</code> for automatic dark mode.
+        Works with <code>@grimoire/yetzirah-core/dark.css</code> for automatic dark mode.
       </div>
 
       <table class="quick-ref mt3">
@@ -1267,7 +1267,7 @@ const theme = createTheme({ palette: { mode } })
           <tr><td><code>ThemeProvider</code> + state</td><td><code>&lt;ytz-theme-toggle&gt;</code></td></tr>
           <tr><td>Manual localStorage</td><td>Automatic persistence</td></tr>
           <tr><td>Manual <code>prefers-color-scheme</code></td><td>Automatic detection</td></tr>
-          <tr><td>Custom CSS variables</td><td><code>@yetzirah/core/dark.css</code></td></tr>
+          <tr><td>Custom CSS variables</td><td><code>@grimoire/yetzirah-core/dark.css</code></td></tr>
           <tr><td>Custom event</td><td><code>themechange</code> event</td></tr>
         </tbody>
       </table>
@@ -1373,9 +1373,9 @@ const theme = createTheme({ palette: { mode } })
 
       <h3 class="f5 fw6 mb2 mt4">Optional Stylesheets</h3>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto mb3"><code>// Animation and positioning helpers
-import '@yetzirah/core/button.css'     // Hover/click feedback
-import '@yetzirah/core/dialog.css'     // Overlay positioning, fade-in
-import '@yetzirah/core/disclosure.css' // Expand/collapse animation</code></pre>
+import '@grimoire/yetzirah-core/button.css'     // Hover/click feedback
+import '@grimoire/yetzirah-core/dialog.css'     // Overlay positioning, fade-in
+import '@grimoire/yetzirah-core/disclosure.css' // Expand/collapse animation</code></pre>
 
       <h3 class="f5 fw6 mb2 mt4">User-Provided CSS</h3>
       <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Dialog backdrop */

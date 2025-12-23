@@ -15,7 +15,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@yetzirah/angular": ["src/public-api.ts"]
+      "@grimoire/yetzirah-angular": ["src/public-api.ts"]
     }
   },
   "include": [

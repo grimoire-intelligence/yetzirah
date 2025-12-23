@@ -2,7 +2,7 @@
  * ytz-popover - Click-triggered positioned content Web Component.
  * Shows interactive content anchored to a trigger element.
  *
- * @module @yetzirah/core/popover
+ * @module @grimoire/yetzirah-core/popover
  * @example
  * <ytz-popover>
  *   <button>Open menu</button>

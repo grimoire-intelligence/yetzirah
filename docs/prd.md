@@ -36,7 +36,7 @@ Yetzirah extracts what MUI got right and discards everything else.
 
 ```
 ┌─────────────────────────────────────────────┐
-│              @yetzirah/core                 │
+│              @grimoire/yetzirah-core                 │
 │    Web Components (light DOM, no Shadow)    │
 │  <ytz-dialog>, <ytz-autocomplete>, etc.     │
 └─────────────────────────────────────────────┘
@@ -69,8 +69,8 @@ Yetzirah extracts what MUI got right and discards everything else.
 
 Ship the foundation and the largest market.
 
-- `@yetzirah/core` — Web Components, works in vanilla HTML
-- `@yetzirah/react` — Thin wrappers for React integration
+- `@grimoire/yetzirah-core` — Web Components, works in vanilla HTML
+- `@grimoire/yetzirah-react` — Thin wrappers for React integration
 - NPM distribution primary, CDN available
 - Tachyons recommended for styling, any CSS works
 
@@ -80,9 +80,9 @@ Ship the foundation and the largest market.
 
 Expand to the rest of the framework market.
 
-- `@yetzirah/vue` — Vue 3 wrappers with proper reactivity binding
-- `@yetzirah/svelte` — Svelte wrappers (likely thinnest of all)
-- `@yetzirah/angular` — Angular wrappers with change detection integration
+- `@grimoire/yetzirah-vue` — Vue 3 wrappers with proper reactivity binding
+- `@grimoire/yetzirah-svelte` — Svelte wrappers (likely thinnest of all)
+- `@grimoire/yetzirah-angular` — Angular wrappers with change detection integration
 
 **Target audience:** Everyone else who hates their framework's Material implementation.
 
@@ -101,7 +101,7 @@ Optimize for buildless and global deployment.
 
 ## Technical Foundation
 
-### Core (`@yetzirah/core`)
+### Core (`@grimoire/yetzirah-core`)
 
 | Aspect | Choice | Rationale |
 |--------|--------|-----------|
@@ -113,10 +113,10 @@ Optimize for buildless and global deployment.
 
 | Package | Responsibility |
 |---------|---------------|
-| `@yetzirah/react` | `onX` → `addEventListener` bridging, ref forwarding, boolean attribute handling |
-| `@yetzirah/vue` | `v-model` support, `.sync` handling, event mapping |
-| `@yetzirah/svelte` | Event forwarding, reactive attribute binding |
-| `@yetzirah/angular` | `ControlValueAccessor` for forms, change detection |
+| `@grimoire/yetzirah-react` | `onX` → `addEventListener` bridging, ref forwarding, boolean attribute handling |
+| `@grimoire/yetzirah-vue` | `v-model` support, `.sync` handling, event mapping |
+| `@grimoire/yetzirah-svelte` | Event forwarding, reactive attribute binding |
+| `@grimoire/yetzirah-angular` | `ControlValueAccessor` for forms, change detection |
 
 Wrappers are thin. If a wrapper exceeds 50 lines per component, something is wrong.
 
@@ -128,13 +128,13 @@ Wrappers are thin. If a wrapper exceeds 50 lines per component, something is wro
 
 ```bash
 # Core only (vanilla HTML)
-npm install @yetzirah/core
+npm install @grimoire/yetzirah-core
 
 # With React wrappers
-npm install @yetzirah/core @yetzirah/react
+npm install @grimoire/yetzirah-core @grimoire/yetzirah-react
 
 # With Vue wrappers
-npm install @yetzirah/core @yetzirah/vue
+npm install @grimoire/yetzirah-core @grimoire/yetzirah-vue
 ```
 
 ### CDN (Phase 3)
@@ -248,7 +248,7 @@ clickOutside()  → Dialog, Menu, Autocomplete, Popover
 keyNav()        → Menu, Autocomplete, Tabs, Listbox
 ```
 
-These live in `@yetzirah/core` as internal utilities. Not exported—implementation details.
+These live in `@grimoire/yetzirah-core` as internal utilities. Not exported—implementation details.
 
 ---
 
@@ -312,7 +312,7 @@ Every Yetzirah component guarantees:
 ### React
 
 ```jsx
-import { Dialog, Button } from '@yetzirah/react'
+import { Dialog, Button } from '@grimoire/yetzirah-react'
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -343,7 +343,7 @@ function App() {
 
 ```vue
 <script setup>
-import { Dialog, Button } from '@yetzirah/vue'
+import { Dialog, Button } from '@grimoire/yetzirah-vue'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -372,7 +372,7 @@ const open = ref(false)
 
 ```svelte
 <script>
-  import { Dialog, Button } from '@yetzirah/svelte'
+  import { Dialog, Button } from '@grimoire/yetzirah-svelte'
   let open = false
 </script>
 
@@ -411,7 +411,7 @@ const open = ref(false)
 ## Core Implementation Pattern
 
 ```javascript
-// @yetzirah/core/dialog.js
+// @grimoire/yetzirah-core/dialog.js
 
 class YtzDialog extends HTMLElement {
   static observedAttributes = ['open']
@@ -473,9 +473,9 @@ export { YtzDialog }
 ## React Wrapper Pattern
 
 ```jsx
-// @yetzirah/react/dialog.js
+// @grimoire/yetzirah-react/dialog.js
 
-import '@yetzirah/core/dialog.js'
+import '@grimoire/yetzirah-core/dialog.js'
 import { useRef, useEffect } from 'react'
 
 export function Dialog({ open, onClose, children, className, ...props }) {
@@ -1036,9 +1036,9 @@ MUI's `m`, `p`, `mx`, `py`, etc. map directly to Tachyons:
 For gradual migration:
 
 ```jsx
-// @yetzirah/react/mui-compat
-export { Dialog as MuiDialog } from '@yetzirah/react'
-export { Autocomplete as MuiAutocomplete } from '@yetzirah/react'
+// @grimoire/yetzirah-react/mui-compat
+export { Dialog as MuiDialog } from '@grimoire/yetzirah-react'
+export { Autocomplete as MuiAutocomplete } from '@grimoire/yetzirah-react'
 // ...
 
 // Passthrough HTML elements

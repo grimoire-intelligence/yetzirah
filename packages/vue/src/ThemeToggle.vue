@@ -16,7 +16,7 @@
  * Vue wrapper for ytz-theme-toggle Web Component.
  * Provides theme switching with persistence and system preference detection.
  *
- * @module @yetzirah/vue/ThemeToggle
+ * @module @grimoire/yetzirah-vue/ThemeToggle
  *
  * @example
  * // Basic usage
@@ -33,7 +33,7 @@
  * </ThemeToggle>
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { ref } from 'vue'
 import type { YetzirahComponentProps } from './types'
 
