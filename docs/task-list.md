@@ -65,7 +65,7 @@ Create Vue 3 wrapper for `<ytz-button>` component. Handle polymorphic behavior (
 ---
 pr_id: PR-087
 title: Vue Disclosure Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -101,7 +101,7 @@ Create Vue 3 wrapper for `<ytz-disclosure>` component. Support `v-model:open` fo
 ---
 pr_id: PR-088
 title: Vue Dialog Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -137,7 +137,7 @@ Create Vue 3 wrapper for `<ytz-dialog>` component. Support `v-model:open` for mo
 ---
 pr_id: PR-089
 title: Vue Tabs Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -182,7 +182,7 @@ Create Vue 3 wrappers for `<ytz-tabs>`, `<ytz-tab-list>`, `<ytz-tab>`, and `<ytz
 ---
 pr_id: PR-090
 title: Vue Tooltip Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -218,7 +218,7 @@ Create Vue 3 wrapper for `<ytz-tooltip>` component. Pass through content prop an
 ---
 pr_id: PR-091
 title: Vue Menu Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -260,7 +260,7 @@ Create Vue 3 wrappers for `<ytz-menu>`, `<ytz-menu-item>`, and `<ytz-menu-trigge
 ---
 pr_id: PR-092
 title: Vue Autocomplete Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -299,7 +299,7 @@ Create Vue 3 wrappers for `<ytz-autocomplete>` and `<ytz-autocomplete-option>`. 
 ---
 pr_id: PR-093
 title: Vue Listbox Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -338,7 +338,7 @@ Create Vue 3 wrappers for `<ytz-listbox>` and `<ytz-listbox-option>`. Support v-
 ---
 pr_id: PR-094
 title: Vue Select Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -377,7 +377,7 @@ Create Vue 3 wrappers for `<ytz-select>` and `<ytz-select-option>`. Support v-mo
 ---
 pr_id: PR-095
 title: Vue Accordion Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -416,7 +416,7 @@ Create Vue 3 wrappers for `<ytz-accordion>` and `<ytz-accordion-item>`. Support 
 ---
 pr_id: PR-096
 title: Vue Drawer Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -452,7 +452,7 @@ Create Vue 3 wrapper for `<ytz-drawer>` component. Support v-model:open and posi
 ---
 pr_id: PR-097
 title: Vue Popover Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -490,7 +490,7 @@ Create Vue 3 wrapper for `<ytz-popover>` component. Support v-model:open for pop
 ---
 pr_id: PR-098
 title: Svelte Button Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -526,7 +526,7 @@ Create Svelte wrapper for `<ytz-button>` component. Forward all props and events
 ---
 pr_id: PR-099
 title: Svelte Disclosure Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -562,7 +562,7 @@ Create Svelte wrapper for `<ytz-disclosure>` component. Support `bind:open` for 
 ---
 pr_id: PR-100
 title: Svelte Dialog Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -598,7 +598,7 @@ Create Svelte wrapper for `<ytz-dialog>` component. Support `bind:open` for moda
 ---
 pr_id: PR-101
 title: Svelte Tabs Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -643,7 +643,7 @@ Create Svelte wrappers for tabs components. Support bind:selectedIndex for activ
 ---
 pr_id: PR-102
 title: Svelte Tooltip Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -679,7 +679,7 @@ Create Svelte wrapper for `<ytz-tooltip>` component. Pass content and delay prop
 ---
 pr_id: PR-103
 title: Svelte Menu Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -721,7 +721,7 @@ Create Svelte wrappers for menu components. Support bind:open for menu visibilit
 ---
 pr_id: PR-104
 title: Svelte Autocomplete Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -760,7 +760,7 @@ Create Svelte wrappers for autocomplete components. Support bind:value for selec
 ---
 pr_id: PR-105
 title: Svelte Listbox Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -798,7 +798,7 @@ Create Svelte wrappers for listbox components. Support bind:value for selection.
 ---
 pr_id: PR-106
 title: Svelte Select Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -836,7 +836,7 @@ Create Svelte wrappers for select components. Support bind:value for selection, 
 ---
 pr_id: PR-107
 title: Svelte Accordion Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -874,7 +874,7 @@ Create Svelte wrappers for accordion components. Support exclusive prop for sing
 ---
 pr_id: PR-108
 title: Svelte Drawer Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -909,7 +909,7 @@ Create Svelte wrapper for drawer component. Support bind:open and position prop.
 ---
 pr_id: PR-109
 title: Svelte Popover Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
@@ -946,7 +946,7 @@ Create Svelte wrapper for popover component. Support bind:open for visibility.
 ---
 pr_id: PR-110
 title: Angular Button Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -985,7 +985,7 @@ Create Angular wrapper for `<ytz-button>` component. Use @Input for href and @Ou
 ---
 pr_id: PR-111
 title: Angular Disclosure Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1023,7 +1023,7 @@ Create Angular wrapper for `<ytz-disclosure>` component. Support [(open)] two-wa
 ---
 pr_id: PR-112
 title: Angular Dialog Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -1062,7 +1062,7 @@ Create Angular wrapper for `<ytz-dialog>` component. Support [(open)] binding an
 ---
 pr_id: PR-113
 title: Angular Tabs Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -1110,7 +1110,7 @@ Create Angular wrappers for tabs components. Support [(selectedIndex)] for activ
 ---
 pr_id: PR-114
 title: Angular Tooltip Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1149,7 +1149,7 @@ Create Angular wrapper for `<ytz-tooltip>` component. Input for content and dela
 ---
 pr_id: PR-115
 title: Angular Menu Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -1194,7 +1194,7 @@ Create Angular wrappers for menu components. Support [(open)] for menu visibilit
 ---
 pr_id: PR-116
 title: Angular Autocomplete Wrapper with ControlValueAccessor
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 6
@@ -1237,7 +1237,7 @@ Create Angular wrappers for autocomplete components. Implement ControlValueAcces
 ---
 pr_id: PR-117
 title: Angular Listbox Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1279,7 +1279,7 @@ Create Angular wrappers for listbox components. Support [(value)] two-way bindin
 ---
 pr_id: PR-118
 title: Angular Select Wrapper with ControlValueAccessor
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -1321,7 +1321,7 @@ Create Angular wrappers for select components. Implement ControlValueAccessor fo
 ---
 pr_id: PR-119
 title: Angular Accordion Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -1362,7 +1362,7 @@ Create Angular wrappers for accordion components. Support exclusive input for si
 ---
 pr_id: PR-120
 title: Angular Drawer Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -1401,7 +1401,7 @@ Create Angular wrapper for drawer component. Support [(open)] and position input
 ---
 pr_id: PR-121
 title: Angular Popover Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
