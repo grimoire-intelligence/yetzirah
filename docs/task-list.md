@@ -29,7 +29,7 @@ phases:
 ---
 pr_id: PR-086
 title: Vue Button Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 2
