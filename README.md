@@ -9,25 +9,28 @@ Unstyled, accessible Web Components with framework wrappers for React, Vue, Svel
 npm install @yetzirah/core
 ```
 
-### React
+### React (18+)
 ```bash
 npm install @yetzirah/core @yetzirah/react
 ```
 
-### Vue 3
+### Vue (3.3+)
 ```bash
 npm install @yetzirah/core @yetzirah/vue
 ```
+> Requires Vue 3.3+ for `defineModel` support
 
-### Svelte
+### Svelte (4+)
 ```bash
 npm install @yetzirah/core @yetzirah/svelte
 ```
+> Supports Svelte 4 and 5
 
-### Angular
+### Angular (16+)
 ```bash
 npm install @yetzirah/core @yetzirah/angular
 ```
+> Requires Angular 16+ for standalone components
 
 ## Philosophy
 
