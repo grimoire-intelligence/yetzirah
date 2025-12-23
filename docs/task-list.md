@@ -888,7 +888,7 @@ Update main README.md and individual package READMEs to document framework wrapp
 ---
 pr_id: PR-085
 title: Bundle Verification for All Frameworks
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 3
