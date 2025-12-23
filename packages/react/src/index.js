@@ -1,5 +1,5 @@
 /**
- * @yetzirah/react
+ * @grimoire/yetzirah-react
  *
  * React wrappers for Yetzirah Web Components.
  * Thin wrappers providing React-idiomatic APIs.
@@ -8,7 +8,7 @@
  */
 
 // Re-export core version
-export { VERSION } from '@yetzirah/core'
+export { VERSION } from '@grimoire/yetzirah-core'
 
 // Components
 export { Accordion, AccordionItem } from './accordion.js'

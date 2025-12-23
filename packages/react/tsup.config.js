@@ -10,7 +10,7 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
-  external: ['react', 'react-dom', '@yetzirah/core'],
+  external: ['react', 'react-dom', '@grimoire/yetzirah-core'],
   esbuildOptions(options) {
     options.loader = { '.js': 'jsx' }
   },

@@ -303,7 +303,7 @@ export { YtzTabs, YtzTab, YtzTabPanel } from './tabs.js'
  *   <TabPanel id="two">Content 2</TabPanel>
  * </Tabs>
  */
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 export const Tabs = forwardRef(function Tabs(
@@ -548,7 +548,7 @@ Following the pattern from existing demos:
     <!-- React Usage -->
     <section class="mv4">
       <h2>React Usage</h2>
-      <pre class="bg-near-white pa3 br2 f6"><code>import { Tabs, Tab, TabPanel } from '@yetzirah/react'
+      <pre class="bg-near-white pa3 br2 f6"><code>import { Tabs, Tab, TabPanel } from '@grimoire/yetzirah-react'
 
 function Settings() {
   const [activeTab, setActiveTab] = useState('account')

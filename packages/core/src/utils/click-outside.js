@@ -1,6 +1,6 @@
 /**
  * Click outside utility for dismissing popups.
- * @module @yetzirah/core/utils/click-outside
+ * @module @grimoire/yetzirah-core/utils/click-outside
  * @internal Not exported from package
  */
 

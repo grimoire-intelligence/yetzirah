@@ -2,7 +2,7 @@
  * Position utility for tooltips, menus, popovers.
  * Places an element relative to an anchor with flip/shift logic.
  *
- * @module @yetzirah/core/utils/position
+ * @module @grimoire/yetzirah-core/utils/position
  * @internal Not exported from package
  *
  * Limitations (by design):

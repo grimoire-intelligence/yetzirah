@@ -1,7 +1,7 @@
 /**
  * React wrappers for ytz-accordion components.
  *
- * @module @yetzirah/react/accordion
+ * @module @grimoire/yetzirah-react/accordion
  * @example
  * <Accordion exclusive>
  *   <AccordionItem open={expanded === 'panel1'} onToggle={(open) => setExpanded(open ? 'panel1' : null)}>
@@ -11,7 +11,7 @@
  * </Accordion>
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**

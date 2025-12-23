@@ -1,0 +1,59 @@
+{
+  "name": "@grimoire/yetzirah-svelte",
+  "version": "0.1.0",
+  "description": "Svelte wrappers for Yetzirah Web Components",
+  "type": "module",
+  "svelte": "./dist/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "svelte": "./dist/index.js",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "svelte-package -i src -o dist",
+    "dev": "svelte-package -i src -o dist --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "svelte",
+    "web-components",
+    "ui",
+    "accessibility",
+    "grimoire",
+    "yetzirah"
+  ],
+  "author": "Grimoire Intelligence",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
+    "directory": "packages/svelte"
+  },
+  "peerDependencies": {
+    "svelte": "^4.0.0 || ^5.0.0"
+  },
+  "dependencies": {
+    "@grimoire/yetzirah-core": "workspace:*"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@sveltejs/package": "^2.5.7",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@testing-library/svelte": "^5.2.7",
+    "happy-dom": "^18.0.1",
+    "svelte": "^5.46.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
+  }
+}

@@ -6,8 +6,12 @@
   "type": "module",
   "scripts": {
     "build": "pnpm -r build",
-    "build:cdn": "pnpm --filter @yetzirah/core build:cdn",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
+    "build:cdn": "pnpm --filter @grimoire/yetzirah-core build:cdn",
+    "test": "pnpm test:core && pnpm test:vue && pnpm test:svelte && pnpm test:angular",
+    "test:core": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
+    "test:vue": "pnpm --filter @grimoire/yetzirah-vue test",
+    "test:svelte": "pnpm --filter @grimoire/yetzirah-svelte test",
+    "test:angular": "pnpm --filter @grimoire/yetzirah-angular test",
     "lint": "eslint packages/*/src/**/*.js",
     "format": "prettier --write \"packages/*/src/**/*.js\"",
     "clean": "pnpm -r exec rm -rf dist",
@@ -24,7 +28,8 @@
     "web",
     "components",
     "ai",
-    "accessibility"
+    "accessibility",
+    "grimoire"
   ],
   "author": "Grimoire Intelligence",
   "license": "ISC",

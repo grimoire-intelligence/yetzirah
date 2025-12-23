@@ -2,10 +2,10 @@
  * React wrapper for ytz-toggle Web Component.
  * Provides controlled toggle with checked/onChange props.
  *
- * @module @yetzirah/react/toggle
+ * @module @grimoire/yetzirah-react/toggle
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react'
 
 /**

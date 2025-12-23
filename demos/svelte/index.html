@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Svelte Demo - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../../packages/core/dist/index.js"></script>
+  <style>
+    .demo-section { margin-bottom: 2rem; }
+    .demo-box { padding: 1rem; background: #f5f5f5; border-radius: 4px; margin-bottom: 1rem; }
+    .status { font-size: 0.875rem; color: #666; margin-top: 0.5rem; }
+    .toggle-wrapper { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .toggle-track {
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track {
+      background: #ff3e00;
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track::after {
+      transform: translateX(18px);
+    }
+    ytz-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      background: #e0e0e0;
+      border-radius: 16px;
+      margin-right: 0.5rem;
+    }
+    ytz-slider {
+      display: block;
+      width: 100%;
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      font-family: 'Fira Code', monospace;
+    }
+    .code-block .keyword { color: #c586c0; }
+    .code-block .string { color: #ce9178; }
+    .code-block .tag { color: #569cd6; }
+    .code-block .attr { color: #9cdcfe; }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="../index.html" class="link blue">&larr; All Components</a>
+      <span class="mh2">|</span>
+      <a href="../frameworks.html" class="link blue">Framework Comparison</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Svelte Demo</h1>
+    <p class="f5 lh-copy gray mt0">
+      Demonstrating Yetzirah Web Components with Svelte using bind: syntax.
+      The examples below show both the Svelte code and interactive demos.
+    </p>
+  </header>
+
+  <main>
+    <!-- Toggle Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Toggle with bind:checked</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="svelte-toggle">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="svelte-toggle">Enable notifications</label>
+        </div>
+        <div class="status">checked: <span id="toggle-status">false</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
+  import { Toggle } from '@grimoire/yetzirah-svelte'
+  let enabled = false
+&lt;/script&gt;
+
+&lt;Toggle bind:checked={enabled}&gt;
+  Enable notifications
+&lt;/Toggle&gt;
+
+&lt;p&gt;Status: {enabled ? 'On' : 'Off'}&lt;/p&gt;</code></pre>
+    </section>
+
+    <!-- Slider Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Slider with bind:value</h2>
+      <div class="demo-box">
+        <label class="db mb2">Volume: <span id="slider-value">50</span></label>
+        <ytz-slider id="svelte-slider" value="50" min="0" max="100"></ytz-slider>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
+  import { Slider } from '@grimoire/yetzirah-svelte'
+  let volume = 50
+&lt;/script&gt;
+
+&lt;label&gt;Volume: {volume}&lt;/label&gt;
+&lt;Slider bind:value={volume} min={0} max={100} /&gt;</code></pre>
+    </section>
+
+    <!-- Chip Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Chip with on:delete</h2>
+      <div class="demo-box" id="chip-container">
+        <ytz-chip deletable data-tag="Svelte">Svelte</ytz-chip>
+        <ytz-chip deletable data-tag="TypeScript">TypeScript</ytz-chip>
+        <ytz-chip deletable data-tag="Vite">Vite</ytz-chip>
+        <ytz-chip deletable data-tag="SSR">SSR</ytz-chip>
+        <div class="status">Click X to remove tags</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
+  import { Chip } from '@grimoire/yetzirah-svelte'
+  let tags = ['Svelte', 'TypeScript', 'Vite', 'SSR']
+
+  const removeTag = (tag) =&gt; {
+    tags = tags.filter(t =&gt; t !== tag)
+  }
+&lt;/script&gt;
+
+{#each tags as tag}
+  &lt;Chip deletable on:delete={() =&gt; removeTag(tag)}&gt;
+    {tag}
+  &lt;/Chip&gt;
+{/each}</code></pre>
+    </section>
+
+    <!-- IconButton Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">IconButton with on:click</h2>
+      <div class="demo-box">
+        <ytz-icon-button id="favorite-btn" aria-label="Favorite">🤍</ytz-icon-button>
+        <ytz-icon-button aria-label="Share" onclick="alert('Shared!')">📤</ytz-icon-button>
+        <ytz-icon-button aria-label="Settings" disabled>⚙️</ytz-icon-button>
+        <div class="status">Click the heart to toggle favorite</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
+  import { IconButton } from '@grimoire/yetzirah-svelte'
+  let isFavorite = false
+&lt;/script&gt;
+
+&lt;IconButton
+  label="Favorite"
+  on:click={() =&gt; isFavorite = !isFavorite}
+&gt;
+  {isFavorite ? '❤️' : '🤍'}
+&lt;/IconButton&gt;</code></pre>
+    </section>
+
+    <!-- ThemeToggle Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">ThemeToggle with on:themechange</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-theme-toggle id="svelte-theme-toggle" no-persist>
+            <span class="toggle-track"></span>
+          </ytz-theme-toggle>
+          <label>Theme Toggle</label>
+        </div>
+        <div class="status">currentTheme: <span id="theme-status">light</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
+  import { ThemeToggle } from '@grimoire/yetzirah-svelte'
+  let theme = 'light'
+&lt;/script&gt;
+
+&lt;ThemeToggle
+  on:themechange={(e) =&gt; theme = e.detail.theme}
+&gt;
+  Theme: {theme}
+&lt;/ThemeToggle&gt;</code></pre>
+    </section>
+
+    <!-- DataGrid Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">DataGrid with on:sort and on:rowselect</h2>
+      <div class="demo-box" style="height: 250px; overflow: auto;">
+        <ytz-datagrid id="svelte-datagrid" row-height="40">
+          <ytz-datagrid-column field="name" header="Name" sortable></ytz-datagrid-column>
+          <ytz-datagrid-column field="framework" header="Framework"></ytz-datagrid-column>
+          <ytz-datagrid-column field="experience" header="Exp" width="80px"></ytz-datagrid-column>
+        </ytz-datagrid>
+        <div class="status">lastAction: <span id="grid-status">No action yet</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;script&gt;
+  import { DataGrid } from '@grimoire/yetzirah-svelte'
+
+  const data = [
+    { name: 'Rich Harris', framework: 'Svelte', experience: '10+' },
+    { name: 'Evan You', framework: 'Vue', experience: '10+' },
+    { name: 'Dan Abramov', framework: 'React', experience: '10+' }
+  ]
+
+  const columns = [
+    { field: 'name', header: 'Name', sortable: true },
+    { field: 'framework', header: 'Framework' },
+    { field: 'experience', header: 'Exp', width: '80px' }
+  ]
+&lt;/script&gt;
+
+&lt;DataGrid
+  {data}
+  {columns}
+  on:sort={(e) =&gt; console.log(e.detail)}
+  on:rowselect={(e) =&gt; console.log(e.detail)}
+/&gt;</code></pre>
+    </section>
+  </main>
+
+  <script>
+    // Interactive demos with vanilla JS to simulate Svelte behavior
+
+    // Toggle
+    const toggle = document.getElementById('svelte-toggle')
+    const toggleStatus = document.getElementById('toggle-status')
+    toggle.addEventListener('change', (e) => {
+      toggleStatus.textContent = e.detail?.checked ?? false
+    })
+
+    // Slider
+    const slider = document.getElementById('svelte-slider')
+    const sliderValue = document.getElementById('slider-value')
+    slider.addEventListener('change', (e) => {
+      sliderValue.textContent = e.detail?.value ?? 0
+    })
+
+    // Chips
+    const chipContainer = document.getElementById('chip-container')
+    chipContainer.addEventListener('delete', (e) => {
+      e.target.remove()
+    })
+
+    // Favorite button
+    const favoriteBtn = document.getElementById('favorite-btn')
+    let isFavorite = false
+    favoriteBtn.addEventListener('click', () => {
+      isFavorite = !isFavorite
+      favoriteBtn.textContent = isFavorite ? '❤️' : '🤍'
+    })
+
+    // Theme toggle
+    const themeToggle = document.getElementById('svelte-theme-toggle')
+    const themeStatus = document.getElementById('theme-status')
+    themeToggle.addEventListener('themechange', (e) => {
+      themeStatus.textContent = e.detail?.theme ?? 'light'
+    })
+
+    // DataGrid
+    const datagrid = document.getElementById('svelte-datagrid')
+    const gridStatus = document.getElementById('grid-status')
+    datagrid.data = [
+      { name: 'Rich Harris', framework: 'Svelte', experience: '10+' },
+      { name: 'Evan You', framework: 'Vue', experience: '10+' },
+      { name: 'Dan Abramov', framework: 'React', experience: '10+' },
+      { name: 'Misko Hevery', framework: 'Angular', experience: '15+' }
+    ]
+    datagrid.addEventListener('sort', (e) => {
+      gridStatus.textContent = `Sorted by ${e.detail?.field} (${e.detail?.direction})`
+    })
+    datagrid.addEventListener('rowselect', (e) => {
+      gridStatus.textContent = `Selected: ${e.detail?.row?.name}`
+    })
+  </script>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="../index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

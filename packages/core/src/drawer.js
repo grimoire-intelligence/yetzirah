@@ -2,7 +2,7 @@
  * ytz-drawer - Slide-in panel Web Component.
  * Inherits modal behavior: focus trap, scroll lock, escape-to-close, backdrop dismiss.
  *
- * @module @yetzirah/core/drawer
+ * @module @grimoire/yetzirah-core/drawer
  * @example
  * <ytz-drawer id="menu" anchor="left" class="w5 h-100 bg-white shadow-2">
  *   <nav class="pa4">

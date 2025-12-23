@@ -2,7 +2,7 @@
  * ytz-accordion - Coordinated disclosure container.
  * Manages multiple accordion items with optional exclusive mode.
  *
- * @module @yetzirah/core/accordion
+ * @module @grimoire/yetzirah-core/accordion
  * @example
  * <ytz-accordion>
  *   <ytz-accordion-item>

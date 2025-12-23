@@ -346,7 +346,7 @@ disclosure.addEventListener('toggle', (e) => {
     <section class="demo-section pv4">
       <h2 class="f4 fw6 mb3">React Usage</h2>
 
-      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Disclosure } from '@yetzirah/react'
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Disclosure } from '@grimoire/yetzirah-react'
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -398,7 +398,7 @@ function App() {
 
   <!-- Load the component -->
   <script type="module">
-    import '@yetzirah/core'
+    import '@grimoire/yetzirah-core'
   </script>
 </body>
 </html>

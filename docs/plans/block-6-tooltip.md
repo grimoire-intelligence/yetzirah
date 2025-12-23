@@ -117,7 +117,7 @@ export function position(anchor, floating, options = {}) {
  * ytz-tooltip - Positioned hint text Web Component.
  * Shows on hover/focus with configurable delay and placement.
  *
- * @module @yetzirah/core/tooltip
+ * @module @grimoire/yetzirah-core/tooltip
  * @example
  * <ytz-tooltip>
  *   <button>Hover me</button>
@@ -414,13 +414,13 @@ export { YtzTooltip } from './tooltip.js'
 /**
  * React wrapper for ytz-tooltip.
  *
- * @module @yetzirah/react/tooltip
+ * @module @grimoire/yetzirah-react/tooltip
  * @example
  * <Tooltip content="Helpful hint" placement="top">
  *   <button>Hover me</button>
  * </Tooltip>
  */
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**
@@ -665,7 +665,7 @@ export { Tooltip } from './tooltip.js'
     <!-- React Usage -->
     <section class="mb5">
       <h2 class="f4 fw6 mb3">React Usage</h2>
-      <pre class="pa3 bg-near-white br2 f6 overflow-x-auto"><code>import { Tooltip, Button } from '@yetzirah/react'
+      <pre class="pa3 bg-near-white br2 f6 overflow-x-auto"><code>import { Tooltip, Button } from '@grimoire/yetzirah-react'
 
 function App() {
   return (

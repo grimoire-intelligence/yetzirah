@@ -2,10 +2,10 @@
  * React wrapper for ytz-chip Web Component.
  * Provides deletable tag/label with keyboard support.
  *
- * @module @yetzirah/react/chip
+ * @module @grimoire/yetzirah-react/chip
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react'
 
 /**

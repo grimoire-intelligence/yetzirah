@@ -6,10 +6,10 @@
  * Respects prefers-color-scheme: dark by default.
  *
  * Usage:
- * 1. Import: @import '@yetzirah/core/dark.css';
+ * 1. Import: @import '@grimoire/yetzirah-core/dark.css';
  * 2. Toggle manually: document.documentElement.dataset.theme = 'dark';
  *
- * @module @yetzirah/core/dark
+ * @module @grimoire/yetzirah-core/dark
  */
 
 /* System preference detection */

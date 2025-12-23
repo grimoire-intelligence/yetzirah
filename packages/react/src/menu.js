@@ -2,10 +2,10 @@
  * React wrappers for ytz-menu Web Components.
  * Dropdown menu with keyboard navigation.
  *
- * @module @yetzirah/react/menu
+ * @module @grimoire/yetzirah-react/menu
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

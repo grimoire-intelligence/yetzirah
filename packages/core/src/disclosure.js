@@ -2,7 +2,7 @@
  * ytz-disclosure - Expandable content Web Component.
  * Toggles content visibility with proper ARIA attributes.
  *
- * @module @yetzirah/core/disclosure
+ * @module @grimoire/yetzirah-core/disclosure
  * @example
  * <ytz-disclosure>
  *   <button>Show Details</button>

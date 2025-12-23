@@ -1,6 +1,6 @@
 /**
  * ytz-select - Dropdown select with trigger button and listbox.
- * @module @yetzirah/core/select
+ * @module @grimoire/yetzirah-core/select
  */
 import { position } from './utils/position.js'
 import { createKeyNav } from './utils/key-nav.js'

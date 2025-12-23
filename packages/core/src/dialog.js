@@ -2,7 +2,7 @@
  * ytz-dialog - Modal dialog Web Component.
  * Provides focus trap, scroll lock, escape-to-close, and backdrop dismiss.
  *
- * @module @yetzirah/core/dialog
+ * @module @grimoire/yetzirah-core/dialog
  * @example
  * <ytz-dialog id="my-dialog" class="pa4 bg-white br3 shadow-2">
  *   <h2>Dialog Title</h2>

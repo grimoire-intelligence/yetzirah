@@ -1,6 +1,6 @@
 /**
  * Keyboard navigation utility for arrow key navigation.
- * @module @yetzirah/core/utils/key-nav
+ * @module @grimoire/yetzirah-core/utils/key-nav
  * @internal Not exported from package
  */
 

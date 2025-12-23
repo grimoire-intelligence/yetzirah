@@ -2,7 +2,7 @@
  * Virtual Scroll utility for efficient rendering of large lists.
  * Only renders visible items plus a buffer for smooth scrolling.
  *
- * @module @yetzirah/core/utils/virtual-scroll
+ * @module @grimoire/yetzirah-core/utils/virtual-scroll
  */
 
 /**

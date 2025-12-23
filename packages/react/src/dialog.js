@@ -2,10 +2,10 @@
  * React wrapper for ytz-dialog Web Component.
  * Provides modal dialog with focus trap, scroll lock, and escape-to-close.
  *
- * @module @yetzirah/react/dialog
+ * @module @grimoire/yetzirah-react/dialog
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Framework Comparison - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <style>
+    .framework-card {
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+    .framework-card h3 {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .vue-color { color: #42b883; }
+    .svelte-color { color: #ff3e00; }
+    .angular-color { color: #dd0031; }
+    .react-color { color: #61dafb; }
+    .code-comparison {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+    .code-block {
+      background: #f8f8f8;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 1rem;
+      font-size: 0.875rem;
+      overflow-x: auto;
+    }
+    .code-block h4 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      font-size: 0.875rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .feature-table th,
+    .feature-table td {
+      padding: 0.75rem;
+      text-align: left;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .feature-table th {
+      background: #f5f5f5;
+      font-weight: 600;
+    }
+    .check { color: #4caf50; }
+    .logo {
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw9 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Framework Comparison</h1>
+    <p class="f5 lh-copy gray mt0">
+      Yetzirah provides first-class wrappers for Vue, Svelte, and Angular.
+      Each wrapper provides idiomatic bindings that feel native to the framework.
+    </p>
+  </header>
+
+  <main>
+    <!-- Quick Links -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Quick Start Demos</h2>
+      <div class="flex flex-wrap gap3" style="gap: 1rem;">
+        <a href="vue/index.html" class="link pa3 br2 bg-near-white hover-bg-light-gray flex items-center" style="gap: 0.5rem;">
+          <span class="vue-color f3">&#9881;</span>
+          <span>Vue 3 Demo</span>
+        </a>
+        <a href="svelte/index.html" class="link pa3 br2 bg-near-white hover-bg-light-gray flex items-center" style="gap: 0.5rem;">
+          <span class="svelte-color f3">&#9881;</span>
+          <span>Svelte Demo</span>
+        </a>
+        <a href="angular/index.html" class="link pa3 br2 bg-near-white hover-bg-light-gray flex items-center" style="gap: 0.5rem;">
+          <span class="angular-color f3">&#9881;</span>
+          <span>Angular Demo</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Framework Overview -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Package Overview</h2>
+      <div class="overflow-auto">
+        <table class="feature-table">
+          <thead>
+            <tr>
+              <th>Package</th>
+              <th>Framework Version</th>
+              <th>Bundle Size (gzip)</th>
+              <th>Key Feature</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>@grimoire/yetzirah-vue</code></td>
+              <td>Vue 3.3+</td>
+              <td>&lt; 4kb</td>
+              <td>v-model with defineModel</td>
+            </tr>
+            <tr>
+              <td><code>@grimoire/yetzirah-svelte</code></td>
+              <td>Svelte 4+</td>
+              <td>&lt; 2kb</td>
+              <td>bind: syntax (thinnest wrappers)</td>
+            </tr>
+            <tr>
+              <td><code>@grimoire/yetzirah-angular</code></td>
+              <td>Angular 16+</td>
+              <td>&lt; 5kb</td>
+              <td>ControlValueAccessor for forms</td>
+            </tr>
+            <tr>
+              <td><code>@grimoire/yetzirah-react</code></td>
+              <td>React 18+</td>
+              <td>&lt; 3kb</td>
+              <td>Controlled components with hooks</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Toggle Comparison -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Toggle: Binding Syntax Comparison</h2>
+      <div class="code-comparison">
+        <div class="code-block">
+          <h4><span class="vue-color">&#9679;</span> Vue 3</h4>
+          <pre><code>&lt;Toggle v-model:checked="enabled"&gt;
+  Dark mode
+&lt;/Toggle&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="svelte-color">&#9679;</span> Svelte</h4>
+          <pre><code>&lt;Toggle bind:checked={enabled}&gt;
+  Dark mode
+&lt;/Toggle&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="angular-color">&#9679;</span> Angular</h4>
+          <pre><code>&lt;ytz-toggle [(ngModel)]="enabled"&gt;
+  Dark mode
+&lt;/ytz-toggle&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="react-color">&#9679;</span> React</h4>
+          <pre><code>&lt;Toggle
+  checked={enabled}
+  onChange={e =&gt; setEnabled(e.detail.checked)}
+&gt;
+  Dark mode
+&lt;/Toggle&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Slider Comparison -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Slider: Two-way Binding</h2>
+      <div class="code-comparison">
+        <div class="code-block">
+          <h4><span class="vue-color">&#9679;</span> Vue 3</h4>
+          <pre><code>&lt;Slider
+  v-model="volume"
+  :min="0"
+  :max="100"
+/&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="svelte-color">&#9679;</span> Svelte</h4>
+          <pre><code>&lt;Slider
+  bind:value={volume}
+  min={0}
+  max={100}
+/&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="angular-color">&#9679;</span> Angular</h4>
+          <pre><code>&lt;ytz-slider
+  [(ngModel)]="volume"
+  [min]="0"
+  [max]="100"
+&gt;&lt;/ytz-slider&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="react-color">&#9679;</span> React</h4>
+          <pre><code>&lt;Slider
+  value={volume}
+  min={0}
+  max={100}
+  onChange={e =&gt; setVolume(e.detail.value)}
+/&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- DataGrid Comparison -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">DataGrid: Complex Component</h2>
+      <div class="code-comparison">
+        <div class="code-block">
+          <h4><span class="vue-color">&#9679;</span> Vue 3</h4>
+          <pre><code>&lt;DataGrid
+  :data="users"
+  :columns="[
+    { key: 'name', header: 'Name', sortable: true },
+    { key: 'email', header: 'Email' }
+  ]"
+  @sort="handleSort"
+  @rowclick="handleRowClick"
+/&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="svelte-color">&#9679;</span> Svelte</h4>
+          <pre><code>&lt;DataGrid
+  {data}
+  {columns}
+  on:sort={handleSort}
+  on:rowselect={handleRowClick}
+/&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="angular-color">&#9679;</span> Angular</h4>
+          <pre><code>&lt;ytz-datagrid
+  [data]="users"
+  [columns]="columns"
+  (sort)="handleSort($event)"
+  (rowClick)="handleRowClick($event)"
+&gt;&lt;/ytz-datagrid&gt;</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="react-color">&#9679;</span> React</h4>
+          <pre><code>&lt;DataGrid
+  data={users}
+  columns={columns}
+  onSort={handleSort}
+  onRowClick={handleRowClick}
+/&gt;</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Feature Matrix -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Feature Matrix</h2>
+      <div class="overflow-auto">
+        <table class="feature-table">
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Vue</th>
+              <th>Svelte</th>
+              <th>Angular</th>
+              <th>React</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Two-way binding</td>
+              <td><span class="check">&#10003;</span> v-model</td>
+              <td><span class="check">&#10003;</span> bind:</td>
+              <td><span class="check">&#10003;</span> ngModel</td>
+              <td>Controlled</td>
+            </tr>
+            <tr>
+              <td>Forms integration</td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span> CVA</td>
+              <td><span class="check">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>TypeScript support</td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>SSR compatible</td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>Tree-shakeable</td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+              <td><span class="check">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td>Reactive forms</td>
+              <td>-</td>
+              <td>-</td>
+              <td><span class="check">&#10003;</span></td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Installation -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Installation</h2>
+      <div class="code-comparison">
+        <div class="code-block">
+          <h4><span class="vue-color">&#9679;</span> Vue 3</h4>
+          <pre><code>npm install @grimoire/yetzirah-vue @grimoire/yetzirah-core</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="svelte-color">&#9679;</span> Svelte</h4>
+          <pre><code>npm install @grimoire/yetzirah-svelte @grimoire/yetzirah-core</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="angular-color">&#9679;</span> Angular</h4>
+          <pre><code>npm install @grimoire/yetzirah-angular @grimoire/yetzirah-core</code></pre>
+        </div>
+        <div class="code-block">
+          <h4><span class="react-color">&#9679;</span> React</h4>
+          <pre><code>npm install @grimoire/yetzirah-react @grimoire/yetzirah-core</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components Available -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Components Available</h2>
+      <div class="overflow-auto">
+        <table class="feature-table">
+          <thead>
+            <tr>
+              <th>Component</th>
+              <th>Description</th>
+              <th>Forms</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>Toggle</code></td>
+              <td>Switch/toggle with checkbox semantics</td>
+              <td><span class="check">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td><code>Slider</code></td>
+              <td>Range slider with min/max/step</td>
+              <td><span class="check">&#10003;</span></td>
+            </tr>
+            <tr>
+              <td><code>Chip</code></td>
+              <td>Deletable tag/label</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><code>IconButton</code></td>
+              <td>Icon-only button with a11y label</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><code>ThemeToggle</code></td>
+              <td>Light/dark theme switcher with persistence</td>
+              <td>-</td>
+            </tr>
+            <tr>
+              <td><code>DataGrid</code></td>
+              <td>Virtualized data grid with sorting</td>
+              <td>-</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

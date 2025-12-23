@@ -2,10 +2,10 @@
  * React wrappers for ytz-tabs Web Components.
  * Provides controlled/uncontrolled tab selection.
  *
- * @module @yetzirah/react/tabs
+ * @module @grimoire/yetzirah-react/tabs
  */
 
-import '@yetzirah/core'
+import '@grimoire/yetzirah-core'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**
