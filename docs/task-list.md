@@ -151,7 +151,7 @@ Create Vue 3 wrapper for ytz-chip. Forward deletable and disabled props. Emit de
 ---
 pr_id: PR-065
 title: Vue IconButton Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
