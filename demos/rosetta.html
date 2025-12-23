@@ -1408,6 +1408,161 @@ ytz-tooltip [role="tooltip"] {
 }</code></pre>
     </section>
 
+    <!-- Integration Pitfalls -->
+    <section class="demo-section pv4" id="pitfalls">
+      <h2 class="f3 fw6 mb3">Integration Pitfalls</h2>
+      <p class="lh-copy mb3">
+        Common issues when integrating Yetzirah components, especially in HTML demos.
+      </p>
+
+      <h3 class="f5 fw6 mb2 mt4">Module Script Timing</h3>
+      <div class="key-diff">
+        <strong>Problem:</strong> Data set on components before custom elements are defined.
+      </div>
+      <p class="lh-copy mb2">
+        When loading <code>@grimoire/yetzirah-core</code> as a module, inline scripts run before
+        the module finishes loading. Setting <code>.data</code> on a DataGrid before it's defined
+        does nothing—it's just a property on a plain HTMLElement.
+      </p>
+      <div class="comparison mb3">
+        <div class="comparison-panel">
+          <div class="comparison-header" style="background: #c62828; color: white;">❌ Broken</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;script type="module" src="core/dist/index.js"&gt;&lt;/script&gt;
+...
+&lt;script&gt;
+  // Runs BEFORE module loads!
+  const grid = document.querySelector('ytz-datagrid')
+  grid.data = myData  // Does nothing
+&lt;/script&gt;</code></pre>
+        </div>
+        <div class="comparison-panel">
+          <div class="comparison-header" style="background: #2e7d32; color: white;">✅ Fixed</div>
+          <pre class="comparison-content f6 ma0 overflow-auto"><code>&lt;script type="module" src="core/dist/index.js"&gt;&lt;/script&gt;
+...
+&lt;script type="module"&gt;
+  // Now runs AFTER all modules load
+  const grid = document.querySelector('ytz-datagrid')
+  grid.data = myData  // Works!
+&lt;/script&gt;
+
+// Or use whenDefined:
+customElements.whenDefined('ytz-datagrid').then(() =&gt; {
+  grid.data = myData
+})</code></pre>
+        </div>
+      </div>
+
+      <h3 class="f5 fw6 mb2 mt4">Component Internal CSS</h3>
+      <div class="key-diff">
+        <strong>Problem:</strong> Components are invisible or partially rendered.
+      </div>
+      <p class="lh-copy mb2">
+        Some components create internal elements that require CSS. Without these styles,
+        components appear broken even though they're in the DOM.
+      </p>
+      <div class="overflow-auto">
+        <table class="quick-ref">
+          <thead>
+            <tr><th>Component</th><th>Required CSS Selectors</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>ytz-slider</code></td>
+              <td><code>.ytz-slider-track</code>, <code>.ytz-slider-thumb</code></td>
+            </tr>
+            <tr>
+              <td><code>ytz-datagrid</code></td>
+              <td><code>.ytz-datagrid-header</code>, <code>.ytz-datagrid-header-cell</code>,
+                  <code>.ytz-datagrid-viewport</code>, <code>.ytz-datagrid-body</code>,
+                  <code>.ytz-datagrid-row</code>, <code>.ytz-datagrid-cell</code></td>
+            </tr>
+            <tr>
+              <td><code>ytz-chip</code></td>
+              <td><code>.ytz-chip-delete</code> (when <code>deletable</code>)</td>
+            </tr>
+            <tr>
+              <td><code>ytz-toggle</code></td>
+              <td><code>.toggle-track</code> or custom styling for the switch appearance</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="lh-copy mt3 mb2">
+        Example slider CSS (minimal required):
+      </p>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>ytz-slider {
+  display: block;
+  position: relative;
+  height: 40px;
+  width: 100%;
+  cursor: pointer;
+}
+.ytz-slider-track {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(to right,
+    var(--accent, #357edd) var(--slider-percent, 0%),
+    #e0e0e0 var(--slider-percent, 0%));
+  transform: translateY(-50%);
+}
+.ytz-slider-thumb {
+  position: absolute;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  background: var(--accent, #357edd);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}</code></pre>
+
+      <h3 class="f5 fw6 mb2 mt4">Dark Mode Considerations</h3>
+      <div class="key-diff">
+        <strong>Problem:</strong> Components become unreadable in dark mode.
+      </div>
+      <p class="lh-copy mb2">
+        When implementing dark mode, ensure all internal elements have appropriate color overrides:
+      </p>
+      <ul class="lh-copy pl3 mb3">
+        <li><strong>Chip delete buttons:</strong> Use light colors on dark backgrounds</li>
+        <li><strong>DataGrid focused rows:</strong> Use dark background with light text</li>
+        <li><strong>Code blocks:</strong> Override Tachyons <code>.bg-near-white</code></li>
+        <li><strong>Status text:</strong> Ensure <code>.gray</code> text is readable</li>
+      </ul>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>/* Dark mode overrides */
+html.dark-mode .ytz-chip-delete {
+  background: rgba(255,255,255,0.2);
+  color: #e0e0e0;
+}
+html.dark-mode .ytz-datagrid-row-focused {
+  background: #1e3a5f;  /* Dark blue, not light blue */
+  color: #e0e0e0;
+}
+html.dark-mode .bg-near-white {
+  background: #2a2a2a !important;
+}</code></pre>
+
+      <h3 class="f5 fw6 mb2 mt4">ThemeToggle Child Preservation</h3>
+      <div class="key-diff">
+        <strong>Problem:</strong> ThemeToggle shows only text, no toggle switch.
+      </div>
+      <p class="lh-copy mb2">
+        The ThemeToggle component moves its children into an internal toggle. If checking for
+        empty content, avoid <code>textContent</code> which destroys element children.
+      </p>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// ❌ This destroys the toggle-track span:
+if (!this.#toggle.textContent.trim()) {
+  this.#toggle.textContent = 'Dark mode'
+}
+
+// ✅ This preserves element children:
+if (!this.#toggle.hasChildNodes()) {
+  this.#toggle.textContent = 'Dark mode'
+}</code></pre>
+    </section>
+
     <!-- Tachyons Cheatsheet -->
     <section class="demo-section pv4" id="tachyons">
       <h2 class="f3 fw6 mb3">Tachyons Quick Reference</h2>
