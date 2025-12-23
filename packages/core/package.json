@@ -13,7 +13,13 @@
       "require": "./dist/index.cjs"
     },
     "./cdn": {
-      "import": "./dist/yetzirah.js"
+      "import": "./cdn/core.js"
+    },
+    "./cdn/core": {
+      "import": "./cdn/core.js"
+    },
+    "./cdn/*": {
+      "import": "./cdn/*.js"
     },
     "./button": {
       "types": "./dist/button.d.ts",
@@ -107,6 +113,7 @@
   },
   "files": [
     "dist",
+    "cdn",
     "src/dark.css",
     "*.css"
   ],
@@ -132,5 +139,9 @@
     "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
     "directory": "packages/core"
   },
-  "sideEffects": false
+  "sideEffects": [
+    "src/*.js",
+    "dist/*.js",
+    "cdn/*.js"
+  ]
 }
