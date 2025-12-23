@@ -611,7 +611,7 @@ Create Angular wrapper for ytz-toggle implementing ControlValueAccessor for Angu
 ---
 pr_id: PR-078
 title: Angular Chip Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
