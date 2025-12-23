@@ -394,7 +394,7 @@ Create Svelte wrapper for ytz-chip. Forward delete event via on:delete. Pass thr
 ---
 pr_id: PR-072
 title: Svelte IconButton Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 1
