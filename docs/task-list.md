@@ -645,7 +645,7 @@ Create Angular wrapper for ytz-chip. Use @Input for deletable and disabled. Use 
 ---
 pr_id: PR-079
 title: Angular IconButton Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
