@@ -118,7 +118,7 @@ Create Vue 3 wrapper for ytz-toggle with `v-model:checked` support. Use defineMo
 ---
 pr_id: PR-064
 title: Vue Chip Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
