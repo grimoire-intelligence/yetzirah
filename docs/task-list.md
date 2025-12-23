@@ -427,7 +427,7 @@ Create Svelte wrapper for ytz-icon-button. Forward aria-label and tooltip props.
 ---
 pr_id: PR-073
 title: Svelte Slider Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
