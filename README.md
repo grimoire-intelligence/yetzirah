@@ -4,33 +4,34 @@ Unstyled, accessible Web Components with framework wrappers for React, Vue, Svel
 
 ## Installation
 
-### Vanilla HTML (Web Components)
-```bash
-npm install @grimoire/yetzirah-core
-```
-
 ### React (18+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-react
+npm install @grimoire/yetzirah-react
 ```
 
 ### Vue (3.3+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-vue
+npm install @grimoire/yetzirah-vue
 ```
 > Requires Vue 3.3+ for `defineModel` support
 
 ### Svelte (4+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-svelte
+npm install @grimoire/yetzirah-svelte
 ```
 > Supports Svelte 4 and 5
 
 ### Angular (16+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-angular
+npm install @grimoire/yetzirah-angular
 ```
 > Requires Angular 16+ for standalone components
+
+### Vanilla HTML (Web Components)
+```bash
+npm install @grimoire/yetzirah-core
+```
+> Framework packages automatically include the core, so you only need to install `@grimoire/yetzirah-core` directly when using vanilla HTML without a framework.
 
 ## Philosophy
 
