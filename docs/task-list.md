@@ -745,7 +745,7 @@ Create Angular wrapper for ytz-theme-toggle. Use @Input for storageKey and noPer
 ---
 pr_id: PR-082
 title: Angular DataGrid Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 5
