@@ -576,7 +576,7 @@ Initialize `@yetzirah/angular` package for Angular 16+ wrappers. Use standalone 
 ---
 pr_id: PR-077
 title: Angular Toggle Wrapper with ControlValueAccessor
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 4
