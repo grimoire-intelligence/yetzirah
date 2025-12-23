@@ -70,7 +70,7 @@ npm install @yetzirah/core @yetzirah/angular
 | DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` | Virtual-scrolling data table |
 | ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` | Dark/light mode toggle |
 
-> **Note:** Vue, Svelte, and Angular wrappers for Tier 2 components are in development. Tier 1 framework wrappers coming in a future release.
+> **Note:** Tier 1 framework wrappers for Vue, Svelte, and Angular are coming in a future release.
 
 ## Usage
 
@@ -280,6 +280,134 @@ Open any demo file directly in a browser:
 - [DataGrid](demos/datagrid.html)
 - [Theme Toggle](demos/theme-toggle.html)
 - [MUI Rosetta Stone](demos/rosetta.html)
+
+## Tier 2 Component API Reference
+
+### Toggle
+
+Two-state switch with checkbox semantics.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `checked` | `boolean` | `false` | Current checked state |
+| `disabled` | `boolean` | `false` | Disables the toggle |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `change` | `{ checked: boolean }` | Fires when checked state changes |
+
+**Framework bindings:**
+- **Vue:** `v-model:checked`
+- **Svelte:** `bind:checked`
+- **Angular:** `[(ngModel)]` with `ControlValueAccessor`
+
+### Chip
+
+Deletable tag/label component.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `deletable` | `boolean` | `false` | Shows delete button |
+| `disabled` | `boolean` | `false` | Disables the chip |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `delete` | - | Fires when delete button clicked |
+
+### IconButton
+
+Icon-only button with tooltip support.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `aria-label` | `string` | *required* | Accessible label |
+| `tooltip` | `string` | - | Tooltip text |
+| `disabled` | `boolean` | `false` | Disables the button |
+
+### Slider
+
+Range input with keyboard support.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `value` | `number` | `0` | Current value |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `disabled` | `boolean` | `false` | Disables the slider |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `input` | `{ value: number }` | Fires during drag (live) |
+| `change` | `{ value: number }` | Fires on release (committed) |
+
+**Framework bindings:**
+- **Vue:** `v-model`
+- **Svelte:** `bind:value`
+- **Angular:** `[(ngModel)]` with `ControlValueAccessor`
+
+### DataGrid
+
+Virtual-scrolling data table with sorting.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `data` | `any[]` | `[]` | Array of row data objects |
+| `columns` | `Column[]` | `[]` | Column definitions |
+| `rowHeight` | `number` | `40` | Height of each row in pixels |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `sort` | `{ column: string, direction: 'asc' \| 'desc' }` | Column sort requested |
+| `rowselect` | `{ row: any, index: number }` | Row selected |
+| `rowactivate` | `{ row: any, index: number }` | Row double-clicked |
+
+### ThemeToggle
+
+Dark/light mode toggle with persistence.
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `storage-key` | `string` | `'theme'` | localStorage key |
+| `no-persist` | `boolean` | `false` | Disable localStorage persistence |
+
+| Event | Detail | Description |
+|-------|--------|-------------|
+| `themechange` | `{ theme: 'light' \| 'dark', isDark: boolean }` | Theme changed |
+
+## Testing
+
+### Run All Tests
+
+```bash
+pnpm test
+```
+
+### Framework-Specific Tests
+
+```bash
+# Vue tests
+pnpm --filter @yetzirah/vue test
+
+# Svelte tests
+pnpm --filter @yetzirah/svelte test
+
+# Angular tests
+pnpm --filter @yetzirah/angular test
+
+# React tests
+pnpm --filter @yetzirah/react test
+
+# Core tests
+pnpm --filter @yetzirah/core test
+```
+
+### Watch Mode
+
+```bash
+# Run tests in watch mode
+pnpm test:watch
+```
 
 ## Development
 

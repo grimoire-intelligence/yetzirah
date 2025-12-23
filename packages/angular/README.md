@@ -107,7 +107,20 @@ import '@yetzirah/core/tabs';
 
 ## Available Components
 
-All Yetzirah Web Components are available in Angular templates:
+All Yetzirah Web Components are available in Angular templates. Tier 2 components have dedicated Angular wrapper components with full forms support.
+
+### Tier 2 Wrapper Components
+
+| Component | Selector | Forms Support |
+|-----------|----------|---------------|
+| Toggle | `ytz-toggle` | `ControlValueAccessor`, `[(ngModel)]`, `formControlName` |
+| Chip | `ytz-chip` | - |
+| IconButton | `ytz-icon-button` | - |
+| Slider | `ytz-slider` | `ControlValueAccessor`, `[(ngModel)]`, `formControlName` |
+| DataGrid | `ytz-datagrid`, `ytz-datagrid-column` | - |
+| ThemeToggle | `ytz-theme-toggle` | - |
+
+### All Web Components
 
 - `<ytz-button>` - Material button with ripple effect
 - `<ytz-dialog>` - Modal dialog with backdrop
@@ -121,11 +134,200 @@ All Yetzirah Web Components are available in Angular templates:
 - `<ytz-accordion>` - Collapsible sections
 - `<ytz-drawer>` - Side drawer/panel
 - `<ytz-popover>` - Floating popovers
-- `<ytz-toggle>` - Toggle switch
-- `<ytz-chip>` - Material chips
-- `<ytz-icon-button>` - Icon-only buttons
-- `<ytz-slider>` - Range slider
-- `<ytz-datagrid>` - Data grid/table
+- `<ytz-toggle>` - Toggle switch (with wrapper)
+- `<ytz-chip>` - Material chips (with wrapper)
+- `<ytz-icon-button>` - Icon-only buttons (with wrapper)
+- `<ytz-slider>` - Range slider (with wrapper)
+- `<ytz-datagrid>` - Data grid/table (with wrapper)
+- `<ytz-theme-toggle>` - Theme toggle (with wrapper)
+
+## Tier 2 Component API
+
+### Toggle
+
+Implements `ControlValueAccessor` for Angular forms integration.
+
+```typescript
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Toggle } from '@yetzirah/angular';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Toggle],
+  template: `
+    <ytz-toggle [(ngModel)]="enabled" [disabled]="false" (change)="onChange($event)"></ytz-toggle>
+  `
+})
+export class MyComponent {
+  enabled = false;
+  onChange(event: Event) { console.log(event); }
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `ngModel` | `boolean` | `false` | Two-way bound checked state |
+| `disabled` | `boolean` | `false` | Disables the toggle |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `ngModelChange` | `boolean` | Emits when checked state changes |
+| `change` | `Event` | Native change event |
+
+### Chip
+
+```typescript
+import { Component } from '@angular/core';
+import { Chip } from '@yetzirah/angular';
+
+@Component({
+  standalone: true,
+  imports: [Chip],
+  template: `
+    <ytz-chip [deletable]="true" (delete)="onDelete()">Tag Name</ytz-chip>
+  `
+})
+export class MyComponent {
+  onDelete() { console.log('deleted'); }
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `deletable` | `boolean` | `false` | Shows delete button |
+| `disabled` | `boolean` | `false` | Disables the chip |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `delete` | `EventEmitter<void>` | Emits when delete button clicked |
+
+### IconButton
+
+```typescript
+import { Component } from '@angular/core';
+import { IconButton } from '@yetzirah/angular';
+
+@Component({
+  standalone: true,
+  imports: [IconButton],
+  template: `
+    <ytz-icon-button ariaLabel="Close" tooltip="Close dialog" (click)="onClick()">
+      <svg><!-- icon --></svg>
+    </ytz-icon-button>
+  `
+})
+export class MyComponent {
+  onClick() { console.log('clicked'); }
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `ariaLabel` | `string` | *required* | Accessible label (maps to aria-label) |
+| `tooltip` | `string` | - | Tooltip text |
+| `disabled` | `boolean` | `false` | Disables the button |
+
+### Slider
+
+Implements `ControlValueAccessor` for Angular forms integration.
+
+```typescript
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { Slider } from '@yetzirah/angular';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, Slider],
+  template: `
+    <ytz-slider [(ngModel)]="volume" [min]="0" [max]="100" [step]="1"></ytz-slider>
+  `
+})
+export class MyComponent {
+  volume = 50;
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `ngModel` | `number` | `0` | Two-way bound value |
+| `min` | `number` | `0` | Minimum value |
+| `max` | `number` | `100` | Maximum value |
+| `step` | `number` | `1` | Step increment |
+| `disabled` | `boolean` | `false` | Disables the slider |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `ngModelChange` | `number` | Emits on value change |
+| `input` | `Event` | Live value change during drag |
+| `change` | `Event` | Committed value change on release |
+
+### DataGrid
+
+```typescript
+import { Component } from '@angular/core';
+import { DataGrid, DataGridColumn } from '@yetzirah/angular';
+
+@Component({
+  standalone: true,
+  imports: [DataGrid, DataGridColumn],
+  template: `
+    <ytz-datagrid [data]="data" [rowHeight]="40" (sort)="onSort($event)" (rowSelect)="onSelect($event)">
+      <ytz-datagrid-column field="id" header="ID" [width]="80"></ytz-datagrid-column>
+      <ytz-datagrid-column field="name" header="Name" [sortable]="true"></ytz-datagrid-column>
+      <ytz-datagrid-column field="email" header="Email"></ytz-datagrid-column>
+    </ytz-datagrid>
+  `
+})
+export class MyComponent {
+  data = [
+    { id: 1, name: 'Alice', email: 'alice@example.com' },
+    { id: 2, name: 'Bob', email: 'bob@example.com' }
+  ];
+  onSort(event: any) { console.log(event); }
+  onSelect(event: any) { console.log(event); }
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `data` | `any[]` | `[]` | Row data array |
+| `columns` | `Column[]` | `[]` | Column definitions (alternative to children) |
+| `rowHeight` | `number` | `40` | Row height in pixels |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `sort` | `{ column, direction }` | Sort requested |
+| `rowSelect` | `{ row, index }` | Row selected |
+| `rowActivate` | `{ row, index }` | Row double-clicked |
+
+### ThemeToggle
+
+```typescript
+import { Component } from '@angular/core';
+import { ThemeToggle } from '@yetzirah/angular';
+
+@Component({
+  standalone: true,
+  imports: [ThemeToggle],
+  template: `
+    <ytz-theme-toggle [storageKey]="'my-app-theme'" (themeChange)="onThemeChange($event)"></ytz-theme-toggle>
+  `
+})
+export class MyComponent {
+  onThemeChange(event: CustomEvent) { console.log(event.detail); }
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `storageKey` | `string` | `'theme'` | localStorage key |
+| `noPersist` | `boolean` | `false` | Disable persistence |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `themeChange` | `{ theme, isDark }` | Theme changed |
 
 ## TypeScript Support
 
@@ -180,6 +382,21 @@ Or use the dark theme:
 ```typescript
 import '@yetzirah/core/dark.css';
 ```
+
+## Testing
+
+```bash
+# Run all tests
+pnpm test
+
+# Run tests in watch mode
+pnpm test:watch
+
+# Run with coverage
+pnpm test:coverage
+```
+
+Tests use [Jest](https://jestjs.io/) with [jest-preset-angular](https://github.com/thymikee/jest-preset-angular) for Angular-specific testing utilities.
 
 ## Requirements
 
