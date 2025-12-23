@@ -67,7 +67,7 @@ Create build configuration for generating CDN-optimized bundles. Configure Rollu
 ---
 pr_id: PR-126
 title: Individual Component Bundles
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -106,7 +106,7 @@ Generate individual ESM bundles for each component that can be imported independ
 ---
 pr_id: PR-127
 title: Bundle Size Optimization
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 6
@@ -146,7 +146,7 @@ These PRs enable CDN usage patterns.
 ---
 pr_id: PR-128
 title: Import Map Support
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
