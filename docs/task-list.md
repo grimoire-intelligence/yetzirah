@@ -851,7 +851,7 @@ Set up test infrastructure for all framework packages and create comprehensive t
 ---
 pr_id: PR-084
 title: README Update with Framework Support
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 3
