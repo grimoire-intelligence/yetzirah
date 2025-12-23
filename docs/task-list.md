@@ -184,7 +184,7 @@ Create Vue 3 wrapper for ytz-icon-button. Forward aria-label (required), tooltip
 ---
 pr_id: PR-066
 title: Vue Slider Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 3
