@@ -487,7 +487,15 @@ class YtzDatagrid extends HTMLElement {
     // Scroll row into view via virtual scroller
     this.#virtualScroller?.scrollToIndex(this.#focusedRow)
 
-    // Update focus styling
+    // Apply focus styling after any scroll-triggered re-render completes
+    // (scrollToIndex may trigger scroll event → RAF render that clears DOM)
+    requestAnimationFrame(() => {
+      this.#applyFocusStyling()
+    })
+  }
+
+  #applyFocusStyling() {
+    // Update row focus styling
     this.querySelectorAll('.ytz-datagrid-row').forEach(row => {
       row.classList.remove('ytz-datagrid-row-focused')
     })

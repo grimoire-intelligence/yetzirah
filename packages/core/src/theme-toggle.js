@@ -62,8 +62,9 @@ class YtzThemeToggle extends HTMLElement {
         this.#toggle.appendChild(this.firstChild)
       }
 
-      // Default label if none provided
-      if (!this.#toggle.textContent.trim()) {
+      // Default label if no children provided
+      // Use hasChildNodes() instead of textContent to preserve element children like styling spans
+      if (!this.#toggle.hasChildNodes()) {
         this.#toggle.textContent = 'Dark mode'
       }
 
