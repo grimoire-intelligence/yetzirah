@@ -217,7 +217,7 @@ Create Vue 3 wrapper for ytz-slider with v-model support. Handle number type coe
 ---
 pr_id: PR-067
 title: Vue ThemeToggle Wrapper
-cold_state: ready
+cold_state: completed
 priority: medium
 complexity:
   score: 2
