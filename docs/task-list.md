@@ -1442,7 +1442,7 @@ Create Angular wrapper for popover component. Support [(open)] binding.
 ---
 pr_id: PR-122
 title: Framework Wrapper Tests for Tier 1 Components
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -1481,7 +1481,7 @@ Create integration test suites for all Tier 1 framework wrappers. Verify event f
 ---
 pr_id: PR-123
 title: README Update with Tier 1 Framework Support
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -1521,7 +1521,7 @@ Update all README files with complete Tier 1 + Tier 2 component documentation. A
 ---
 pr_id: PR-124
 title: Bundle Verification for All Frameworks (Tier 1 + Tier 2)
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
