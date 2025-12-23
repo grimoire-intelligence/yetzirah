@@ -85,7 +85,7 @@ Initialize `@yetzirah/vue` package for Vue 3 wrappers. Configure build to output
 ---
 pr_id: PR-063
 title: Vue Toggle Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 2
