@@ -361,7 +361,7 @@ Create Svelte wrapper for ytz-toggle. Use bind:checked for two-way binding. Forw
 ---
 pr_id: PR-071
 title: Svelte Chip Wrapper
-cold_state: ready
+cold_state: completed
 priority: high
 complexity:
   score: 1
