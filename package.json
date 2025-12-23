@@ -7,7 +7,11 @@
   "scripts": {
     "build": "pnpm -r build",
     "build:cdn": "pnpm --filter @yetzirah/core build:cdn",
-    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
+    "test": "pnpm test:core && pnpm test:vue && pnpm test:svelte && pnpm test:angular",
+    "test:core": "node --experimental-vm-modules node_modules/jest/bin/jest.js --passWithNoTests",
+    "test:vue": "pnpm --filter @yetzirah/vue test",
+    "test:svelte": "pnpm --filter @yetzirah/svelte test",
+    "test:angular": "pnpm --filter @yetzirah/angular test",
     "lint": "eslint packages/*/src/**/*.js",
     "format": "prettier --write \"packages/*/src/**/*.js\"",
     "clean": "pnpm -r exec rm -rf dist",

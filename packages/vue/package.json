@@ -18,7 +18,10 @@
   ],
   "scripts": {
     "build": "tsup",
-    "dev": "tsup --watch"
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "vue",
@@ -43,6 +46,11 @@
   },
   "sideEffects": false,
   "devDependencies": {
-    "esbuild-plugin-vue3": "^0.5.1"
+    "@vitejs/plugin-vue": "^5.2.4",
+    "@vue/test-utils": "^2.4.6",
+    "esbuild-plugin-vue3": "^0.5.1",
+    "happy-dom": "^18.0.1",
+    "vitest": "^3.2.4",
+    "vue": "^3.5.0"
   }
 }

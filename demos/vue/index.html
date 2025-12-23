@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vue 3 Demo - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <script type="module" src="../../packages/core/dist/index.js"></script>
+  <style>
+    .demo-section { margin-bottom: 2rem; }
+    .demo-box { padding: 1rem; background: #f5f5f5; border-radius: 4px; margin-bottom: 1rem; }
+    .status { font-size: 0.875rem; color: #666; margin-top: 0.5rem; }
+    .toggle-wrapper { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .toggle-track {
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track {
+      background: #357edd;
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track::after {
+      transform: translateX(18px);
+    }
+    ytz-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      background: #e0e0e0;
+      border-radius: 16px;
+      margin-right: 0.5rem;
+    }
+    ytz-slider {
+      display: block;
+      width: 100%;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="../index.html" class="link blue">&larr; All Components</a>
+      <span class="mh2">|</span>
+      <a href="../frameworks.html" class="link blue">Framework Comparison</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Vue 3 Demo</h1>
+    <p class="f5 lh-copy gray mt0">
+      Demonstrating Yetzirah Web Components with Vue 3 using v-model bindings.
+    </p>
+  </header>
+
+  <div id="app">
+    <!-- Toggle Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Toggle with v-model:checked</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-toggle
+            :checked="darkMode"
+            @change="handleToggleChange"
+          >
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label>Dark mode</label>
+        </div>
+        <div class="status">darkMode: {{ darkMode }}</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Toggle v-model:checked="darkMode"&gt;Dark mode&lt;/Toggle&gt;</code></pre>
+    </section>
+
+    <!-- Slider Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Slider with v-model</h2>
+      <div class="demo-box">
+        <label class="db mb2">Volume: {{ volume }}</label>
+        <ytz-slider
+          :value="volume"
+          :min="0"
+          :max="100"
+          @change="handleSliderChange"
+        ></ytz-slider>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Slider v-model="volume" :min="0" :max="100" /&gt;</code></pre>
+    </section>
+
+    <!-- Chip Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Chip with @delete</h2>
+      <div class="demo-box">
+        <ytz-chip
+          v-for="(tag, index) in tags"
+          :key="tag"
+          deletable
+          @delete="removeTag(index)"
+        >{{ tag }}</ytz-chip>
+        <span v-if="tags.length === 0" class="gray">No tags remaining</span>
+        <div class="status">tags: {{ tags.join(', ') }}</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;Chip v-for="tag in tags" deletable @delete="removeTag(tag)"&gt;
+  {{ tag }}
+&lt;/Chip&gt;</code></pre>
+    </section>
+
+    <!-- IconButton Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">IconButton with @click</h2>
+      <div class="demo-box">
+        <ytz-icon-button
+          aria-label="Favorite"
+          @click="toggleFavorite"
+        >{{ isFavorite ? '❤️' : '🤍' }}</ytz-icon-button>
+        <ytz-icon-button
+          aria-label="Share"
+          @click="showMessage('Shared!')"
+        >📤</ytz-icon-button>
+        <ytz-icon-button
+          aria-label="Settings"
+          disabled
+        >⚙️</ytz-icon-button>
+        <div class="status">isFavorite: {{ isFavorite }}</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;IconButton label="Favorite" @click="toggleFavorite"&gt;
+  {{ isFavorite ? '❤️' : '🤍' }}
+&lt;/IconButton&gt;</code></pre>
+    </section>
+
+    <!-- ThemeToggle Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">ThemeToggle with @themechange</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-theme-toggle
+            @themechange="handleThemeChange"
+          >
+            <span class="toggle-track"></span>
+          </ytz-theme-toggle>
+          <label>Theme Toggle</label>
+        </div>
+        <div class="status">currentTheme: {{ currentTheme }}</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ThemeToggle @themechange="handleThemeChange" /&gt;</code></pre>
+    </section>
+
+    <!-- DataGrid Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">DataGrid with @sort and @rowclick</h2>
+      <div class="demo-box" style="height: 250px; overflow: auto;">
+        <ytz-datagrid
+          :row-height="40"
+          @sort="handleSort"
+          @rowselect="handleRowClick"
+        >
+          <ytz-datagrid-column field="name" header="Name" sortable></ytz-datagrid-column>
+          <ytz-datagrid-column field="email" header="Email"></ytz-datagrid-column>
+          <ytz-datagrid-column field="role" header="Role" width="120px"></ytz-datagrid-column>
+        </ytz-datagrid>
+        <div class="status">lastAction: {{ lastGridAction }}</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;DataGrid
+  :data="users"
+  :columns="[
+    { key: 'name', header: 'Name', sortable: true },
+    { key: 'email', header: 'Email' },
+    { key: 'role', header: 'Role' }
+  ]"
+  @sort="handleSort"
+  @rowclick="handleRowClick"
+/&gt;</code></pre>
+    </section>
+  </div>
+
+  <script>
+    const { createApp, ref } = Vue
+
+    createApp({
+      setup() {
+        const darkMode = ref(false)
+        const volume = ref(50)
+        const tags = ref(['JavaScript', 'TypeScript', 'Vue', 'React'])
+        const isFavorite = ref(false)
+        const currentTheme = ref('light')
+        const lastGridAction = ref('No action yet')
+        const users = ref([
+          { name: 'Alice Smith', email: 'alice@example.com', role: 'Admin' },
+          { name: 'Bob Johnson', email: 'bob@example.com', role: 'User' },
+          { name: 'Carol White', email: 'carol@example.com', role: 'Editor' },
+          { name: 'David Brown', email: 'david@example.com', role: 'User' }
+        ])
+
+        const handleToggleChange = (e) => {
+          darkMode.value = e.detail?.checked ?? false
+        }
+
+        const handleSliderChange = (e) => {
+          volume.value = e.detail?.value ?? 0
+        }
+
+        const removeTag = (index) => {
+          tags.value.splice(index, 1)
+        }
+
+        const toggleFavorite = () => {
+          isFavorite.value = !isFavorite.value
+        }
+
+        const showMessage = (msg) => {
+          alert(msg)
+        }
+
+        const handleThemeChange = (e) => {
+          currentTheme.value = e.detail?.theme ?? 'light'
+        }
+
+        const handleSort = (e) => {
+          lastGridAction.value = `Sorted by ${e.detail?.field} (${e.detail?.direction})`
+        }
+
+        const handleRowClick = (e) => {
+          lastGridAction.value = `Selected row: ${e.detail?.row?.name}`
+        }
+
+        // Set data on datagrid after mount
+        setTimeout(() => {
+          const grid = document.querySelector('ytz-datagrid')
+          if (grid) grid.data = users.value
+        }, 100)
+
+        return {
+          darkMode,
+          volume,
+          tags,
+          isFavorite,
+          currentTheme,
+          lastGridAction,
+          users,
+          handleToggleChange,
+          handleSliderChange,
+          removeTag,
+          toggleFavorite,
+          showMessage,
+          handleThemeChange,
+          handleSort,
+          handleRowClick
+        }
+      }
+    }).mount('#app')
+  </script>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="../index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

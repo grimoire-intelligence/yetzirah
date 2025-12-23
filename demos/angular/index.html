@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Angular Demo - Yetzirah</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../../packages/core/dist/index.js"></script>
+  <style>
+    .demo-section { margin-bottom: 2rem; }
+    .demo-box { padding: 1rem; background: #f5f5f5; border-radius: 4px; margin-bottom: 1rem; }
+    .status { font-size: 0.875rem; color: #666; margin-top: 0.5rem; }
+    .toggle-wrapper { display: inline-flex; align-items: center; gap: 0.5rem; }
+    .toggle-track {
+      display: inline-block;
+      width: 40px;
+      height: 22px;
+      background: #ccc;
+      border-radius: 11px;
+      position: relative;
+      transition: background 0.2s ease;
+    }
+    .toggle-track::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 18px;
+      height: 18px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track {
+      background: #dd0031;
+    }
+    ytz-toggle[aria-checked="true"] .toggle-track::after {
+      transform: translateX(18px);
+    }
+    ytz-chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.25rem 0.75rem;
+      background: #e0e0e0;
+      border-radius: 16px;
+      margin-right: 0.5rem;
+    }
+    ytz-slider {
+      display: block;
+      width: 100%;
+    }
+    .code-block {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="../index.html" class="link blue">&larr; All Components</a>
+      <span class="mh2">|</span>
+      <a href="../frameworks.html" class="link blue">Framework Comparison</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Angular Demo</h1>
+    <p class="f5 lh-copy gray mt0">
+      Demonstrating Yetzirah Web Components with Angular using ngModel, reactive forms, and event outputs.
+      The examples below show Angular code patterns and interactive demos.
+    </p>
+  </header>
+
+  <main>
+    <!-- Toggle Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Toggle with ngModel (Template-driven Forms)</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="angular-toggle">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="angular-toggle">Enable two-factor auth</label>
+        </div>
+        <div class="status">twoFactorEnabled: <span id="toggle-status">false</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { ToggleComponent } from '@yetzirah/angular'
+
+@Component({
+  imports: [FormsModule, ToggleComponent],
+  template: \`
+    &lt;ytz-toggle [(ngModel)]="twoFactorEnabled"&gt;
+      Enable two-factor auth
+    &lt;/ytz-toggle&gt;
+    &lt;p&gt;Status: {{ twoFactorEnabled }}&lt;/p&gt;
+  \`
+})
+export class MyComponent {
+  twoFactorEnabled = false
+}</code></pre>
+    </section>
+
+    <!-- Toggle with Reactive Forms -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Toggle with FormControl (Reactive Forms)</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-toggle id="angular-toggle-reactive">
+            <span class="toggle-track"></span>
+          </ytz-toggle>
+          <label for="angular-toggle-reactive">Accept terms</label>
+        </div>
+        <div class="status">termsAccepted: <span id="toggle-reactive-status">false</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { FormControl, ReactiveFormsModule } from '@angular/forms'
+import { ToggleComponent } from '@yetzirah/angular'
+
+@Component({
+  imports: [ReactiveFormsModule, ToggleComponent],
+  template: \`
+    &lt;ytz-toggle [formControl]="termsControl"&gt;
+      Accept terms
+    &lt;/ytz-toggle&gt;
+    &lt;p&gt;Valid: {{ termsControl.valid }}&lt;/p&gt;
+  \`
+})
+export class MyComponent {
+  termsControl = new FormControl(false, Validators.requiredTrue)
+}</code></pre>
+    </section>
+
+    <!-- Slider Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Slider with ngModel</h2>
+      <div class="demo-box">
+        <label class="db mb2">Brightness: <span id="slider-value">75</span>%</label>
+        <ytz-slider id="angular-slider" value="75" min="0" max="100" step="5"></ytz-slider>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { SliderComponent } from '@yetzirah/angular'
+
+@Component({
+  imports: [FormsModule, SliderComponent],
+  template: \`
+    &lt;label&gt;Brightness: {{ brightness }}%&lt;/label&gt;
+    &lt;ytz-slider
+      [(ngModel)]="brightness"
+      [min]="0"
+      [max]="100"
+      [step]="5"
+    /&gt;
+  \`
+})
+export class MyComponent {
+  brightness = 75
+}</code></pre>
+    </section>
+
+    <!-- Chip Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">Chip with (delete) Output</h2>
+      <div class="demo-box" id="chip-container">
+        <ytz-chip deletable data-tag="Angular">Angular</ytz-chip>
+        <ytz-chip deletable data-tag="RxJS">RxJS</ytz-chip>
+        <ytz-chip deletable data-tag="NgRx">NgRx</ytz-chip>
+        <ytz-chip deletable data-tag="Signals">Signals</ytz-chip>
+        <div class="status">Click X to remove tags</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { ChipComponent } from '@yetzirah/angular'
+
+@Component({
+  imports: [ChipComponent],
+  template: \`
+    @for (tag of tags; track tag) {
+      &lt;ytz-chip [deletable]="true" (delete)="removeTag(tag)"&gt;
+        {{ tag }}
+      &lt;/ytz-chip&gt;
+    }
+  \`
+})
+export class MyComponent {
+  tags = ['Angular', 'RxJS', 'NgRx', 'Signals']
+
+  removeTag(tag: string) {
+    this.tags = this.tags.filter(t =&gt; t !== tag)
+  }
+}</code></pre>
+    </section>
+
+    <!-- IconButton Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">IconButton with (buttonClick) Output</h2>
+      <div class="demo-box">
+        <ytz-icon-button id="favorite-btn" aria-label="Favorite">🤍</ytz-icon-button>
+        <ytz-icon-button aria-label="Share" onclick="alert('Shared!')">📤</ytz-icon-button>
+        <ytz-icon-button aria-label="Settings" disabled>⚙️</ytz-icon-button>
+        <div class="status">Click the heart to toggle favorite</div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { IconButtonComponent } from '@yetzirah/angular'
+
+@Component({
+  imports: [IconButtonComponent],
+  template: \`
+    &lt;ytz-icon-button
+      [label]="'Favorite'"
+      (buttonClick)="toggleFavorite()"
+    &gt;
+      {{ isFavorite ? '❤️' : '🤍' }}
+    &lt;/ytz-icon-button&gt;
+  \`
+})
+export class MyComponent {
+  isFavorite = false
+
+  toggleFavorite() {
+    this.isFavorite = !this.isFavorite
+  }
+}</code></pre>
+    </section>
+
+    <!-- ThemeToggle Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">ThemeToggle with (themeChange) Output</h2>
+      <div class="demo-box">
+        <div class="toggle-wrapper">
+          <ytz-theme-toggle id="angular-theme-toggle" no-persist>
+            <span class="toggle-track"></span>
+          </ytz-theme-toggle>
+          <label>Theme Toggle</label>
+        </div>
+        <div class="status">currentTheme: <span id="theme-status">light</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { ThemeToggleComponent } from '@yetzirah/angular'
+
+@Component({
+  imports: [ThemeToggleComponent],
+  template: \`
+    &lt;ytz-theme-toggle
+      (themeChange)="onThemeChange($event)"
+    &gt;
+      Current: {{ theme }}
+    &lt;/ytz-theme-toggle&gt;
+  \`
+})
+export class MyComponent {
+  theme = 'light'
+
+  onThemeChange(event: CustomEvent) {
+    this.theme = event.detail.theme
+  }
+}</code></pre>
+    </section>
+
+    <!-- DataGrid Demo -->
+    <section class="demo-section">
+      <h2 class="f4 fw6 mb3">DataGrid with (sort) and (rowClick) Outputs</h2>
+      <div class="demo-box" style="height: 250px; overflow: auto;">
+        <ytz-datagrid id="angular-datagrid" row-height="40">
+          <ytz-datagrid-column field="name" header="Developer" sortable></ytz-datagrid-column>
+          <ytz-datagrid-column field="company" header="Company"></ytz-datagrid-column>
+          <ytz-datagrid-column field="project" header="Project" width="120px"></ytz-datagrid-column>
+        </ytz-datagrid>
+        <div class="status">lastAction: <span id="grid-status">No action yet</span></div>
+      </div>
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>// component.ts
+import { DataGridComponent, DataGridColumn } from '@yetzirah/angular'
+
+@Component({
+  imports: [DataGridComponent],
+  template: \`
+    &lt;ytz-datagrid
+      [data]="developers"
+      [columns]="columns"
+      [rowHeight]="40"
+      (sort)="onSort($event)"
+      (rowClick)="onRowClick($event)"
+    /&gt;
+  \`
+})
+export class MyComponent {
+  developers = [
+    { name: 'Misko Hevery', company: 'Google', project: 'Angular' },
+    { name: 'Igor Minar', company: 'Google', project: 'Angular' },
+    { name: 'Minko Gechev', company: 'Google', project: 'Angular' }
+  ]
+
+  columns: DataGridColumn[] = [
+    { key: 'name', header: 'Developer', sortable: true },
+    { key: 'company', header: 'Company' },
+    { key: 'project', header: 'Project', width: '120px' }
+  ]
+
+  onSort(event: CustomEvent) {
+    console.log('Sort:', event.detail)
+  }
+
+  onRowClick(event: CustomEvent) {
+    console.log('Row:', event.detail.row)
+  }
+}</code></pre>
+    </section>
+  </main>
+
+  <script>
+    // Interactive demos with vanilla JS to simulate Angular behavior
+
+    // Toggle (Template-driven)
+    const toggle = document.getElementById('angular-toggle')
+    const toggleStatus = document.getElementById('toggle-status')
+    toggle.addEventListener('change', (e) => {
+      toggleStatus.textContent = e.detail?.checked ?? false
+    })
+
+    // Toggle (Reactive)
+    const toggleReactive = document.getElementById('angular-toggle-reactive')
+    const toggleReactiveStatus = document.getElementById('toggle-reactive-status')
+    toggleReactive.addEventListener('change', (e) => {
+      toggleReactiveStatus.textContent = e.detail?.checked ?? false
+    })
+
+    // Slider
+    const slider = document.getElementById('angular-slider')
+    const sliderValue = document.getElementById('slider-value')
+    slider.addEventListener('change', (e) => {
+      sliderValue.textContent = e.detail?.value ?? 0
+    })
+
+    // Chips
+    const chipContainer = document.getElementById('chip-container')
+    chipContainer.addEventListener('delete', (e) => {
+      e.target.remove()
+    })
+
+    // Favorite button
+    const favoriteBtn = document.getElementById('favorite-btn')
+    let isFavorite = false
+    favoriteBtn.addEventListener('click', () => {
+      isFavorite = !isFavorite
+      favoriteBtn.textContent = isFavorite ? '❤️' : '🤍'
+    })
+
+    // Theme toggle
+    const themeToggle = document.getElementById('angular-theme-toggle')
+    const themeStatus = document.getElementById('theme-status')
+    themeToggle.addEventListener('themechange', (e) => {
+      themeStatus.textContent = e.detail?.theme ?? 'light'
+    })
+
+    // DataGrid
+    const datagrid = document.getElementById('angular-datagrid')
+    const gridStatus = document.getElementById('grid-status')
+    datagrid.data = [
+      { name: 'Misko Hevery', company: 'Google', project: 'Angular' },
+      { name: 'Igor Minar', company: 'Google', project: 'Angular' },
+      { name: 'Minko Gechev', company: 'Google', project: 'Angular' },
+      { name: 'Alex Rickabaugh', company: 'Google', project: 'Angular Compiler' }
+    ]
+    datagrid.addEventListener('sort', (e) => {
+      gridStatus.textContent = `Sorted by ${e.detail?.field} (${e.detail?.direction})`
+    })
+    datagrid.addEventListener('rowselect', (e) => {
+      gridStatus.textContent = `Selected: ${e.detail?.row?.name}`
+    })
+  </script>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="../index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

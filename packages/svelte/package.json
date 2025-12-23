@@ -20,7 +20,10 @@
   ],
   "scripts": {
     "build": "svelte-package -i src -o dist",
-    "dev": "svelte-package -i src -o dist --watch"
+    "dev": "svelte-package -i src -o dist --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
   },
   "keywords": [
     "svelte",
@@ -45,7 +48,11 @@
   "sideEffects": false,
   "devDependencies": {
     "@sveltejs/package": "^2.5.7",
+    "@sveltejs/vite-plugin-svelte": "^5.0.3",
+    "@testing-library/svelte": "^5.2.7",
+    "happy-dom": "^18.0.1",
     "svelte": "^5.46.0",
-    "typescript": "^5.0.0"
+    "typescript": "^5.0.0",
+    "vitest": "^3.2.4"
   }
 }
