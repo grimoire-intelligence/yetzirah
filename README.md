@@ -4,33 +4,34 @@ Unstyled, accessible Web Components with framework wrappers for React, Vue, Svel
 
 ## Installation
 
-### Vanilla HTML (Web Components)
-```bash
-npm install @grimoire/yetzirah-core
-```
-
 ### React (18+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-react
+npm install @grimoire/yetzirah-react
 ```
 
 ### Vue (3.3+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-vue
+npm install @grimoire/yetzirah-vue
 ```
 > Requires Vue 3.3+ for `defineModel` support
 
 ### Svelte (4+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-svelte
+npm install @grimoire/yetzirah-svelte
 ```
 > Supports Svelte 4 and 5
 
 ### Angular (16+)
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-angular
+npm install @grimoire/yetzirah-angular
 ```
 > Requires Angular 16+ for standalone components
+
+### Vanilla HTML (Web Components)
+```bash
+npm install @grimoire/yetzirah-core
+```
+> Framework packages automatically include the core, so you only need to install `@grimoire/yetzirah-core` directly when using vanilla HTML without a framework.
 
 ## Philosophy
 
@@ -44,33 +45,31 @@ npm install @grimoire/yetzirah-core @grimoire/yetzirah-angular
 
 ### Tier 1 (Core)
 
-| Component | Web Component | React | Description |
-|-----------|--------------|-------|-------------|
-| Button | `<ytz-button>` | `<Button>` | Polymorphic button/link |
-| Dialog | `<ytz-dialog>` | `<Dialog>` | Modal dialog with focus trap |
-| Drawer | `<ytz-drawer>` | `<Drawer>` | Side panel overlay |
-| Tabs | `<ytz-tabs>` | `<Tabs>` | Tabbed interface |
-| Menu | `<ytz-menu>` | `<Menu>` | Dropdown menu |
-| Accordion | `<ytz-accordion>` | `<Accordion>` | Collapsible sections |
-| Disclosure | `<ytz-disclosure>` | `<Disclosure>` | Expandable content |
-| Tooltip | `<ytz-tooltip>` | `<Tooltip>` | Hover/focus tooltip |
-| Popover | `<ytz-popover>` | `<Popover>` | Positioned popup |
-| Autocomplete | `<ytz-autocomplete>` | `<Autocomplete>` | Filterable combobox |
-| Listbox | `<ytz-listbox>` | `<Listbox>` | Keyboard-navigable list |
-| Select | `<ytz-select>` | `<Select>` | Dropdown select |
+| Component | Web Component | React | Vue | Svelte | Angular |
+|-----------|--------------|-------|-----|--------|---------|
+| Button | `<ytz-button>` | `<Button>` | `<Button>` | `<Button>` | `<ytz-button>` |
+| Dialog | `<ytz-dialog>` | `<Dialog>` | `<Dialog>` | `<Dialog>` | `<ytz-dialog>` |
+| Drawer | `<ytz-drawer>` | `<Drawer>` | `<Drawer>` | `<Drawer>` | `<ytz-drawer>` |
+| Tabs | `<ytz-tabs>` | `<Tabs>` | `<Tabs>` | `<Tabs>` | `<ytz-tabs>` |
+| Menu | `<ytz-menu>` | `<Menu>` | `<Menu>` | `<Menu>` | `<ytz-menu>` |
+| Accordion | `<ytz-accordion>` | `<Accordion>` | `<Accordion>` | `<Accordion>` | `<ytz-accordion>` |
+| Disclosure | `<ytz-disclosure>` | `<Disclosure>` | `<Disclosure>` | `<Disclosure>` | `<ytz-disclosure>` |
+| Tooltip | `<ytz-tooltip>` | `<Tooltip>` | `<Tooltip>` | `<Tooltip>` | `<ytz-tooltip>` |
+| Popover | `<ytz-popover>` | `<Popover>` | `<Popover>` | `<Popover>` | `<ytz-popover>` |
+| Autocomplete | `<ytz-autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` |
+| Listbox | `<ytz-listbox>` | `<Listbox>` | `<Listbox>` | `<Listbox>` | `<ytz-listbox>` |
+| Select | `<ytz-select>` | `<Select>` | `<Select>` | `<Select>` | `<ytz-select>` |
 
 ### Tier 2 (Extended)
 
-| Component | Web Component | React | Vue | Svelte | Angular | Description |
-|-----------|--------------|-------|-----|--------|---------|-------------|
-| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` | Switch with checkbox semantics |
-| Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` | Deletable tag/label |
-| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` | Icon-only button with tooltip |
-| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` | Range input with keyboard support |
-| DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` | Virtual-scrolling data table |
-| ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` | Dark/light mode toggle |
-
-> **Note:** Tier 1 framework wrappers for Vue, Svelte, and Angular are coming in a future release.
+| Component | Web Component | React | Vue | Svelte | Angular |
+|-----------|--------------|-------|-----|--------|---------|
+| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` |
+| Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` |
+| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` |
+| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` |
+| DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` |
+| ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` |
 
 ## Usage
 
@@ -217,15 +216,39 @@ export class AppComponent {
 
 ## Styling
 
-Yetzirah components are unstyled. Use utility classes or custom CSS:
+Yetzirah components are unstyled by design. We recommend **[Tachyons](https://tachyons.io/)** as the ideal pairing:
+
+### Why Tachyons?
+
+| Benefit | Details |
+|---------|---------|
+| **Tiny bundle** | ~15KB gzipped for the entire library |
+| **No build step** | CDN or npm, works immediately |
+| **Composable** | Utility classes combine to create any design |
+| **Material-ready** | Easy to replicate Material Design with utilities |
+
+**Total stack size** with Tachyons:
+- Yetzirah Core + React: ~15KB
+- Tachyons CSS: ~15KB
+- **Total: ~30KB** (vs 150KB+ for Material UI)
+
+### Example: Material-style Button
 
 ```html
-<!-- Tachyons -->
-<ytz-button class="ph3 pv2 br2 bn white bg-blue pointer">
+<!-- Tachyons utilities replicate Material Design -->
+<ytz-button class="ph3 pv2 br2 bn white bg-blue pointer shadow-1 hover-shadow-2">
   Submit
 </ytz-button>
 
-<!-- Custom CSS -->
+<!-- Outlined variant -->
+<ytz-button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">
+  Cancel
+</ytz-button>
+```
+
+### Alternative: Custom CSS
+
+```html
 <style>
   .my-button {
     padding: 0.5rem 1rem;

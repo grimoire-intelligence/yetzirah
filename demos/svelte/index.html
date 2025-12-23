@@ -11,6 +11,8 @@
     .demo-box { padding: 1rem; background: #f5f5f5; border-radius: 4px; margin-bottom: 1rem; }
     .status { font-size: 0.875rem; color: #666; margin-top: 0.5rem; }
     .toggle-wrapper { display: inline-flex; align-items: center; gap: 0.5rem; }
+
+    /* Toggle track styling */
     .toggle-track {
       display: inline-block;
       width: 40px;
@@ -38,6 +40,8 @@
     ytz-toggle[aria-checked="true"] .toggle-track::after {
       transform: translateX(18px);
     }
+
+    /* Chip styling */
     ytz-chip {
       display: inline-flex;
       align-items: center;
@@ -45,11 +49,168 @@
       background: #e0e0e0;
       border-radius: 16px;
       margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
     }
+    .ytz-chip-delete {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 0.5rem;
+      width: 18px;
+      height: 18px;
+      border: none;
+      background: rgba(0,0,0,0.2);
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 14px;
+      line-height: 1;
+      color: #333;
+      padding: 0;
+    }
+    .ytz-chip-delete:hover {
+      background: rgba(0,0,0,0.3);
+    }
+
+    /* Slider styling */
     ytz-slider {
       display: block;
+      position: relative;
+      height: 40px;
       width: 100%;
+      cursor: pointer;
     }
+    ytz-slider[aria-disabled="true"] {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .ytz-slider-track {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(to right, #ff3e00 var(--slider-percent, 0%), #e0e0e0 var(--slider-percent, 0%));
+      border-radius: 2px;
+      transform: translateY(-50%);
+    }
+    .ytz-slider-thumb {
+      position: absolute;
+      top: 50%;
+      width: 20px;
+      height: 20px;
+      background: #ff3e00;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: box-shadow 0.15s ease;
+    }
+    ytz-slider:hover .ytz-slider-thumb {
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    ytz-slider:focus {
+      outline: none;
+    }
+    ytz-slider:focus .ytz-slider-thumb {
+      box-shadow: 0 0 0 3px rgba(255, 62, 0, 0.3);
+    }
+
+    /* DataGrid styling */
+    ytz-datagrid {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      height: 200px;
+      border: 1px solid #e0e0e0;
+      font-size: 14px;
+    }
+    .ytz-datagrid-header {
+      display: flex;
+      background: #f5f5f5;
+      border-bottom: 2px solid #e0e0e0;
+      font-weight: 600;
+    }
+    .ytz-datagrid-header-cell {
+      flex: 1;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+    }
+    .ytz-datagrid-sortable {
+      cursor: pointer;
+    }
+    .ytz-datagrid-sortable:hover {
+      background: #eee;
+    }
+    .ytz-datagrid-viewport {
+      flex: 1;
+      overflow-y: auto;
+    }
+    .ytz-datagrid-body {
+      position: relative;
+    }
+    .ytz-datagrid-row {
+      display: flex;
+      border-bottom: 1px solid #e0e0e0;
+    }
+    .ytz-datagrid-row:hover {
+      background: #fafafa;
+    }
+    .ytz-datagrid-row-focused {
+      background: #e3f2fd;
+    }
+    .ytz-datagrid-cell {
+      flex: 1;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Dark mode support */
+    html.dark-mode {
+      background: #1a1a1a;
+      color: #e0e0e0;
+    }
+    html.dark-mode .demo-box {
+      background: #2a2a2a;
+    }
+    html.dark-mode ytz-chip {
+      background: #444;
+      color: #e0e0e0;
+    }
+    html.dark-mode .ytz-chip-delete {
+      background: rgba(255,255,255,0.2);
+      color: #e0e0e0;
+    }
+    html.dark-mode .ytz-chip-delete:hover {
+      background: rgba(255,255,255,0.3);
+    }
+    html.dark-mode ytz-datagrid {
+      border-color: #444;
+    }
+    html.dark-mode .ytz-datagrid-header {
+      background: #2a2a2a;
+      border-color: #444;
+    }
+    html.dark-mode .ytz-datagrid-row {
+      border-color: #444;
+    }
+    html.dark-mode .ytz-datagrid-row:hover {
+      background: #333;
+    }
+    html.dark-mode .ytz-datagrid-row-focused {
+      background: #1e3a5f;
+      color: #e0e0e0;
+    }
+    html.dark-mode .bg-near-white {
+      background: #2a2a2a !important;
+    }
+    html.dark-mode pre code {
+      color: #e0e0e0;
+    }
+
     .code-block {
       background: #1e1e1e;
       color: #d4d4d4;
@@ -227,8 +388,9 @@
     </section>
   </main>
 
-  <script>
+  <script type="module">
     // Interactive demos with vanilla JS to simulate Svelte behavior
+    // Using type="module" ensures this runs after the core module loads and defines custom elements
 
     // Toggle
     const toggle = document.getElementById('svelte-toggle')
@@ -263,6 +425,10 @@
     const themeStatus = document.getElementById('theme-status')
     themeToggle.addEventListener('themechange', (e) => {
       themeStatus.textContent = e.detail?.theme ?? 'light'
+    })
+    // Set initial status from component's current theme (after it reads system preference)
+    requestAnimationFrame(() => {
+      themeStatus.textContent = themeToggle.theme ?? 'light'
     })
 
     // DataGrid

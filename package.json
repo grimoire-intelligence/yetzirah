@@ -16,7 +16,9 @@
     "format": "prettier --write \"packages/*/src/**/*.js\"",
     "clean": "pnpm -r exec rm -rf dist",
     "size": "pnpm build && node scripts/check-size.js",
-    "size:report": "pnpm build && node scripts/check-size.js --report"
+    "size:report": "pnpm build && node scripts/check-size.js --report",
+    "check-size": "node scripts/check-size.js",
+    "verify-bundles": "pnpm build && node scripts/check-size.js --generate-report"
   },
   "repository": {
     "type": "git",

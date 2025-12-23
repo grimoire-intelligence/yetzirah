@@ -107,9 +107,26 @@ import '@grimoire/yetzirah-core/tabs';
 
 ## Available Components
 
-All Yetzirah Web Components are available in Angular templates. Tier 2 components have dedicated Angular wrapper components with full forms support.
+All Yetzirah Web Components are available in Angular templates with dedicated standalone components.
 
-### Tier 2 Wrapper Components
+### Tier 1 Standalone Components
+
+| Component | Selector | Import |
+|-----------|----------|--------|
+| Button | `ytz-button` | `ButtonComponent` |
+| Dialog | `ytz-dialog` | `DialogComponent` |
+| Drawer | `ytz-drawer` | `DrawerComponent` |
+| Tabs | `ytz-tabs`, `ytz-tab-list`, `ytz-tab`, `ytz-tab-panel` | `TabsComponent`, `TabListComponent`, `TabComponent`, `TabPanelComponent` |
+| Menu | `ytz-menu`, `ytz-menu-item`, `ytz-menu-trigger` | `MenuComponent`, `MenuItemComponent`, `MenuTriggerComponent` |
+| Accordion | `ytz-accordion`, `ytz-accordion-item` | `AccordionComponent`, `AccordionItemComponent` |
+| Disclosure | `ytz-disclosure` | `DisclosureComponent` |
+| Tooltip | `ytz-tooltip` | `TooltipComponent` |
+| Popover | `ytz-popover` | `PopoverComponent` |
+| Autocomplete | `ytz-autocomplete`, `ytz-autocomplete-option` | `AutocompleteComponent`, `AutocompleteOptionComponent` |
+| Listbox | `ytz-listbox`, `ytz-listbox-option` | `ListboxComponent`, `ListboxOptionComponent` |
+| Select | `ytz-select`, `ytz-select-option` | `SelectComponent`, `SelectOptionComponent` |
+
+### Tier 2 Standalone Components
 
 | Component | Selector | Forms Support |
 |-----------|----------|---------------|
@@ -120,26 +137,156 @@ All Yetzirah Web Components are available in Angular templates. Tier 2 component
 | DataGrid | `ytz-datagrid`, `ytz-datagrid-column` | - |
 | ThemeToggle | `ytz-theme-toggle` | - |
 
-### All Web Components
+## Tier 1 Component API
 
-- `<ytz-button>` - Material button with ripple effect
-- `<ytz-dialog>` - Modal dialog with backdrop
-- `<ytz-disclosure>` - Expandable disclosure/details
-- `<ytz-tabs>` - Tabbed interface
-- `<ytz-tooltip>` - Accessible tooltips
-- `<ytz-menu>` - Dropdown menus
-- `<ytz-autocomplete>` - Autocomplete input
-- `<ytz-listbox>` - Selectable list
-- `<ytz-select>` - Native-like select dropdown
-- `<ytz-accordion>` - Collapsible sections
-- `<ytz-drawer>` - Side drawer/panel
-- `<ytz-popover>` - Floating popovers
-- `<ytz-toggle>` - Toggle switch (with wrapper)
-- `<ytz-chip>` - Material chips (with wrapper)
-- `<ytz-icon-button>` - Icon-only buttons (with wrapper)
-- `<ytz-slider>` - Range slider (with wrapper)
-- `<ytz-datagrid>` - Data grid/table (with wrapper)
-- `<ytz-theme-toggle>` - Theme toggle (with wrapper)
+### Dialog
+
+```typescript
+import { Component } from '@angular/core';
+import { DialogComponent, ButtonComponent } from '@grimoire/yetzirah-angular';
+
+@Component({
+  standalone: true,
+  imports: [DialogComponent, ButtonComponent],
+  template: `
+    <ytz-button (click)="isOpen = true">Open Dialog</ytz-button>
+
+    <ytz-dialog [open]="isOpen" (close)="isOpen = false">
+      <div class="pa4 bg-white br3">
+        <h2>Dialog Title</h2>
+        <p>Dialog content goes here.</p>
+        <ytz-button (click)="isOpen = false">Close</ytz-button>
+      </div>
+    </ytz-dialog>
+  `
+})
+export class MyComponent {
+  isOpen = false;
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `open` | `boolean` | `false` | Controls dialog visibility |
+| `static` | `boolean` | `false` | Prevent backdrop dismiss |
+
+| Output | Type | Description |
+|--------|------|-------------|
+| `close` | `EventEmitter<void>` | Emitted when dialog closes |
+
+### Select
+
+```typescript
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { SelectComponent, SelectOptionComponent } from '@grimoire/yetzirah-angular';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, SelectComponent, SelectOptionComponent],
+  template: `
+    <ytz-select [(ngModel)]="selected" placeholder="Choose an option...">
+      <ytz-select-option value="1">Option 1</ytz-select-option>
+      <ytz-select-option value="2">Option 2</ytz-select-option>
+      <ytz-select-option value="3">Option 3</ytz-select-option>
+    </ytz-select>
+  `
+})
+export class MyComponent {
+  selected = '';
+}
+```
+
+| Input | Type | Default | Description |
+|-------|------|---------|-------------|
+| `ngModel` | `string \| string[]` | `''` | Two-way bound value |
+| `multiple` | `boolean` | `false` | Enable multi-select |
+| `disabled` | `boolean` | `false` | Disable the select |
+| `placeholder` | `string` | - | Placeholder text |
+
+### Tabs
+
+```typescript
+import { Component } from '@angular/core';
+import {
+  TabsComponent,
+  TabListComponent,
+  TabComponent,
+  TabPanelComponent
+} from '@grimoire/yetzirah-angular';
+
+@Component({
+  standalone: true,
+  imports: [TabsComponent, TabListComponent, TabComponent, TabPanelComponent],
+  template: `
+    <ytz-tabs>
+      <ytz-tab-list>
+        <ytz-tab>Tab 1</ytz-tab>
+        <ytz-tab>Tab 2</ytz-tab>
+        <ytz-tab>Tab 3</ytz-tab>
+      </ytz-tab-list>
+      <ytz-tab-panel>Content for Tab 1</ytz-tab-panel>
+      <ytz-tab-panel>Content for Tab 2</ytz-tab-panel>
+      <ytz-tab-panel>Content for Tab 3</ytz-tab-panel>
+    </ytz-tabs>
+  `
+})
+export class MyComponent {}
+```
+
+### Menu
+
+```typescript
+import { Component } from '@angular/core';
+import {
+  MenuComponent,
+  MenuTriggerComponent,
+  MenuItemComponent,
+  ButtonComponent
+} from '@grimoire/yetzirah-angular';
+
+@Component({
+  standalone: true,
+  imports: [MenuComponent, MenuTriggerComponent, MenuItemComponent, ButtonComponent],
+  template: `
+    <ytz-menu>
+      <ytz-menu-trigger>
+        <ytz-button>Open Menu</ytz-button>
+      </ytz-menu-trigger>
+      <ytz-menu-item (click)="handleEdit()">Edit</ytz-menu-item>
+      <ytz-menu-item (click)="handleDelete()">Delete</ytz-menu-item>
+    </ytz-menu>
+  `
+})
+export class MyComponent {
+  handleEdit() { console.log('Edit'); }
+  handleDelete() { console.log('Delete'); }
+}
+```
+
+### Autocomplete
+
+```typescript
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { AutocompleteComponent, AutocompleteOptionComponent } from '@grimoire/yetzirah-angular';
+
+@Component({
+  standalone: true,
+  imports: [FormsModule, AutocompleteComponent, AutocompleteOptionComponent],
+  template: `
+    <ytz-autocomplete [(ngModel)]="value" placeholder="Search fruits...">
+      @for (option of options; track option) {
+        <ytz-autocomplete-option [value]="option">{{ option }}</ytz-autocomplete-option>
+      }
+    </ytz-autocomplete>
+  `
+})
+export class MyComponent {
+  value = '';
+  options = ['Apple', 'Banana', 'Cherry', 'Date'];
+}
+```
 
 ## Tier 2 Component API
 
