@@ -377,7 +377,7 @@ Document how to use Yetzirah from popular CDNs (jsDelivr, unpkg, esm.sh, Skypack
 ---
 pr_id: PR-136
 title: Phase 3 Architecture Documentation
-cold_state: new
+cold_state: completed
 priority: low
 complexity:
   score: 3
