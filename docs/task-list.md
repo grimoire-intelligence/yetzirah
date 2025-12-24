@@ -253,7 +253,7 @@ Document using Yetzirah with Preact and HTM (Hyperscript Tagged Markup) for a Re
 ---
 pr_id: PR-132
 title: Vanilla JS Patterns Guide
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
