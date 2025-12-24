@@ -20,7 +20,14 @@
     "check-size": "node scripts/check-size.js",
     "verify-bundles": "pnpm build && node scripts/check-size.js --generate-report",
     "analyze-bundle": "node scripts/analyze-bundle.js",
-    "analyze-bundle:report": "node scripts/analyze-bundle.js --report"
+    "analyze-bundle:report": "node scripts/analyze-bundle.js --report",
+    "perf": "node scripts/perf-test.js",
+    "perf:report": "node scripts/perf-test.js --report --throttle",
+    "perf:baseline": "node scripts/perf-test.js --baseline",
+    "perf:ci": "node scripts/perf-test.js --ci --throttle",
+    "test:cdn": "playwright test tests/cdn",
+    "test:cdn:ui": "playwright test tests/cdn --ui",
+    "test:cdn:headed": "playwright test tests/cdn --headed"
   },
   "repository": {
     "type": "git",
@@ -42,11 +49,13 @@
   },
   "homepage": "https://github.com/grimoire-intelligence/yetzirah#readme",
   "devDependencies": {
+    "@playwright/test": "^1.40.0",
     "@babel/core": "^7.28.5",
     "@babel/preset-env": "^7.28.5",
     "@babel/preset-react": "^7.28.5",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.1",
+    "serve": "^14.2.0",
     "@types/jest": "^29.5.12",
     "babel-jest": "^30.2.0",
     "eslint": "^8.57.0",

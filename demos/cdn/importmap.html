@@ -87,14 +87,14 @@
       Open Dialog
     </button>
 
-    <yz-dialog id="demo-dialog" class="pa4 br3 shadow-2">
+    <ytz-dialog id="demo-dialog" class="pa4 br3 shadow-2">
       <h2 class="mt0">Hello from Yetzirah!</h2>
       <p>This dialog was loaded from CDN using import maps.</p>
       <p class="f6 gray">Press Escape or click outside to close.</p>
       <form method="dialog">
         <button class="bg-blue white bn pa2 br2 pointer">Close</button>
       </form>
-    </yz-dialog>
+    </ytz-dialog>
   </div>
 
   <!-- Disclosure Demo -->
@@ -102,7 +102,7 @@
     <h3>Disclosure Component</h3>
     <p class="f6 gray mb3">An expandable/collapsible section.</p>
 
-    <yz-disclosure>
+    <ytz-disclosure>
       <button slot="trigger" class="bg-light-gray bn pa2 br2 pointer w-100 tl">
         Click to expand
       </button>
@@ -110,7 +110,7 @@
         <p class="ma0">This content is revealed when you click the trigger button.</p>
         <p class="ma0 mt2">Yetzirah handles all the ARIA attributes automatically.</p>
       </div>
-    </yz-disclosure>
+    </ytz-disclosure>
   </div>
 
   <!-- Tabs Demo -->
@@ -118,27 +118,27 @@
     <h3>Tabs Component</h3>
     <p class="f6 gray mb3">Accessible tabbed interface with keyboard navigation.</p>
 
-    <yz-tabs>
-      <yz-tablist class="flex bb b--light-gray">
-        <yz-tab class="pa2 bg-transparent bn pointer bb b--transparent" selected>Overview</yz-tab>
-        <yz-tab class="pa2 bg-transparent bn pointer bb b--transparent">Features</yz-tab>
-        <yz-tab class="pa2 bg-transparent bn pointer bb b--transparent">Usage</yz-tab>
-      </yz-tablist>
-      <yz-tabpanel class="pa3">
+    <ytz-tabs>
+      <ytz-tablist class="flex bb b--light-gray">
+        <ytz-tab class="pa2 bg-transparent bn pointer bb b--transparent" selected>Overview</ytz-tab>
+        <ytz-tab class="pa2 bg-transparent bn pointer bb b--transparent">Features</ytz-tab>
+        <ytz-tab class="pa2 bg-transparent bn pointer bb b--transparent">Usage</ytz-tab>
+      </ytz-tablist>
+      <ytz-tabpanel class="pa3">
         <p class="ma0">Yetzirah is a headless component library built with Web Components.</p>
-      </yz-tabpanel>
-      <yz-tabpanel class="pa3">
+      </ytz-tabpanel>
+      <ytz-tabpanel class="pa3">
         <ul class="ma0 pl3">
           <li>Zero dependencies</li>
           <li>Framework agnostic</li>
           <li>Accessible by default</li>
           <li>Minimal bundle size</li>
         </ul>
-      </yz-tabpanel>
-      <yz-tabpanel class="pa3">
+      </ytz-tabpanel>
+      <ytz-tabpanel class="pa3">
         <p class="ma0">Load from CDN, use with any framework, or vanilla JS!</p>
-      </yz-tabpanel>
-    </yz-tabs>
+      </ytz-tabpanel>
+    </ytz-tabs>
   </div>
 
   <!-- Tooltip Demo -->
@@ -147,14 +147,14 @@
     <p class="f6 gray mb3">Accessible tooltips with automatic positioning.</p>
 
     <div class="flex gap3">
-      <yz-tooltip>
+      <ytz-tooltip>
         <button slot="trigger" class="bg-green white bn pa2 br2 pointer">
           Hover me
         </button>
         <span slot="content" class="bg-dark-gray white pa2 br2 f6">
           Tooltip from CDN!
         </span>
-      </yz-tooltip>
+      </ytz-tooltip>
     </div>
   </div>
 
@@ -163,18 +163,18 @@
     <h3>Menu Component</h3>
     <p class="f6 gray mb3">Dropdown menu with keyboard navigation.</p>
 
-    <yz-menu>
+    <ytz-menu>
       <button slot="trigger" class="bg-purple white bn pa2 br2 pointer">
         Open Menu ▾
       </button>
       <div slot="content" class="bg-white shadow-2 br2 overflow-hidden">
-        <yz-menuitem class="db pa2 pointer hover-bg-light-gray">Edit</yz-menuitem>
-        <yz-menuitem class="db pa2 pointer hover-bg-light-gray">Duplicate</yz-menuitem>
-        <yz-menuitem class="db pa2 pointer hover-bg-light-gray">Archive</yz-menuitem>
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray">Edit</ytz-menuitem>
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray">Duplicate</ytz-menuitem>
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray">Archive</ytz-menuitem>
         <hr class="ma0 b--light-gray">
-        <yz-menuitem class="db pa2 pointer hover-bg-light-gray dark-red">Delete</yz-menuitem>
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray dark-red">Delete</ytz-menuitem>
       </div>
-    </yz-menu>
+    </ytz-menu>
   </div>
 
   <!-- Usage Examples -->
@@ -190,7 +190,7 @@ import 'yetzirah/dialog.js';
 import 'yetzirah/tabs.js';
 
 // Components self-register, just use them in HTML:
-// &lt;yz-dialog&gt;...&lt;/yz-dialog&gt;</pre>
+// &lt;ytz-dialog&gt;...&lt;/ytz-dialog&gt;</pre>
   </div>
 
   <!-- CDN Alternatives -->
