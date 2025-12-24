@@ -18,9 +18,6 @@
     "./cdn/core": {
       "import": "./cdn/core.js"
     },
-    "./cdn/tier1": {
-      "import": "./cdn/tier1.js"
-    },
     "./cdn/auto": {
       "import": "./cdn/auto.js"
     },

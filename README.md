@@ -1,6 +1,25 @@
 # Yetzirah
 
-Unstyled, accessible Web Components with framework wrappers for React, Vue, Svelte, and Angular. Behavior and accessibility without opinionated styling.
+**AI-native UI components.** The entire library fits in a single LLM context window (~11 KB gzipped), making AI-assisted development faster and cheaper. Unstyled, accessible Web Components with framework wrappers for React, Vue, Svelte, and Angular.
+
+## Quick Start (CDN)
+
+No build step required. Add a single script tag and start using components:
+
+```html
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+
+<ytz-dialog id="my-dialog">
+  <div class="dialog-content">
+    <h2>Hello World</h2>
+    <ytz-button onclick="this.closest('ytz-dialog').close()">Close</ytz-button>
+  </div>
+</ytz-dialog>
+
+<ytz-button onclick="document.getElementById('my-dialog').showModal()">
+  Open Dialog
+</ytz-button>
+```
 
 ## Installation
 
@@ -47,41 +66,47 @@ Just import `@grimoire/yetzirah-core` and use the elements directly.
 
 ## Philosophy
 
+- **AI-native** - Entire codebase fits in one context window for cheaper, faster AI-assisted development
 - **Unstyled by default** - You bring your own CSS (Tachyons, custom styles, etc.)
 - **Accessibility first** - Full ARIA compliance, keyboard navigation built-in
 - **Web Components** - Framework-agnostic core, works anywhere
 - **Framework wrappers** - Idiomatic APIs for React, Vue, Svelte, and Angular
 - **Tiny bundles** - Tree-shakeable, no runtime CSS-in-JS
 
+## Bundle Sizes
+
+| Package | Gzipped |
+|---------|---------|
+| **@grimoire/yetzirah-core** (CDN) | 10.96 KB |
+| @grimoire/yetzirah-react | 2.53 KB |
+| @grimoire/yetzirah-vue | 3.91 KB |
+| @grimoire/yetzirah-svelte | 0.51 KB |
+| @grimoire/yetzirah-angular | 11.69 KB |
+
+Individual components range from 0.49 KB (button) to 2.99 KB (datagrid) gzipped.
+
 ## Components
 
-### Tier 1 (Core)
-
 | Component | Web Component | React | Vue | Svelte | Angular |
 |-----------|--------------|-------|-----|--------|---------|
-| Button | `<ytz-button>` | `<Button>` | `<Button>` | `<Button>` | `<ytz-button>` |
-| Dialog | `<ytz-dialog>` | `<Dialog>` | `<Dialog>` | `<Dialog>` | `<ytz-dialog>` |
-| Drawer | `<ytz-drawer>` | `<Drawer>` | `<Drawer>` | `<Drawer>` | `<ytz-drawer>` |
-| Tabs | `<ytz-tabs>` | `<Tabs>` | `<Tabs>` | `<Tabs>` | `<ytz-tabs>` |
-| Menu | `<ytz-menu>` | `<Menu>` | `<Menu>` | `<Menu>` | `<ytz-menu>` |
 | Accordion | `<ytz-accordion>` | `<Accordion>` | `<Accordion>` | `<Accordion>` | `<ytz-accordion>` |
-| Disclosure | `<ytz-disclosure>` | `<Disclosure>` | `<Disclosure>` | `<Disclosure>` | `<ytz-disclosure>` |
-| Tooltip | `<ytz-tooltip>` | `<Tooltip>` | `<Tooltip>` | `<Tooltip>` | `<ytz-tooltip>` |
-| Popover | `<ytz-popover>` | `<Popover>` | `<Popover>` | `<Popover>` | `<ytz-popover>` |
 | Autocomplete | `<ytz-autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` |
-| Listbox | `<ytz-listbox>` | `<Listbox>` | `<Listbox>` | `<Listbox>` | `<ytz-listbox>` |
-| Select | `<ytz-select>` | `<Select>` | `<Select>` | `<Select>` | `<ytz-select>` |
-
-### Tier 2 (Extended)
-
-| Component | Web Component | React | Vue | Svelte | Angular |
-|-----------|--------------|-------|-----|--------|---------|
-| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` |
+| Button | `<ytz-button>` | `<Button>` | `<Button>` | `<Button>` | `<ytz-button>` |
 | Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` |
-| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` |
-| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` |
 | DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` |
+| Dialog | `<ytz-dialog>` | `<Dialog>` | `<Dialog>` | `<Dialog>` | `<ytz-dialog>` |
+| Disclosure | `<ytz-disclosure>` | `<Disclosure>` | `<Disclosure>` | `<Disclosure>` | `<ytz-disclosure>` |
+| Drawer | `<ytz-drawer>` | `<Drawer>` | `<Drawer>` | `<Drawer>` | `<ytz-drawer>` |
+| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` |
+| Listbox | `<ytz-listbox>` | `<Listbox>` | `<Listbox>` | `<Listbox>` | `<ytz-listbox>` |
+| Menu | `<ytz-menu>` | `<Menu>` | `<Menu>` | `<Menu>` | `<ytz-menu>` |
+| Popover | `<ytz-popover>` | `<Popover>` | `<Popover>` | `<Popover>` | `<ytz-popover>` |
+| Select | `<ytz-select>` | `<Select>` | `<Select>` | `<Select>` | `<ytz-select>` |
+| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` |
+| Tabs | `<ytz-tabs>` | `<Tabs>` | `<Tabs>` | `<Tabs>` | `<ytz-tabs>` |
 | ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` |
+| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` |
+| Tooltip | `<ytz-tooltip>` | `<Tooltip>` | `<Tooltip>` | `<Tooltip>` | `<ytz-tooltip>` |
 
 ## Usage
 
@@ -306,7 +331,7 @@ See the [MUI Rosetta Stone](demos/rosetta.html) for a complete migration guide f
 Open any demo file directly in a browser:
 
 - [All Components](demos/index.html)
-- [CDN Demo](demos/cdn/index.html) - All Tier 1 components from CDN
+- [CDN Demo](demos/cdn/index.html) - All components loaded via CDN
 - [Import Map Demo](demos/cdn/importmap.html) - npm-like imports without build step
 - [Button](demos/button.html)
 - [Dialog](demos/dialog.html)
@@ -318,7 +343,7 @@ Open any demo file directly in a browser:
 - [Theme Toggle](demos/theme-toggle.html)
 - [MUI Rosetta Stone](demos/rosetta.html)
 
-## Tier 2 Component API Reference
+## Component API Reference
 
 ### Toggle
 

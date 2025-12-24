@@ -12,13 +12,11 @@ export default defineConfig({
   entry: {
     // Combined bundle with all components
     'core': 'src/index.js',
-    // Tier 1 only bundle (target: <10KB gzipped)
-    'tier1': 'src/tier1.js',
     // Re-export index for tree-shaking
     'index': 'src/cdn-index.js',
     // Auto-registration entry point for script tag usage
     'auto': 'src/cdn-entry.js',
-    // Tier 1 individual components
+    // Individual component bundles
     'button': 'src/button.js',
     'disclosure': 'src/disclosure.js',
     'dialog': 'src/dialog.js',
@@ -31,7 +29,6 @@ export default defineConfig({
     'accordion': 'src/accordion.js',
     'drawer': 'src/drawer.js',
     'popover': 'src/popover.js',
-    // Tier 2 individual components
     'toggle': 'src/toggle.js',
     'chip': 'src/chip.js',
     'icon-button': 'src/icon-button.js',

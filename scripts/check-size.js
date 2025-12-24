@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /**
  * Bundle size checker for Yetzirah
- * Verifies core bundle stays under 15kb gzipped (Tier 1+2 components)
+ * Verifies core bundle stays under 15kb gzipped
  * Verifies framework wrapper bundles stay under size limits
  */
 
@@ -16,10 +16,10 @@ const VUE_DIST = 'packages/vue/dist'
 const SVELTE_DIST = 'packages/svelte/dist'
 const ANGULAR_DIST = 'packages/angular/dist'
 
-// Size limits (in bytes) - Updated for Tier 1 + Tier 2 components (27 components each)
+// Size limits (in bytes)
 const MAX_CORE_SIZE = 15 * 1024      // 15kb (all core components)
-const MAX_SVELTE_SIZE = 3 * 1024     // 3kb gzipped (thinnest wrappers, Tier 1+2)
-const MAX_VUE_SIZE = 5 * 1024        // 5kb gzipped (Tier 1+2)
+const MAX_SVELTE_SIZE = 3 * 1024     // 3kb gzipped (thinnest wrappers)
+const MAX_VUE_SIZE = 5 * 1024        // 5kb gzipped
 const MAX_ANGULAR_SIZE = 12 * 1024   // 12kb gzipped (Angular has higher overhead: decorators, CVA, TypeScript metadata)
 const MAX_REACT_SIZE = 15 * 1024     // 15kb (existing limit)
 
@@ -211,12 +211,10 @@ function checkReactWrapperLines() {
   console.log('\n📝 React Wrapper Line Counts')
   console.log('═'.repeat(50))
 
-  // Tier 1 + Tier 2 wrappers
+  // All component wrappers
   const wrappers = [
-    // Tier 1
     'button', 'disclosure', 'dialog', 'tabs', 'tooltip',
     'menu', 'autocomplete', 'listbox', 'select',
-    // Tier 2
     'accordion', 'drawer', 'popover', 'chip',
     'slider', 'toggle', 'theme-toggle', 'icon-button', 'datagrid'
   ]
@@ -392,16 +390,12 @@ The ~12KB gzipped for 27 components averages ~444 bytes per wrapper, which is re
 
 ## Component Coverage
 
-All framework wrapper packages include wrappers for:
+All framework wrapper packages include wrappers for 18 components:
 
-### Tier 1 Components (12)
 - Button, Disclosure, Dialog, Tabs (TabList, Tab, TabPanel)
 - Tooltip, Menu (MenuItem, MenuTrigger), Autocomplete (AutocompleteOption)
 - Listbox (ListboxOption), Select (SelectOption), Accordion (AccordionItem)
-- Drawer, Popover
-
-### Tier 2 Components (7)
-- Chip, Slider, Toggle, ThemeToggle, IconButton, DataGrid
+- Drawer, Popover, Chip, Slider, Toggle, ThemeToggle, IconButton, DataGrid
 
 ## Verification Status
 

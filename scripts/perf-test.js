@@ -32,7 +32,6 @@ const REPORT_FILE = join(ROOT, 'docs/perf-report.md')
 // Performance budgets (in bytes, gzipped)
 const BUDGETS = {
   'core.js': 15 * 1024,      // 15KB - full bundle
-  'tier1.js': 10 * 1024,     // 10KB - tier 1 components
   'button.js': 1 * 1024,     // 1KB - individual component
   'dialog.js': 2 * 1024,     // 2KB
   'tabs.js': 2 * 1024,       // 2KB
@@ -142,7 +141,7 @@ function measureNetworkPerformance(bundleSizes) {
   console.log('═'.repeat(60))
 
   const results = {}
-  const keyBundles = ['core.js', 'tier1.js', 'button.js', 'auto.js']
+  const keyBundles = ['core.js', 'button.js', 'auto.js']
 
   for (const profile of Object.keys(NETWORK_PROFILES)) {
     console.log(`\n  ${profile.toUpperCase()}:`)
@@ -176,7 +175,7 @@ function measureParseTime() {
   // Mobile devices: ~2-3ms per KB
 
   const results = {}
-  const bundles = ['core.js', 'tier1.js', 'auto.js']
+  const bundles = ['core.js', 'auto.js']
 
   for (const bundle of bundles) {
     const filePath = join(CDN_DIR, bundle)
@@ -259,7 +258,7 @@ Generated: ${date}
 |--------|---------|-----|-----------|
 `
 
-  for (const bundle of ['core.js', 'tier1.js', 'button.js', 'auto.js']) {
+  for (const bundle of ['core.js', 'button.js', 'auto.js']) {
     const fast3g = results.networkPerf?.['fast-3g']?.[bundle]
     const lte = results.networkPerf?.['4g']?.[bundle]
     const broadband = results.networkPerf?.['broadband']?.[bundle]
@@ -288,7 +287,6 @@ The following gzipped size budgets are enforced:
 | Category | Budget | Rationale |
 |----------|--------|-----------|
 | Full bundle (core.js) | 15KB | All components, single request |
-| Tier 1 bundle | 10KB | Most common components |
 | Individual components | 1-4KB | Tree-shaking optimization |
 | Auto-register bundle | 15KB | Convenience bundle with auto-registration |
 

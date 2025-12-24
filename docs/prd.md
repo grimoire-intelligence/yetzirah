@@ -97,9 +97,22 @@ Optimize for buildless and global deployment.
 
 **Target audience:** Developers without build steps, applications serving bandwidth-constrained users.
 
-### Phase 4: Minimalist Framework Extensions
+### Phase 4: Extensions, Additional Components & Distribution
 
-Extend to frameworks that share Yetzirah's philosophy of minimalism, performance, and buildless-friendly development.
+Extend to minimalist frameworks, ship additional components, and finalize npm distribution.
+
+#### NPM Distribution Setup
+
+Finalize `@grimoire` organization on npmjs.com and publish all packages. Until then, CDN distribution via jsDelivr/unpkg serves as primary distribution channel.
+
+#### Additional Components
+
+| Component | Element | Notes |
+|-----------|---------|-------|
+| **Snackbar/Toast** | `<ytz-snackbar>` | Queue management, auto-dismiss, stacking, position anchoring |
+| **Progress/Spinner** | `<ytz-progress>` | Mostly CSS. Indeterminate and determinate modes. Circular and linear variants. |
+| **Badge** | `<ytz-badge>` | Notification dot/count overlay. Positioned relative to slotted content. |
+| **Carousel** | `<ytz-carousel>` | *Maybe.* Stripped-down version—no infinite scroll, no autoplay by default. Touch/swipe, keyboard nav, dots/arrows. Based on existing MUI-idiomatic implementation. |
 
 #### Solid.js Wrappers (`@grimoire/yetzirah-solid`)
 
@@ -192,7 +205,21 @@ These frameworks can import `@grimoire/yetzirah-core` directly and use `<ytz-dia
 
 ## Distribution
 
-### NPM (all phases)
+### CDN (Phase 3 — Primary)
+
+CDN is the primary distribution channel until npm organization is finalized in Phase 4.
+
+```html
+<!-- Core components -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+
+<!-- Individual components -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js"></script>
+```
+
+### NPM (Phase 4)
+
+npm publishing deferred until `@grimoire` organization is claimed on npmjs.com.
 
 ```bash
 # Core only (vanilla HTML)
@@ -203,16 +230,6 @@ npm install @grimoire/yetzirah-core @grimoire/yetzirah-react
 
 # With Vue wrappers
 npm install @grimoire/yetzirah-core @grimoire/yetzirah-vue
-```
-
-### CDN (Phase 3)
-
-```html
-<!-- Core components -->
-<script type="module" src="https://cdn.yetzirah.dev/core.js"></script>
-
-<!-- Individual components -->
-<script type="module" src="https://cdn.yetzirah.dev/dialog.js"></script>
 ```
 
 ---
@@ -301,10 +318,6 @@ HTML primitives plus CSS already handle these. Yetzirah does not ship:
 - Typography → semantic HTML
 - Grid/Layout → CSS
 
-### Stretch Goal: Snackbar/Toast
-
-`<ytz-snackbar>` — Queue management, auto-dismiss, stacking. Post-launch consideration.
-
 ---
 
 ## Shared Utilities
@@ -362,7 +375,7 @@ Every Yetzirah component guarantees:
 ### Vanilla HTML
 
 ```html
-<script type="module" src="https://cdn.yetzirah.dev/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
 
 <ytz-button onclick="document.getElementById('my-dialog').setAttribute('open', '')" class="ph3 pv2 br2 white bg-blue">
   Open Dialog
@@ -1171,12 +1184,16 @@ export const Box = (props) => <div {...props} />
 3. Total Tier 1 < 10kb from CDN
 4. Sub-Saharan Africa load time < 3s on 3G
 
-### Phase 4 (Solid + Alpine)
-1. Solid.js wrappers with native signal integration
-2. Alpine.js plugin with `x-ytz` directive
-3. Two-way binding support (`x-ytz:model`)
-4. CDN distribution for Alpine plugin (no build step required)
-5. Documentation for Rails/Laravel/Django integration patterns
+### Phase 4 (Extensions, Components & Distribution)
+1. `@grimoire` npm organization claimed and all packages published
+2. Snackbar/Toast component with queue management
+3. Progress/Spinner component (CSS-driven)
+4. Badge component for notification overlays
+5. Solid.js wrappers with native signal integration
+6. Alpine.js plugin with `x-ytz` directive
+7. Two-way binding support (`x-ytz:model`)
+8. CDN distribution for Alpine plugin (no build step required)
+9. Documentation for Rails/Laravel/Django integration patterns
 
 ---
 

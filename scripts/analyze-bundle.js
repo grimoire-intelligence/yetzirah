@@ -9,16 +9,13 @@ import { join, basename } from 'path'
 import { gzipSync } from 'zlib'
 
 const CDN_DIR = 'packages/core/cdn'
-const MAX_TIER1_GZIPPED = 10 * 1024  // 10KB target for Tier 1
+const MAX_CORE_GZIPPED = 15 * 1024  // 15KB target for full bundle
 
-// Component tier classification
-const TIER_1_COMPONENTS = [
+// All components
+const ALL_COMPONENTS = [
   'button', 'disclosure', 'dialog', 'tabs', 'tooltip',
   'menu', 'autocomplete', 'listbox', 'select',
-  'accordion', 'drawer', 'popover'
-]
-
-const TIER_2_COMPONENTS = [
+  'accordion', 'drawer', 'popover',
   'toggle', 'chip', 'icon-button', 'slider', 'datagrid', 'theme-toggle'
 ]
 
@@ -65,21 +62,18 @@ function analyzeCdnBundles() {
 }
 
 function categorizeComponents(bundles) {
-  const tier1 = {}
-  const tier2 = {}
+  const components = {}
   const other = {}
 
   for (const [name, info] of Object.entries(bundles)) {
-    if (TIER_1_COMPONENTS.includes(name)) {
-      tier1[name] = info
-    } else if (TIER_2_COMPONENTS.includes(name)) {
-      tier2[name] = info
+    if (ALL_COMPONENTS.includes(name)) {
+      components[name] = info
     } else {
       other[name] = info
     }
   }
 
-  return { tier1, tier2, other }
+  return { components, other }
 }
 
 function sumSizes(components, key = 'gzipped') {
@@ -87,43 +81,33 @@ function sumSizes(components, key = 'gzipped') {
 }
 
 function printReport(bundles) {
-  const { tier1, tier2, other } = categorizeComponents(bundles)
+  const { components, other } = categorizeComponents(bundles)
 
   console.log('\n📦 CDN Bundle Size Analysis')
   console.log('═'.repeat(60))
 
   // Combined bundles
   console.log('\n📋 Combined Bundles:')
-  if (bundles.tier1) {
-    const status = bundles.tier1.gzipped <= MAX_TIER1_GZIPPED ? '✅' : '❌'
-    console.log(`  tier1.js       ${formatBytes(bundles.tier1.raw).padStart(10)} → ${formatBytes(bundles.tier1.gzipped).padStart(10)} gzip ${status}`)
-  }
   if (bundles.core) {
-    console.log(`  core.js        ${formatBytes(bundles.core.raw).padStart(10)} → ${formatBytes(bundles.core.gzipped).padStart(10)} gzip (all components)`)
+    const status = bundles.core.gzipped <= MAX_CORE_GZIPPED ? '✅' : '❌'
+    console.log(`  core.js        ${formatBytes(bundles.core.raw).padStart(10)} → ${formatBytes(bundles.core.gzipped).padStart(10)} gzip ${status}`)
   }
   if (bundles.index) {
     console.log(`  index.js       ${formatBytes(bundles.index.raw).padStart(10)} → ${formatBytes(bundles.index.gzipped).padStart(10)} gzip (tree-shakeable)`)
   }
+  if (bundles.auto) {
+    console.log(`  auto.js        ${formatBytes(bundles.auto.raw).padStart(10)} → ${formatBytes(bundles.auto.gzipped).padStart(10)} gzip (auto-register)`)
+  }
 
-  // Tier 1 components
-  console.log('\n📦 Tier 1 Components (12):')
-  const tier1Sorted = Object.entries(tier1).sort((a, b) => a[1].gzipped - b[1].gzipped)
-  for (const [name, info] of tier1Sorted) {
+  // All components
+  console.log(`\n📦 Components (${Object.keys(components).length}):`)
+  const componentsSorted = Object.entries(components).sort((a, b) => a[1].gzipped - b[1].gzipped)
+  for (const [name, info] of componentsSorted) {
     console.log(`  ${(name + '.js').padEnd(20)} ${formatBytes(info.raw).padStart(10)} → ${formatBytes(info.gzipped).padStart(10)} gzip`)
   }
-  const tier1Total = sumSizes(tier1)
+  const componentsTotal = sumSizes(components)
   console.log(`  ${'─'.repeat(50)}`)
-  console.log(`  ${'Sum (individual):'.padEnd(20)} ${formatBytes(sumSizes(tier1, 'raw')).padStart(10)} → ${formatBytes(tier1Total).padStart(10)} gzip`)
-
-  // Tier 2 components
-  console.log('\n📦 Tier 2 Components (6):')
-  const tier2Sorted = Object.entries(tier2).sort((a, b) => a[1].gzipped - b[1].gzipped)
-  for (const [name, info] of tier2Sorted) {
-    console.log(`  ${(name + '.js').padEnd(20)} ${formatBytes(info.raw).padStart(10)} → ${formatBytes(info.gzipped).padStart(10)} gzip`)
-  }
-  const tier2Total = sumSizes(tier2)
-  console.log(`  ${'─'.repeat(50)}`)
-  console.log(`  ${'Sum (individual):'.padEnd(20)} ${formatBytes(sumSizes(tier2, 'raw')).padStart(10)} → ${formatBytes(tier2Total).padStart(10)} gzip`)
+  console.log(`  ${'Sum (individual):'.padEnd(20)} ${formatBytes(sumSizes(components, 'raw')).padStart(10)} → ${formatBytes(componentsTotal).padStart(10)} gzip`)
 
   // Summary
   console.log('\n📊 Summary:')
@@ -132,18 +116,15 @@ function printReport(bundles) {
   const coreGzip = bundles.core?.gzipped || 0
 
   console.log(`  Core bundle (all components):  ${formatBytes(coreGzip)} gzipped`)
-  console.log(`  Tier 1 individual sum:         ${formatBytes(tier1Total)} gzipped`)
-  console.log(`  Tier 2 individual sum:         ${formatBytes(tier2Total)} gzipped`)
-  console.log(`  All individual sum:            ${formatBytes(tier1Total + tier2Total)} gzipped`)
+  console.log(`  Individual bundles sum:        ${formatBytes(componentsTotal)} gzipped`)
 
   // Deduplication analysis
   console.log('\n🔗 Import Map Efficiency:')
-  const individualTotal = tier1Total + tier2Total
   const coreSize = bundles.core?.gzipped || 0
-  const overhead = individualTotal - coreSize
+  const overhead = componentsTotal - coreSize
   const overheadPct = ((overhead / coreSize) * 100).toFixed(1)
 
-  console.log(`  Individual bundles total:      ${formatBytes(individualTotal)}`)
+  console.log(`  Individual bundles total:      ${formatBytes(componentsTotal)}`)
   console.log(`  Core bundle total:             ${formatBytes(coreSize)}`)
   console.log(`  Overhead (duplication):        ${formatBytes(overhead)} (${overheadPct}%)`)
   console.log('')
@@ -152,28 +133,24 @@ function printReport(bundles) {
 
   // Check against targets
   console.log('\n✅ Size Targets:')
-  const tier1BundleGzip = bundles.tier1?.gzipped || 0
-  const tier1Pass = tier1BundleGzip <= MAX_TIER1_GZIPPED
-  const status = tier1Pass ? '✅ PASS' : '❌ FAIL'
-  console.log(`  Tier 1 bundle < 10KB: ${status} (${formatBytes(tier1BundleGzip)})`)
+  const corePass = coreGzip <= MAX_CORE_GZIPPED
+  const status = corePass ? '✅ PASS' : '❌ FAIL'
+  console.log(`  Core bundle < 15KB: ${status} (${formatBytes(coreGzip)})`)
 
   return {
-    passed: tier1Pass,
+    passed: corePass,
     bundles,
-    tier1,
-    tier2,
+    components,
     summary: {
-      tier1BundleGzipped: tier1BundleGzip,
       coreGzipped: coreGzip,
-      tier1Total,
-      tier2Total,
-      individualTotal
+      componentsTotal,
+      individualTotal: componentsTotal
     }
   }
 }
 
 function generateMarkdownReport(analysis) {
-  const { bundles, tier1, tier2, summary } = analysis
+  const { bundles, components, summary } = analysis
   const date = new Date().toISOString().split('T')[0]
 
   let md = `## CDN Bundle Sizes
@@ -186,15 +163,15 @@ Generated: ${date}
 |--------|-----|---------|--------|--------|
 `
 
-  if (bundles.tier1) {
-    const tier1Status = bundles.tier1.gzipped <= MAX_TIER1_GZIPPED ? '✅ Pass' : '❌ Fail'
-    md += `| tier1.js | ${formatBytes(bundles.tier1.raw)} | ${formatBytes(bundles.tier1.gzipped)} | < 10 KB | ${tier1Status} |\n`
-  }
   if (bundles.core) {
-    md += `| core.js | ${formatBytes(bundles.core.raw)} | ${formatBytes(bundles.core.gzipped)} | - | All components |\n`
+    const coreStatus = bundles.core.gzipped <= MAX_CORE_GZIPPED ? '✅ Pass' : '❌ Fail'
+    md += `| core.js | ${formatBytes(bundles.core.raw)} | ${formatBytes(bundles.core.gzipped)} | < 15 KB | ${coreStatus} |\n`
   }
   if (bundles.index) {
     md += `| index.js | ${formatBytes(bundles.index.raw)} | ${formatBytes(bundles.index.gzipped)} | - | Tree-shakeable |\n`
+  }
+  if (bundles.auto) {
+    md += `| auto.js | ${formatBytes(bundles.auto.raw)} | ${formatBytes(bundles.auto.gzipped)} | - | Auto-register |\n`
   }
 
   md += `
@@ -202,38 +179,22 @@ Generated: ${date}
 
 These standalone bundles can be loaded independently via CDN.
 
-#### Tier 1 Components
-
 | Component | Raw | Gzipped |
 |-----------|-----|---------|
 `
 
-  const tier1Sorted = Object.entries(tier1).sort((a, b) => a[0].localeCompare(b[0]))
-  for (const [name, info] of tier1Sorted) {
+  const componentsSorted = Object.entries(components).sort((a, b) => a[0].localeCompare(b[0]))
+  for (const [name, info] of componentsSorted) {
     md += `| ${name} | ${formatBytes(info.raw)} | ${formatBytes(info.gzipped)} |\n`
   }
-  md += `| **Total** | **${formatBytes(sumSizes(tier1, 'raw'))}** | **${formatBytes(summary.tier1Total)}** |\n`
-
-  md += `
-#### Tier 2 Components
-
-| Component | Raw | Gzipped |
-|-----------|-----|---------|
-`
-
-  const tier2Sorted = Object.entries(tier2).sort((a, b) => a[0].localeCompare(b[0]))
-  for (const [name, info] of tier2Sorted) {
-    md += `| ${name} | ${formatBytes(info.raw)} | ${formatBytes(info.gzipped)} |\n`
-  }
-  md += `| **Total** | **${formatBytes(sumSizes(tier2, 'raw'))}** | **${formatBytes(summary.tier2Total)}** |\n`
+  md += `| **Total** | **${formatBytes(sumSizes(components, 'raw'))}** | **${formatBytes(summary.componentsTotal)}** |\n`
 
   md += `
 ### Size Targets
 
 | Target | Status | Actual |
 |--------|--------|--------|
-| Tier 1 bundle < 10KB gzip | ${summary.tier1BundleGzipped <= MAX_TIER1_GZIPPED ? '✅ Pass' : '❌ Fail'} | ${formatBytes(summary.tier1BundleGzipped)} |
-| All components (core.js) | - | ${formatBytes(summary.coreGzipped)} |
+| Core bundle < 15KB gzip | ${summary.coreGzipped <= MAX_CORE_GZIPPED ? '✅ Pass' : '❌ Fail'} | ${formatBytes(summary.coreGzipped)} |
 
 ### Import Map Usage Notes
 
