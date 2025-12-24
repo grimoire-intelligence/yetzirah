@@ -317,7 +317,7 @@ Create performance testing infrastructure to verify CDN bundles meet the <3s loa
 ---
 pr_id: PR-134
 title: CDN Integration Tests
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
