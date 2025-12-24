@@ -22,6 +22,7 @@
 import { position } from './utils/position.js'
 import { createKeyNav } from './utils/key-nav.js'
 import { clickOutside } from './utils/click-outside.js'
+import { register } from './utils/register.js'
 
 let autocompleteId = 0
 
@@ -429,7 +430,7 @@ class YtzOption extends HTMLElement {
   set value(v) { v ? this.setAttribute('value', v) : this.removeAttribute('value') }
 }
 
-customElements.define('ytz-autocomplete', YtzAutocomplete)
-customElements.define('ytz-option', YtzOption)
+register('ytz-autocomplete', YtzAutocomplete)
+register('ytz-option', YtzOption)
 
 export { YtzAutocomplete, YtzOption }

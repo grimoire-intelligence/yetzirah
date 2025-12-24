@@ -15,6 +15,8 @@
  * <ytz-slider min="0" max="100" value="50" disabled></ytz-slider>
  */
 
+import { register } from './utils/register.js'
+
 /**
  * @class YtzSlider
  * @extends HTMLElement
@@ -262,6 +264,6 @@ class YtzSlider extends HTMLElement {
   }
 }
 
-customElements.define('ytz-slider', YtzSlider)
+register('ytz-slider', YtzSlider)
 
 export { YtzSlider }

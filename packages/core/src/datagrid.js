@@ -14,6 +14,7 @@
  */
 
 import { createVirtualScroller } from './utils/virtual-scroll.js'
+import { register } from './utils/register.js'
 
 /**
  * @class YtzDatagridColumn
@@ -36,7 +37,7 @@ class YtzDatagridColumn extends HTMLElement {
   set width(val) { this.setAttribute('width', val) }
 }
 
-customElements.define('ytz-datagrid-column', YtzDatagridColumn)
+register('ytz-datagrid-column', YtzDatagridColumn)
 
 /**
  * @class YtzDatagrid
@@ -562,6 +563,6 @@ class YtzDatagrid extends HTMLElement {
   }
 }
 
-customElements.define('ytz-datagrid', YtzDatagrid)
+register('ytz-datagrid', YtzDatagrid)
 
 export { YtzDatagrid, YtzDatagridColumn }

@@ -33,6 +33,18 @@ npm install @grimoire/yetzirah-core
 ```
 > Framework packages automatically include the core, so you only need to install `@grimoire/yetzirah-core` directly when using vanilla HTML without a framework.
 
+### No Wrapper Needed
+
+These frameworks have excellent Web Component interop and work with Yetzirah out of the box:
+
+| Framework | Notes |
+|-----------|-------|
+| **Lit** | Built on Web Components—Yetzirah elements compose naturally |
+| **HTMX** | HTML-centric; Yetzirah elements work like any HTML element |
+| **Stencil** | Web Components compiler; native interop with `<ytz-*>` elements |
+
+Just import `@grimoire/yetzirah-core` and use the elements directly.
+
 ## Philosophy
 
 - **Unstyled by default** - You bring your own CSS (Tachyons, custom styles, etc.)
@@ -294,6 +306,8 @@ See the [MUI Rosetta Stone](demos/rosetta.html) for a complete migration guide f
 Open any demo file directly in a browser:
 
 - [All Components](demos/index.html)
+- [CDN Demo](demos/cdn/index.html) - All Tier 1 components from CDN
+- [Import Map Demo](demos/cdn/importmap.html) - npm-like imports without build step
 - [Button](demos/button.html)
 - [Dialog](demos/dialog.html)
 - [Toggle](demos/toggle.html)

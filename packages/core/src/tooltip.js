@@ -18,6 +18,7 @@
  */
 
 import { position } from './utils/position.js'
+import { register } from './utils/register.js'
 
 let tooltipId = 0
 
@@ -226,6 +227,6 @@ class YtzTooltip extends HTMLElement {
   }
 }
 
-customElements.define('ytz-tooltip', YtzTooltip)
+register('ytz-tooltip', YtzTooltip)
 
 export { YtzTooltip }

@@ -15,6 +15,8 @@
  * <ytz-toggle disabled>Premium feature</ytz-toggle>
  */
 
+import { register } from './utils/register.js'
+
 /**
  * @class YtzToggle
  * @extends HTMLElement
@@ -121,6 +123,6 @@ class YtzToggle extends HTMLElement {
   }
 }
 
-customElements.define('ytz-toggle', YtzToggle)
+register('ytz-toggle', YtzToggle)
 
 export { YtzToggle }

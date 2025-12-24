@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yetzirah CDN Import Map Demo</title>
+
+  <!-- Tachyons CSS from CDN -->
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+
+  <!--
+    Import Map Configuration
+
+    Import maps allow bare specifier imports like:
+      import { YzDialog } from 'yetzirah'
+
+    to resolve to CDN URLs, providing an npm-like DX without a build step.
+
+    Browser Support: Chrome 89+, Edge 89+, Safari 16.4+, Firefox 108+
+    For older browsers, use es-module-shims polyfill (see below)
+  -->
+
+  <!-- Polyfill for older browsers (optional, ~3KB) -->
+  <script async src="https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js"></script>
+
+  <!-- Import Map Definition -->
+  <script type="importmap">
+  {
+    "imports": {
+      "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
+      "yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/",
+      "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
+      "@grimoire/yetzirah-core/": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/"
+    }
+  }
+  </script>
+
+  <style>
+    /* Demo-specific styles */
+    .demo-section {
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .demo-section h3 {
+      margin-top: 0;
+      color: #333;
+    }
+    .code-block {
+      background: #f5f5f5;
+      padding: 0.75rem;
+      border-radius: 4px;
+      font-family: monospace;
+      font-size: 0.875rem;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <h1 class="f2 mb2">Yetzirah Import Map Demo</h1>
+  <p class="f5 gray mb4">
+    This demo shows how to use Yetzirah components from CDN with import maps.
+    No build step required!
+  </p>
+
+  <!-- Import Map Configuration Display -->
+  <div class="demo-section">
+    <h3>Import Map Configuration</h3>
+    <p class="f6 gray">Add this import map to your HTML &lt;head&gt;:</p>
+    <pre class="code-block">&lt;script type="importmap"&gt;
+{
+  "imports": {
+    "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
+    "yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/"
+  }
+}
+&lt;/script&gt;</pre>
+  </div>
+
+  <!-- Dialog Demo -->
+  <div class="demo-section">
+    <h3>Dialog Component</h3>
+    <p class="f6 gray mb3">A modal dialog with focus trapping and keyboard handling.</p>
+
+    <button class="bg-blue white bn pa2 br2 pointer" onclick="document.querySelector('#demo-dialog').showModal()">
+      Open Dialog
+    </button>
+
+    <ytz-dialog id="demo-dialog" class="pa4 br3 shadow-2">
+      <h2 class="mt0">Hello from Yetzirah!</h2>
+      <p>This dialog was loaded from CDN using import maps.</p>
+      <p class="f6 gray">Press Escape or click outside to close.</p>
+      <form method="dialog">
+        <button class="bg-blue white bn pa2 br2 pointer">Close</button>
+      </form>
+    </ytz-dialog>
+  </div>
+
+  <!-- Disclosure Demo -->
+  <div class="demo-section">
+    <h3>Disclosure Component</h3>
+    <p class="f6 gray mb3">An expandable/collapsible section.</p>
+
+    <ytz-disclosure>
+      <button slot="trigger" class="bg-light-gray bn pa2 br2 pointer w-100 tl">
+        Click to expand
+      </button>
+      <div slot="content" class="pa3 bg-near-white br2 mt2">
+        <p class="ma0">This content is revealed when you click the trigger button.</p>
+        <p class="ma0 mt2">Yetzirah handles all the ARIA attributes automatically.</p>
+      </div>
+    </ytz-disclosure>
+  </div>
+
+  <!-- Tabs Demo -->
+  <div class="demo-section">
+    <h3>Tabs Component</h3>
+    <p class="f6 gray mb3">Accessible tabbed interface with keyboard navigation.</p>
+
+    <ytz-tabs>
+      <ytz-tablist class="flex bb b--light-gray">
+        <ytz-tab class="pa2 bg-transparent bn pointer bb b--transparent" selected>Overview</ytz-tab>
+        <ytz-tab class="pa2 bg-transparent bn pointer bb b--transparent">Features</ytz-tab>
+        <ytz-tab class="pa2 bg-transparent bn pointer bb b--transparent">Usage</ytz-tab>
+      </ytz-tablist>
+      <ytz-tabpanel class="pa3">
+        <p class="ma0">Yetzirah is a headless component library built with Web Components.</p>
+      </ytz-tabpanel>
+      <ytz-tabpanel class="pa3">
+        <ul class="ma0 pl3">
+          <li>Zero dependencies</li>
+          <li>Framework agnostic</li>
+          <li>Accessible by default</li>
+          <li>Minimal bundle size</li>
+        </ul>
+      </ytz-tabpanel>
+      <ytz-tabpanel class="pa3">
+        <p class="ma0">Load from CDN, use with any framework, or vanilla JS!</p>
+      </ytz-tabpanel>
+    </ytz-tabs>
+  </div>
+
+  <!-- Tooltip Demo -->
+  <div class="demo-section">
+    <h3>Tooltip Component</h3>
+    <p class="f6 gray mb3">Accessible tooltips with automatic positioning.</p>
+
+    <div class="flex gap3">
+      <ytz-tooltip>
+        <button slot="trigger" class="bg-green white bn pa2 br2 pointer">
+          Hover me
+        </button>
+        <span slot="content" class="bg-dark-gray white pa2 br2 f6">
+          Tooltip from CDN!
+        </span>
+      </ytz-tooltip>
+    </div>
+  </div>
+
+  <!-- Menu Demo -->
+  <div class="demo-section">
+    <h3>Menu Component</h3>
+    <p class="f6 gray mb3">Dropdown menu with keyboard navigation.</p>
+
+    <ytz-menu>
+      <button slot="trigger" class="bg-purple white bn pa2 br2 pointer">
+        Open Menu ▾
+      </button>
+      <div slot="content" class="bg-white shadow-2 br2 overflow-hidden">
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray">Edit</ytz-menuitem>
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray">Duplicate</ytz-menuitem>
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray">Archive</ytz-menuitem>
+        <hr class="ma0 b--light-gray">
+        <ytz-menuitem class="db pa2 pointer hover-bg-light-gray dark-red">Delete</ytz-menuitem>
+      </div>
+    </ytz-menu>
+  </div>
+
+  <!-- Usage Examples -->
+  <div class="demo-section">
+    <h3>JavaScript Usage</h3>
+    <p class="f6 gray">With import maps, you can import like you would with npm:</p>
+
+    <pre class="code-block">// Import all components (core bundle)
+import 'yetzirah';
+
+// Or import individual components
+import 'yetzirah/dialog.js';
+import 'yetzirah/tabs.js';
+
+// Components self-register, just use them in HTML:
+// &lt;ytz-dialog&gt;...&lt;/ytz-dialog&gt;</pre>
+  </div>
+
+  <!-- CDN Alternatives -->
+  <div class="demo-section">
+    <h3>Alternative CDN URLs</h3>
+    <p class="f6 gray">You can use different CDN providers:</p>
+
+    <pre class="code-block">// jsDelivr (recommended - global CDN, good performance)
+https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js
+
+// unpkg (npm CDN)
+https://unpkg.com/@grimoire/yetzirah-core@latest/cdn/core.js
+
+// esm.sh (optimized for ESM)
+https://esm.sh/@grimoire/yetzirah-core@latest/cdn/core.js</pre>
+  </div>
+
+  <!-- Version Pinning -->
+  <div class="demo-section">
+    <h3>Version Pinning</h3>
+    <p class="f6 gray">Pin to a specific version for production:</p>
+
+    <pre class="code-block">// Pin to exact version (recommended for production)
+https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js
+
+// Pin to major version (gets patches and minor updates)
+https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0/cdn/core.js
+
+// Pin to minor version (gets patches only)
+https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1/cdn/core.js</pre>
+  </div>
+
+  <!-- Load Yetzirah from local CDN build for demo -->
+  <script type="module">
+    // In production, this would come from CDN via the import map
+    // For local demo, we load from the built CDN files
+    import '../../packages/core/cdn/core.js';
+
+    console.log('Yetzirah components loaded from CDN build');
+  </script>
+</body>
+</html>

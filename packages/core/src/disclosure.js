@@ -17,6 +17,8 @@
  * </ytz-disclosure>
  */
 
+import { register } from './utils/register.js'
+
 let disclosureId = 0
 
 /**
@@ -118,6 +120,6 @@ class YtzDisclosure extends HTMLElement {
   }
 }
 
-customElements.define('ytz-disclosure', YtzDisclosure)
+register('ytz-disclosure', YtzDisclosure)
 
 export { YtzDisclosure }

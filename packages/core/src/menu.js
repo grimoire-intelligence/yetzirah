@@ -21,6 +21,7 @@
 import { position } from './utils/position.js'
 import { createKeyNav } from './utils/key-nav.js'
 import { clickOutside } from './utils/click-outside.js'
+import { register } from './utils/register.js'
 
 let menuId = 0
 
@@ -269,7 +270,7 @@ class YtzMenuItem extends HTMLElement {
   set value(v) { v ? this.setAttribute('value', v) : this.removeAttribute('value') }
 }
 
-customElements.define('ytz-menu', YtzMenu)
-customElements.define('ytz-menuitem', YtzMenuItem)
+register('ytz-menu', YtzMenu)
+register('ytz-menuitem', YtzMenuItem)
 
 export { YtzMenu, YtzMenuItem }

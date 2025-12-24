@@ -15,6 +15,8 @@
  * <ytz-chip deletable disabled>Can't delete</ytz-chip>
  */
 
+import { register } from './utils/register.js'
+
 /**
  * @class YtzChip
  * @extends HTMLElement
@@ -122,6 +124,6 @@ class YtzChip extends HTMLElement {
   }
 }
 
-customElements.define('ytz-chip', YtzChip)
+register('ytz-chip', YtzChip)
 
 export { YtzChip }

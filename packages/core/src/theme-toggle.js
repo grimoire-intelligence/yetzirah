@@ -16,6 +16,7 @@
  */
 
 import './toggle.js'
+import { register } from './utils/register.js'
 
 /** @type {string} Default localStorage key */
 const DEFAULT_STORAGE_KEY = 'yetzirah-theme'
@@ -195,6 +196,6 @@ class YtzThemeToggle extends HTMLElement {
   }
 }
 
-customElements.define('ytz-theme-toggle', YtzThemeToggle)
+register('ytz-theme-toggle', YtzThemeToggle)
 
 export { YtzThemeToggle }

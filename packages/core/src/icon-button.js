@@ -21,6 +21,8 @@
  * </ytz-icon-button>
  */
 
+import { register } from './utils/register.js'
+
 /** @type {string} Default classes for icon button */
 const DEFAULTS = 'pointer bn bg-transparent pa0 dib'
 
@@ -163,6 +165,6 @@ class YtzIconButton extends HTMLElement {
   }
 }
 
-customElements.define('ytz-icon-button', YtzIconButton)
+register('ytz-icon-button', YtzIconButton)
 
 export { YtzIconButton }
