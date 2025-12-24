@@ -19,15 +19,12 @@ Phase 3 optimizes Yetzirah for buildless and global deployment:
 - Sub-10kb total for core + all Tier 1 components
 - Sub-Saharan Africa load time < 3s on 3G
 - Publication to npm, pnpm, bun, and yarn registries
-
 ---
-
 ## Dependency Block 1: Build Infrastructure
 
 These PRs establish the CDN build pipeline.
 
 ### PR-125: CDN Build Configuration
-
 ---
 pr_id: PR-125
 title: CDN Build Configuration
@@ -50,7 +47,6 @@ estimated_files:
     action: create
     description: Build script orchestrating CDN bundle generation
 ---
-
 **Description:**
 Create build configuration for generating CDN-optimized bundles. Configure Rollup/esbuild to produce ESM bundles with aggressive tree-shaking, minification, and source maps. Output both a combined `core.js` and individual component files.
 
@@ -59,11 +55,8 @@ Create build configuration for generating CDN-optimized bundles. Configure Rollu
 - [ ] Combined `core.js` includes all Tier 1 + Tier 2 components
 - [ ] Source maps generated for debugging
 - [ ] Build completes in under 10 seconds
-
 ---
-
 ### PR-126: Individual Component Bundles
-
 ---
 pr_id: PR-126
 title: Individual Component Bundles
@@ -89,7 +82,6 @@ estimated_files:
     action: modify
     description: Generate individual component entry points
 ---
-
 **Description:**
 Generate individual ESM bundles for each component that can be imported independently from CDN. Each bundle should include only the component and its required utilities (positioning, focus trap, etc.), enabling minimal payloads for single-component usage.
 
@@ -98,11 +90,8 @@ Generate individual ESM bundles for each component that can be imported independ
 - [ ] Each Tier 2 component has its own `cdn/{component}.js` file
 - [ ] Shared utilities are inlined or chunked appropriately
 - [ ] Individual imports work: `import '@cdn/dialog.js'`
-
 ---
-
 ### PR-127: Bundle Size Optimization
-
 ---
 pr_id: PR-127
 title: Bundle Size Optimization
@@ -125,7 +114,6 @@ estimated_files:
     action: modify
     description: Update with CDN bundle sizes
 ---
-
 **Description:**
 Optimize CDN bundles to meet the <10KB gzipped target for all Tier 1 components. Analyze bundle composition, eliminate dead code, optimize utility sharing, and ensure aggressive minification. Document final sizes.
 
@@ -134,15 +122,12 @@ Optimize CDN bundles to meet the <10KB gzipped target for all Tier 1 components.
 - [ ] Individual component bundles documented with sizes
 - [ ] Bundle analysis report generated on each build
 - [ ] No duplicate code across component bundles when using import maps
-
 ---
-
 ## Dependency Block 2: CDN Integration
 
 These PRs enable CDN usage patterns.
 
 ### PR-128: Import Map Support
-
 ---
 pr_id: PR-128
 title: Import Map Support
@@ -162,7 +147,6 @@ estimated_files:
     action: create
     description: CDN usage documentation with import map examples
 ---
-
 **Description:**
 Document and demonstrate import map usage for CDN bundles. Import maps allow bare specifier imports (`import { Dialog } from 'yetzirah'`) to resolve to CDN URLs, providing a npm-like DX without a build step.
 
@@ -171,11 +155,8 @@ Document and demonstrate import map usage for CDN bundles. Import maps allow bar
 - [ ] Documentation covers import map setup
 - [ ] Examples for jsDelivr, unpkg, and esm.sh CDNs
 - [ ] Browser compatibility notes included
-
 ---
-
 ### PR-129: CDN Demo Page
-
 ---
 pr_id: PR-129
 title: CDN Demo Page
@@ -195,7 +176,6 @@ estimated_files:
     action: create
     description: Demo styles using Tachyons from CDN
 ---
-
 **Description:**
 Create a comprehensive demo page that loads Yetzirah entirely from CDN with no build step. Demonstrate all Tier 1 components working together, styled with Tachyons loaded from CDN. This serves as both documentation and proof that buildless usage works.
 
@@ -205,11 +185,8 @@ Create a comprehensive demo page that loads Yetzirah entirely from CDN with no b
 - [ ] All Tier 1 components demonstrated and functional
 - [ ] Page works when served from any static file server
 - [ ] Total page weight < 50KB (excluding images)
-
 ---
-
 ### PR-130: Script Tag Auto-Registration
-
 ---
 pr_id: PR-130
 title: Script Tag Auto-Registration
@@ -229,7 +206,6 @@ estimated_files:
     action: modify
     description: Ensure components self-register when loaded
 ---
-
 **Description:**
 Ensure CDN bundles automatically register custom elements when loaded via script tag. The bundle should be a side-effect module that defines all custom elements immediately, requiring no additional JavaScript from the user.
 
@@ -238,19 +214,16 @@ Ensure CDN bundles automatically register custom elements when loaded via script
 - [ ] No additional JS required to use components
 - [ ] Individual component scripts also self-register
 - [ ] Multiple script loads are idempotent (no duplicate registration errors)
-
 ---
-
 ## Dependency Block 3: Framework-less Patterns
 
 These PRs document buildless framework usage.
 
 ### PR-131: Preact + HTM Documentation
-
 ---
 pr_id: PR-131
 title: Preact + HTM Documentation
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
@@ -266,7 +239,6 @@ estimated_files:
     action: create
     description: Guide for using Yetzirah with Preact + HTM (no build)
 ---
-
 **Description:**
 Document using Yetzirah with Preact and HTM (Hyperscript Tagged Markup) for a React-like DX without a build step. This pattern allows JSX-like syntax with tagged template literals, all loaded from CDN.
 
@@ -276,11 +248,8 @@ Document using Yetzirah with Preact and HTM (Hyperscript Tagged Markup) for a Re
 - [ ] Event handling examples (onClose, onChange, etc.)
 - [ ] State management with Preact hooks demonstrated
 - [ ] Comparison with full React wrapper approach
-
 ---
-
 ### PR-132: Vanilla JS Patterns Guide
-
 ---
 pr_id: PR-132
 title: Vanilla JS Patterns Guide
@@ -300,7 +269,6 @@ estimated_files:
     action: create
     description: Complete vanilla JS application example
 ---
-
 **Description:**
 Document idiomatic vanilla JavaScript patterns for using Yetzirah without any framework. Cover event handling, state management with custom events, DOM manipulation patterns, and building interactive applications with just HTML, CSS, and Yetzirah.
 
@@ -310,17 +278,14 @@ Document idiomatic vanilla JavaScript patterns for using Yetzirah without any fr
 - [ ] Patterns for form handling with Autocomplete/Select
 - [ ] Dialog/Drawer coordination patterns
 - [ ] Progressive enhancement examples
-
 ---
-
 ## Dependency Block 4: Performance & Testing
 
 ### PR-133: Performance Testing Suite
-
 ---
 pr_id: PR-133
 title: Performance Testing Suite
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -339,7 +304,6 @@ estimated_files:
     action: create
     description: Performance benchmarks and methodology
 ---
-
 **Description:**
 Create performance testing infrastructure to verify CDN bundles meet the <3s load time target on 3G networks. Use Lighthouse CI for automated performance scoring and network throttling to simulate constrained environments.
 
@@ -348,11 +312,8 @@ Create performance testing infrastructure to verify CDN bundles meet the <3s loa
 - [ ] 3G throttling test achieves < 3s First Contentful Paint
 - [ ] Bundle sizes tracked in CI (fail on regression)
 - [ ] Performance report generated and documented
-
 ---
-
 ### PR-134: CDN Integration Tests
-
 ---
 pr_id: PR-134
 title: CDN Integration Tests
@@ -372,7 +333,6 @@ estimated_files:
     action: create
     description: Tests verifying import map functionality
 ---
-
 **Description:**
 Create integration tests that verify CDN bundles work correctly in a browser environment. Test component functionality, event handling, and interaction patterns using Playwright against the CDN demo page.
 
@@ -381,13 +341,10 @@ Create integration tests that verify CDN bundles work correctly in a browser env
 - [ ] Tests run against actual CDN demo page
 - [ ] Import map resolution verified
 - [ ] No console errors during component usage
-
 ---
-
 ## Dependency Block 5: Documentation & Finalization
 
 ### PR-135: CDN Hosting Guide
-
 ---
 pr_id: PR-135
 title: CDN Hosting Guide
@@ -407,7 +364,6 @@ estimated_files:
     action: modify
     description: Add CDN installation section
 ---
-
 **Description:**
 Document how to use Yetzirah from popular CDNs (jsDelivr, unpkg, esm.sh, Skypack) and how to self-host the CDN bundles. Include version pinning strategies and cache considerations.
 
@@ -416,11 +372,8 @@ Document how to use Yetzirah from popular CDNs (jsDelivr, unpkg, esm.sh, Skypack
 - [ ] Self-hosting instructions provided
 - [ ] Version pinning best practices
 - [ ] README updated with CDN installation option
-
 ---
-
 ### PR-136: Phase 3 Architecture Documentation
-
 ---
 pr_id: PR-136
 title: Phase 3 Architecture Documentation
@@ -440,7 +393,6 @@ estimated_files:
     action: modify
     description: Document Phase 3 release
 ---
-
 **Description:**
 Document the architecture decisions made for Phase 3 CDN distribution. Cover build pipeline, bundle structure, performance optimizations, and lessons learned. This serves as onboarding documentation for future contributors.
 
@@ -450,11 +402,8 @@ Document the architecture decisions made for Phase 3 CDN distribution. Cover bui
 - [ ] Performance optimization decisions explained
 - [ ] Future improvement opportunities identified
 - [ ] CHANGELOG updated for Phase 3 release
-
 ---
-
 ### PR-137: Package Registry Publication Setup
-
 ---
 pr_id: PR-137
 title: Package Registry Publication Setup
@@ -495,7 +444,6 @@ estimated_files:
     action: create
     description: Guide for maintainers on publishing releases
 ---
-
 **Description:**
 Set up automated package publication to npm registry with compatibility for pnpm, bun, and yarn. Configure GitHub Actions workflow for version tagging, changelog generation, and multi-package publishing. All @grimoire/yetzirah-* packages should be published atomically with consistent versions.
 
@@ -507,9 +455,7 @@ Set up automated package publication to npm registry with compatibility for pnpm
 - [ ] CDN bundles automatically available on jsDelivr/unpkg after npm publish
 - [ ] Version management script handles monorepo versioning
 - [ ] Publishing guide documents the release process for maintainers
-
 ---
-
 ## Dependency Graph
 
 ```
