@@ -4,35 +4,6 @@ Unstyled, accessible Web Components with framework wrappers for React, Vue, Svel
 
 ## Installation
 
-### CDN (No Build Step)
-
-The fastest way to get started - just add a script tag:
-
-```html
-<!-- All components (~11KB gzipped) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
-
-<!-- Or Tier 1 only (~6KB gzipped) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/tier1.js"></script>
-```
-
-All `ytz-*` elements are immediately available:
-
-```html
-<ytz-dialog id="my-dialog">
-  <div class="pa4 bg-white br3">
-    <h2>Hello World</h2>
-    <ytz-button onclick="this.closest('ytz-dialog').close()">Close</ytz-button>
-  </div>
-</ytz-dialog>
-
-<ytz-button onclick="document.getElementById('my-dialog').showModal()">
-  Open Dialog
-</ytz-button>
-```
-
-See the [CDN Hosting Guide](docs/cdn-hosting.md) for version pinning, self-hosting, and import maps.
-
 ### React (18+)
 ```bash
 npm install @grimoire/yetzirah-react
