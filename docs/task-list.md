@@ -204,7 +204,7 @@ Create React wrapper for `<ytz-progress>` following existing wrapper patterns. S
 ---
 pr_id: PR-143
 title: Badge React Wrapper
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
