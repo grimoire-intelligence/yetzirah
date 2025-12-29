@@ -98,7 +98,7 @@ Implement `<ytz-progress>` component for loading indicators. Support indetermina
 ---
 pr_id: PR-140
 title: Badge Core Component
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
