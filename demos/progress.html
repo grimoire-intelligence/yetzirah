@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Progress/Spinner - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Circular Progress Styling */
+    ytz-progress:not([linear]) {
+      display: inline-block;
+    }
+
+    ytz-progress:not([linear]) .ytz-progress-circular {
+      display: block;
+    }
+
+    /* Size variants */
+    ytz-progress[data-size="small"]:not([linear]) .ytz-progress-circular { width: 24px; height: 24px; }
+    ytz-progress[data-size="medium"]:not([linear]) .ytz-progress-circular { width: 40px; height: 40px; }
+    ytz-progress[data-size="large"]:not([linear]) .ytz-progress-circular { width: 56px; height: 56px; }
+
+    ytz-progress .ytz-progress-track {
+      stroke: #e0e0e0;
+    }
+
+    ytz-progress .ytz-progress-indicator {
+      stroke: #357edd;
+      transform-origin: center;
+    }
+
+    /* Indeterminate circular animation */
+    ytz-progress[data-indeterminate]:not([linear]) .ytz-progress-circular {
+      animation: ytz-spin 1.4s linear infinite;
+    }
+
+    @keyframes ytz-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Linear Progress Styling */
+    ytz-progress[linear] {
+      display: block;
+      width: 100%;
+    }
+
+    ytz-progress[linear] .ytz-progress-track {
+      position: relative;
+      height: 4px;
+      background: #e0e0e0;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    ytz-progress[linear][data-size="small"] .ytz-progress-track { height: 2px; }
+    ytz-progress[linear][data-size="large"] .ytz-progress-track { height: 8px; }
+
+    ytz-progress[linear] .ytz-progress-indicator {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      background: #357edd;
+      border-radius: inherit;
+      transition: width 0.3s ease;
+    }
+
+    /* Indeterminate linear animation */
+    ytz-progress[linear][data-indeterminate] .ytz-progress-indicator {
+      width: 40% !important;
+      animation: ytz-indeterminate 1.5s ease-in-out infinite;
+    }
+
+    @keyframes ytz-indeterminate {
+      0% { left: -40%; }
+      100% { left: 100%; }
+    }
+
+    /* Color variants */
+    .progress-success .ytz-progress-indicator { stroke: #19a974; background: #19a974; }
+    .progress-error .ytz-progress-indicator { stroke: #ff4136; background: #ff4136; }
+    .progress-warning .ytz-progress-indicator { stroke: #ff6300; background: #ff6300; }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Progress / Spinner</h1>
+    <p class="f5 lh-copy gray mt0">
+      Progress indicator supporting both indeterminate (spinner) and determinate (progress bar) modes,
+      with circular and linear visual variants. CSS-driven animations.
+    </p>
+  </header>
+
+  <main>
+    <!-- Circular Indeterminate -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Circular Spinner (Indeterminate)</h2>
+      <p class="lh-copy mb3">
+        Default mode - a spinning indicator for unknown progress.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-progress></ytz-progress>
+        <ytz-progress size="small"></ytz-progress>
+        <ytz-progress size="large"></ytz-progress>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-progress&gt;&lt;/ytz-progress&gt;
+&lt;ytz-progress size="small"&gt;&lt;/ytz-progress&gt;
+&lt;ytz-progress size="large"&gt;&lt;/ytz-progress&gt;</code></pre>
+    </section>
+
+    <!-- Circular Determinate -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Circular Progress (Determinate)</h2>
+      <p class="lh-copy mb3">
+        Set <code>value</code> (0-100) for determinate progress.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-progress value="25"></ytz-progress>
+        <ytz-progress value="50"></ytz-progress>
+        <ytz-progress value="75"></ytz-progress>
+        <ytz-progress value="100"></ytz-progress>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-progress value="25"&gt;&lt;/ytz-progress&gt;
+&lt;ytz-progress value="50"&gt;&lt;/ytz-progress&gt;
+&lt;ytz-progress value="75"&gt;&lt;/ytz-progress&gt;</code></pre>
+    </section>
+
+    <!-- Linear Indeterminate -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Linear Progress Bar (Indeterminate)</h2>
+      <p class="lh-copy mb3">
+        Add <code>linear</code> attribute for a progress bar style.
+      </p>
+
+      <div class="mb3" style="max-width: 400px;">
+        <ytz-progress linear></ytz-progress>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-progress linear&gt;&lt;/ytz-progress&gt;</code></pre>
+    </section>
+
+    <!-- Linear Determinate -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Linear Progress Bar (Determinate)</h2>
+      <p class="lh-copy mb3">
+        Linear progress with a specific value.
+      </p>
+
+      <div class="mb3" style="max-width: 400px;">
+        <ytz-progress linear value="0" class="mb3"></ytz-progress>
+        <ytz-progress linear value="33" class="mb3"></ytz-progress>
+        <ytz-progress linear value="66" class="mb3"></ytz-progress>
+        <ytz-progress linear value="100"></ytz-progress>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-progress linear value="33"&gt;&lt;/ytz-progress&gt;
+&lt;ytz-progress linear value="66"&gt;&lt;/ytz-progress&gt;</code></pre>
+    </section>
+
+    <!-- Size Variants -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Size Variants</h2>
+      <p class="lh-copy mb3">
+        Use <code>size</code> attribute: small, medium (default), or large.
+      </p>
+
+      <h3 class="f5 fw6 mt4 mb2">Circular</h3>
+      <div class="demo-row mb3">
+        <div class="tc">
+          <ytz-progress size="small" value="50"></ytz-progress>
+          <p class="f7 gray mt2">small</p>
+        </div>
+        <div class="tc">
+          <ytz-progress size="medium" value="50"></ytz-progress>
+          <p class="f7 gray mt2">medium</p>
+        </div>
+        <div class="tc">
+          <ytz-progress size="large" value="50"></ytz-progress>
+          <p class="f7 gray mt2">large</p>
+        </div>
+      </div>
+
+      <h3 class="f5 fw6 mt4 mb2">Linear</h3>
+      <div style="max-width: 300px;">
+        <p class="f7 gray mb1">small</p>
+        <ytz-progress linear size="small" value="50" class="mb3"></ytz-progress>
+        <p class="f7 gray mb1">medium</p>
+        <ytz-progress linear size="medium" value="50" class="mb3"></ytz-progress>
+        <p class="f7 gray mb1">large</p>
+        <ytz-progress linear size="large" value="50"></ytz-progress>
+      </div>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Color Variants</h2>
+      <p class="lh-copy mb3">
+        Apply CSS classes for different colors.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-progress value="75"></ytz-progress>
+        <ytz-progress value="75" class="progress-success"></ytz-progress>
+        <ytz-progress value="75" class="progress-warning"></ytz-progress>
+        <ytz-progress value="75" class="progress-error"></ytz-progress>
+      </div>
+
+      <div style="max-width: 400px;">
+        <ytz-progress linear value="75" class="mb3"></ytz-progress>
+        <ytz-progress linear value="75" class="progress-success mb3"></ytz-progress>
+        <ytz-progress linear value="75" class="progress-warning mb3"></ytz-progress>
+        <ytz-progress linear value="75" class="progress-error"></ytz-progress>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto mt3"><code>&lt;ytz-progress value="75" class="progress-success"&gt;&lt;/ytz-progress&gt;</code></pre>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Interactive Demo</h2>
+      <p class="lh-copy mb3">
+        Control the progress value dynamically.
+      </p>
+
+      <div class="mb3" style="max-width: 400px;">
+        <ytz-progress id="interactive-progress" linear value="0"></ytz-progress>
+      </div>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="setProgress(0)">0%</button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="setProgress(25)">25%</button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="setProgress(50)">50%</button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="setProgress(75)">75%</button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="setProgress(100)">100%</button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="toggleIndeterminate()">Toggle Indeterminate</button>
+      </div>
+
+      <p id="progress-status" class="f6 gray">Current: 0%</p>
+
+      <script>
+        function setProgress(value) {
+          const progress = document.getElementById('interactive-progress')
+          progress.value = value
+          document.getElementById('progress-status').textContent = `Current: ${value}%`
+        }
+
+        function toggleIndeterminate() {
+          const progress = document.getElementById('interactive-progress')
+          if (progress.value !== null) {
+            progress.value = null
+            document.getElementById('progress-status').textContent = 'Current: Indeterminate'
+          } else {
+            progress.value = 50
+            document.getElementById('progress-status').textContent = 'Current: 50%'
+          }
+        }
+      </script>
+    </section>
+
+    <!-- Animated Progress -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Animated Progress</h2>
+      <p class="lh-copy mb3">
+        Simulate a loading process.
+      </p>
+
+      <div class="mb3" style="max-width: 400px;">
+        <ytz-progress id="animated-progress" linear value="0"></ytz-progress>
+      </div>
+
+      <div class="demo-row">
+        <button id="start-animation" class="ph3 pv2 br2 bg-green white bn pointer" onclick="startAnimation()">
+          Start Loading
+        </button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="resetAnimation()">
+          Reset
+        </button>
+      </div>
+
+      <script>
+        let animationInterval = null
+
+        function startAnimation() {
+          const progress = document.getElementById('animated-progress')
+          const btn = document.getElementById('start-animation')
+          progress.value = 0
+          btn.disabled = true
+
+          animationInterval = setInterval(() => {
+            if (progress.value >= 100) {
+              clearInterval(animationInterval)
+              btn.disabled = false
+              return
+            }
+            progress.value = progress.value + Math.random() * 10
+          }, 200)
+        }
+
+        function resetAnimation() {
+          clearInterval(animationInterval)
+          document.getElementById('animated-progress').value = 0
+          document.getElementById('start-animation').disabled = false
+        }
+      </script>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        Progress accessibility features:
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li><code>role="progressbar"</code> - Semantic role</li>
+        <li><code>aria-valuenow</code> - Current value (determinate only)</li>
+        <li><code>aria-valuemin="0"</code> - Minimum value (determinate only)</li>
+        <li><code>aria-valuemax="100"</code> - Maximum value (determinate only)</li>
+        <li><code>aria-label</code> - Custom label via <code>label</code> attribute</li>
+        <li>ARIA value attributes removed in indeterminate mode per spec</li>
+      </ul>
+
+      <div class="demo-row mb3">
+        <ytz-progress value="65" label="Upload progress"></ytz-progress>
+        <span class="f6 gray ml3">With aria-label="Upload progress"</span>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-progress value="65" label="Upload progress"&gt;&lt;/ytz-progress&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;CircularProgress /&gt;</td>
+              <td class="pa2 code">&lt;ytz-progress&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;CircularProgress value={50} /&gt;</td>
+              <td class="pa2 code">&lt;ytz-progress value="50"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;LinearProgress /&gt;</td>
+              <td class="pa2 code">&lt;ytz-progress linear&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;LinearProgress value={50} /&gt;</td>
+              <td class="pa2 code">&lt;ytz-progress linear value="50"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">variant="determinate"</td>
+              <td class="pa2 code">value="50" (any value makes it determinate)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Progress } from '@grimoire/yetzirah-react'
+
+function UploadProgress({ progress }) {
+  return (
+    &lt;div&gt;
+      &lt;Progress
+        linear
+        value={progress}
+        label="File upload progress"
+      /&gt;
+      &lt;p&gt;{progress}% complete&lt;/p&gt;
+    &lt;/div&gt;
+  )
+}
+
+// Indeterminate spinner
+function LoadingSpinner() {
+  return &lt;Progress size="large" /&gt;
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

@@ -24,6 +24,7 @@
 // Import all components (triggers their registration via side effects)
 import './accordion.js'
 import './autocomplete.js'
+import './badge.js'
 import './button.js'
 import './chip.js'
 import './datagrid.js'
@@ -34,8 +35,10 @@ import './icon-button.js'
 import './listbox.js'
 import './menu.js'
 import './popover.js'
+import './progress.js'
 import './select.js'
 import './slider.js'
+import './snackbar.js'
 import './tabs.js'
 import './theme-toggle.js'
 import './toggle.js'
@@ -55,7 +58,7 @@ export function getRegistrationStatus() {
     'ytz-accordion',
     'ytz-accordion-item',
     'ytz-autocomplete',
-    'ytz-option',
+    'ytz-badge',
     'ytz-button',
     'ytz-chip',
     'ytz-datagrid',
@@ -67,9 +70,12 @@ export function getRegistrationStatus() {
     'ytz-listbox',
     'ytz-menu',
     'ytz-menuitem',
+    'ytz-option',
     'ytz-popover',
+    'ytz-progress',
     'ytz-select',
     'ytz-slider',
+    'ytz-snackbar',
     'ytz-tab',
     'ytz-tabpanel',
     'ytz-tabs',
@@ -96,7 +102,7 @@ export async function whenAllDefined() {
     'ytz-accordion',
     'ytz-accordion-item',
     'ytz-autocomplete',
-    'ytz-option',
+    'ytz-badge',
     'ytz-button',
     'ytz-chip',
     'ytz-datagrid',
@@ -108,9 +114,12 @@ export async function whenAllDefined() {
     'ytz-listbox',
     'ytz-menu',
     'ytz-menuitem',
+    'ytz-option',
     'ytz-popover',
+    'ytz-progress',
     'ytz-select',
     'ytz-slider',
+    'ytz-snackbar',
     'ytz-tab',
     'ytz-tabpanel',
     'ytz-tabs',
