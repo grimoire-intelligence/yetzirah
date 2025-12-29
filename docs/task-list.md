@@ -62,7 +62,7 @@ Implement `<ytz-snackbar>` component for transient notifications. Support queue 
 ---
 pr_id: PR-139
 title: Progress/Spinner Core Component
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
