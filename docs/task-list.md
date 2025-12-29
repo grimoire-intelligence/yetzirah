@@ -240,7 +240,7 @@ Create React wrapper for `<ytz-badge>` following existing wrapper patterns. Chil
 ---
 pr_id: PR-144
 title: Snackbar Vue/Svelte/Angular Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
