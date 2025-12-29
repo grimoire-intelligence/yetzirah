@@ -306,7 +306,7 @@ Create framework wrappers for Progress in Vue, Svelte, and Angular.
 ---
 pr_id: PR-146
 title: Badge Vue/Svelte/Angular Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
