@@ -1,408 +1,840 @@
-# Yetzirah Phase 3: CDN-First Distribution
+# Yetzirah Phase 4: Extensions, Components & Distribution
 
 ## Orchestration Metadata
 
 ```yaml
 version: 1.0
-project: yetzirah-phase-3-cdn
-total_prs: 13
-parallel_tracks: 3
-estimated_total_hours: 18
+project: yetzirah-phase-4
+total_prs: 22
+parallel_tracks: 4
 ```
 
 ## Overview
 
-Phase 3 optimizes Yetzirah for buildless and global deployment:
-- Single-file bundles for each component
-- ESM imports from CDN
-- Documentation for Preact + HTM usage
-- Sub-10kb total for core + all Tier 1 components
-- Sub-Saharan Africa load time < 3s on 3G
-- Publication to npm, pnpm, bun, and yarn registries
----
-## Dependency Block 1: Build Infrastructure
+Phase 4 extends Yetzirah with additional components, framework integrations, and finalizes npm distribution:
+- New components: Snackbar/Toast, Progress/Spinner, Badge
+- Solid.js framework wrappers with native signal integration
+- Alpine.js plugin with `x-ytz` directives
+- Server framework integration patterns (Rails, Laravel, Django)
+- NPM package publication to `@grimoire` organization (final step)
 
-These PRs establish the CDN build pipeline.
+---
 
-### PR-125: CDN Build Configuration
----
-pr_id: PR-125
-title: CDN Build Configuration
-cold_state: completed
-priority: high
-complexity:
-  score: 5
-  estimated_minutes: 45
-  suggested_model: sonnet
-  rationale: Rollup/esbuild config for multiple output formats requires bundler expertise
-dependencies: []
-estimated_files:
-  - path: packages/core/rollup.config.cdn.js
-    action: create
-    description: Rollup config for CDN bundles with tree-shaking
-  - path: packages/core/package.json
-    action: modify
-    description: Add cdn build scripts
-  - path: scripts/build-cdn.js
-    action: create
-    description: Build script orchestrating CDN bundle generation
----
-**Description:**
-Create build configuration for generating CDN-optimized bundles. Configure Rollup/esbuild to produce ESM bundles with aggressive tree-shaking, minification, and source maps. Output both a combined `core.js` and individual component files.
+## Dependency Block 1: Additional Core Components
 
-**Acceptance Criteria:**
-- [ ] `pnpm build:cdn` produces ESM bundles in `packages/core/cdn/`
-- [ ] Combined `core.js` includes all Tier 1 + Tier 2 components
-- [ ] Source maps generated for debugging
-- [ ] Build completes in under 10 seconds
----
-### PR-126: Individual Component Bundles
----
-pr_id: PR-126
-title: Individual Component Bundles
-cold_state: completed
-priority: high
-complexity:
-  score: 4
-  estimated_minutes: 30
-  suggested_model: sonnet
-  rationale: Generating per-component entry points with shared utilities
-dependencies: [PR-125]
-estimated_files:
-  - path: packages/core/cdn/button.js
-    action: create
-    description: Standalone Button component bundle
-  - path: packages/core/cdn/dialog.js
-    action: create
-    description: Standalone Dialog component bundle
-  - path: packages/core/cdn/index.js
-    action: create
-    description: Re-export all components for tree-shaking
-  - path: scripts/build-cdn.js
-    action: modify
-    description: Generate individual component entry points
----
-**Description:**
-Generate individual ESM bundles for each component that can be imported independently from CDN. Each bundle should include only the component and its required utilities (positioning, focus trap, etc.), enabling minimal payloads for single-component usage.
+These PRs add new core components to the library.
 
-**Acceptance Criteria:**
-- [ ] Each Tier 1 component has its own `cdn/{component}.js` file
-- [ ] Each Tier 2 component has its own `cdn/{component}.js` file
-- [ ] Shared utilities are inlined or chunked appropriately
-- [ ] Individual imports work: `import '@cdn/dialog.js'`
+### PR-138: Snackbar/Toast Core Component
 ---
-### PR-127: Bundle Size Optimization
----
-pr_id: PR-127
-title: Bundle Size Optimization
-cold_state: completed
+pr_id: PR-138
+title: Snackbar/Toast Core Component
+cold_state: new
 priority: high
 complexity:
   score: 6
-  estimated_minutes: 60
+  estimated_minutes: 90
   suggested_model: sonnet
-  rationale: Requires analysis of bundle composition and optimization strategies
-dependencies: [PR-126]
+  rationale: Queue management, auto-dismiss timing, stacking behavior requires careful state handling
+dependencies: []
 estimated_files:
-  - path: packages/core/src/utils/index.ts
-    action: modify
-    description: Optimize utility exports for tree-shaking
-  - path: scripts/analyze-bundle.js
+  - path: packages/core/src/snackbar.ts
     action: create
-    description: Bundle analysis script with size breakdown
-  - path: docs/bundle-report.md
-    action: modify
-    description: Update with CDN bundle sizes
+    description: Snackbar Web Component implementation
+  - path: packages/core/src/snackbar.test.ts
+    action: create
+    description: Unit tests for snackbar component
+  - path: demos/snackbar.html
+    action: create
+    description: Demo page for snackbar component
 ---
 **Description:**
-Optimize CDN bundles to meet the <10KB gzipped target for all Tier 1 components. Analyze bundle composition, eliminate dead code, optimize utility sharing, and ensure aggressive minification. Document final sizes.
+Implement `<ytz-snackbar>` component for transient notifications. Support queue management (multiple snackbars stacked), auto-dismiss with configurable duration, position anchoring (top/bottom, left/center/right), and manual dismissal.
 
 **Acceptance Criteria:**
-- [ ] Combined Tier 1 bundle < 10KB gzipped
-- [ ] Individual component bundles documented with sizes
-- [ ] Bundle analysis report generated on each build
-- [ ] No duplicate code across component bundles when using import maps
----
-## Dependency Block 2: CDN Integration
+- [ ] `<ytz-snackbar>` component registers and renders
+- [ ] Queue management: multiple snackbars stack properly
+- [ ] Auto-dismiss after configurable duration (default 5s)
+- [ ] Position anchoring via `position` attribute (bottom-center default)
+- [ ] Manual dismissal via close button or `dismiss()` method
+- [ ] Dispatches `dismiss` event when closed
+- [ ] ARIA live region for accessibility
+- [ ] Works in vanilla HTML without JavaScript
 
-These PRs enable CDN usage patterns.
-
-### PR-128: Import Map Support
 ---
-pr_id: PR-128
-title: Import Map Support
-cold_state: completed
+
+### PR-139: Progress/Spinner Core Component
+---
+pr_id: PR-139
+title: Progress/Spinner Core Component
+cold_state: new
 priority: medium
 complexity:
   score: 3
-  estimated_minutes: 25
+  estimated_minutes: 45
   suggested_model: haiku
-  rationale: Documentation and example configuration, minimal code
-dependencies: [PR-126]
+  rationale: Mostly CSS-driven, minimal JavaScript logic
+dependencies: []
 estimated_files:
-  - path: demos/cdn/importmap.html
+  - path: packages/core/src/progress.ts
     action: create
-    description: Demo using import maps for CDN modules
-  - path: docs/cdn-usage.md
+    description: Progress/Spinner Web Component implementation
+  - path: packages/core/src/progress.test.ts
     action: create
-    description: CDN usage documentation with import map examples
+    description: Unit tests for progress component
+  - path: demos/progress.html
+    action: create
+    description: Demo page for progress component
 ---
 **Description:**
-Document and demonstrate import map usage for CDN bundles. Import maps allow bare specifier imports (`import { Dialog } from 'yetzirah'`) to resolve to CDN URLs, providing a npm-like DX without a build step.
+Implement `<ytz-progress>` component for loading indicators. Support indeterminate (spinner) and determinate (progress bar) modes. Provide both circular and linear variants. CSS-driven animations with no JavaScript animation loops.
 
 **Acceptance Criteria:**
-- [ ] Working import map example in demos/cdn/
-- [ ] Documentation covers import map setup
-- [ ] Examples for jsDelivr, unpkg, and esm.sh CDNs
-- [ ] Browser compatibility notes included
+- [ ] `<ytz-progress>` component registers and renders
+- [ ] Indeterminate mode: continuous spinning/animation
+- [ ] Determinate mode: shows progress via `value` attribute (0-100)
+- [ ] Circular variant (spinner)
+- [ ] Linear variant (progress bar)
+- [ ] CSS-driven animations (no requestAnimationFrame)
+- [ ] `aria-valuenow`, `aria-valuemin`, `aria-valuemax` for determinate mode
+- [ ] `role="progressbar"` for accessibility
+
 ---
-### PR-129: CDN Demo Page
+
+### PR-140: Badge Core Component
 ---
-pr_id: PR-129
-title: CDN Demo Page
-cold_state: completed
+pr_id: PR-140
+title: Badge Core Component
+cold_state: new
 priority: medium
 complexity:
-  score: 4
-  estimated_minutes: 35
-  suggested_model: sonnet
-  rationale: Full demo page with all components loaded from CDN
-dependencies: [PR-127]
+  score: 2
+  estimated_minutes: 30
+  suggested_model: haiku
+  rationale: Simple overlay positioning, minimal logic
+dependencies: []
 estimated_files:
-  - path: demos/cdn/index.html
+  - path: packages/core/src/badge.ts
     action: create
-    description: Comprehensive CDN demo with all Tier 1 components
-  - path: demos/cdn/styles.css
+    description: Badge Web Component implementation
+  - path: packages/core/src/badge.test.ts
     action: create
-    description: Demo styles using Tachyons from CDN
+    description: Unit tests for badge component
+  - path: demos/badge.html
+    action: create
+    description: Demo page for badge component
 ---
 **Description:**
-Create a comprehensive demo page that loads Yetzirah entirely from CDN with no build step. Demonstrate all Tier 1 components working together, styled with Tachyons loaded from CDN. This serves as both documentation and proof that buildless usage works.
+Implement `<ytz-badge>` component for notification dots and counts. Position relative to slotted content with configurable anchor position. Support dot mode (no content) and count mode (shows number).
 
 **Acceptance Criteria:**
-- [ ] Demo loads Yetzirah core from CDN URL
-- [ ] Demo loads Tachyons from CDN
-- [ ] All Tier 1 components demonstrated and functional
-- [ ] Page works when served from any static file server
-- [ ] Total page weight < 50KB (excluding images)
+- [ ] `<ytz-badge>` component registers and renders
+- [ ] Wraps slotted content with positioned badge overlay
+- [ ] Dot mode when no `value` attribute (just shows indicator)
+- [ ] Count mode when `value` attribute present (shows number)
+- [ ] `max` attribute to cap displayed value (e.g., "99+")
+- [ ] Position configurable via `position` attribute (top-right default)
+- [ ] Hidden when `value="0"` or `hidden` attribute set
+
 ---
-### PR-130: Script Tag Auto-Registration
+
+## Dependency Block 2: React Wrappers for New Components
+
+### PR-141: Snackbar React Wrapper
 ---
-pr_id: PR-130
-title: Script Tag Auto-Registration
-cold_state: completed
+pr_id: PR-141
+title: Snackbar React Wrapper
+cold_state: new
+priority: high
+complexity:
+  score: 3
+  estimated_minutes: 30
+  suggested_model: haiku
+  rationale: Standard wrapper pattern, follows existing React wrapper conventions
+dependencies: [PR-138]
+estimated_files:
+  - path: packages/react/src/Snackbar.tsx
+    action: create
+    description: React wrapper for Snackbar component
+  - path: packages/react/src/Snackbar.test.tsx
+    action: create
+    description: Tests for Snackbar React wrapper
+  - path: packages/react/src/index.ts
+    action: modify
+    description: Export Snackbar component
+---
+**Description:**
+Create React wrapper for `<ytz-snackbar>` following existing wrapper patterns. Bridge `onDismiss` callback, expose `show()` and `dismiss()` methods via ref.
+
+**Acceptance Criteria:**
+- [ ] `<Snackbar>` component exported from @grimoire/yetzirah-react
+- [ ] `onDismiss` prop bridges to dismiss event
+- [ ] `open` prop controls visibility
+- [ ] `autoHideDuration` prop sets dismiss timing
+- [ ] `position` prop for anchoring
+- [ ] Ref exposes `show()` and `dismiss()` methods
+- [ ] TypeScript types exported
+
+---
+
+### PR-142: Progress React Wrapper
+---
+pr_id: PR-142
+title: Progress React Wrapper
+cold_state: new
 priority: medium
 complexity:
   score: 2
   estimated_minutes: 20
   suggested_model: haiku
-  rationale: Simple side-effect module ensuring custom elements register on load
-dependencies: [PR-125]
+  rationale: Simple wrapper, mostly prop passthrough
+dependencies: [PR-139]
 estimated_files:
-  - path: packages/core/src/cdn-entry.ts
+  - path: packages/react/src/Progress.tsx
     action: create
-    description: CDN entry point with auto-registration
-  - path: packages/core/cdn/core.js
+    description: React wrapper for Progress component
+  - path: packages/react/src/Progress.test.tsx
+    action: create
+    description: Tests for Progress React wrapper
+  - path: packages/react/src/index.ts
     action: modify
-    description: Ensure components self-register when loaded
+    description: Export Progress component
 ---
 **Description:**
-Ensure CDN bundles automatically register custom elements when loaded via script tag. The bundle should be a side-effect module that defines all custom elements immediately, requiring no additional JavaScript from the user.
+Create React wrapper for `<ytz-progress>` following existing wrapper patterns. Support both `CircularProgress` and `LinearProgress` named exports for MUI compatibility.
 
 **Acceptance Criteria:**
-- [ ] `<script type="module" src="core.js">` registers all elements
-- [ ] No additional JS required to use components
-- [ ] Individual component scripts also self-register
-- [ ] Multiple script loads are idempotent (no duplicate registration errors)
----
-## Dependency Block 3: Framework-less Patterns
+- [ ] `<Progress>` component exported from @grimoire/yetzirah-react
+- [ ] `<CircularProgress>` alias for circular variant
+- [ ] `<LinearProgress>` alias for linear variant
+- [ ] `value` prop for determinate mode
+- [ ] `variant` prop: "indeterminate" | "determinate"
+- [ ] TypeScript types exported
 
-These PRs document buildless framework usage.
-
-### PR-131: Preact + HTM Documentation
 ---
-pr_id: PR-131
-title: Preact + HTM Documentation
-cold_state: completed
+
+### PR-143: Badge React Wrapper
+---
+pr_id: PR-143
+title: Badge React Wrapper
+cold_state: new
+priority: medium
+complexity:
+  score: 2
+  estimated_minutes: 20
+  suggested_model: haiku
+  rationale: Simple wrapper, mostly prop passthrough
+dependencies: [PR-140]
+estimated_files:
+  - path: packages/react/src/Badge.tsx
+    action: create
+    description: React wrapper for Badge component
+  - path: packages/react/src/Badge.test.tsx
+    action: create
+    description: Tests for Badge React wrapper
+  - path: packages/react/src/index.ts
+    action: modify
+    description: Export Badge component
+---
+**Description:**
+Create React wrapper for `<ytz-badge>` following existing wrapper patterns. Children become the anchored content.
+
+**Acceptance Criteria:**
+- [ ] `<Badge>` component exported from @grimoire/yetzirah-react
+- [ ] `badgeContent` prop sets the badge value
+- [ ] `max` prop caps displayed value
+- [ ] `invisible` prop hides the badge
+- [ ] `children` rendered as anchored content
+- [ ] TypeScript types exported
+
+---
+
+## Dependency Block 3: Vue/Svelte/Angular Wrappers
+
+### PR-144: Snackbar Vue/Svelte/Angular Wrappers
+---
+pr_id: PR-144
+title: Snackbar Vue/Svelte/Angular Wrappers
+cold_state: new
 priority: medium
 complexity:
   score: 4
-  estimated_minutes: 40
+  estimated_minutes: 60
   suggested_model: sonnet
-  rationale: Requires testing Preact integration and documenting patterns
-dependencies: [PR-129]
+  rationale: Three frameworks, each with their own conventions
+dependencies: [PR-141]
 estimated_files:
-  - path: demos/cdn/preact-htm.html
+  - path: packages/vue/src/Snackbar.vue
     action: create
-    description: Demo using Preact + HTM with Yetzirah from CDN
-  - path: docs/preact-htm.md
+    description: Vue wrapper for Snackbar
+  - path: packages/svelte/src/Snackbar.svelte
     action: create
-    description: Guide for using Yetzirah with Preact + HTM (no build)
+    description: Svelte wrapper for Snackbar
+  - path: packages/angular/src/snackbar.component.ts
+    action: create
+    description: Angular wrapper for Snackbar
 ---
 **Description:**
-Document using Yetzirah with Preact and HTM (Hyperscript Tagged Markup) for a React-like DX without a build step. This pattern allows JSX-like syntax with tagged template literals, all loaded from CDN.
+Create framework wrappers for Snackbar in Vue, Svelte, and Angular following existing patterns for each framework.
 
 **Acceptance Criteria:**
-- [ ] Working demo loading Preact, HTM, and Yetzirah from CDN
-- [ ] Documentation covers component usage patterns
-- [ ] Event handling examples (onClose, onChange, etc.)
-- [ ] State management with Preact hooks demonstrated
-- [ ] Comparison with full React wrapper approach
+- [ ] Vue: `<Snackbar>` with `v-model:open` support
+- [ ] Svelte: `<Snackbar>` with `bind:open` support
+- [ ] Angular: `YtzSnackbar` component with `[(open)]` two-way binding
+- [ ] All frameworks: `@dismiss` / `on:dismiss` / `(dismiss)` event
+- [ ] Tests for each framework wrapper
+
 ---
-### PR-132: Vanilla JS Patterns Guide
+
+### PR-145: Progress Vue/Svelte/Angular Wrappers
 ---
-pr_id: PR-132
-title: Vanilla JS Patterns Guide
-cold_state: completed
+pr_id: PR-145
+title: Progress Vue/Svelte/Angular Wrappers
+cold_state: new
 priority: medium
 complexity:
   score: 3
-  estimated_minutes: 30
+  estimated_minutes: 45
   suggested_model: haiku
-  rationale: Documentation with code examples, minimal implementation
-dependencies: [PR-129]
+  rationale: Simple component, straightforward wrappers
+dependencies: [PR-142]
 estimated_files:
-  - path: docs/vanilla-patterns.md
+  - path: packages/vue/src/Progress.vue
     action: create
-    description: Guide for vanilla JS usage patterns
-  - path: demos/cdn/vanilla-app.html
+    description: Vue wrapper for Progress
+  - path: packages/svelte/src/Progress.svelte
     action: create
-    description: Complete vanilla JS application example
+    description: Svelte wrapper for Progress
+  - path: packages/angular/src/progress.component.ts
+    action: create
+    description: Angular wrapper for Progress
 ---
 **Description:**
-Document idiomatic vanilla JavaScript patterns for using Yetzirah without any framework. Cover event handling, state management with custom events, DOM manipulation patterns, and building interactive applications with just HTML, CSS, and Yetzirah.
+Create framework wrappers for Progress in Vue, Svelte, and Angular.
 
 **Acceptance Criteria:**
-- [ ] Common patterns documented (event delegation, state, etc.)
-- [ ] Working demo of a multi-component application
-- [ ] Patterns for form handling with Autocomplete/Select
-- [ ] Dialog/Drawer coordination patterns
-- [ ] Progressive enhancement examples
----
-## Dependency Block 4: Performance & Testing
+- [ ] Vue: `<Progress>` and `<CircularProgress>`/`<LinearProgress>` aliases
+- [ ] Svelte: `<Progress>` with variant prop
+- [ ] Angular: `YtzProgress` component
+- [ ] All variants (circular/linear, determinate/indeterminate) supported
+- [ ] Tests for each framework wrapper
 
-### PR-133: Performance Testing Suite
 ---
-pr_id: PR-133
-title: Performance Testing Suite
-cold_state: completed
+
+### PR-146: Badge Vue/Svelte/Angular Wrappers
+---
+pr_id: PR-146
+title: Badge Vue/Svelte/Angular Wrappers
+cold_state: new
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Simple component, straightforward wrappers
+dependencies: [PR-143]
+estimated_files:
+  - path: packages/vue/src/Badge.vue
+    action: create
+    description: Vue wrapper for Badge
+  - path: packages/svelte/src/Badge.svelte
+    action: create
+    description: Svelte wrapper for Badge
+  - path: packages/angular/src/badge.component.ts
+    action: create
+    description: Angular wrapper for Badge
+---
+**Description:**
+Create framework wrappers for Badge in Vue, Svelte, and Angular.
+
+**Acceptance Criteria:**
+- [ ] Vue: `<Badge>` with slot for anchored content
+- [ ] Svelte: `<Badge>` with slot
+- [ ] Angular: `YtzBadge` with content projection
+- [ ] All props (badgeContent, max, invisible) supported
+- [ ] Tests for each framework wrapper
+
+---
+
+## Dependency Block 4: Solid.js Integration
+
+### PR-147: Solid.js Package Setup
+---
+pr_id: PR-147
+title: Solid.js Package Setup
+cold_state: new
+priority: high
+complexity:
+  score: 4
+  estimated_minutes: 45
+  suggested_model: sonnet
+  rationale: New package setup with Solid-specific build configuration
+dependencies: [PR-146]
+estimated_files:
+  - path: packages/solid/package.json
+    action: create
+    description: Package configuration for Solid.js wrappers
+  - path: packages/solid/tsconfig.json
+    action: create
+    description: TypeScript config for Solid
+  - path: packages/solid/vite.config.ts
+    action: create
+    description: Vite build config for Solid
+  - path: packages/solid/src/index.ts
+    action: create
+    description: Main entry point
+  - path: packages/solid/src/utils.ts
+    action: create
+    description: Shared utilities for Solid wrappers
+  - path: pnpm-workspace.yaml
+    action: modify
+    description: Add solid package to workspace
+---
+**Description:**
+Set up `@grimoire/yetzirah-solid` package with proper Solid.js build configuration. Create shared utilities for signal integration and event bridging.
+
+**Acceptance Criteria:**
+- [ ] Package builds with `pnpm build`
+- [ ] TypeScript configured for Solid JSX
+- [ ] Vite configured for Solid library mode
+- [ ] Shared `createYetzirahWrapper` utility for consistent wrapper pattern
+- [ ] Signal-based state management helper
+- [ ] Event handler bridging utility (`on:` → `addEventListener`)
+
+---
+
+### PR-148: Solid.js Core Component Wrappers
+---
+pr_id: PR-148
+title: Solid.js Core Component Wrappers
+cold_state: new
 priority: high
 complexity:
   score: 5
-  estimated_minutes: 45
+  estimated_minutes: 90
   suggested_model: sonnet
-  rationale: Setting up Lighthouse CI and network throttling tests
-dependencies: [PR-129]
+  rationale: All Tier 1 and Tier 2 components need Solid wrappers
+dependencies: [PR-147]
 estimated_files:
-  - path: scripts/perf-test.js
+  - path: packages/solid/src/Button.tsx
     action: create
-    description: Performance testing script with Lighthouse
-  - path: .github/workflows/perf.yml
+    description: Solid wrapper for Button
+  - path: packages/solid/src/Dialog.tsx
     action: create
-    description: CI workflow for performance regression testing
-  - path: docs/performance.md
+    description: Solid wrapper for Dialog
+  - path: packages/solid/src/Drawer.tsx
     action: create
-    description: Performance benchmarks and methodology
+    description: Solid wrapper for Drawer
+  - path: packages/solid/src/Menu.tsx
+    action: create
+    description: Solid wrapper for Menu
+  - path: packages/solid/src/Tabs.tsx
+    action: create
+    description: Solid wrapper for Tabs
+  - path: packages/solid/src/Tooltip.tsx
+    action: create
+    description: Solid wrapper for Tooltip
+  - path: packages/solid/src/Disclosure.tsx
+    action: create
+    description: Solid wrapper for Disclosure
+  - path: packages/solid/src/Accordion.tsx
+    action: create
+    description: Solid wrapper for Accordion
+  - path: packages/solid/src/Autocomplete.tsx
+    action: create
+    description: Solid wrapper for Autocomplete
+  - path: packages/solid/src/Select.tsx
+    action: create
+    description: Solid wrapper for Select
+  - path: packages/solid/src/Popover.tsx
+    action: create
+    description: Solid wrapper for Popover
+  - path: packages/solid/src/Toggle.tsx
+    action: create
+    description: Solid wrapper for Toggle
+  - path: packages/solid/src/Slider.tsx
+    action: create
+    description: Solid wrapper for Slider
+  - path: packages/solid/src/Chip.tsx
+    action: create
+    description: Solid wrapper for Chip
 ---
 **Description:**
-Create performance testing infrastructure to verify CDN bundles meet the <3s load time target on 3G networks. Use Lighthouse CI for automated performance scoring and network throttling to simulate constrained environments.
+Create Solid.js wrappers for all existing Tier 1 and Tier 2 components. Use native Solid signals for state, proper ref forwarding, and idiomatic event handling.
 
 **Acceptance Criteria:**
-- [ ] Lighthouse CI configured for CDN demo page
-- [ ] 3G throttling test achieves < 3s First Contentful Paint
-- [ ] Bundle sizes tracked in CI (fail on regression)
-- [ ] Performance report generated and documented
+- [ ] All Tier 1 components wrapped (Button, Dialog, Drawer, Menu, Tabs, Tooltip, Disclosure, Accordion, Autocomplete, Select, Popover)
+- [ ] All Tier 2 components wrapped (Toggle, Slider, Chip)
+- [ ] Native signal integration for reactive props
+- [ ] Ref forwarding via `ref` prop
+- [ ] Event handlers use Solid's `on:event` syntax
+- [ ] TypeScript types for all components
+
 ---
-### PR-134: CDN Integration Tests
+
+### PR-149: Solid.js New Component Wrappers
 ---
-pr_id: PR-134
-title: CDN Integration Tests
-cold_state: completed
+pr_id: PR-149
+title: Solid.js New Component Wrappers
+cold_state: new
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Three new components, pattern already established
+dependencies: [PR-148]
+estimated_files:
+  - path: packages/solid/src/Snackbar.tsx
+    action: create
+    description: Solid wrapper for Snackbar
+  - path: packages/solid/src/Progress.tsx
+    action: create
+    description: Solid wrapper for Progress
+  - path: packages/solid/src/Badge.tsx
+    action: create
+    description: Solid wrapper for Badge
+  - path: packages/solid/src/index.ts
+    action: modify
+    description: Export new components
+---
+**Description:**
+Create Solid.js wrappers for the new Phase 4 components (Snackbar, Progress, Badge).
+
+**Acceptance Criteria:**
+- [ ] `<Snackbar>` with signal-based open state
+- [ ] `<Progress>` with signal-based value
+- [ ] `<Badge>` with slot support
+- [ ] Consistent with existing Solid wrapper patterns
+
+---
+
+### PR-150: Solid.js Integration Tests & Documentation
+---
+pr_id: PR-150
+title: Solid.js Integration Tests & Documentation
+cold_state: new
 priority: medium
 complexity:
   score: 4
-  estimated_minutes: 35
+  estimated_minutes: 60
   suggested_model: sonnet
-  rationale: E2E tests verifying CDN bundles work correctly
-dependencies: [PR-129]
+  rationale: Comprehensive testing and documentation for new framework
+dependencies: [PR-149]
 estimated_files:
-  - path: tests/cdn/cdn.spec.ts
+  - path: packages/solid/src/__tests__/integration.test.tsx
     action: create
-    description: Playwright tests for CDN demo page
-  - path: tests/cdn/importmap.spec.ts
+    description: Integration tests for Solid wrappers
+  - path: demos/solid/index.html
     action: create
-    description: Tests verifying import map functionality
+    description: Solid demo page
+  - path: demos/solid/App.tsx
+    action: create
+    description: Solid demo application
+  - path: docs/solid.md
+    action: create
+    description: Solid.js usage documentation
 ---
 **Description:**
-Create integration tests that verify CDN bundles work correctly in a browser environment. Test component functionality, event handling, and interaction patterns using Playwright against the CDN demo page.
+Create comprehensive integration tests and documentation for Solid.js wrappers. Include demo application showcasing all components.
 
 **Acceptance Criteria:**
-- [ ] All Tier 1 components tested via CDN bundles
-- [ ] Tests run against actual CDN demo page
-- [ ] Import map resolution verified
-- [ ] No console errors during component usage
----
-## Dependency Block 5: Documentation & Finalization
+- [ ] Integration tests for all wrapped components
+- [ ] Demo application with all components
+- [ ] Documentation covering installation, usage, and patterns
+- [ ] SSR compatibility notes (Solid Start)
+- [ ] Signal integration examples
 
-### PR-135: CDN Hosting Guide
 ---
-pr_id: PR-135
-title: CDN Hosting Guide
-cold_state: completed
-priority: low
+
+## Dependency Block 5: Alpine.js Integration
+
+### PR-151: Alpine.js Plugin Package Setup
+---
+pr_id: PR-151
+title: Alpine.js Plugin Package Setup
+cold_state: new
+priority: high
 complexity:
-  score: 2
-  estimated_minutes: 20
-  suggested_model: haiku
-  rationale: Documentation only, listing CDN options and setup
-dependencies: [PR-127]
+  score: 4
+  estimated_minutes: 45
+  suggested_model: sonnet
+  rationale: Plugin architecture requires understanding Alpine's extension system
+dependencies: [PR-146]
 estimated_files:
-  - path: docs/cdn-hosting.md
+  - path: packages/alpine/package.json
     action: create
-    description: Guide for hosting Yetzirah on various CDNs
-  - path: README.md
+    description: Package configuration for Alpine plugin
+  - path: packages/alpine/tsconfig.json
+    action: create
+    description: TypeScript configuration
+  - path: packages/alpine/src/index.ts
+    action: create
+    description: Plugin entry point
+  - path: packages/alpine/src/plugin.ts
+    action: create
+    description: Alpine plugin registration
+  - path: pnpm-workspace.yaml
     action: modify
-    description: Add CDN installation section
+    description: Add alpine package to workspace
 ---
 **Description:**
-Document how to use Yetzirah from popular CDNs (jsDelivr, unpkg, esm.sh, Skypack) and how to self-host the CDN bundles. Include version pinning strategies and cache considerations.
+Set up `@grimoire/yetzirah-alpine` package as an Alpine.js plugin. Create the plugin registration infrastructure and CDN-ready build.
 
 **Acceptance Criteria:**
-- [ ] jsDelivr, unpkg, esm.sh URLs documented
-- [ ] Self-hosting instructions provided
-- [ ] Version pinning best practices
-- [ ] README updated with CDN installation option
+- [ ] Package builds as ESM and UMD for CDN usage
+- [ ] Plugin registers with `Alpine.plugin(yetzirah)`
+- [ ] Auto-detects Yetzirah elements on init
+- [ ] Works without build step (CDN-ready)
+- [ ] TypeScript types for Alpine integration
+
 ---
-### PR-136: Phase 3 Architecture Documentation
+
+### PR-152: x-ytz Directive Implementation
 ---
-pr_id: PR-136
-title: Phase 3 Architecture Documentation
-cold_state: completed
+pr_id: PR-152
+title: x-ytz Directive Implementation
+cold_state: new
+priority: high
+complexity:
+  score: 5
+  estimated_minutes: 60
+  suggested_model: sonnet
+  rationale: Event bridging between CustomEvent.detail and Alpine's expected event.target.value
+dependencies: [PR-151]
+estimated_files:
+  - path: packages/alpine/src/directives/x-ytz.ts
+    action: create
+    description: x-ytz directive implementation
+  - path: packages/alpine/src/directives/index.ts
+    action: create
+    description: Directive exports
+  - path: packages/alpine/src/__tests__/x-ytz.test.ts
+    action: create
+    description: Tests for x-ytz directive
+---
+**Description:**
+Implement `x-ytz` directive that patches Yetzirah elements to expose `event.detail.value` as `event.target.value`, harmonizing with Alpine's expected event structure.
+
+**Acceptance Criteria:**
+- [ ] `x-ytz` directive registers with Alpine
+- [ ] Patches element to proxy `event.detail.value` to `event.target.value`
+- [ ] Works with all Yetzirah form components (Select, Autocomplete, Toggle, Slider)
+- [ ] Supports `@change`, `@input`, and custom events
+- [ ] Auto-applied when plugin loaded (no manual `x-ytz` needed)
+
+---
+
+### PR-153: x-ytz:model Two-way Binding
+---
+pr_id: PR-153
+title: x-ytz:model Two-way Binding
+cold_state: new
+priority: high
+complexity:
+  score: 5
+  estimated_minutes: 60
+  suggested_model: sonnet
+  rationale: Two-way binding requires watching Alpine data and syncing to element
+dependencies: [PR-152]
+estimated_files:
+  - path: packages/alpine/src/directives/x-ytz-model.ts
+    action: create
+    description: x-ytz:model directive implementation
+  - path: packages/alpine/src/__tests__/x-ytz-model.test.ts
+    action: create
+    description: Tests for x-ytz:model directive
+---
+**Description:**
+Implement `x-ytz:model` directive for two-way data binding between Alpine state and Yetzirah form components.
+
+**Acceptance Criteria:**
+- [ ] `x-ytz:model="variable"` binds Alpine data to component value
+- [ ] Changes in component update Alpine data
+- [ ] Changes in Alpine data update component
+- [ ] Works with Select, Autocomplete, Toggle, Slider
+- [ ] Supports modifiers (`.debounce`, `.throttle`)
+
+---
+
+### PR-154: Alpine.js Magic Methods
+---
+pr_id: PR-154
+title: Alpine.js Magic Methods
+cold_state: new
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 30
+  suggested_model: haiku
+  rationale: Simple utility methods, pattern is established
+dependencies: [PR-153]
+estimated_files:
+  - path: packages/alpine/src/magics/ytz.ts
+    action: create
+    description: $ytz magic implementation
+  - path: packages/alpine/src/__tests__/magics.test.ts
+    action: create
+    description: Tests for magic methods
+---
+**Description:**
+Implement Alpine magic methods for imperative control of Yetzirah components.
+
+**Acceptance Criteria:**
+- [ ] `$ytz.open(selector)` opens Dialog/Drawer/Menu
+- [ ] `$ytz.close(selector)` closes Dialog/Drawer/Menu
+- [ ] `$ytz.toggle(selector)` toggles open state
+- [ ] `$ytz.show(selector, message)` shows Snackbar
+- [ ] Works with element refs or selectors
+
+---
+
+### PR-155: Alpine.js Integration Tests & Documentation
+---
+pr_id: PR-155
+title: Alpine.js Integration Tests & Documentation
+cold_state: new
+priority: medium
+complexity:
+  score: 4
+  estimated_minutes: 60
+  suggested_model: sonnet
+  rationale: Comprehensive testing and documentation for CDN-first framework
+dependencies: [PR-154]
+estimated_files:
+  - path: packages/alpine/src/__tests__/integration.test.ts
+    action: create
+    description: Integration tests for Alpine plugin
+  - path: demos/alpine/index.html
+    action: create
+    description: Alpine demo page (CDN-based)
+  - path: docs/alpine.md
+    action: create
+    description: Alpine.js plugin documentation
+---
+**Description:**
+Create comprehensive integration tests and documentation for Alpine.js plugin. Demo must work entirely from CDN with no build step.
+
+**Acceptance Criteria:**
+- [ ] Integration tests for all directives and magics
+- [ ] CDN-only demo page (no build step)
+- [ ] Documentation covering installation, directives, magics
+- [ ] Examples for Rails/Laravel/Django usage patterns
+- [ ] Comparison with vanilla Alpine patterns
+
+---
+
+## Dependency Block 6: Documentation & CDN
+
+### PR-156: Server Framework Integration Patterns
+---
+pr_id: PR-156
+title: Server Framework Integration Patterns
+cold_state: new
+priority: medium
+complexity:
+  score: 3
+  estimated_minutes: 45
+  suggested_model: haiku
+  rationale: Documentation-focused, pattern examples
+dependencies: [PR-150, PR-155]
+estimated_files:
+  - path: docs/rails-integration.md
+    action: create
+    description: Rails integration guide
+  - path: docs/laravel-integration.md
+    action: create
+    description: Laravel integration guide
+  - path: docs/django-integration.md
+    action: create
+    description: Django integration guide
+---
+**Description:**
+Document integration patterns for server-rendered frameworks (Rails, Laravel, Django) using Yetzirah with Alpine.js for progressive enhancement.
+
+**Acceptance Criteria:**
+- [ ] Rails: Hotwire/Turbo + Yetzirah + Alpine patterns
+- [ ] Laravel: Livewire + Yetzirah + Alpine patterns
+- [ ] Django: HTMX + Yetzirah patterns
+- [ ] Asset pipeline configuration for each framework
+- [ ] Example templates/views for common patterns
+
+---
+
+### PR-157: CDN Distribution for New Components & Plugins
+---
+pr_id: PR-157
+title: CDN Distribution for New Components & Plugins
+cold_state: new
+priority: medium
+complexity:
+  score: 4
+  estimated_minutes: 45
+  suggested_model: sonnet
+  rationale: Build configuration for CDN bundles of new packages
+dependencies: [PR-156]
+estimated_files:
+  - path: packages/core/cdn/snackbar.js
+    action: create
+    description: CDN bundle for Snackbar
+  - path: packages/core/cdn/progress.js
+    action: create
+    description: CDN bundle for Progress
+  - path: packages/core/cdn/badge.js
+    action: create
+    description: CDN bundle for Badge
+  - path: packages/alpine/cdn/alpine-yetzirah.js
+    action: create
+    description: CDN bundle for Alpine plugin
+  - path: scripts/build-cdn.js
+    action: modify
+    description: Update to build new components
+---
+**Description:**
+Update CDN build to include new components and Alpine.js plugin. Ensure all new components are available via jsDelivr/unpkg after npm publish.
+
+**Acceptance Criteria:**
+- [ ] Snackbar, Progress, Badge available as individual CDN bundles
+- [ ] Alpine plugin available as single CDN bundle
+- [ ] Updated core.js includes new components
+- [ ] Bundle sizes documented
+- [ ] Demo pages updated to show CDN usage
+
+---
+
+### PR-158: Phase 4 Architecture Documentation
+---
+pr_id: PR-158
+title: Phase 4 Architecture Documentation
+cold_state: new
 priority: low
 complexity:
   score: 3
   estimated_minutes: 30
   suggested_model: haiku
-  rationale: Final documentation summarizing CDN architecture decisions
-dependencies: [PR-133, PR-134, PR-135]
+  rationale: Documentation summarizing Phase 4 decisions
+dependencies: [PR-157]
 estimated_files:
-  - path: docs/architecture-phase3.md
+  - path: docs/architecture-phase4.md
     action: create
-    description: CDN architecture decisions and rationale
+    description: Phase 4 architecture decisions and rationale
   - path: CHANGELOG.md
     action: modify
-    description: Document Phase 3 release
+    description: Document Phase 4 release
 ---
 **Description:**
-Document the architecture decisions made for Phase 3 CDN distribution. Cover build pipeline, bundle structure, performance optimizations, and lessons learned. This serves as onboarding documentation for future contributors.
+Document architecture decisions made for Phase 4. Cover new components, Solid.js integration, Alpine.js plugin design, and npm distribution setup.
 
 **Acceptance Criteria:**
-- [ ] Build pipeline architecture documented
-- [ ] Bundle structure and size breakdown
-- [ ] Performance optimization decisions explained
-- [ ] Future improvement opportunities identified
-- [ ] CHANGELOG updated for Phase 3 release
+- [ ] New component architecture documented
+- [ ] Solid.js wrapper design decisions
+- [ ] Alpine.js plugin architecture explained
+- [ ] NPM distribution setup documented
+- [ ] CHANGELOG updated for Phase 4 release
+
 ---
+
+## Dependency Block 7: NPM Distribution (Final)
+
 ### PR-137: Package Registry Publication Setup
 ---
 pr_id: PR-137
@@ -414,7 +846,7 @@ complexity:
   estimated_minutes: 50
   suggested_model: sonnet
   rationale: CI/CD setup for multi-registry publishing requires careful configuration
-dependencies: [PR-136]
+dependencies: [PR-158]
 estimated_files:
   - path: .github/workflows/publish.yml
     action: create
@@ -437,6 +869,12 @@ estimated_files:
   - path: packages/angular/package.json
     action: modify
     description: Add publishConfig and registry metadata
+  - path: packages/solid/package.json
+    action: modify
+    description: Add publishConfig and registry metadata
+  - path: packages/alpine/package.json
+    action: modify
+    description: Add publishConfig and registry metadata
   - path: scripts/publish.js
     action: create
     description: Publication script with version management
@@ -449,41 +887,71 @@ Set up automated package publication to npm registry with compatibility for pnpm
 
 **Acceptance Criteria:**
 - [ ] GitHub Actions workflow publishes on version tag push
-- [ ] All 5 packages published atomically (@grimoire/yetzirah-core, -react, -vue, -svelte, -angular)
+- [ ] All 7 packages published atomically (@grimoire/yetzirah-core, -react, -vue, -svelte, -angular, -solid, -alpine)
 - [ ] Packages installable via `npm install`, `pnpm add`, `bun add`, and `yarn add`
 - [ ] Provenance attestation enabled for supply chain security
 - [ ] CDN bundles automatically available on jsDelivr/unpkg after npm publish
 - [ ] Version management script handles monorepo versioning
 - [ ] Publishing guide documents the release process for maintainers
+
 ---
+
 ## Dependency Graph
 
 ```
-PR-125 (CDN Build Config)
-    ├── PR-126 (Individual Bundles)
-    │       └── PR-127 (Size Optimization)
-    │               ├── PR-129 (CDN Demo)
-    │               │       ├── PR-131 (Preact+HTM)
-    │               │       ├── PR-132 (Vanilla Patterns)
-    │               │       ├── PR-133 (Perf Testing)
-    │               │       └── PR-134 (Integration Tests)
-    │               └── PR-135 (Hosting Guide)
-    ├── PR-128 (Import Maps) ← depends on PR-126
-    └── PR-130 (Auto-Registration)
-
-PR-136 (Architecture Docs) ← depends on PR-133, PR-134, PR-135
-    └── PR-137 (Registry Publication) ← final PR
+PR-138 (Snackbar Core) ──┐
+                         ├── PR-141 (Snackbar React)
+PR-139 (Progress Core) ──┤       │
+                         ├── PR-142 (Progress React)
+PR-140 (Badge Core) ─────┤       │
+                         └── PR-143 (Badge React)
+                                 │
+                                 ▼
+                    ┌────────────┴────────────┐
+                    │                         │
+            PR-144 (Snackbar V/S/A)    PR-145 (Progress V/S/A)
+                    │                         │
+                    └────────────┬────────────┘
+                                 │
+                         PR-146 (Badge V/S/A)
+                                 │
+                    ┌────────────┴────────────┐
+                    │                         │
+            PR-147 (Solid Setup)      PR-151 (Alpine Setup)
+                    │                         │
+            PR-148 (Solid Tier 1+2)   PR-152 (x-ytz Directive)
+                    │                         │
+            PR-149 (Solid New)        PR-153 (x-ytz:model)
+                    │                         │
+            PR-150 (Solid Docs)       PR-154 (Magic Methods)
+                    │                         │
+                    │                 PR-155 (Alpine Docs)
+                    │                         │
+                    └────────────┬────────────┘
+                                 │
+                         PR-156 (Server Patterns)
+                                 │
+                         PR-157 (CDN New Components)
+                                 │
+                         PR-158 (Architecture Docs)
+                                 │
+                         PR-137 (NPM Distribution)
 ```
 
 ## Parallel Execution Opportunities
 
-After PR-125 completes:
-- PR-128, PR-130 can run in parallel
+Immediately (no dependencies):
+- PR-138, PR-139, PR-140 can run in parallel
 
-After PR-127 completes:
-- PR-129, PR-135 can run in parallel
+After each core component completes:
+- React wrapper can start immediately (PR-141, PR-142, PR-143 in parallel)
 
-After PR-129 completes:
-- PR-131, PR-132, PR-133, PR-134 can all run in parallel
+After React wrappers complete:
+- PR-144, PR-145, PR-146 can run in parallel
 
-PR-137 runs last after all documentation is complete.
+After PR-146 completes:
+- PR-147 (Solid) and PR-151 (Alpine) can run in parallel
+- Solid track and Alpine track are independent
+
+After PR-150 and PR-155 complete:
+- PR-156 → PR-157 → PR-158 → PR-137 run sequentially
