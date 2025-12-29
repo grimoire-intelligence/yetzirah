@@ -273,7 +273,7 @@ Create framework wrappers for Snackbar in Vue, Svelte, and Angular following exi
 ---
 pr_id: PR-145
 title: Progress Vue/Svelte/Angular Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
