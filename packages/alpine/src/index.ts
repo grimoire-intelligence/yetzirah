@@ -11,6 +11,7 @@
 import '@grimoire/yetzirah-core'
 import { registerDirectives } from './directives'
 import { registerModelDirective } from './model'
+import { createYtzMagic, type YtzMagic, type SnackbarOptions } from './magics'
 
 /**
  * Re-export VERSION from core
@@ -25,15 +26,8 @@ export interface YetzirahAlpineOptions {
   prefix?: string
 }
 
-/**
- * Options for the snackbar utility
- */
-export interface SnackbarOptions {
-  /** Duration in milliseconds before auto-dismiss */
-  duration?: number
-  /** Position on screen */
-  position?: 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-}
+// Re-export types from magics
+export type { YtzMagic, SnackbarOptions }
 
 /**
  * Alpine instance type - simplified for compatibility
@@ -53,20 +47,6 @@ interface AlpineInstance {
     ) => void
   ): void
   evaluate(el: Element, expression: string): unknown
-}
-
-/**
- * Ytz magic utilities interface
- */
-export interface YtzMagic {
-  snackbar(message: string, options?: SnackbarOptions): HTMLElement
-  openDialog(target: string | HTMLElement): void
-  closeDialog(target: string | HTMLElement): void
-  openDrawer(target: string | HTMLElement): void
-  closeDrawer(target: string | HTMLElement): void
-  toggleTheme(): 'light' | 'dark'
-  getTheme(): string
-  setTheme(theme: 'light' | 'dark'): void
 }
 
 /**
@@ -111,97 +91,7 @@ export function yetzirahPlugin(Alpine: AlpineInstance, options: YetzirahAlpineOp
   /**
    * $ytz magic - provides utilities for working with Yetzirah components
    */
-  Alpine.magic(prefix, (): YtzMagic => {
-    return {
-      /**
-       * Show a snackbar message programmatically
-       */
-      snackbar(message: string, options: SnackbarOptions = {}): HTMLElement {
-        const snackbar = document.createElement('ytz-snackbar')
-        snackbar.textContent = message
-
-        if (options.duration !== undefined) {
-          snackbar.setAttribute('duration', String(options.duration))
-        }
-        if (options.position) {
-          snackbar.setAttribute('position', options.position)
-        }
-
-        document.body.appendChild(snackbar)
-        snackbar.setAttribute('open', '')
-
-        snackbar.addEventListener('close', () => {
-          snackbar.remove()
-        }, { once: true })
-
-        return snackbar
-      },
-
-      /**
-       * Open a dialog by selector or element
-       */
-      openDialog(target: string | HTMLElement): void {
-        const el = typeof target === 'string' ? document.querySelector(target) : target
-        if (el) {
-          el.setAttribute('open', '')
-        }
-      },
-
-      /**
-       * Close a dialog by selector or element
-       */
-      closeDialog(target: string | HTMLElement): void {
-        const el = typeof target === 'string' ? document.querySelector(target) : target
-        if (el) {
-          el.removeAttribute('open')
-        }
-      },
-
-      /**
-       * Open a drawer by selector or element
-       */
-      openDrawer(target: string | HTMLElement): void {
-        const el = typeof target === 'string' ? document.querySelector(target) : target
-        if (el) {
-          el.setAttribute('open', '')
-        }
-      },
-
-      /**
-       * Close a drawer by selector or element
-       */
-      closeDrawer(target: string | HTMLElement): void {
-        const el = typeof target === 'string' ? document.querySelector(target) : target
-        if (el) {
-          el.removeAttribute('open')
-        }
-      },
-
-      /**
-       * Toggle theme between light and dark
-       */
-      toggleTheme(): 'light' | 'dark' {
-        const current = document.documentElement.getAttribute('data-theme')
-        const next = current === 'dark' ? 'light' : 'dark'
-        document.documentElement.setAttribute('data-theme', next)
-        return next
-      },
-
-      /**
-       * Get current theme
-       */
-      getTheme(): string {
-        return document.documentElement.getAttribute('data-theme') || 'light'
-      },
-
-      /**
-       * Set theme
-       */
-      setTheme(theme: 'light' | 'dark'): void {
-        document.documentElement.setAttribute('data-theme', theme)
-      },
-    }
-  })
+  Alpine.magic(prefix, (): YtzMagic => createYtzMagic())
 }
 
 // Default export for convenient import
@@ -210,3 +100,4 @@ export default yetzirahPlugin
 // Re-export directives registration for advanced use
 export { registerDirectives } from './directives'
 export { registerModelDirective } from './model'
+export { createYtzMagic } from './magics'

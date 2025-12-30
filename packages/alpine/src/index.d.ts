@@ -20,6 +20,13 @@ export interface SnackbarOptions {
 }
 
 export interface YtzMagic {
+  // Generic methods (PR-154)
+  open(target: string | HTMLElement): void;
+  close(target: string | HTMLElement): void;
+  toggle(target: string | HTMLElement): void;
+  show(target: string | HTMLElement, message?: string): void;
+
+  // Existing methods (backwards compatibility)
   snackbar(message: string, options?: SnackbarOptions): HTMLElement;
   openDialog(target: string | HTMLElement): void;
   closeDialog(target: string | HTMLElement): void;
@@ -57,3 +64,5 @@ type DirectiveCallback = (
 export declare function yetzirahPlugin(Alpine: AlpineInstance, options?: YetzirahAlpineOptions): void;
 
 export default yetzirahPlugin;
+
+export declare function createYtzMagic(): YtzMagic;
