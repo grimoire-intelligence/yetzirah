@@ -10,6 +10,7 @@
 // Import and register core web components
 import '@grimoire/yetzirah-core'
 import { registerDirectives } from './directives'
+import { registerModelDirective } from './model'
 
 /**
  * Re-export VERSION from core
@@ -103,6 +104,9 @@ export function yetzirahPlugin(Alpine: AlpineInstance, options: YetzirahAlpineOp
 
   // Register all directives
   registerDirectives(Alpine, prefix)
+
+  // Register x-ytz:model two-way binding directive
+  registerModelDirective(Alpine, prefix)
 
   /**
    * $ytz magic - provides utilities for working with Yetzirah components
@@ -205,3 +209,4 @@ export default yetzirahPlugin
 
 // Re-export directives registration for advanced use
 export { registerDirectives } from './directives'
+export { registerModelDirective } from './model'

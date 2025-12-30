@@ -24,12 +24,12 @@ interface AlpineInstance {
 /**
  * Create a debounced function
  */
-function debounce<T extends (...args: unknown[]) => void>(fn: T, ms: number): T {
+function debounce(fn: (e: Event) => void, ms: number): (e: Event) => void {
   let timeout: ReturnType<typeof setTimeout>
-  return ((...args: unknown[]) => {
+  return (e: Event) => {
     clearTimeout(timeout)
-    timeout = setTimeout(() => fn(...args), ms)
-  }) as T
+    timeout = setTimeout(() => fn(e), ms)
+  }
 }
 
 /**
