@@ -724,7 +724,7 @@ Document integration patterns for server-rendered frameworks (Rails, Laravel, Dj
 ---
 pr_id: PR-157
 title: CDN Distribution for New Components & Plugins
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
