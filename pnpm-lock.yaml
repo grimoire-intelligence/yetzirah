@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       lemegeton:
-        specifier: file:C:/Users/tgrah/Documents/Gauntlet/repos/lemegeton/lemegeton-0.1.0.tgz
-        version: file:../../../Gauntlet/repos/lemegeton/lemegeton-0.1.0.tgz(hono@4.11.1)
+        specifier: file:../lemegeton/lemegeton-0.1.0.tgz
+        version: file:../lemegeton/lemegeton-0.1.0.tgz(hono@4.11.1)
     devDependencies:
       '@babel/core':
         specifier: ^7.28.5
@@ -3438,8 +3438,8 @@ packages:
     resolution: {integrity: sha512-o+NO+8WrRiQEE4/7nwRJhN1HWpVmJm511pBHUxPLtp0BUISzlBplORYSmTclCnJvQq2tKu/sgl3xVpkc7ZWuQQ==}
     engines: {node: '>=6'}
 
-  lemegeton@file:../../../Gauntlet/repos/lemegeton/lemegeton-0.1.0.tgz:
-    resolution: {integrity: sha512-zKgd5E2iVri1XCsgEzxysrIgyrI8pfXoOl874DuEgh0gFqieMmo9b7P8xfH+y8kMe+I0wIQDVGEQSbea7gWXOA==, tarball: file:../../../Gauntlet/repos/lemegeton/lemegeton-0.1.0.tgz}
+  lemegeton@file:../lemegeton/lemegeton-0.1.0.tgz:
+    resolution: {integrity: sha512-syyXiQqD39xPiGoy4k6eP+4afQY7JN/QDulHdKS7QN0ibc4QlNJzLS9N9/oHZlST6WctSb55CchlR2j5DfGi8w==, tarball: file:../lemegeton/lemegeton-0.1.0.tgz}
     version: 0.1.0
     engines: {node: '>=16.0.0'}
     hasBin: true
@@ -8725,7 +8725,7 @@ snapshots:
 
   kleur@4.1.5: {}
 
-  lemegeton@file:../../../Gauntlet/repos/lemegeton/lemegeton-0.1.0.tgz(hono@4.11.1):
+  lemegeton@file:../lemegeton/lemegeton-0.1.0.tgz(hono@4.11.1):
     dependencies:
       '@modelcontextprotocol/sdk': 1.25.1(hono@4.11.1)(zod@3.25.76)
       '@xenova/transformers': 2.17.2
