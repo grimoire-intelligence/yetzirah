@@ -149,15 +149,92 @@ For minimal payload, load only the components you need:
 | Theme Toggle | `cdn/theme-toggle.js` | ~1.1 KB |
 | DataGrid | `cdn/datagrid.js` | ~3.1 KB |
 
+#### Tier 3 Components
+
+| Component | Bundle | Size (gzip) |
+|-----------|--------|-------------|
+| Snackbar | `cdn/snackbar.js` | ~0.8 KB |
+| Progress | `cdn/progress.js` | ~0.6 KB |
+| Badge | `cdn/badge.js` | ~0.5 KB |
+
 #### Combined Bundles
 
 | Bundle | Contents | Size (gzip) |
 |--------|----------|-------------|
 | `cdn/tier1.js` | Tier 1 components only | ~6.5 KB |
-| `cdn/core.js` | All components (Tier 1 + 2) | ~11 KB |
-| `cdn/index.js` | Tree-shakeable exports | ~11 KB |
+| `cdn/core.js` | All components (Tier 1 + 2 + 3) | ~12 KB |
+| `cdn/index.js` | Tree-shakeable exports | ~12 KB |
 
 **Recommended:** Use `tier1.js` for the smallest payload with all essential components.
+
+## Alpine.js Plugin
+
+The Yetzirah Alpine.js plugin provides reactive bindings for components. Load it directly from CDN alongside Alpine.js:
+
+### Basic Setup
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+  <script type="importmap">
+  {
+    "imports": {
+      "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js",
+      "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
+      "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/cdn/yetzirah-alpine.js"
+    }
+  }
+  </script>
+</head>
+<body>
+  <script type="module">
+    // Load Yetzirah core components
+    import '@grimoire/yetzirah-core';
+    
+    // Load and initialize Alpine with Yetzirah plugin
+    import Alpine from 'alpinejs';
+    import yetzirahPlugin from '@grimoire/yetzirah-alpine';
+    
+    Alpine.plugin(yetzirahPlugin);
+    Alpine.start();
+  </script>
+</body>
+</html>
+```
+
+### Using with Components
+
+Once initialized, use Alpine's `x-ytz` directive for reactive component bindings:
+
+```html
+<div x-data="{ isOpen: false }">
+  <button @click="isOpen = true">Open Dialog</button>
+  
+  <yz-dialog x-ytz:dialog="{ open: isOpen }" @close="isOpen = false">
+    <h2>Reactive Dialog</h2>
+    <p>This dialog is controlled by Alpine state.</p>
+  </yz-dialog>
+</div>
+```
+
+### Direct Script Tag (No Import Map)
+
+For simpler setups without import maps:
+
+```html
+<!-- Load Yetzirah core -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+
+<!-- Load Alpine + plugin -->
+<script type="module">
+  import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js';
+  import yetzirahPlugin from 'https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/cdn/yetzirah-alpine.js';
+  
+  Alpine.plugin(yetzirahPlugin);
+  Alpine.start();
+</script>
+```
 
 ## Version Pinning
 

@@ -11,14 +11,19 @@
       "types": "./src/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
+    },
+    "./cdn": {
+      "import": "./cdn/yetzirah-alpine.js"
     }
   },
   "files": [
     "dist",
+    "cdn",
     "src/*.d.ts"
   ],
   "scripts": {
     "build": "tsup",
+    "build:cdn": "tsup --config tsup.cdn.config.js",
     "dev": "tsup --watch",
     "test": "vitest run",
     "test:watch": "vitest",
