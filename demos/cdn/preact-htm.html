@@ -11,6 +11,9 @@
   <!-- Demo-specific styles -->
   <link rel="stylesheet" href="styles.css">
 
+  <!-- Yetzirah button interaction styles (hover/click feedback) -->
+  <link rel="stylesheet" href="../../packages/core/button.css">
+
   <style>
     /* Additional styles for Preact demo */
     .preact-app {
@@ -46,6 +49,62 @@
     <div class="pa5 tc gray">Loading Preact + HTM demo...</div>
   </div>
 
+  <!-- Code examples as script templates to avoid escaping issues -->
+  <script type="text/template" id="code-importmap"><!-- Add to your HTML (once @grimoire/yetzirah-core is published to npm) -->
+&lt;script type="importmap"&gt;
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10",
+    "preact/": "https://esm.sh/preact@10/",
+    "htm/preact": "https://esm.sh/htm/preact?external=preact",
+    "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/core.js"
+  }
+}
+&lt;/script&gt;
+&lt;script type="module"&gt;
+  import 'yetzirah';  // Load all components
+&lt;/script&gt;</script>
+
+  <script type="text/template" id="code-event-hook">// Custom hook for Yetzirah events
+function useYetzirahEvent(ref, eventName, handler) {
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !handler) return;
+
+    element.addEventListener(eventName, handler);
+    return () => element.removeEventListener(eventName, handler);
+  }, [ref, eventName, handler]);
+}
+
+// Usage
+const dialogRef = useRef(null);
+useYetzirahEvent(dialogRef, 'close', () => {
+  console.log('Dialog closed!');
+});</script>
+
+  <script type="text/template" id="code-controlling">// Use refs to call component methods
+const dialogRef = useRef(null);
+
+const openDialog = () => dialogRef.current?.showModal();
+const closeDialog = () => dialogRef.current?.close();
+
+return html`
+  &lt;ytz-dialog ref=${dialogRef}&gt;
+    &lt;div class="dialog-content"&gt;...&lt;/div&gt;
+  &lt;/ytz-dialog&gt;
+`;</script>
+
+  <script type="text/template" id="code-htm-syntax">import { html } from 'htm/preact';
+
+// HTM looks like JSX but uses template literals
+const element = html`
+  &lt;div class="container"&gt;
+    &lt;${MyComponent} prop=${value}&gt;
+      ${items.map(item => html`&lt;li&gt;${item}&lt;/li&gt;`)}
+    &lt;/${MyComponent}&gt;
+  &lt;/div&gt;
+`;</script>
+
   <!--
     Preact + HTM + Yetzirah from CDN
 
@@ -74,8 +133,11 @@
     import { useState, useEffect, useRef, useCallback } from 'preact/hooks';
     import { html } from 'htm/preact';
 
-    // Load Yetzirah components
+    // Load Yetzirah components (local path for development)
     import '../../packages/core/cdn/core.js';
+
+    // Helper to get code from template scripts
+    const getCodeTemplate = (id) => document.getElementById(id)?.textContent || '';
 
     // ===========================================
     // Utility: useYetzirahEvent hook
@@ -580,6 +642,32 @@
     }
 
     // ===========================================
+    // Code Examples Component
+    // ===========================================
+    function CodeExamples() {
+      return html`
+        <section class="demo-section mb5">
+          <h2 class="f3 fw6 mb3">Code Patterns</h2>
+
+          <div class="bg-near-white pa3 br2 mb4">
+            <h4 class="f6 fw6 mt0 mb2">Event Handling Hook</h4>
+            <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-event-hook')}</code></pre>
+          </div>
+
+          <div class="bg-near-white pa3 br2 mb4">
+            <h4 class="f6 fw6 mt0 mb2">Controlling Components</h4>
+            <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-controlling')}</code></pre>
+          </div>
+
+          <div class="bg-near-white pa3 br2">
+            <h4 class="f6 fw6 mt0 mb2">HTM Syntax Basics</h4>
+            <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-htm-syntax')}</code></pre>
+          </div>
+        </section>
+      `;
+    }
+
+    // ===========================================
     // Main App Component
     // ===========================================
     function App() {
@@ -588,7 +676,7 @@
           <header class="pa4 bg-dark-pink white">
             <div class="mw8 center">
               <nav class="mb3">
-                <a href="../index.html" class="link light-pink">&larr; All Demos</a>
+                <a href="../index.html" class="link light-pink">← All Demos</a>
                 <span class="mh2 light-pink">|</span>
                 <a href="index.html" class="link light-pink">CDN Demo</a>
                 <span class="mh2 light-pink">|</span>
@@ -620,17 +708,7 @@
                 </ul>
               </div>
 
-              <pre class="code-block f6 overflow-x-auto"><code>${`<!-- Just add these to your HTML -->
-<script type="importmap">
-{
-  "imports": {
-    "preact": "https://esm.sh/preact@10",
-    "preact/": "https://esm.sh/preact@10/",
-    "htm/preact": "https://esm.sh/htm/preact?external=preact"
-  }
-}
-</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/core.js"></script>`}</code></pre>
+              <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-importmap')}</code></pre>
             </section>
 
             <${Counter} />
@@ -639,60 +717,7 @@
             <${TabsExample} />
             <${TodoApp} />
             <${DrawerExample} />
-
-            <!-- Code Patterns -->
-            <section class="demo-section mb5">
-              <h2 class="f3 fw6 mb3">Code Patterns</h2>
-
-              <div class="bg-near-white pa3 br2 mb4">
-                <h4 class="f6 fw6 mt0 mb2">Event Handling Hook</h4>
-                <pre class="code-block f6 overflow-x-auto"><code>${`// Custom hook for Yetzirah events
-function useYetzirahEvent(ref, eventName, handler) {
-  useEffect(() => {
-    const element = ref.current;
-    if (!element || !handler) return;
-
-    element.addEventListener(eventName, handler);
-    return () => element.removeEventListener(eventName, handler);
-  }, [ref, eventName, handler]);
-}
-
-// Usage
-const dialogRef = useRef(null);
-useYetzirahEvent(dialogRef, 'close', () => {
-  console.log('Dialog closed!');
-});`}</code></pre>
-              </div>
-
-              <div class="bg-near-white pa3 br2 mb4">
-                <h4 class="f6 fw6 mt0 mb2">Controlling Components</h4>
-                <pre class="code-block f6 overflow-x-auto"><code>${`// Use refs to call component methods
-const dialogRef = useRef(null);
-
-const openDialog = () => dialogRef.current?.showModal();
-const closeDialog = () => dialogRef.current?.close();
-
-return html\`
-  <ytz-dialog ref=\${dialogRef}>
-    <div class="dialog-content">...</div>
-  </ytz-dialog>
-\`;`}</code></pre>
-              </div>
-
-              <div class="bg-near-white pa3 br2">
-                <h4 class="f6 fw6 mt0 mb2">HTM Syntax Basics</h4>
-                <pre class="code-block f6 overflow-x-auto"><code>${`import { html } from 'htm/preact';
-
-// HTM looks like JSX but uses template literals
-const element = html\`
-  <div class="container">
-    <\${MyComponent} prop=\${value}>
-      \${items.map(item => html\`<li>\${item}</li>\`)}
-    </\${MyComponent}>
-  </div>
-\`;`}</code></pre>
-              </div>
-            </section>
+            <${CodeExamples} />
           </main>
 
           <footer class="pa4 bg-near-white bt b--light-gray">
