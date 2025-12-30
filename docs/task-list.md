@@ -341,7 +341,7 @@ Create framework wrappers for Badge in Vue, Svelte, and Angular.
 ---
 pr_id: PR-147
 title: Solid.js Package Setup
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
