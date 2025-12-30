@@ -596,7 +596,7 @@ Implement `x-ytz` directive that patches Yetzirah elements to expose `event.deta
 ---
 pr_id: PR-153
 title: x-ytz:model Two-way Binding
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
