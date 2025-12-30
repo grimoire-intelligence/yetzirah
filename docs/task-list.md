@@ -384,7 +384,7 @@ Set up `@grimoire/yetzirah-solid` package with proper Solid.js build configurati
 ---
 pr_id: PR-148
 title: Solid.js Core Component Wrappers
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
