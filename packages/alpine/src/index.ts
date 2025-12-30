@@ -9,6 +9,7 @@
 
 // Import and register core web components
 import '@grimoire/yetzirah-core'
+import { registerDirectives } from './directives'
 
 /**
  * Re-export VERSION from core
@@ -38,15 +39,20 @@ export interface SnackbarOptions {
  */
 interface AlpineInstance {
   magic(name: string, callback: () => unknown): void
-  directive(name: string, callback: DirectiveCallback): void
+  directive(
+    name: string,
+    callback: (
+      el: Element,
+      directive: { expression: string; modifiers: string[] },
+      utilities: {
+        evaluate: (expr: string) => unknown
+        effect: (fn: () => void) => void
+        cleanup: (fn: () => void) => void
+      }
+    ) => void
+  ): void
   evaluate(el: Element, expression: string): unknown
 }
-
-type DirectiveCallback = (
-  el: Element,
-  directive: { expression: string },
-  utilities: { evaluate: (expr: string) => unknown; effect: (fn: () => void) => void }
-) => void
 
 /**
  * Ytz magic utilities interface
@@ -86,7 +92,7 @@ export interface YtzMagic {
  * ```html
  * <div x-data="{ open: false }">
  *   <ytz-button @click="open = true">Open Dialog</ytz-button>
- *   <ytz-dialog :open="open" @close="open = false">
+ *   <ytz-dialog x-ytz-dialog="open">
  *     <p>Dialog content</p>
  *   </ytz-dialog>
  * </div>
@@ -94,6 +100,9 @@ export interface YtzMagic {
  */
 export function yetzirahPlugin(Alpine: AlpineInstance, options: YetzirahAlpineOptions = {}): void {
   const prefix = options.prefix ?? 'ytz'
+
+  // Register all directives
+  registerDirectives(Alpine, prefix)
 
   /**
    * $ytz magic - provides utilities for working with Yetzirah components
@@ -189,139 +198,10 @@ export function yetzirahPlugin(Alpine: AlpineInstance, options: YetzirahAlpineOp
       },
     }
   })
-
-  /**
-   * x-ytz-dialog directive - syncs dialog open state with Alpine data
-   * @example <ytz-dialog x-ytz-dialog="open">...</ytz-dialog>
-   */
-  Alpine.directive(`${prefix}-dialog`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const isOpen = evaluate(expression)
-      if (isOpen) {
-        el.setAttribute('open', '')
-      } else {
-        el.removeAttribute('open')
-      }
-    })
-
-    el.addEventListener('close', () => {
-      Alpine.evaluate(el, `${expression} = false`)
-    })
-  })
-
-  /**
-   * x-ytz-drawer directive - syncs drawer open state with Alpine data
-   * @example <ytz-drawer x-ytz-drawer="drawerOpen">...</ytz-drawer>
-   */
-  Alpine.directive(`${prefix}-drawer`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const isOpen = evaluate(expression)
-      if (isOpen) {
-        el.setAttribute('open', '')
-      } else {
-        el.removeAttribute('open')
-      }
-    })
-
-    el.addEventListener('close', () => {
-      Alpine.evaluate(el, `${expression} = false`)
-    })
-  })
-
-  /**
-   * x-ytz-tabs directive - syncs tabs value with Alpine data
-   * @example <ytz-tabs x-ytz-tabs="activeTab">...</ytz-tabs>
-   */
-  Alpine.directive(`${prefix}-tabs`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const value = evaluate(expression)
-      if (value) {
-        el.setAttribute('default-tab', String(value))
-      }
-    })
-
-    el.addEventListener('change', (e: Event) => {
-      const customEvent = e as CustomEvent
-      Alpine.evaluate(el, `${expression} = '${customEvent.detail?.value || ''}'`)
-    })
-  })
-
-  /**
-   * x-ytz-toggle directive - syncs toggle checked state with Alpine data
-   * @example <ytz-toggle x-ytz-toggle="enabled">...</ytz-toggle>
-   */
-  Alpine.directive(`${prefix}-toggle`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const isChecked = evaluate(expression)
-      if (isChecked) {
-        el.setAttribute('checked', '')
-      } else {
-        el.removeAttribute('checked')
-      }
-    })
-
-    el.addEventListener('change', (e: Event) => {
-      const customEvent = e as CustomEvent
-      Alpine.evaluate(el, `${expression} = ${customEvent.detail?.checked ?? false}`)
-    })
-  })
-
-  /**
-   * x-ytz-slider directive - syncs slider value with Alpine data
-   * @example <ytz-slider x-ytz-slider="volume">...</ytz-slider>
-   */
-  Alpine.directive(`${prefix}-slider`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const value = evaluate(expression)
-      if (value !== undefined) {
-        el.setAttribute('value', String(value))
-      }
-    })
-
-    el.addEventListener('change', (e: Event) => {
-      const customEvent = e as CustomEvent
-      Alpine.evaluate(el, `${expression} = ${customEvent.detail?.value ?? 0}`)
-    })
-  })
-
-  /**
-   * x-ytz-select directive - syncs select value with Alpine data
-   * @example <ytz-select x-ytz-select="selectedOption">...</ytz-select>
-   */
-  Alpine.directive(`${prefix}-select`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const value = evaluate(expression)
-      if (value !== undefined) {
-        el.setAttribute('value', String(value))
-      }
-    })
-
-    el.addEventListener('change', (e: Event) => {
-      const customEvent = e as CustomEvent
-      Alpine.evaluate(el, `${expression} = '${customEvent.detail?.value || ''}'`)
-    })
-  })
-
-  /**
-   * x-ytz-disclosure directive - syncs disclosure open state with Alpine data
-   * @example <ytz-disclosure x-ytz-disclosure="isExpanded">...</ytz-disclosure>
-   */
-  Alpine.directive(`${prefix}-disclosure`, (el, { expression }, { evaluate, effect }) => {
-    effect(() => {
-      const isOpen = evaluate(expression)
-      if (isOpen) {
-        el.setAttribute('open', '')
-      } else {
-        el.removeAttribute('open')
-      }
-    })
-
-    el.addEventListener('toggle', (e: Event) => {
-      const customEvent = e as CustomEvent
-      Alpine.evaluate(el, `${expression} = ${customEvent.detail?.open ?? false}`)
-    })
-  })
 }
 
 // Default export for convenient import
 export default yetzirahPlugin
+
+// Re-export directives registration for advanced use
+export { registerDirectives } from './directives'

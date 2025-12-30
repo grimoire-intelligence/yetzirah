@@ -1,4 +1,5 @@
 import { defineConfig } from 'tsup'
+import { solidPlugin } from 'esbuild-plugin-solid'
 
 export default defineConfig({
   entry: ['src/index.ts'],
@@ -11,8 +12,5 @@ export default defineConfig({
   minify: true,
   outDir: 'dist',
   external: ['solid-js', '@grimoire/yetzirah-core'],
-  esbuildOptions(options) {
-    options.jsx = 'preserve'
-    options.jsxImportSource = 'solid-js'
-  },
+  esbuildPlugins: [solidPlugin({ solid: { generate: 'dom' } })],
 })

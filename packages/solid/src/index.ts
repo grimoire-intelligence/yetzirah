@@ -2,7 +2,7 @@
  * @grimoire/yetzirah-solid
  *
  * Solid.js wrappers for Yetzirah Web Components.
- * Provides type declarations for using Yetzirah components with Solid's JSX.
+ * Provides reactive component wrappers using Solid's primitives.
  *
  * @packageDocumentation
  */
@@ -15,186 +15,90 @@ import '@grimoire/yetzirah-core'
  */
 export const VERSION = '0.1.0'
 
-// Base props that all elements share
-export interface BaseProps {
-  ref?: HTMLElement | ((el: HTMLElement) => void)
-  class?: string
-  id?: string
-  style?: string | Record<string, string>
-  children?: unknown
-}
+// Component exports
+export { Button } from './Button'
+export type { ButtonProps } from './Button'
 
-// Component-specific props
-export interface YtzButtonProps extends BaseProps {
-  href?: string
-  disabled?: boolean
-  type?: 'button' | 'submit' | 'reset'
-  onClick?: (e: MouseEvent) => void
-}
+export { Dialog } from './Dialog'
+export type { DialogProps } from './Dialog'
 
-export interface YtzDisclosureProps extends BaseProps {
-  open?: boolean
-  onToggle?: (e: CustomEvent) => void
-}
+export { Drawer } from './Drawer'
+export type { DrawerProps } from './Drawer'
 
-export interface YtzDialogProps extends BaseProps {
-  open?: boolean
-  modal?: boolean
-  'close-on-overlay'?: boolean
-  onClose?: (e: CustomEvent) => void
-}
+export { Disclosure } from './Disclosure'
+export type { DisclosureProps } from './Disclosure'
 
-export interface YtzTabsProps extends BaseProps {
-  'default-tab'?: string
-  onChange?: (e: CustomEvent) => void
-}
+export { Tabs, TabList } from './Tabs'
+export type { TabsProps, TabListProps } from './Tabs'
 
-export interface YtzTabProps extends BaseProps {
-  value?: string
-  disabled?: boolean
-}
+export { Tab } from './Tab'
+export type { TabProps } from './Tab'
 
-export interface YtzTabListProps extends BaseProps {
-  'aria-label'?: string
-}
+export { TabPanel } from './TabPanel'
+export type { TabPanelProps } from './TabPanel'
 
-export interface YtzTabPanelProps extends BaseProps {
-  value?: string
-}
+export { Tooltip } from './Tooltip'
+export type { TooltipProps } from './Tooltip'
 
-export interface YtzTooltipProps extends BaseProps {
-  content?: string
-  position?: 'top' | 'bottom' | 'left' | 'right'
-  delay?: number
-}
+export { Menu } from './Menu'
+export type { MenuProps } from './Menu'
 
-export interface YtzMenuProps extends BaseProps {
-  onSelect?: (e: CustomEvent) => void
-}
+export { MenuItem } from './MenuItem'
+export type { MenuItemProps } from './MenuItem'
 
-export interface YtzMenuItemProps extends BaseProps {
-  value?: string
-  disabled?: boolean
-}
+export { MenuTrigger } from './MenuTrigger'
+export type { MenuTriggerProps } from './MenuTrigger'
 
-export interface YtzMenuTriggerProps extends BaseProps {}
+export { Autocomplete } from './Autocomplete'
+export type { AutocompleteProps } from './Autocomplete'
 
-export interface YtzAutocompleteProps extends BaseProps {
-  value?: string
-  placeholder?: string
-  disabled?: boolean
-  onInput?: (e: CustomEvent) => void
-  onSelect?: (e: CustomEvent) => void
-}
+export { AutocompleteOption } from './AutocompleteOption'
+export type { AutocompleteOptionProps } from './AutocompleteOption'
 
-export interface YtzAutocompleteOptionProps extends BaseProps {
-  value?: string
-  disabled?: boolean
-}
+export { Listbox } from './Listbox'
+export type { ListboxProps } from './Listbox'
 
-export interface YtzListboxProps extends BaseProps {
-  value?: string
-  multiple?: boolean
-  onChange?: (e: CustomEvent) => void
-}
+export { ListboxOption } from './ListboxOption'
+export type { ListboxOptionProps } from './ListboxOption'
 
-export interface YtzListboxOptionProps extends BaseProps {
-  value?: string
-  disabled?: boolean
-}
+export { Select } from './Select'
+export type { SelectProps } from './Select'
 
-export interface YtzSelectProps extends BaseProps {
-  value?: string
-  placeholder?: string
-  disabled?: boolean
-  onChange?: (e: CustomEvent) => void
-}
+export { SelectOption } from './SelectOption'
+export type { SelectOptionProps } from './SelectOption'
 
-export interface YtzSelectOptionProps extends BaseProps {
-  value?: string
-  disabled?: boolean
-}
+export { Accordion } from './Accordion'
+export type { AccordionProps } from './Accordion'
 
-export interface YtzAccordionProps extends BaseProps {
-  multiple?: boolean
-}
+export { AccordionItem } from './AccordionItem'
+export type { AccordionItemProps } from './AccordionItem'
 
-export interface YtzAccordionItemProps extends BaseProps {
-  open?: boolean
-  disabled?: boolean
-  onToggle?: (e: CustomEvent) => void
-}
+export { Popover } from './Popover'
+export type { PopoverProps } from './Popover'
 
-export interface YtzDrawerProps extends BaseProps {
-  open?: boolean
-  position?: 'left' | 'right' | 'top' | 'bottom'
-  onClose?: (e: CustomEvent) => void
-}
+export { Toggle } from './Toggle'
+export type { ToggleProps } from './Toggle'
 
-export interface YtzPopoverProps extends BaseProps {
-  open?: boolean
-  position?: 'top' | 'bottom' | 'left' | 'right'
-  trigger?: 'click' | 'hover'
-  onToggle?: (e: CustomEvent) => void
-}
+export { Chip } from './Chip'
+export type { ChipProps } from './Chip'
 
-export interface YtzToggleProps extends BaseProps {
-  checked?: boolean
-  disabled?: boolean
-  onChange?: (e: CustomEvent) => void
-}
+export { IconButton } from './IconButton'
+export type { IconButtonProps } from './IconButton'
 
-export interface YtzChipProps extends BaseProps {
-  removable?: boolean
-  disabled?: boolean
-  onRemove?: (e: CustomEvent) => void
-}
+export { Slider } from './Slider'
+export type { SliderProps } from './Slider'
 
-export interface YtzIconButtonProps extends BaseProps {
-  'aria-label': string
-  disabled?: boolean
-  onClick?: (e: MouseEvent) => void
-}
+export { ThemeToggle } from './ThemeToggle'
+export type { ThemeToggleProps } from './ThemeToggle'
 
-export interface YtzSliderProps extends BaseProps {
-  value?: number
-  min?: number
-  max?: number
-  step?: number
-  disabled?: boolean
-  onChange?: (e: CustomEvent) => void
-}
+export { DataGrid } from './DataGrid'
+export type { DataGridProps } from './DataGrid'
 
-export interface YtzThemeToggleProps extends BaseProps {
-  theme?: 'light' | 'dark' | 'system'
-  onChange?: (e: CustomEvent) => void
-}
+export { Snackbar } from './Snackbar'
+export type { SnackbarProps } from './Snackbar'
 
-export interface YtzDataGridProps extends BaseProps {
-  columns?: string
-  rows?: string
-  sortable?: boolean
-  selectable?: boolean
-  onSort?: (e: CustomEvent) => void
-  onSelect?: (e: CustomEvent) => void
-}
+export { Progress } from './Progress'
+export type { ProgressProps } from './Progress'
 
-export interface YtzSnackbarProps extends BaseProps {
-  open?: boolean
-  duration?: number
-  position?: 'top' | 'bottom' | 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
-  onClose?: (e: CustomEvent) => void
-}
-
-export interface YtzProgressProps extends BaseProps {
-  value?: number
-  max?: number
-  indeterminate?: boolean
-  variant?: 'linear' | 'circular'
-}
-
-export interface YtzBadgeProps extends BaseProps {
-  count?: number
-  max?: number
-  dot?: boolean
-}
+export { Badge } from './Badge'
+export type { BadgeProps } from './Badge'
