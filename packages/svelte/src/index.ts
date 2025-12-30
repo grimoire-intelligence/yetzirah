@@ -43,3 +43,8 @@ export { default as IconButton } from './IconButton.svelte'
 export { default as Slider } from './Slider.svelte'
 export { default as ThemeToggle } from './ThemeToggle.svelte'
 export { default as DataGrid } from './DataGrid.svelte'
+
+// Tier 3 component wrappers
+export { default as Snackbar } from './Snackbar.svelte'
+export { default as Progress } from './Progress.svelte'
+export { default as Badge } from './Badge.svelte'

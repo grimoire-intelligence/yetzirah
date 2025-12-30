@@ -41,5 +41,10 @@ export { default as Slider } from './Slider.vue'
 export { default as ThemeToggle } from './ThemeToggle.vue'
 export { default as DataGrid } from './DataGrid.vue'
 
+// Tier 3 component wrappers
+export { default as Snackbar } from './Snackbar.vue'
+export { default as Progress } from './Progress.vue'
+export { default as Badge } from './Badge.vue'
+
 // Export shared types
 export type * from './types'

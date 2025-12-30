@@ -34,3 +34,8 @@ export { IconButtonComponent } from './lib/icon-button.component';
 export { SliderComponent } from './lib/slider.component';
 export { ThemeToggleComponent } from './lib/theme-toggle.component';
 export { DataGridComponent } from './lib/datagrid.component';
+
+// Tier 3 standalone components
+export { SnackbarComponent, SnackbarPosition, SnackbarDismissDetail } from './lib/snackbar.component';
+export { ProgressComponent, ProgressSize } from './lib/progress.component';
+export { BadgeComponent, BadgePosition } from './lib/badge.component';
