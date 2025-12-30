@@ -21,6 +21,7 @@
 
 import { createFocusTrap } from './utils/focus-trap.js'
 import { register } from './utils/register.js'
+import { lockScroll, unlockScroll } from './utils/scroll-lock.js'
 
 /** @type {string} Selector for focusable elements */
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -36,8 +37,6 @@ class YtzDialog extends HTMLElement {
   #previousFocus = null
   /** @type {{ activate: () => void, deactivate: () => void }|null} */
   #focusTrap = null
-  /** @type {string} */
-  #previousOverflow = ''
 
   connectedCallback() {
     this.setAttribute('role', 'dialog')
@@ -66,9 +65,8 @@ class YtzDialog extends HTMLElement {
     // Show dialog
     this.hidden = false
 
-    // Lock body scroll
-    this.#previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    // Lock body scroll (ref-counted)
+    lockScroll()
 
     // Set up focus trap
     this.#focusTrap = createFocusTrap(this)
@@ -98,8 +96,8 @@ class YtzDialog extends HTMLElement {
   }
 
   #cleanup() {
-    // Restore body scroll
-    document.body.style.overflow = this.#previousOverflow
+    // Release scroll lock (ref-counted)
+    unlockScroll()
 
     // Deactivate focus trap
     this.#focusTrap?.deactivate()

@@ -41,6 +41,26 @@
     .dark-mode .fruit-badge {
       background: #1565c0;
     }
+    /* Native dialog styling */
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    dialog {
+      border: none;
+    }
+    /* Yetzirah tabs - prevent custom elements from creating visual boxes */
+    ytz-tabs {
+      display: contents;
+    }
+    ytz-tab {
+      display: inline-block;
+    }
+    ytz-tabpanel {
+      display: block;
+    }
+    ytz-tabpanel[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body class="sans-serif">
@@ -136,8 +156,15 @@ const element = html`
     // Load Yetzirah components (local path for development)
     import '../../packages/core/cdn/core.js';
 
-    // Helper to get code from template scripts
-    const getCodeTemplate = (id) => document.getElementById(id)?.textContent || '';
+    // Helper to get code from template scripts (decodes HTML entities)
+    const getCodeTemplate = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      // Decode HTML entities by using a textarea
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = el.textContent;
+      return textarea.value;
+    };
 
     // ===========================================
     // Utility: useYetzirahEvent hook
@@ -195,7 +222,7 @@ const element = html`
     }
 
     // ===========================================
-    // Dialog Example - Refs and Events
+    // Dialog Example - Native Modal
     // ===========================================
     function DialogExample() {
       const dialogRef = useRef(null);
@@ -209,16 +236,27 @@ const element = html`
         dialogRef.current?.close();
       }, []);
 
-      // Handle dialog close event
-      useYetzirahEvent(dialogRef, 'close', () => {
-        setLastAction('Dialog closed');
-      });
+      // Handle dialog close event (native dialog emits 'close')
+      useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+        const handleClose = () => setLastAction('Dialog closed');
+        dialog.addEventListener('close', handleClose);
+        return () => dialog.removeEventListener('close', handleClose);
+      }, []);
+
+      // Handle backdrop click for native dialog
+      const handleBackdropClick = useCallback((e) => {
+        if (e.target === dialogRef.current) {
+          dialogRef.current?.close();
+        }
+      }, []);
 
       return html`
         <section class="demo-section mb5 pb4 bb b--light-gray">
-          <h2 class="f3 fw6 mb3">Dialog with Events</h2>
+          <h2 class="f3 fw6 mb3">Modal Dialog (Native)</h2>
           <p class="f5 lh-copy gray mb3">
-            Using refs to control dialogs and listening to custom events.
+            Using the native <code>&lt;dialog&gt;</code> element with <code>showModal()</code> for proper modal behavior.
           </p>
 
           <div class="flex items-center gap3 mb3">
@@ -226,37 +264,39 @@ const element = html`
               class="ph3 pv2 br2 bn white bg-purple pointer"
               onClick=${openDialog}
             >
-              Open Dialog
+              Open Modal
             </ytz-button>
             <span class="f6 gray">Last action: ${lastAction}</span>
           </div>
 
-          <ytz-dialog ref=${dialogRef}>
-            <div class="dialog-content pa4 bg-white br3 shadow-2 mw6">
-              <h3 class="f4 fw6 mt0 mb3">Hello from Preact!</h3>
-              <p class="lh-copy mb3">
-                This dialog is controlled via a Preact ref.
-                Click the backdrop, press Escape, or use the button to close.
-              </p>
-              <div class="flex justify-end gap2">
-                <ytz-button
-                  class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer"
-                  onClick=${closeDialog}
-                >
-                  Cancel
-                </ytz-button>
-                <ytz-button
-                  class="ph3 pv2 br2 bn white bg-purple pointer"
-                  onClick=${() => {
-                    setLastAction('Confirmed!');
-                    closeDialog();
-                  }}
-                >
-                  Confirm
-                </ytz-button>
-              </div>
+          <dialog
+            ref=${dialogRef}
+            class="pa4 bg-white br3 shadow-2 mw6"
+            onClick=${handleBackdropClick}
+          >
+            <h3 class="f4 fw6 mt0 mb3">Hello from Preact!</h3>
+            <p class="lh-copy mb3">
+              This is a native modal dialog. The background is inert and
+              cannot be interacted with. Press Escape or click backdrop to close.
+            </p>
+            <div class="flex justify-end gap2">
+              <button
+                class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer"
+                onClick=${closeDialog}
+              >
+                Cancel
+              </button>
+              <ytz-button
+                class="ph3 pv2 br2 bn white bg-purple pointer"
+                onClick=${() => {
+                  setLastAction('Confirmed!');
+                  closeDialog();
+                }}
+              >
+                Confirm
+              </ytz-button>
             </div>
-          </ytz-dialog>
+          </dialog>
         </section>
       `;
     }
@@ -377,27 +417,29 @@ const element = html`
             Syncing tab state between Yetzirah and Preact.
           </p>
 
-          <ytz-tabs ref=${tabsRef} value=${activeTab} class="mb3">
-            <div class="flex bb b--light-gray" role="tablist">
+          <div class="mb3">
+            <ytz-tabs ref=${tabsRef} value=${activeTab}>
+              <div class="flex bg-light-gray br2 br--top">
+                ${tabs.map(tab => html`
+                  <ytz-tab
+                    panel=${tab.id}
+                    class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue br2 br--top"
+                  >
+                    ${tab.icon} ${tab.label}
+                  </ytz-tab>
+                `)}
+              </div>
               ${tabs.map(tab => html`
-                <ytz-tab
-                  panel=${tab.id}
-                  class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue"
-                >
-                  ${tab.icon} ${tab.label}
-                </ytz-tab>
+                <ytz-tabpanel id=${tab.id} class="pa3 bg-near-white br2 br--bottom">
+                  ${content[tab.id]}
+                </ytz-tabpanel>
               `)}
-            </div>
-            ${tabs.map(tab => html`
-              <ytz-tabpanel id=${tab.id} class="pa3 bg-near-white br2 br--bottom">
-                ${content[tab.id]}
-              </ytz-tabpanel>
-            `)}
-          </ytz-tabs>
+            </ytz-tabs>
+          </div>
 
           <div class="flex gap2">
             ${tabs.map(tab => html`
-              <ytz-button
+              <button
                 class=${`ph2 pv1 br2 bn pointer f6 ${
                   activeTab === tab.id
                     ? 'white bg-blue'
@@ -406,7 +448,7 @@ const element = html`
                 onClick=${() => setActiveTab(tab.id)}
               >
                 ${tab.label}
-              </ytz-button>
+              </button>
             `)}
           </div>
           <p class="f6 gray mt2">
@@ -520,7 +562,12 @@ const element = html`
                     <ytz-toggle
                       checked=${todo.completed}
                       class="toggle-demo"
-                      onClick=${() => toggleTodo(todo.id)}
+                      onchange=${(e) => {
+                        const checked = e.detail?.checked ?? false;
+                        setTodos(prev => prev.map(t =>
+                          t.id === todo.id ? { ...t, completed: checked } : t
+                        ));
+                      }}
                       aria-label=${todo.completed ? 'Mark incomplete' : 'Mark complete'}
                     />
                     <span class="flex-grow-1">${todo.text}</span>
