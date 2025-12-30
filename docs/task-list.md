@@ -626,7 +626,7 @@ Implement `x-ytz:model` directive for two-way data binding between Alpine state 
 ---
 pr_id: PR-154
 title: Alpine.js Magic Methods
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
