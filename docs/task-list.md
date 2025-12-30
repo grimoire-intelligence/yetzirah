@@ -656,7 +656,7 @@ Implement Alpine magic methods for imperative control of Yetzirah components.
 ---
 pr_id: PR-155
 title: Alpine.js Integration Tests & Documentation
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
