@@ -563,7 +563,7 @@ Set up `@grimoire/yetzirah-alpine` package as an Alpine.js plugin. Create the pl
 ---
 pr_id: PR-152
 title: x-ytz Directive Implementation
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
