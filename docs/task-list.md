@@ -451,7 +451,7 @@ Create Solid.js wrappers for all existing Tier 1 and Tier 2 components. Use nati
 ---
 pr_id: PR-149
 title: Solid.js New Component Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
