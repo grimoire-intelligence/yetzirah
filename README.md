@@ -1,20 +1,41 @@
 # Yetzirah
 
-**Your LLM hallucinates MUI APIs because it can't see the source.**
+**AI is going to write your frontend. This is the component library for that.**
 
-Material UI is 500KB+ of code. Your AI can't fit it in context—so it guesses. Deprecated props. Wrong event signatures. Imaginary APIs.
+A single MUI icon is 16KB gzipped. Yetzirah is under 15KB. Twenty-one components, full ARIA, no runtime CSS.
 
-Yetzirah is 30K tokens. That's 15% of one context window. Your AI reads the *entire* library—every component, every prop, every implementation detail. No hallucinations. Just working code.
+Your AI reads the whole thing—every component, every prop, every implementation detail. No hallucinated APIs. No guessing.
 
-Unstyled, accessible Web Components with idiomatic wrappers for React, Vue, Svelte, Angular, and vanilla HTML.
+When something's wrong? The output is `bg-blue white ph3 pv2 br2`, not a theme object four levels deep.
+
+**One library. React, Vue, Svelte, Angular, Solid, Alpine, vanilla HTML.**
+
+---
+
+## Who's This For?
+
+**MUI refugees.** Same components, fraction of the bundle.
+**AI-first teams.** Haiku gets it right.
+**Multi-framework shops.** One library, every framework.
+**Low-bandwidth apps.** Under 15KB on the wire.
+
+### Alternatives
+
+| | MUI | Radix | Shoelace | Yetzirah |
+|---|-----|-------|----------|----------|
+| Size | >250KB | >40KB | >75KB | <15KB |
+| Frameworks | React | React | All | All |
+| AI-ready | ✗ | partial | partial | ✓ |
 
 ---
 
 ## Why Unstyled?
 
-CSS-in-JS themes are JavaScript debt—computed on every render, impossible to debug, opaque to your AI.
+Your AI writes the styles. That's the point.
 
-Yetzirah components are bare primitives. Style them with utility classes, plain CSS, or whatever you already use. We recommend [Tachyons](https://tachyons.io/)—close enough to raw CSS that you can actually debug it, small enough that your LLM never needs to guess.
+Themed libraries force your AI to learn theme objects, design tokens, and `sx` props. When it hallucinates, you're debugging JavaScript. Yetzirah components are bare behavior—your AI writes `bg-blue white ph3 pv2 br2`. When it's wrong, you change a class name.
+
+We recommend [Tachyons](https://tachyons.io/)—close enough to raw CSS that even Haiku gets it right, small enough to fit in any context window.
 
 **Want consistent styling across AI sessions?** Put your conventions in `AGENTS.md`. Plain text, read once, applied everywhere. Zero runtime cost.
 
@@ -116,11 +137,39 @@ Just import `@grimoire/yetzirah-core` and use the elements directly.
 - **Framework wrappers** - Idiomatic APIs for React, Vue, Svelte, Angular, Solid, and Alpine
 - **Tiny bundles** - Tree-shakeable, no runtime CSS-in-JS
 
+## AI Economics
+
+MUI requires expensive models. Its API surface is massive, version-dependent, and offers multiple patterns—`sx`, `styled()`, theme overrides, component slots. Your AI guesses which one your codebase uses.
+
+Yetzirah works with cheap models. The entire framework is ground truth, not training data fragments. One way to do things. Haiku gets it right.
+
+**Model pricing (December 2025):**
+
+| Model | Input/1M | Output/1M |
+|-------|----------|-----------|
+| Claude Haiku 3 | $0.25 | $1.25 |
+| GPT-4.1-mini | $0.40 | $1.60 |
+| Claude Sonnet 4.5 | $3.00 | $15.00 |
+| Claude Opus 4.5 | $5.00 | $25.00 |
+
+**Daily cost for frontend work (~500K input, ~100K output):**
+
+| Stack | Model Required | Daily Cost |
+|-------|----------------|------------|
+| MUI + Tailwind | Sonnet / Opus | $2–4 |
+| Yetzirah + Tachyons | Haiku / 4.1-mini | $0.15–0.30 |
+
+**Annual savings per developer: $500–1,000**
+
+Beyond cost: cheap models respond faster. Lower token counts mean longer conversations before context overflow. Predictable outputs mean less time debugging AI mistakes.
+
+MUI can't shrink. Tailwind keeps growing. They're locked into expensive models. Yetzirah fits in the *cheap* context.
+
 ## Bundle Sizes
 
 | Package | Gzipped |
 |---------|---------|
-| **@grimoire/yetzirah-core** (CDN) | 10.96 KB |
+| **@grimoire/yetzirah-core** (CDN) | 12.73 KB |
 | @grimoire/yetzirah-react | 2.53 KB |
 | @grimoire/yetzirah-vue | 3.91 KB |
 | @grimoire/yetzirah-svelte | 0.51 KB |
@@ -128,7 +177,7 @@ Just import `@grimoire/yetzirah-core` and use the elements directly.
 | @grimoire/yetzirah-solid | 3.48 KB |
 | @grimoire/yetzirah-alpine | 2.41 KB |
 
-Individual components range from 0.49 KB (button) to 2.99 KB (datagrid) gzipped.
+Individual components range from 0.50 KB (button) to 3.01 KB (datagrid) gzipped.
 
 ## Components
 
@@ -136,6 +185,7 @@ Individual components range from 0.49 KB (button) to 2.99 KB (datagrid) gzipped.
 |-----------|--------------|-------|-----|--------|---------|-------|--------|
 | Accordion | `<ytz-accordion>` | `<Accordion>` | `<Accordion>` | `<Accordion>` | `<ytz-accordion>` | `<Accordion>` | `<ytz-accordion>` |
 | Autocomplete | `<ytz-autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` |
+| Badge | `<ytz-badge>` | `<Badge>` | `<Badge>` | `<Badge>` | `<ytz-badge>` | `<Badge>` | `<ytz-badge>` |
 | Button | `<ytz-button>` | `<Button>` | `<Button>` | `<Button>` | `<ytz-button>` | `<Button>` | `<ytz-button>` |
 | Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` | `<Chip>` | `<ytz-chip>` |
 | DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` | `<DataGrid>` | `<ytz-datagrid>` |
@@ -146,8 +196,10 @@ Individual components range from 0.49 KB (button) to 2.99 KB (datagrid) gzipped.
 | Listbox | `<ytz-listbox>` | `<Listbox>` | `<Listbox>` | `<Listbox>` | `<ytz-listbox>` | `<Listbox>` | `<ytz-listbox>` |
 | Menu | `<ytz-menu>` | `<Menu>` | `<Menu>` | `<Menu>` | `<ytz-menu>` | `<Menu>` | `<ytz-menu>` |
 | Popover | `<ytz-popover>` | `<Popover>` | `<Popover>` | `<Popover>` | `<ytz-popover>` | `<Popover>` | `<ytz-popover>` |
+| Progress | `<ytz-progress>` | `<Progress>` | `<Progress>` | `<Progress>` | `<ytz-progress>` | `<Progress>` | `<ytz-progress>` |
 | Select | `<ytz-select>` | `<Select>` | `<Select>` | `<Select>` | `<ytz-select>` | `<Select>` | `<ytz-select>` |
 | Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` | `<Slider>` | `<ytz-slider>` |
+| Snackbar | `<ytz-snackbar>` | `<Snackbar>` | `<Snackbar>` | `<Snackbar>` | `<ytz-snackbar>` | `<Snackbar>` | `<ytz-snackbar>` |
 | Tabs | `<ytz-tabs>` | `<Tabs>` | `<Tabs>` | `<Tabs>` | `<ytz-tabs>` | `<Tabs>` | `<ytz-tabs>` |
 | ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` |
 | Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` | `<Toggle>` | `<ytz-toggle>` |
@@ -547,6 +599,12 @@ pnpm install
 pnpm test
 pnpm build
 ```
+
+## The Name
+
+*Yetzirah* — In Kabbalah, the world of formation. Where fundamental elements first take shape. Below it is raw potential; above it, finished forms.
+
+Yetzirah is the smallest meaningful layer of UI abstraction. Below this, you're writing vanilla JavaScript. At this layer, you're working with the elements themselves.
 
 ## License
 
