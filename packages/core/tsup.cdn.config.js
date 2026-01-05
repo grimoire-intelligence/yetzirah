@@ -35,6 +35,10 @@ export default defineConfig({
     'slider': 'src/slider.js',
     'datagrid': 'src/datagrid.js',
     'theme-toggle': 'src/theme-toggle.js',
+    // Tier 3 components
+    'snackbar': 'src/snackbar.js',
+    'progress': 'src/progress.js',
+    'badge': 'src/badge.js',
   },
   format: ['esm'],
   dts: false,

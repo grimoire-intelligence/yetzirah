@@ -1,0 +1,62 @@
+{
+  "name": "@grimoire/yetzirah-solid",
+  "version": "0.1.0",
+  "description": "Solid.js wrappers for Yetzirah Web Components",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "solid": "./dist/index.js",
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./jsx": {
+      "types": "./src/jsx.d.ts"
+    }
+  },
+  "files": [
+    "dist",
+    "src/*.d.ts"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "solid",
+    "solidjs",
+    "web-components",
+    "ui",
+    "accessibility",
+    "grimoire",
+    "yetzirah"
+  ],
+  "author": "Grimoire Intelligence",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
+    "directory": "packages/solid"
+  },
+  "peerDependencies": {
+    "solid-js": ">=1.7.0"
+  },
+  "dependencies": {
+    "@grimoire/yetzirah-core": "workspace:*"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@solidjs/testing-library": "^0.8.10",
+    "esbuild-plugin-solid": "^0.6.0",
+    "happy-dom": "^18.0.1",
+    "solid-js": "^1.9.0",
+    "vite-plugin-solid": "^2.11.0",
+    "vitest": "^3.2.4"
+  }
+}

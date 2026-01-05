@@ -1,0 +1,61 @@
+{
+  "name": "@grimoire/yetzirah-alpine",
+  "version": "0.1.0",
+  "description": "Alpine.js plugin for Yetzirah Web Components",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./cdn": {
+      "import": "./cdn/yetzirah-alpine.js"
+    }
+  },
+  "files": [
+    "dist",
+    "cdn",
+    "src/*.d.ts"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "build:cdn": "tsup --config tsup.cdn.config.js",
+    "dev": "tsup --watch",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage"
+  },
+  "keywords": [
+    "alpine",
+    "alpinejs",
+    "web-components",
+    "ui",
+    "accessibility",
+    "grimoire",
+    "yetzirah"
+  ],
+  "author": "Grimoire Intelligence",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
+    "directory": "packages/alpine"
+  },
+  "peerDependencies": {
+    "alpinejs": ">=3.0.0"
+  },
+  "dependencies": {
+    "@grimoire/yetzirah-core": "workspace:*"
+  },
+  "sideEffects": false,
+  "devDependencies": {
+    "@types/alpinejs": "^3.13.0",
+    "alpinejs": "^3.14.0",
+    "happy-dom": "^18.0.1",
+    "vitest": "^3.2.4"
+  }
+}

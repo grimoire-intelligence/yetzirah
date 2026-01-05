@@ -1,10 +1,62 @@
 # Yetzirah
 
-**AI-native UI components.** The entire library fits in a single LLM context window (~11 KB gzipped), making AI-assisted development faster and cheaper. Unstyled, accessible Web Components with framework wrappers for React, Vue, Svelte, and Angular.
+**AI is going to write your frontend. This is the component library for that.**
 
-## Quick Start (CDN)
+A single MUI icon is 16KB gzipped. Yetzirah is under 15KB. Twenty-one components, full ARIA, no runtime CSS.
 
-No build step required. Add a single script tag and start using components:
+Your AI reads the whole thing—every component, every prop, every implementation detail. No hallucinated APIs. No guessing.
+
+When something's wrong? The output is `bg-blue white ph3 pv2 br2`, not a theme object four levels deep.
+
+**One library. React, Vue, Svelte, Angular, Solid, Alpine, vanilla HTML.**
+
+---
+
+## Who's This For?
+
+**MUI refugees.** Same components, fraction of the bundle.
+**AI-first teams.** Haiku gets it right.
+**Multi-framework shops.** One library, every framework.
+**Low-bandwidth apps.** Under 15KB on the wire.
+
+### Alternatives
+
+| | MUI | Radix | Shoelace | Yetzirah |
+|---|-----|-------|----------|----------|
+| Size | >250KB | >40KB | >75KB | <15KB |
+| Frameworks | React | React | All | All |
+| AI-ready | ✗ | partial | partial | ✓ |
+
+---
+
+## Why Unstyled?
+
+Your AI writes the styles. That's the point.
+
+Themed libraries force your AI to learn theme objects, design tokens, and `sx` props. When it hallucinates, you're debugging JavaScript. Yetzirah components are bare behavior—your AI writes `bg-blue white ph3 pv2 br2`. When it's wrong, you change a class name.
+
+We recommend [Tachyons](https://tachyons.io/)—close enough to raw CSS that even Haiku gets it right, small enough to fit in any context window.
+
+**Want consistent styling across AI sessions?** Put your conventions in `AGENTS.md`. Plain text, read once, applied everywhere. Zero runtime cost.
+
+### Example: Button Conventions for AGENTS.md
+
+```markdown
+Use Tachyons classes based on button intent:
+
+| Intent | Classes | Hover |
+|--------|---------|-------|
+| Primary | `bg-blue white bn ph3 pv2 br2 pointer` | `hover-bg-dark-blue` |
+| Secondary | `bg-transparent blue ba b--blue ph3 pv2 br2 pointer` | `hover-bg-lightest-blue` |
+| Destructive | `bg-dark-red white bn ph3 pv2 br2 pointer` | `hover-bg-red` |
+| Disabled | Add `o-50 not-allowed` to any variant | — |
+```
+
+---
+
+## Quick Start
+
+One script tag. No npm. No build step. Working components in 10 seconds:
 
 ```html
 <script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
@@ -46,6 +98,18 @@ npm install @grimoire/yetzirah-angular
 ```
 > Requires Angular 16+ for standalone components
 
+### Solid
+```bash
+npm install @grimoire/yetzirah-solid
+```
+> Primitive wrappers with reactive props
+
+### Alpine
+```bash
+npm install @grimoire/yetzirah-alpine
+```
+> Directives for `x-model` binding and attribute sync
+
 ### Vanilla HTML (Web Components)
 ```bash
 npm install @grimoire/yetzirah-core
@@ -70,43 +134,76 @@ Just import `@grimoire/yetzirah-core` and use the elements directly.
 - **Unstyled by default** - You bring your own CSS (Tachyons, custom styles, etc.)
 - **Accessibility first** - Full ARIA compliance, keyboard navigation built-in
 - **Web Components** - Framework-agnostic core, works anywhere
-- **Framework wrappers** - Idiomatic APIs for React, Vue, Svelte, and Angular
+- **Framework wrappers** - Idiomatic APIs for React, Vue, Svelte, Angular, Solid, and Alpine
 - **Tiny bundles** - Tree-shakeable, no runtime CSS-in-JS
+
+## AI Economics
+
+MUI requires expensive models. Its API surface is massive, version-dependent, and offers multiple patterns—`sx`, `styled()`, theme overrides, component slots. Your AI guesses which one your codebase uses.
+
+Yetzirah works with cheap models. The entire framework is ground truth, not training data fragments. One way to do things. Haiku gets it right.
+
+**Model pricing (December 2025):**
+
+| Model | Input/1M | Output/1M |
+|-------|----------|-----------|
+| Claude Haiku 3 | $0.25 | $1.25 |
+| GPT-4.1-mini | $0.40 | $1.60 |
+| Claude Sonnet 4.5 | $3.00 | $15.00 |
+| Claude Opus 4.5 | $5.00 | $25.00 |
+
+**Daily cost for frontend work (~500K input, ~100K output):**
+
+| Stack | Model Required | Daily Cost |
+|-------|----------------|------------|
+| MUI + Tailwind | Sonnet / Opus | $2–4 |
+| Yetzirah + Tachyons | Haiku / 4.1-mini | $0.15–0.30 |
+
+**Annual savings per developer: $500–1,000**
+
+Beyond cost: cheap models respond faster. Lower token counts mean longer conversations before context overflow. Predictable outputs mean less time debugging AI mistakes.
+
+MUI can't shrink. Tailwind keeps growing. They're locked into expensive models. Yetzirah fits in the *cheap* context.
 
 ## Bundle Sizes
 
 | Package | Gzipped |
 |---------|---------|
-| **@grimoire/yetzirah-core** (CDN) | 10.96 KB |
+| **@grimoire/yetzirah-core** (CDN) | 12.73 KB |
 | @grimoire/yetzirah-react | 2.53 KB |
 | @grimoire/yetzirah-vue | 3.91 KB |
 | @grimoire/yetzirah-svelte | 0.51 KB |
 | @grimoire/yetzirah-angular | 11.69 KB |
+| @grimoire/yetzirah-solid | 3.48 KB |
+| @grimoire/yetzirah-alpine | 2.41 KB |
 
-Individual components range from 0.49 KB (button) to 2.99 KB (datagrid) gzipped.
+Individual components range from 0.50 KB (button) to 3.01 KB (datagrid) gzipped.
 
 ## Components
 
-| Component | Web Component | React | Vue | Svelte | Angular |
-|-----------|--------------|-------|-----|--------|---------|
-| Accordion | `<ytz-accordion>` | `<Accordion>` | `<Accordion>` | `<Accordion>` | `<ytz-accordion>` |
-| Autocomplete | `<ytz-autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` |
-| Button | `<ytz-button>` | `<Button>` | `<Button>` | `<Button>` | `<ytz-button>` |
-| Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` |
-| DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` |
-| Dialog | `<ytz-dialog>` | `<Dialog>` | `<Dialog>` | `<Dialog>` | `<ytz-dialog>` |
-| Disclosure | `<ytz-disclosure>` | `<Disclosure>` | `<Disclosure>` | `<Disclosure>` | `<ytz-disclosure>` |
-| Drawer | `<ytz-drawer>` | `<Drawer>` | `<Drawer>` | `<Drawer>` | `<ytz-drawer>` |
-| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` |
-| Listbox | `<ytz-listbox>` | `<Listbox>` | `<Listbox>` | `<Listbox>` | `<ytz-listbox>` |
-| Menu | `<ytz-menu>` | `<Menu>` | `<Menu>` | `<Menu>` | `<ytz-menu>` |
-| Popover | `<ytz-popover>` | `<Popover>` | `<Popover>` | `<Popover>` | `<ytz-popover>` |
-| Select | `<ytz-select>` | `<Select>` | `<Select>` | `<Select>` | `<ytz-select>` |
-| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` |
-| Tabs | `<ytz-tabs>` | `<Tabs>` | `<Tabs>` | `<Tabs>` | `<ytz-tabs>` |
-| ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` |
-| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` |
-| Tooltip | `<ytz-tooltip>` | `<Tooltip>` | `<Tooltip>` | `<Tooltip>` | `<ytz-tooltip>` |
+| Component | Web Component | React | Vue | Svelte | Angular | Solid | Alpine |
+|-----------|--------------|-------|-----|--------|---------|-------|--------|
+| Accordion | `<ytz-accordion>` | `<Accordion>` | `<Accordion>` | `<Accordion>` | `<ytz-accordion>` | `<Accordion>` | `<ytz-accordion>` |
+| Autocomplete | `<ytz-autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` | `<Autocomplete>` | `<ytz-autocomplete>` |
+| Badge | `<ytz-badge>` | `<Badge>` | `<Badge>` | `<Badge>` | `<ytz-badge>` | `<Badge>` | `<ytz-badge>` |
+| Button | `<ytz-button>` | `<Button>` | `<Button>` | `<Button>` | `<ytz-button>` | `<Button>` | `<ytz-button>` |
+| Chip | `<ytz-chip>` | `<Chip>` | `<Chip>` | `<Chip>` | `<ytz-chip>` | `<Chip>` | `<ytz-chip>` |
+| DataGrid | `<ytz-datagrid>` | `<DataGrid>` | `<DataGrid>` | `<DataGrid>` | `<ytz-datagrid>` | `<DataGrid>` | `<ytz-datagrid>` |
+| Dialog | `<ytz-dialog>` | `<Dialog>` | `<Dialog>` | `<Dialog>` | `<ytz-dialog>` | `<Dialog>` | `<ytz-dialog>` |
+| Disclosure | `<ytz-disclosure>` | `<Disclosure>` | `<Disclosure>` | `<Disclosure>` | `<ytz-disclosure>` | `<Disclosure>` | `<ytz-disclosure>` |
+| Drawer | `<ytz-drawer>` | `<Drawer>` | `<Drawer>` | `<Drawer>` | `<ytz-drawer>` | `<Drawer>` | `<ytz-drawer>` |
+| IconButton | `<ytz-icon-button>` | `<IconButton>` | `<IconButton>` | `<IconButton>` | `<ytz-icon-button>` | `<IconButton>` | `<ytz-icon-button>` |
+| Listbox | `<ytz-listbox>` | `<Listbox>` | `<Listbox>` | `<Listbox>` | `<ytz-listbox>` | `<Listbox>` | `<ytz-listbox>` |
+| Menu | `<ytz-menu>` | `<Menu>` | `<Menu>` | `<Menu>` | `<ytz-menu>` | `<Menu>` | `<ytz-menu>` |
+| Popover | `<ytz-popover>` | `<Popover>` | `<Popover>` | `<Popover>` | `<ytz-popover>` | `<Popover>` | `<ytz-popover>` |
+| Progress | `<ytz-progress>` | `<Progress>` | `<Progress>` | `<Progress>` | `<ytz-progress>` | `<Progress>` | `<ytz-progress>` |
+| Select | `<ytz-select>` | `<Select>` | `<Select>` | `<Select>` | `<ytz-select>` | `<Select>` | `<ytz-select>` |
+| Slider | `<ytz-slider>` | `<Slider>` | `<Slider>` | `<Slider>` | `<ytz-slider>` | `<Slider>` | `<ytz-slider>` |
+| Snackbar | `<ytz-snackbar>` | `<Snackbar>` | `<Snackbar>` | `<Snackbar>` | `<ytz-snackbar>` | `<Snackbar>` | `<ytz-snackbar>` |
+| Tabs | `<ytz-tabs>` | `<Tabs>` | `<Tabs>` | `<Tabs>` | `<ytz-tabs>` | `<Tabs>` | `<ytz-tabs>` |
+| ThemeToggle | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` | `<ThemeToggle>` | `<ytz-theme-toggle>` |
+| Toggle | `<ytz-toggle>` | `<Toggle>` | `<Toggle>` | `<Toggle>` | `<ytz-toggle>` | `<Toggle>` | `<ytz-toggle>` |
+| Tooltip | `<ytz-tooltip>` | `<Tooltip>` | `<Tooltip>` | `<Tooltip>` | `<ytz-tooltip>` | `<Tooltip>` | `<ytz-tooltip>` |
 
 ## Usage
 
@@ -251,51 +348,75 @@ export class AppComponent {
 }
 ```
 
-## Styling
+### Solid
 
-Yetzirah components are unstyled by design. We recommend **[Tachyons](https://tachyons.io/)** as the ideal pairing:
+```tsx
+import { createSignal } from 'solid-js'
+import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-solid'
 
-### Why Tachyons?
+function App() {
+  const [enabled, setEnabled] = createSignal(false)
+  const [volume, setVolume] = createSignal(50)
 
-| Benefit | Details |
-|---------|---------|
-| **Tiny bundle** | ~15KB gzipped for the entire library |
-| **No build step** | CDN or npm, works immediately |
-| **Composable** | Utility classes combine to create any design |
-| **Material-ready** | Easy to replicate Material Design with utilities |
+  return (
+    <>
+      <label class="flex items-center mb3">
+        <Toggle checked={enabled()} onChange={setEnabled} />
+        <span class="ml2">Enable notifications</span>
+      </label>
 
-**Total stack size** with Tachyons:
-- Yetzirah Core + React: ~15KB
-- Tachyons CSS: ~15KB
-- **Total: ~30KB** (vs 150KB+ for Material UI)
+      <label class="db mb3">
+        <span class="db mb2">Volume: {volume()}%</span>
+        <Slider value={volume()} onChange={setVolume} min={0} max={100} />
+      </label>
 
-### Example: Material-style Button
+      <ThemeToggle onThemeChange={(e) => console.log(e.detail.theme)} />
+    </>
+  )
+}
+```
+
+### Alpine
 
 ```html
-<!-- Tachyons utilities replicate Material Design -->
+<script type="module">
+  import Alpine from 'alpinejs'
+  import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
+
+  Alpine.plugin(yetzirahPlugin)
+  Alpine.start()
+</script>
+
+<div x-data="{ enabled: false, volume: 50 }">
+  <label class="flex items-center mb3">
+    <ytz-toggle x-ytz:model="enabled"></ytz-toggle>
+    <span class="ml2">Enable notifications</span>
+  </label>
+
+  <label class="db mb3">
+    <span class="db mb2">Volume: <span x-text="volume"></span>%</span>
+    <ytz-slider x-ytz:model="volume" min="0" max="100"></ytz-slider>
+  </label>
+
+  <ytz-theme-toggle @themechange="console.log($event.detail.theme)"></ytz-theme-toggle>
+</div>
+```
+
+## Styling
+
+### Material-style Buttons
+
+```html
 <ytz-button class="ph3 pv2 br2 bn white bg-blue pointer shadow-1 hover-shadow-2">
   Submit
 </ytz-button>
 
-<!-- Outlined variant -->
 <ytz-button class="ph3 pv2 br2 ba b--blue blue bg-transparent pointer">
   Cancel
 </ytz-button>
 ```
 
-### Alternative: Custom CSS
-
-```html
-<style>
-  .my-button {
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
-    background: blue;
-    color: white;
-  }
-</style>
-<ytz-button class="my-button">Submit</ytz-button>
-```
+See the [MUI Rosetta Stone](demos/rosetta.html) for a complete guide to replicating Material Design with Tachyons. For anything Tachyons doesn't cover, your AI knows how to write CSS.
 
 ### Optional CSS
 
@@ -478,6 +599,12 @@ pnpm install
 pnpm test
 pnpm build
 ```
+
+## The Name
+
+*Yetzirah* — In Kabbalah, the world of formation. Where fundamental elements first take shape. Below it is raw potential; above it, finished forms.
+
+Yetzirah is the smallest meaningful layer of UI abstraction. Below this, you're writing vanilla JavaScript. At this layer, you're working with the elements themselves.
 
 ## License
 

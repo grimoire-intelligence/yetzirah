@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Badge - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Badge container styling */
+    ytz-badge {
+      display: inline-flex;
+      position: relative;
+    }
+
+    /* Badge indicator base */
+    .ytz-badge-indicator {
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: white;
+      background: #ff4136;
+      border-radius: 10px;
+      min-width: 20px;
+      height: 20px;
+      padding: 0 6px;
+      box-sizing: border-box;
+      transform: translate(50%, -50%);
+    }
+
+    /* Position variants */
+    .ytz-badge-indicator[data-position="top-right"] {
+      top: 0;
+      right: 0;
+    }
+    .ytz-badge-indicator[data-position="top-left"] {
+      top: 0;
+      left: 0;
+      transform: translate(-50%, -50%);
+    }
+    .ytz-badge-indicator[data-position="bottom-right"] {
+      bottom: 0;
+      right: 0;
+      top: auto;
+      transform: translate(50%, 50%);
+    }
+    .ytz-badge-indicator[data-position="bottom-left"] {
+      bottom: 0;
+      left: 0;
+      top: auto;
+      transform: translate(-50%, 50%);
+    }
+
+    /* Dot mode */
+    .ytz-badge-indicator[data-mode="dot"] {
+      min-width: 10px;
+      width: 10px;
+      height: 10px;
+      padding: 0;
+    }
+
+    /* Color variants */
+    .badge-primary .ytz-badge-indicator { background: #357edd; }
+    .badge-success .ytz-badge-indicator { background: #19a974; }
+    .badge-warning .ytz-badge-indicator { background: #ff6300; }
+    .badge-error .ytz-badge-indicator { background: #ff4136; }
+
+    /* Demo button styling */
+    .demo-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 0.875rem;
+    }
+    .demo-btn:hover {
+      background: #eee;
+    }
+
+    /* Icon button demo */
+    .icon-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: #f4f4f4;
+      cursor: pointer;
+      font-size: 1.25rem;
+    }
+    .icon-btn:hover {
+      background: #eee;
+    }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Badge</h1>
+    <p class="f5 lh-copy gray mt0">
+      Notification badge that overlays a count or dot indicator on slotted content.
+      Configurable position and max value with automatic "99+" display.
+    </p>
+  </header>
+
+  <main>
+    <!-- Dot Mode -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Dot Badge</h2>
+      <p class="lh-copy mb3">
+        Without a <code>value</code> attribute, the badge displays as a small dot indicator.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-badge>
+          <button class="icon-btn">📧</button>
+        </ytz-badge>
+        <ytz-badge>
+          <button class="demo-btn">Messages</button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge&gt;
+  &lt;button&gt;Messages&lt;/button&gt;
+&lt;/ytz-badge&gt;</code></pre>
+    </section>
+
+    <!-- Count Mode -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Count Badge</h2>
+      <p class="lh-copy mb3">
+        Set <code>value</code> to display a count.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-badge value="3">
+          <button class="icon-btn">📧</button>
+        </ytz-badge>
+        <ytz-badge value="12">
+          <button class="icon-btn">🔔</button>
+        </ytz-badge>
+        <ytz-badge value="99">
+          <button class="demo-btn">Inbox</button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge value="12"&gt;
+  &lt;button&gt;Notifications&lt;/button&gt;
+&lt;/ytz-badge&gt;</code></pre>
+    </section>
+
+    <!-- Max Cap -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Maximum Value</h2>
+      <p class="lh-copy mb3">
+        Use <code>max</code> to cap the displayed value. Shows "max+" when exceeded.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-badge value="50" max="99">
+          <button class="demo-btn">50 of 99 max</button>
+        </ytz-badge>
+        <ytz-badge value="100" max="99">
+          <button class="demo-btn">100 → 99+</button>
+        </ytz-badge>
+        <ytz-badge value="1000" max="99">
+          <button class="demo-btn">1000 → 99+</button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge value="150" max="99"&gt;
+  &lt;button&gt;Shows 99+&lt;/button&gt;
+&lt;/ytz-badge&gt;</code></pre>
+    </section>
+
+    <!-- Hidden States -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Hidden States</h2>
+      <p class="lh-copy mb3">
+        Badge hides automatically when <code>value="0"</code> or when <code>hidden</code> attribute is present.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-badge value="0">
+          <button class="demo-btn">value="0" (hidden)</button>
+        </ytz-badge>
+        <ytz-badge value="5" hidden>
+          <button class="demo-btn">hidden attribute</button>
+        </ytz-badge>
+        <ytz-badge value="5">
+          <button class="demo-btn">Visible (value="5")</button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge value="0"&gt;...&lt;/ytz-badge&gt;  &lt;!-- Hidden --&gt;
+&lt;ytz-badge value="5" hidden&gt;...&lt;/ytz-badge&gt;  &lt;!-- Hidden --&gt;</code></pre>
+    </section>
+
+    <!-- Positions -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Positioning</h2>
+      <p class="lh-copy mb3">
+        Use the <code>position</code> attribute for different anchor positions.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-badge value="1" position="top-right">
+          <button class="demo-btn">top-right (default)</button>
+        </ytz-badge>
+        <ytz-badge value="2" position="top-left">
+          <button class="demo-btn">top-left</button>
+        </ytz-badge>
+        <ytz-badge value="3" position="bottom-right">
+          <button class="demo-btn">bottom-right</button>
+        </ytz-badge>
+        <ytz-badge value="4" position="bottom-left">
+          <button class="demo-btn">bottom-left</button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge value="5" position="top-left"&gt;
+  &lt;button&gt;...&lt;/button&gt;
+&lt;/ytz-badge&gt;</code></pre>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Custom Styling</h2>
+      <p class="lh-copy mb3">
+        Yetzirah doesn't ship color variants—style with your own CSS classes.
+        The classes below are defined in this demo's <code>&lt;style&gt;</code> block.
+      </p>
+
+      <div class="demo-row mb3">
+        <ytz-badge value="5" class="badge-error">
+          <button class="demo-btn">Error (default)</button>
+        </ytz-badge>
+        <ytz-badge value="5" class="badge-primary">
+          <button class="demo-btn">Primary</button>
+        </ytz-badge>
+        <ytz-badge value="5" class="badge-success">
+          <button class="demo-btn">Success</button>
+        </ytz-badge>
+        <ytz-badge value="5" class="badge-warning">
+          <button class="demo-btn">Warning</button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge value="5" class="badge-success"&gt;
+  &lt;button&gt;...&lt;/button&gt;
+&lt;/ytz-badge&gt;</code></pre>
+    </section>
+
+    <!-- Interactive Demo -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Interactive Demo</h2>
+      <p class="lh-copy mb3">
+        Dynamically update the badge value.
+      </p>
+
+      <div class="demo-row mb4">
+        <ytz-badge id="interactive-badge" value="0" max="99">
+          <button class="icon-btn" onclick="incrementBadge()">🔔</button>
+        </ytz-badge>
+        <span id="badge-value" class="f6 gray">Value: 0</span>
+      </div>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-green white bn pointer" onclick="incrementBadge()">+1</button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="incrementBadge(10)">+10</button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="resetBadge()">Reset</button>
+        <button class="ph3 pv2 br2 bg-red white bn pointer" onclick="toggleBadge()">Toggle Hidden</button>
+      </div>
+
+      <script>
+        let badgeCount = 0
+
+        function incrementBadge(amount = 1) {
+          badgeCount += amount
+          const badge = document.getElementById('interactive-badge')
+          badge.value = badgeCount
+          updateBadgeStatus()
+        }
+
+        function resetBadge() {
+          badgeCount = 0
+          const badge = document.getElementById('interactive-badge')
+          badge.value = 0
+          updateBadgeStatus()
+        }
+
+        function toggleBadge() {
+          const badge = document.getElementById('interactive-badge')
+          if (badge.hasAttribute('hidden')) {
+            badge.removeAttribute('hidden')
+          } else {
+            badge.setAttribute('hidden', '')
+          }
+          updateBadgeStatus()
+        }
+
+        function updateBadgeStatus() {
+          const badge = document.getElementById('interactive-badge')
+          const isHidden = badge.hasAttribute('hidden') || badgeCount === 0
+          document.getElementById('badge-value').textContent =
+            `Value: ${badgeCount}${isHidden ? ' (hidden)' : ''}`
+        }
+      </script>
+    </section>
+
+    <!-- Real-World Examples -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Real-World Examples</h2>
+
+      <h3 class="f5 fw6 mt4 mb2">Navigation with Badges</h3>
+      <nav class="demo-row mb4">
+        <ytz-badge value="3">
+          <a href="#" class="link dark-gray pa2">Inbox</a>
+        </ytz-badge>
+        <ytz-badge>
+          <a href="#" class="link dark-gray pa2">Updates</a>
+        </ytz-badge>
+        <ytz-badge value="12" max="9">
+          <a href="#" class="link dark-gray pa2">Notifications</a>
+        </ytz-badge>
+      </nav>
+
+      <h3 class="f5 fw6 mt4 mb2">Icon Toolbar</h3>
+      <div class="demo-row mb3">
+        <ytz-badge value="5">
+          <button class="icon-btn">📧</button>
+        </ytz-badge>
+        <ytz-badge>
+          <button class="icon-btn">📣</button>
+        </ytz-badge>
+        <ytz-badge value="99" max="99">
+          <button class="icon-btn">🛒</button>
+        </ytz-badge>
+        <button class="icon-btn">⚙️</button>
+      </div>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        Badge accessibility notes:
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li>Badge indicator has <code>aria-hidden="true"</code> (purely visual)</li>
+        <li>Screen reader context should come from the parent element's accessible name</li>
+        <li>Consider adding <code>aria-label</code> to the parent button with count info</li>
+      </ul>
+
+      <div class="demo-row mb3">
+        <ytz-badge value="5">
+          <button class="demo-btn" aria-label="Notifications, 5 unread">
+            🔔 Notifications
+          </button>
+        </ytz-badge>
+      </div>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-badge value="5"&gt;
+  &lt;button aria-label="Notifications, 5 unread"&gt;
+    🔔 Notifications
+  &lt;/button&gt;
+&lt;/ytz-badge&gt;</code></pre>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Badge badgeContent={5}&gt;</td>
+              <td class="pa2 code">&lt;ytz-badge value="5"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Badge variant="dot"&gt;</td>
+              <td class="pa2 code">&lt;ytz-badge&gt; (no value)</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Badge max={99}&gt;</td>
+              <td class="pa2 code">&lt;ytz-badge max="99"&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Badge invisible&gt;</td>
+              <td class="pa2 code">&lt;ytz-badge hidden&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">anchorOrigin={{vertical: 'bottom'}}</td>
+              <td class="pa2 code">position="bottom-right"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Badge } from '@grimoire/yetzirah-react'
+
+function NotificationBell({ count }) {
+  return (
+    &lt;Badge value={count} max={99}&gt;
+      &lt;button aria-label={`Notifications, ${count} unread`}&gt;
+        🔔
+      &lt;/button&gt;
+    &lt;/Badge&gt;
+  )
+}
+
+// Dot badge for new content
+function NewFeatureIndicator() {
+  return (
+    &lt;Badge&gt;
+      &lt;span&gt;Settings&lt;/span&gt;
+    &lt;/Badge&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>

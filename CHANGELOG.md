@@ -7,6 +7,72 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - Phase 4: Extensions, Components & Distribution
+
+### Added
+
+#### New Core Components
+- `<ytz-snackbar>` - Transient notifications with queue management, auto-dismiss, and position anchoring
+- `<ytz-progress>` - Loading indicators with circular/linear variants and CSS-driven animations
+- `<ytz-badge>` - Notification dots and counts with overlay positioning
+
+#### Solid.js Integration
+- `@grimoire/yetzirah-solid` package with native signal-based wrappers
+- Wrappers for all 22 components using Solid's fine-grained reactivity
+- TypeScript types with JSX namespace augmentation
+- SSR compatibility (Solid Start)
+
+#### Alpine.js Plugin
+- `@grimoire/yetzirah-alpine` package for progressive enhancement
+- Component-specific directives (`x-ytz-dialog`, `x-ytz-toggle`, etc.)
+- Unified `x-ytz:model` directive for two-way data binding
+- `$ytz` magic methods for imperative component control
+- CDN-ready bundle for buildless usage
+
+#### Server Framework Integration
+- Rails + Hotwire integration guide
+- Laravel + Livewire integration guide
+- Django + HTMX integration guide
+
+#### Framework Wrappers for New Components
+- React: `<Snackbar>`, `<Progress>`, `<Badge>`
+- Vue: `<Snackbar>`, `<Progress>`, `<Badge>` with v-model support
+- Svelte: `<Snackbar>`, `<Progress>`, `<Badge>` with bind: support
+- Angular: `YtzSnackbar`, `YtzProgress`, `YtzBadge` components
+- Solid: `<Snackbar>`, `<Progress>`, `<Badge>` with signal integration
+
+#### CDN Distribution
+- Individual CDN bundles for Snackbar, Progress, Badge
+- Alpine.js plugin CDN bundle
+- Updated core.js with all 22 components
+
+#### Documentation
+- Phase 4 architecture documentation
+- Solid.js usage guide
+- Alpine.js plugin documentation
+
+### Changed
+
+- Core bundle now includes 22 components (was 19)
+- Framework wrapper packages updated with new component exports
+
+### Performance
+
+- New component bundle sizes:
+  - Snackbar: ~1 KB gzipped
+  - Progress: ~600 B gzipped
+  - Badge: ~500 B gzipped
+- Solid.js wrappers: ~4 KB gzipped
+- Alpine.js plugin: ~3 KB gzipped
+- Total core bundle: ~12 KB gzipped (was ~11 KB)
+
+### Technical Details
+
+- Solid.js wrappers use native `createEffect` for reactive updates
+- Alpine.js directives use `effect()` for bidirectional sync
+- All new components follow ARIA accessibility patterns
+- Zero new runtime dependencies
+
 ## [0.2.0] - Phase 3: CDN-First Distribution
 
 ### Added
@@ -107,6 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite
 - Bundle size verification
 
-[Unreleased]: https://github.com/grimoire-intelligence/yetzirah/compare/v0.2.0...HEAD
+[Unreleased]: https://github.com/grimoire-intelligence/yetzirah/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/grimoire-intelligence/yetzirah/compare/v0.2.0...v0.3.0
 [0.2.0]: https://github.com/grimoire-intelligence/yetzirah/compare/v0.1.0...v0.2.0
 [0.1.0]: https://github.com/grimoire-intelligence/yetzirah/releases/tag/v0.1.0

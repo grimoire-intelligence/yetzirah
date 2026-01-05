@@ -25,6 +25,9 @@ export { YtzChip } from './chip.js'
 export { YtzIconButton } from './icon-button.js'
 export { YtzSlider } from './slider.js'
 export { YtzDatagrid, YtzDatagridColumn } from './datagrid.js'
+export { YtzSnackbar } from './snackbar.js'
+export { YtzProgress } from './progress.js'
+export { YtzBadge } from './badge.js'
 
 /**
  * Yetzirah version

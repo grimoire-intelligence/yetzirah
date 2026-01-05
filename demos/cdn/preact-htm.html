@@ -11,6 +11,9 @@
   <!-- Demo-specific styles -->
   <link rel="stylesheet" href="styles.css">
 
+  <!-- Yetzirah button interaction styles (hover/click feedback) -->
+  <link rel="stylesheet" href="../../packages/core/button.css">
+
   <style>
     /* Additional styles for Preact demo */
     .preact-app {
@@ -38,6 +41,26 @@
     .dark-mode .fruit-badge {
       background: #1565c0;
     }
+    /* Native dialog styling */
+    dialog::backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+    dialog {
+      border: none;
+    }
+    /* Yetzirah tabs - prevent custom elements from creating visual boxes */
+    ytz-tabs {
+      display: contents;
+    }
+    ytz-tab {
+      display: inline-block;
+    }
+    ytz-tabpanel {
+      display: block;
+    }
+    ytz-tabpanel[hidden] {
+      display: none;
+    }
   </style>
 </head>
 <body class="sans-serif">
@@ -45,6 +68,62 @@
     <!-- Loading state before Preact hydrates -->
     <div class="pa5 tc gray">Loading Preact + HTM demo...</div>
   </div>
+
+  <!-- Code examples as script templates to avoid escaping issues -->
+  <script type="text/template" id="code-importmap"><!-- Add to your HTML (once @grimoire/yetzirah-core is published to npm) -->
+&lt;script type="importmap"&gt;
+{
+  "imports": {
+    "preact": "https://esm.sh/preact@10",
+    "preact/": "https://esm.sh/preact@10/",
+    "htm/preact": "https://esm.sh/htm/preact?external=preact",
+    "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/core.js"
+  }
+}
+&lt;/script&gt;
+&lt;script type="module"&gt;
+  import 'yetzirah';  // Load all components
+&lt;/script&gt;</script>
+
+  <script type="text/template" id="code-event-hook">// Custom hook for Yetzirah events
+function useYetzirahEvent(ref, eventName, handler) {
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || !handler) return;
+
+    element.addEventListener(eventName, handler);
+    return () => element.removeEventListener(eventName, handler);
+  }, [ref, eventName, handler]);
+}
+
+// Usage
+const dialogRef = useRef(null);
+useYetzirahEvent(dialogRef, 'close', () => {
+  console.log('Dialog closed!');
+});</script>
+
+  <script type="text/template" id="code-controlling">// Use refs to call component methods
+const dialogRef = useRef(null);
+
+const openDialog = () => dialogRef.current?.showModal();
+const closeDialog = () => dialogRef.current?.close();
+
+return html`
+  &lt;ytz-dialog ref=${dialogRef}&gt;
+    &lt;div class="dialog-content"&gt;...&lt;/div&gt;
+  &lt;/ytz-dialog&gt;
+`;</script>
+
+  <script type="text/template" id="code-htm-syntax">import { html } from 'htm/preact';
+
+// HTM looks like JSX but uses template literals
+const element = html`
+  &lt;div class="container"&gt;
+    &lt;${MyComponent} prop=${value}&gt;
+      ${items.map(item => html`&lt;li&gt;${item}&lt;/li&gt;`)}
+    &lt;/${MyComponent}&gt;
+  &lt;/div&gt;
+`;</script>
 
   <!--
     Preact + HTM + Yetzirah from CDN
@@ -74,8 +153,18 @@
     import { useState, useEffect, useRef, useCallback } from 'preact/hooks';
     import { html } from 'htm/preact';
 
-    // Load Yetzirah components
+    // Load Yetzirah components (local path for development)
     import '../../packages/core/cdn/core.js';
+
+    // Helper to get code from template scripts (decodes HTML entities)
+    const getCodeTemplate = (id) => {
+      const el = document.getElementById(id);
+      if (!el) return '';
+      // Decode HTML entities by using a textarea
+      const textarea = document.createElement('textarea');
+      textarea.innerHTML = el.textContent;
+      return textarea.value;
+    };
 
     // ===========================================
     // Utility: useYetzirahEvent hook
@@ -133,7 +222,7 @@
     }
 
     // ===========================================
-    // Dialog Example - Refs and Events
+    // Dialog Example - Native Modal
     // ===========================================
     function DialogExample() {
       const dialogRef = useRef(null);
@@ -147,16 +236,27 @@
         dialogRef.current?.close();
       }, []);
 
-      // Handle dialog close event
-      useYetzirahEvent(dialogRef, 'close', () => {
-        setLastAction('Dialog closed');
-      });
+      // Handle dialog close event (native dialog emits 'close')
+      useEffect(() => {
+        const dialog = dialogRef.current;
+        if (!dialog) return;
+        const handleClose = () => setLastAction('Dialog closed');
+        dialog.addEventListener('close', handleClose);
+        return () => dialog.removeEventListener('close', handleClose);
+      }, []);
+
+      // Handle backdrop click for native dialog
+      const handleBackdropClick = useCallback((e) => {
+        if (e.target === dialogRef.current) {
+          dialogRef.current?.close();
+        }
+      }, []);
 
       return html`
         <section class="demo-section mb5 pb4 bb b--light-gray">
-          <h2 class="f3 fw6 mb3">Dialog with Events</h2>
+          <h2 class="f3 fw6 mb3">Modal Dialog (Native)</h2>
           <p class="f5 lh-copy gray mb3">
-            Using refs to control dialogs and listening to custom events.
+            Using the native <code>&lt;dialog&gt;</code> element with <code>showModal()</code> for proper modal behavior.
           </p>
 
           <div class="flex items-center gap3 mb3">
@@ -164,37 +264,39 @@
               class="ph3 pv2 br2 bn white bg-purple pointer"
               onClick=${openDialog}
             >
-              Open Dialog
+              Open Modal
             </ytz-button>
             <span class="f6 gray">Last action: ${lastAction}</span>
           </div>
 
-          <ytz-dialog ref=${dialogRef}>
-            <div class="dialog-content pa4 bg-white br3 shadow-2 mw6">
-              <h3 class="f4 fw6 mt0 mb3">Hello from Preact!</h3>
-              <p class="lh-copy mb3">
-                This dialog is controlled via a Preact ref.
-                Click the backdrop, press Escape, or use the button to close.
-              </p>
-              <div class="flex justify-end gap2">
-                <ytz-button
-                  class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer"
-                  onClick=${closeDialog}
-                >
-                  Cancel
-                </ytz-button>
-                <ytz-button
-                  class="ph3 pv2 br2 bn white bg-purple pointer"
-                  onClick=${() => {
-                    setLastAction('Confirmed!');
-                    closeDialog();
-                  }}
-                >
-                  Confirm
-                </ytz-button>
-              </div>
+          <dialog
+            ref=${dialogRef}
+            class="pa4 bg-white br3 shadow-2 mw6"
+            onClick=${handleBackdropClick}
+          >
+            <h3 class="f4 fw6 mt0 mb3">Hello from Preact!</h3>
+            <p class="lh-copy mb3">
+              This is a native modal dialog. The background is inert and
+              cannot be interacted with. Press Escape or click backdrop to close.
+            </p>
+            <div class="flex justify-end gap2">
+              <button
+                class="ph3 pv2 br2 ba b--gray gray bg-transparent pointer"
+                onClick=${closeDialog}
+              >
+                Cancel
+              </button>
+              <ytz-button
+                class="ph3 pv2 br2 bn white bg-purple pointer"
+                onClick=${() => {
+                  setLastAction('Confirmed!');
+                  closeDialog();
+                }}
+              >
+                Confirm
+              </ytz-button>
             </div>
-          </ytz-dialog>
+          </dialog>
         </section>
       `;
     }
@@ -315,27 +417,29 @@
             Syncing tab state between Yetzirah and Preact.
           </p>
 
-          <ytz-tabs ref=${tabsRef} value=${activeTab} class="mb3">
-            <div class="flex bb b--light-gray" role="tablist">
+          <div class="mb3">
+            <ytz-tabs ref=${tabsRef} value=${activeTab}>
+              <div class="flex bg-light-gray br2 br--top">
+                ${tabs.map(tab => html`
+                  <ytz-tab
+                    panel=${tab.id}
+                    class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue br2 br--top"
+                  >
+                    ${tab.icon} ${tab.label}
+                  </ytz-tab>
+                `)}
+              </div>
               ${tabs.map(tab => html`
-                <ytz-tab
-                  panel=${tab.id}
-                  class="pa3 bg-transparent bn pointer bb bw2 b--transparent hover-b--blue"
-                >
-                  ${tab.icon} ${tab.label}
-                </ytz-tab>
+                <ytz-tabpanel id=${tab.id} class="pa3 bg-near-white br2 br--bottom">
+                  ${content[tab.id]}
+                </ytz-tabpanel>
               `)}
-            </div>
-            ${tabs.map(tab => html`
-              <ytz-tabpanel id=${tab.id} class="pa3 bg-near-white br2 br--bottom">
-                ${content[tab.id]}
-              </ytz-tabpanel>
-            `)}
-          </ytz-tabs>
+            </ytz-tabs>
+          </div>
 
           <div class="flex gap2">
             ${tabs.map(tab => html`
-              <ytz-button
+              <button
                 class=${`ph2 pv1 br2 bn pointer f6 ${
                   activeTab === tab.id
                     ? 'white bg-blue'
@@ -344,7 +448,7 @@
                 onClick=${() => setActiveTab(tab.id)}
               >
                 ${tab.label}
-              </ytz-button>
+              </button>
             `)}
           </div>
           <p class="f6 gray mt2">
@@ -458,7 +562,12 @@
                     <ytz-toggle
                       checked=${todo.completed}
                       class="toggle-demo"
-                      onClick=${() => toggleTodo(todo.id)}
+                      onchange=${(e) => {
+                        const checked = e.detail?.checked ?? false;
+                        setTodos(prev => prev.map(t =>
+                          t.id === todo.id ? { ...t, completed: checked } : t
+                        ));
+                      }}
                       aria-label=${todo.completed ? 'Mark incomplete' : 'Mark complete'}
                     />
                     <span class="flex-grow-1">${todo.text}</span>
@@ -580,6 +689,32 @@
     }
 
     // ===========================================
+    // Code Examples Component
+    // ===========================================
+    function CodeExamples() {
+      return html`
+        <section class="demo-section mb5">
+          <h2 class="f3 fw6 mb3">Code Patterns</h2>
+
+          <div class="bg-near-white pa3 br2 mb4">
+            <h4 class="f6 fw6 mt0 mb2">Event Handling Hook</h4>
+            <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-event-hook')}</code></pre>
+          </div>
+
+          <div class="bg-near-white pa3 br2 mb4">
+            <h4 class="f6 fw6 mt0 mb2">Controlling Components</h4>
+            <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-controlling')}</code></pre>
+          </div>
+
+          <div class="bg-near-white pa3 br2">
+            <h4 class="f6 fw6 mt0 mb2">HTM Syntax Basics</h4>
+            <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-htm-syntax')}</code></pre>
+          </div>
+        </section>
+      `;
+    }
+
+    // ===========================================
     // Main App Component
     // ===========================================
     function App() {
@@ -588,7 +723,7 @@
           <header class="pa4 bg-dark-pink white">
             <div class="mw8 center">
               <nav class="mb3">
-                <a href="../index.html" class="link light-pink">&larr; All Demos</a>
+                <a href="../index.html" class="link light-pink">← All Demos</a>
                 <span class="mh2 light-pink">|</span>
                 <a href="index.html" class="link light-pink">CDN Demo</a>
                 <span class="mh2 light-pink">|</span>
@@ -620,17 +755,7 @@
                 </ul>
               </div>
 
-              <pre class="code-block f6 overflow-x-auto"><code>${`<!-- Just add these to your HTML -->
-<script type="importmap">
-{
-  "imports": {
-    "preact": "https://esm.sh/preact@10",
-    "preact/": "https://esm.sh/preact@10/",
-    "htm/preact": "https://esm.sh/htm/preact?external=preact"
-  }
-}
-</script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/core.js"></script>`}</code></pre>
+              <pre class="code-block f6 overflow-x-auto"><code>${getCodeTemplate('code-importmap')}</code></pre>
             </section>
 
             <${Counter} />
@@ -639,60 +764,7 @@
             <${TabsExample} />
             <${TodoApp} />
             <${DrawerExample} />
-
-            <!-- Code Patterns -->
-            <section class="demo-section mb5">
-              <h2 class="f3 fw6 mb3">Code Patterns</h2>
-
-              <div class="bg-near-white pa3 br2 mb4">
-                <h4 class="f6 fw6 mt0 mb2">Event Handling Hook</h4>
-                <pre class="code-block f6 overflow-x-auto"><code>${`// Custom hook for Yetzirah events
-function useYetzirahEvent(ref, eventName, handler) {
-  useEffect(() => {
-    const element = ref.current;
-    if (!element || !handler) return;
-
-    element.addEventListener(eventName, handler);
-    return () => element.removeEventListener(eventName, handler);
-  }, [ref, eventName, handler]);
-}
-
-// Usage
-const dialogRef = useRef(null);
-useYetzirahEvent(dialogRef, 'close', () => {
-  console.log('Dialog closed!');
-});`}</code></pre>
-              </div>
-
-              <div class="bg-near-white pa3 br2 mb4">
-                <h4 class="f6 fw6 mt0 mb2">Controlling Components</h4>
-                <pre class="code-block f6 overflow-x-auto"><code>${`// Use refs to call component methods
-const dialogRef = useRef(null);
-
-const openDialog = () => dialogRef.current?.showModal();
-const closeDialog = () => dialogRef.current?.close();
-
-return html\`
-  <ytz-dialog ref=\${dialogRef}>
-    <div class="dialog-content">...</div>
-  </ytz-dialog>
-\`;`}</code></pre>
-              </div>
-
-              <div class="bg-near-white pa3 br2">
-                <h4 class="f6 fw6 mt0 mb2">HTM Syntax Basics</h4>
-                <pre class="code-block f6 overflow-x-auto"><code>${`import { html } from 'htm/preact';
-
-// HTM looks like JSX but uses template literals
-const element = html\`
-  <div class="container">
-    <\${MyComponent} prop=\${value}>
-      \${items.map(item => html\`<li>\${item}</li>\`)}
-    </\${MyComponent}>
-  </div>
-\`;`}</code></pre>
-              </div>
-            </section>
+            <${CodeExamples} />
           </main>
 
           <footer class="pa4 bg-near-white bt b--light-gray">

@@ -17,9 +17,7 @@ Phase 4 extends Yetzirah with additional components, framework integrations, and
 - Alpine.js plugin with `x-ytz` directives
 - Server framework integration patterns (Rails, Laravel, Django)
 - NPM package publication to `@grimoire` organization (final step)
-
 ---
-
 ## Dependency Block 1: Additional Core Components
 
 These PRs add new core components to the library.
@@ -28,7 +26,7 @@ These PRs add new core components to the library.
 ---
 pr_id: PR-138
 title: Snackbar/Toast Core Component
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 6
@@ -59,14 +57,12 @@ Implement `<ytz-snackbar>` component for transient notifications. Support queue 
 - [ ] Dispatches `dismiss` event when closed
 - [ ] ARIA live region for accessibility
 - [ ] Works in vanilla HTML without JavaScript
-
 ---
-
 ### PR-139: Progress/Spinner Core Component
 ---
 pr_id: PR-139
 title: Progress/Spinner Core Component
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -97,14 +93,12 @@ Implement `<ytz-progress>` component for loading indicators. Support indetermina
 - [ ] CSS-driven animations (no requestAnimationFrame)
 - [ ] `aria-valuenow`, `aria-valuemin`, `aria-valuemax` for determinate mode
 - [ ] `role="progressbar"` for accessibility
-
 ---
-
 ### PR-140: Badge Core Component
 ---
 pr_id: PR-140
 title: Badge Core Component
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -134,16 +128,14 @@ Implement `<ytz-badge>` component for notification dots and counts. Position rel
 - [ ] `max` attribute to cap displayed value (e.g., "99+")
 - [ ] Position configurable via `position` attribute (top-right default)
 - [ ] Hidden when `value="0"` or `hidden` attribute set
-
 ---
-
 ## Dependency Block 2: React Wrappers for New Components
 
 ### PR-141: Snackbar React Wrapper
 ---
 pr_id: PR-141
 title: Snackbar React Wrapper
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 3
@@ -173,14 +165,12 @@ Create React wrapper for `<ytz-snackbar>` following existing wrapper patterns. B
 - [ ] `position` prop for anchoring
 - [ ] Ref exposes `show()` and `dismiss()` methods
 - [ ] TypeScript types exported
-
 ---
-
 ### PR-142: Progress React Wrapper
 ---
 pr_id: PR-142
 title: Progress React Wrapper
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -209,14 +199,12 @@ Create React wrapper for `<ytz-progress>` following existing wrapper patterns. S
 - [ ] `value` prop for determinate mode
 - [ ] `variant` prop: "indeterminate" | "determinate"
 - [ ] TypeScript types exported
-
 ---
-
 ### PR-143: Badge React Wrapper
 ---
 pr_id: PR-143
 title: Badge React Wrapper
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 2
@@ -245,16 +233,14 @@ Create React wrapper for `<ytz-badge>` following existing wrapper patterns. Chil
 - [ ] `invisible` prop hides the badge
 - [ ] `children` rendered as anchored content
 - [ ] TypeScript types exported
-
 ---
-
 ## Dependency Block 3: Vue/Svelte/Angular Wrappers
 
 ### PR-144: Snackbar Vue/Svelte/Angular Wrappers
 ---
 pr_id: PR-144
 title: Snackbar Vue/Svelte/Angular Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
@@ -282,14 +268,12 @@ Create framework wrappers for Snackbar in Vue, Svelte, and Angular following exi
 - [ ] Angular: `YtzSnackbar` component with `[(open)]` two-way binding
 - [ ] All frameworks: `@dismiss` / `on:dismiss` / `(dismiss)` event
 - [ ] Tests for each framework wrapper
-
 ---
-
 ### PR-145: Progress Vue/Svelte/Angular Wrappers
 ---
 pr_id: PR-145
 title: Progress Vue/Svelte/Angular Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -317,14 +301,12 @@ Create framework wrappers for Progress in Vue, Svelte, and Angular.
 - [ ] Angular: `YtzProgress` component
 - [ ] All variants (circular/linear, determinate/indeterminate) supported
 - [ ] Tests for each framework wrapper
-
 ---
-
 ### PR-146: Badge Vue/Svelte/Angular Wrappers
 ---
 pr_id: PR-146
 title: Badge Vue/Svelte/Angular Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -352,16 +334,14 @@ Create framework wrappers for Badge in Vue, Svelte, and Angular.
 - [ ] Angular: `YtzBadge` with content projection
 - [ ] All props (badgeContent, max, invisible) supported
 - [ ] Tests for each framework wrapper
-
 ---
-
 ## Dependency Block 4: Solid.js Integration
 
 ### PR-147: Solid.js Package Setup
 ---
 pr_id: PR-147
 title: Solid.js Package Setup
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -399,14 +379,12 @@ Set up `@grimoire/yetzirah-solid` package with proper Solid.js build configurati
 - [ ] Shared `createYetzirahWrapper` utility for consistent wrapper pattern
 - [ ] Signal-based state management helper
 - [ ] Event handler bridging utility (`on:` → `addEventListener`)
-
 ---
-
 ### PR-148: Solid.js Core Component Wrappers
 ---
 pr_id: PR-148
 title: Solid.js Core Component Wrappers
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -468,14 +446,12 @@ Create Solid.js wrappers for all existing Tier 1 and Tier 2 components. Use nati
 - [ ] Ref forwarding via `ref` prop
 - [ ] Event handlers use Solid's `on:event` syntax
 - [ ] TypeScript types for all components
-
 ---
-
 ### PR-149: Solid.js New Component Wrappers
 ---
 pr_id: PR-149
 title: Solid.js New Component Wrappers
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -505,14 +481,12 @@ Create Solid.js wrappers for the new Phase 4 components (Snackbar, Progress, Bad
 - [ ] `<Progress>` with signal-based value
 - [ ] `<Badge>` with slot support
 - [ ] Consistent with existing Solid wrapper patterns
-
 ---
-
 ### PR-150: Solid.js Integration Tests & Documentation
 ---
 pr_id: PR-150
 title: Solid.js Integration Tests & Documentation
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
@@ -543,16 +517,14 @@ Create comprehensive integration tests and documentation for Solid.js wrappers. 
 - [ ] Documentation covering installation, usage, and patterns
 - [ ] SSR compatibility notes (Solid Start)
 - [ ] Signal integration examples
-
 ---
-
 ## Dependency Block 5: Alpine.js Integration
 
 ### PR-151: Alpine.js Plugin Package Setup
 ---
 pr_id: PR-151
 title: Alpine.js Plugin Package Setup
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 4
@@ -586,14 +558,12 @@ Set up `@grimoire/yetzirah-alpine` package as an Alpine.js plugin. Create the pl
 - [ ] Auto-detects Yetzirah elements on init
 - [ ] Works without build step (CDN-ready)
 - [ ] TypeScript types for Alpine integration
-
 ---
-
 ### PR-152: x-ytz Directive Implementation
 ---
 pr_id: PR-152
 title: x-ytz Directive Implementation
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -621,14 +591,12 @@ Implement `x-ytz` directive that patches Yetzirah elements to expose `event.deta
 - [ ] Works with all Yetzirah form components (Select, Autocomplete, Toggle, Slider)
 - [ ] Supports `@change`, `@input`, and custom events
 - [ ] Auto-applied when plugin loaded (no manual `x-ytz` needed)
-
 ---
-
 ### PR-153: x-ytz:model Two-way Binding
 ---
 pr_id: PR-153
 title: x-ytz:model Two-way Binding
-cold_state: new
+cold_state: completed
 priority: high
 complexity:
   score: 5
@@ -653,14 +621,12 @@ Implement `x-ytz:model` directive for two-way data binding between Alpine state 
 - [ ] Changes in Alpine data update component
 - [ ] Works with Select, Autocomplete, Toggle, Slider
 - [ ] Supports modifiers (`.debounce`, `.throttle`)
-
 ---
-
 ### PR-154: Alpine.js Magic Methods
 ---
 pr_id: PR-154
 title: Alpine.js Magic Methods
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -685,14 +651,12 @@ Implement Alpine magic methods for imperative control of Yetzirah components.
 - [ ] `$ytz.toggle(selector)` toggles open state
 - [ ] `$ytz.show(selector, message)` shows Snackbar
 - [ ] Works with element refs or selectors
-
 ---
-
 ### PR-155: Alpine.js Integration Tests & Documentation
 ---
 pr_id: PR-155
 title: Alpine.js Integration Tests & Documentation
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
@@ -720,16 +684,14 @@ Create comprehensive integration tests and documentation for Alpine.js plugin. D
 - [ ] Documentation covering installation, directives, magics
 - [ ] Examples for Rails/Laravel/Django usage patterns
 - [ ] Comparison with vanilla Alpine patterns
-
 ---
-
 ## Dependency Block 6: Documentation & CDN
 
 ### PR-156: Server Framework Integration Patterns
 ---
 pr_id: PR-156
 title: Server Framework Integration Patterns
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 3
@@ -757,14 +719,12 @@ Document integration patterns for server-rendered frameworks (Rails, Laravel, Dj
 - [ ] Django: HTMX + Yetzirah patterns
 - [ ] Asset pipeline configuration for each framework
 - [ ] Example templates/views for common patterns
-
 ---
-
 ### PR-157: CDN Distribution for New Components & Plugins
 ---
 pr_id: PR-157
 title: CDN Distribution for New Components & Plugins
-cold_state: new
+cold_state: completed
 priority: medium
 complexity:
   score: 4
@@ -798,14 +758,12 @@ Update CDN build to include new components and Alpine.js plugin. Ensure all new 
 - [ ] Updated core.js includes new components
 - [ ] Bundle sizes documented
 - [ ] Demo pages updated to show CDN usage
-
 ---
-
 ### PR-158: Phase 4 Architecture Documentation
 ---
 pr_id: PR-158
 title: Phase 4 Architecture Documentation
-cold_state: new
+cold_state: completed
 priority: low
 complexity:
   score: 3
@@ -830,9 +788,7 @@ Document architecture decisions made for Phase 4. Cover new components, Solid.js
 - [ ] Alpine.js plugin architecture explained
 - [ ] NPM distribution setup documented
 - [ ] CHANGELOG updated for Phase 4 release
-
 ---
-
 ## Dependency Block 7: NPM Distribution (Final)
 
 ### PR-137: Package Registry Publication Setup
@@ -893,9 +849,7 @@ Set up automated package publication to npm registry with compatibility for pnpm
 - [ ] CDN bundles automatically available on jsDelivr/unpkg after npm publish
 - [ ] Version management script handles monorepo versioning
 - [ ] Publishing guide documents the release process for maintainers
-
 ---
-
 ## Dependency Graph
 
 ```

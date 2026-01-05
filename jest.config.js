@@ -15,6 +15,9 @@ export default {
   transformIgnorePatterns: [
     '/node_modules/(?!@grimoire)',
   ],
+  moduleNameMapper: {
+    '^@grimoire/yetzirah-core$': '<rootDir>/packages/core/src/index.js',
+  },
   collectCoverageFrom: [
     'packages/*/src/**/*.js',
     '!packages/*/src/**/*.test.js',

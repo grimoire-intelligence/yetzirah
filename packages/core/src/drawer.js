@@ -24,6 +24,7 @@
 
 import { createFocusTrap } from './utils/focus-trap.js'
 import { register } from './utils/register.js'
+import { lockScroll, unlockScroll } from './utils/scroll-lock.js'
 
 /** @type {string} Selector for focusable elements */
 const FOCUSABLE = 'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
@@ -42,8 +43,6 @@ class YtzDrawer extends HTMLElement {
   #previousFocus = null
   /** @type {{ activate: () => void, deactivate: () => void }|null} */
   #focusTrap = null
-  /** @type {string} */
-  #previousOverflow = ''
 
   connectedCallback() {
     this.setAttribute('role', 'dialog')
@@ -74,8 +73,7 @@ class YtzDrawer extends HTMLElement {
   #open() {
     this.#previousFocus = /** @type {HTMLElement} */ (document.activeElement)
     this.hidden = false
-    this.#previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    lockScroll()
     this.#focusTrap = createFocusTrap(this)
     this.#focusTrap.activate()
     document.addEventListener('keydown', this.#handleEscape)
@@ -98,7 +96,7 @@ class YtzDrawer extends HTMLElement {
   }
 
   #cleanup() {
-    document.body.style.overflow = this.#previousOverflow
+    unlockScroll()
     this.#focusTrap?.deactivate()
     this.#focusTrap = null
     document.removeEventListener('keydown', this.#handleEscape)

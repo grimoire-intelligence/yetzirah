@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Snackbar/Toast - Yetzirah Demo</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
+  <script type="module" src="../packages/core/dist/index.js"></script>
+  <style>
+    .demo-row {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    /* Snackbar base styling */
+    ytz-snackbar {
+      position: fixed;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.875rem 1rem;
+      min-width: 280px;
+      max-width: 400px;
+      background: #323232;
+      color: white;
+      border-radius: 4px;
+      box-shadow: 0 3px 5px -1px rgba(0,0,0,.2), 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12);
+      font-size: 0.875rem;
+      z-index: 1000;
+      transform: translateY(var(--ytz-snackbar-offset, 0));
+      transition: transform 0.2s ease;
+    }
+
+    /* Position variants */
+    ytz-snackbar[position="bottom-center"],
+    ytz-snackbar:not([position]) {
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(calc(-1 * var(--ytz-snackbar-offset, 0)));
+    }
+    ytz-snackbar[position="bottom-left"] {
+      bottom: 24px;
+      left: 24px;
+      transform: translateY(calc(-1 * var(--ytz-snackbar-offset, 0)));
+    }
+    ytz-snackbar[position="bottom-right"] {
+      bottom: 24px;
+      right: 24px;
+      transform: translateY(calc(-1 * var(--ytz-snackbar-offset, 0)));
+    }
+    ytz-snackbar[position="top-center"] {
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(var(--ytz-snackbar-offset, 0));
+    }
+    ytz-snackbar[position="top-left"] {
+      top: 24px;
+      left: 24px;
+      transform: translateY(var(--ytz-snackbar-offset, 0));
+    }
+    ytz-snackbar[position="top-right"] {
+      top: 24px;
+      right: 24px;
+      transform: translateY(var(--ytz-snackbar-offset, 0));
+    }
+
+    /* Close button */
+    ytz-snackbar .ytz-snackbar-close {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      margin-left: auto;
+      padding: 0;
+      border: none;
+      border-radius: 50%;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      font-size: 18px;
+      opacity: 0.7;
+    }
+    ytz-snackbar .ytz-snackbar-close:hover {
+      opacity: 1;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* Color variants */
+    .snackbar-success { background: #19a974; }
+    .snackbar-error { background: #ff4136; }
+    .snackbar-warning { background: #ff6300; }
+    .snackbar-info { background: #357edd; }
+  </style>
+</head>
+<body class="sans-serif pa4 mw8 center">
+  <header class="mb4">
+    <nav class="mb3">
+      <a href="index.html" class="link blue">&larr; All Components</a>
+    </nav>
+    <h1 class="f2 fw6 mb2">Snackbar / Toast</h1>
+    <p class="f5 lh-copy gray mt0">
+      Transient notifications that appear briefly and auto-dismiss.
+      Supports queue management, positioning, and hover pause.
+    </p>
+  </header>
+
+  <main>
+    <!-- Basic Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Basic Usage</h2>
+      <p class="lh-copy mb3">
+        Click to show a simple snackbar. It will auto-dismiss after 5 seconds.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('basic-snack').show()">
+          Show Snackbar
+        </button>
+      </div>
+
+      <ytz-snackbar id="basic-snack">File saved successfully</ytz-snackbar>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-snackbar id="snack"&gt;File saved successfully&lt;/ytz-snackbar&gt;
+
+&lt;button onclick="document.getElementById('snack').show()"&gt;
+  Show Snackbar
+&lt;/button&gt;</code></pre>
+    </section>
+
+    <!-- Dismissible -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Dismissible Snackbar</h2>
+      <p class="lh-copy mb3">
+        Add the <code>dismissible</code> attribute to show a close button.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('dismiss-snack').show()">
+          Show Dismissible
+        </button>
+      </div>
+
+      <ytz-snackbar id="dismiss-snack" dismissible>Click the X to close, or wait 5 seconds</ytz-snackbar>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-snackbar dismissible&gt;
+  Click the X to close, or wait 5 seconds
+&lt;/ytz-snackbar&gt;</code></pre>
+    </section>
+
+    <!-- Custom Duration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Custom Duration</h2>
+      <p class="lh-copy mb3">
+        Set <code>duration</code> in milliseconds. Use <code>duration="0"</code> to disable auto-dismiss.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('quick-snack').show()">
+          Quick (2s)
+        </button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('persist-snack').show()">
+          Persistent (no auto-dismiss)
+        </button>
+      </div>
+
+      <ytz-snackbar id="quick-snack" duration="2000">Gone in 2 seconds!</ytz-snackbar>
+      <ytz-snackbar id="persist-snack" duration="0" dismissible>I won't go away on my own</ytz-snackbar>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-snackbar duration="2000"&gt;Quick message&lt;/ytz-snackbar&gt;
+&lt;ytz-snackbar duration="0" dismissible&gt;Persistent&lt;/ytz-snackbar&gt;</code></pre>
+    </section>
+
+    <!-- Positions -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Positioning</h2>
+      <p class="lh-copy mb3">
+        Use the <code>position</code> attribute for different screen positions.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="showPositionSnack('top-left')">Top Left</button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="showPositionSnack('top-center')">Top Center</button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="showPositionSnack('top-right')">Top Right</button>
+      </div>
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="showPositionSnack('bottom-left')">Bottom Left</button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="showPositionSnack('bottom-center')">Bottom Center</button>
+        <button class="ph3 pv2 br2 bg-dark-gray white bn pointer" onclick="showPositionSnack('bottom-right')">Bottom Right</button>
+      </div>
+
+      <ytz-snackbar id="position-snack" duration="2000" dismissible></ytz-snackbar>
+
+      <script>
+        function showPositionSnack(position) {
+          const snack = document.getElementById('position-snack')
+          snack.setAttribute('position', position)
+          snack.show(`Position: ${position}`)
+        }
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-snackbar position="top-right"&gt;...&lt;/ytz-snackbar&gt;
+&lt;ytz-snackbar position="bottom-left"&gt;...&lt;/ytz-snackbar&gt;</code></pre>
+    </section>
+
+    <!-- Color Variants -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Custom Styling</h2>
+      <p class="lh-copy mb3">
+        Yetzirah doesn't ship color variants—style with your own CSS classes.
+        The classes below are defined in this demo's <code>&lt;style&gt;</code> block.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-green white bn pointer" onclick="document.getElementById('success-snack').show()">Success</button>
+        <button class="ph3 pv2 br2 bg-red white bn pointer" onclick="document.getElementById('error-snack').show()">Error</button>
+        <button class="ph3 pv2 br2 bg-orange white bn pointer" onclick="document.getElementById('warning-snack').show()">Warning</button>
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('info-snack').show()">Info</button>
+      </div>
+
+      <ytz-snackbar id="success-snack" class="snackbar-success" dismissible>Changes saved successfully</ytz-snackbar>
+      <ytz-snackbar id="error-snack" class="snackbar-error" dismissible>Failed to save changes</ytz-snackbar>
+      <ytz-snackbar id="warning-snack" class="snackbar-warning" dismissible>Your session will expire soon</ytz-snackbar>
+      <ytz-snackbar id="info-snack" class="snackbar-info" dismissible>New version available</ytz-snackbar>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-snackbar class="snackbar-success"&gt;...&lt;/ytz-snackbar&gt;
+&lt;ytz-snackbar class="snackbar-error"&gt;...&lt;/ytz-snackbar&gt;</code></pre>
+    </section>
+
+    <!-- Queue Stacking -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Queue Stacking</h2>
+      <p class="lh-copy mb3">
+        Multiple snackbars at the same position will stack. The <code>max-visible</code> attribute
+        limits how many show at once (default: 3).
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="addStackedSnack()">
+          Add Stacked Snackbar
+        </button>
+        <span id="stack-count" class="gray">Count: 0</span>
+      </div>
+
+      <div id="snack-container"></div>
+
+      <script>
+        let stackCount = 0
+        function addStackedSnack() {
+          stackCount++
+          const snack = document.createElement('ytz-snackbar')
+          snack.setAttribute('position', 'bottom-right')
+          snack.setAttribute('max-visible', '3')
+          snack.setAttribute('dismissible', '')
+          snack.textContent = `Notification #${stackCount}`
+          document.getElementById('snack-container').appendChild(snack)
+          snack.show()
+          document.getElementById('stack-count').textContent = `Count: ${stackCount}`
+        }
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>&lt;ytz-snackbar max-visible="3" position="bottom-right"&gt;
+  Notification
+&lt;/ytz-snackbar&gt;</code></pre>
+    </section>
+
+    <!-- Hover Pause -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Hover Pause</h2>
+      <p class="lh-copy mb3">
+        Hover over a snackbar to pause its auto-dismiss timer.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('hover-snack').show()">
+          Show (hover to pause)
+        </button>
+      </div>
+
+      <ytz-snackbar id="hover-snack" duration="3000" dismissible>
+        Hover over me to pause the 3 second timer
+      </ytz-snackbar>
+    </section>
+
+    <!-- Event Handling -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Event Handling</h2>
+      <p class="lh-copy mb3">
+        Listen for the <code>dismiss</code> event to track when and why a snackbar closes.
+      </p>
+
+      <div class="demo-row mb3">
+        <button class="ph3 pv2 br2 bg-blue white bn pointer" onclick="document.getElementById('event-snack').show()">
+          Show Snackbar
+        </button>
+      </div>
+      <p id="dismiss-reason" class="f6 gray">Click the button or wait for timeout...</p>
+
+      <ytz-snackbar id="event-snack" duration="3000" dismissible>Close me or wait</ytz-snackbar>
+
+      <script>
+        document.getElementById('event-snack').addEventListener('dismiss', (e) => {
+          document.getElementById('dismiss-reason').textContent =
+            `Dismissed! Reason: ${e.detail.reason}`
+        })
+      </script>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>snackbar.addEventListener('dismiss', (e) => {
+  console.log('Reason:', e.detail.reason)
+  // 'timeout' | 'manual' | 'action'
+})</code></pre>
+    </section>
+
+    <!-- Accessibility -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">Accessibility</h2>
+      <p class="lh-copy mb3">
+        Snackbar accessibility features:
+      </p>
+
+      <ul class="lh-copy pl3 mb3">
+        <li><code>role="status"</code> - Implicit live region for status messages</li>
+        <li><code>aria-live="polite"</code> - Waits for user to finish current task</li>
+        <li><code>aria-atomic="true"</code> - Announces entire region on change</li>
+        <li>Does not trap focus like dialog</li>
+        <li>Close button has <code>aria-label="Dismiss"</code></li>
+      </ul>
+    </section>
+
+    <!-- MUI Migration -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">MUI Migration</h2>
+
+      <div class="overflow-auto">
+        <table class="f6 w-100 collapse ba b--light-gray">
+          <thead>
+            <tr class="bg-near-white">
+              <th class="pa2 tl">MUI</th>
+              <th class="pa2 tl">Yetzirah</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">&lt;Snackbar open /&gt;</td>
+              <td class="pa2 code">&lt;ytz-snackbar open&gt;</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">autoHideDuration={3000}</td>
+              <td class="pa2 code">duration="3000"</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">anchorOrigin={{vertical: 'top'}}</td>
+              <td class="pa2 code">position="top-center"</td>
+            </tr>
+            <tr class="bt b--light-gray">
+              <td class="pa2 code">onClose={handleClose}</td>
+              <td class="pa2 code">addEventListener('dismiss', ...)</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- React Usage -->
+    <section class="mb5">
+      <h2 class="f4 fw6 mb3">React Usage</h2>
+
+      <pre class="f6 bg-near-white pa3 br2 overflow-auto"><code>import { Snackbar } from '@grimoire/yetzirah-react'
+
+function Notifications() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() =&gt; setOpen(true)}&gt;
+        Show Notification
+      &lt;/button&gt;
+      &lt;Snackbar
+        open={open}
+        duration={3000}
+        dismissible
+        onDismiss={(e) =&gt; {
+          console.log(e.detail.reason)
+          setOpen(false)
+        }}
+      &gt;
+        Action completed
+      &lt;/Snackbar&gt;
+    &lt;/&gt;
+  )
+}</code></pre>
+    </section>
+  </main>
+
+  <footer class="mt5 pt4 bt b--light-gray">
+    <p class="f6 gray">
+      <a href="index.html" class="link blue">Back to all components</a>
+    </p>
+  </footer>
+</body>
+</html>
