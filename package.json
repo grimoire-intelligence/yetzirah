@@ -68,8 +68,5 @@
   "engines": {
     "node": ">=18"
   },
-  "packageManager": "pnpm@9.0.0",
-  "dependencies": {
-    "lemegeton": "file:../lemegeton/lemegeton-0.1.0.tgz"
-  }
+  "packageManager": "pnpm@9.0.0"
 }
