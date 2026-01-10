@@ -2,11 +2,11 @@
 
 **AI is going to write your frontend. This is the component library for that.**
 
-A single MUI icon is 16KB gzipped. Yetzirah is under 15KB. Twenty-one components, full ARIA, no runtime CSS.
+Yetzirah is designed for two audiences: human developers who want accessible, unstyled primitives, and language models that need to reason about your UI without hallucinating APIs.
 
-Your AI reads the whole thing—every component, every prop, every implementation detail. No hallucinated APIs. No guessing.
+A single MUI icon is 16KB gzipped. Yetzirah is under 15KB. Twenty-one components, full ARIA, no runtime CSS—small enough that your AI reads the whole thing.
 
-When something's wrong? The output is `bg-blue white ph3 pv2 br2`, not a theme object four levels deep.
+When something's wrong? The output is `bg-blue white ph3 pv2 br2`, not a theme object four levels deep. You debug CSS classes, not JavaScript.
 
 **One library. React, Vue, Svelte, Angular, Solid, Alpine, vanilla HTML.**
 
@@ -130,14 +130,26 @@ Just import `@grimoire/yetzirah-core` and use the elements directly.
 
 ## Philosophy
 
-- **AI-native** - Entire codebase fits in one context window for cheaper, faster AI-assisted development
-- **Unstyled by default** - You bring your own CSS (Tachyons, custom styles, etc.)
-- **Accessibility first** - Full ARIA compliance, keyboard navigation built-in
-- **Web Components** - Framework-agnostic core, works anywhere
-- **Framework wrappers** - Idiomatic APIs for React, Vue, Svelte, Angular, Solid, and Alpine
-- **Tiny bundles** - Tree-shakeable, no runtime CSS-in-JS
+Yetzirah follows an **AI-native design discipline**—architectural choices that make code easier for language models to reason about:
+
+- **Contextual completeness** — Twenty-one components, each with a predictable prop/event interface. The entire API fits in any model's working memory. No hallucinated methods.
+- **Standards over abstractions** — Web Components underneath, native DOM events, standard ARIA patterns. Your AI already knows these from web platform documentation.
+- **One way to do things** — No `sx` props, no theme overrides, no component slots. When there's only one pattern, models don't guess wrong.
+- **Debuggable output** — Utility classes, not generated CSS. When your AI writes `bg-blue` instead of `bg-dark-blue`, you see it and fix it.
+
+The same principles apply to the rest of your stack:
+
+| Layer | AI-Native Choice |
+|-------|------------------|
+| Components | Yetzirah |
+| State | [Clavicula](https://github.com/grimoire-intelligence/clavicula) |
+| Styling | Tachyons / plain CSS |
+
+**[Clavicula](https://github.com/grimoire-intelligence/clavicula)** is our reactive key-value store—seven methods, platform primitives (`EventTarget`, `CustomEvent`), works in vanilla JS or any framework. Same philosophy, different layer.
 
 ## AI Economics
+
+The philosophy above isn't just cleaner—it's cheaper.
 
 MUI requires expensive models. Its API surface is massive, version-dependent, and offers multiple patterns—`sx`, `styled()`, theme overrides, component slots. Your AI guesses which one your codebase uses.
 
