@@ -16,7 +16,7 @@
  * Vue 3 wrapper for ytz-button Web Component.
  * Polymorphic button/anchor that renders <a> when href provided, <button> otherwise.
  *
- * @module @grimoire/yetzirah-vue/Button
+ * @module @grimoire-intel/yetzirah-vue/Button
  *
  * @example
  * <template>
@@ -34,7 +34,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Button component

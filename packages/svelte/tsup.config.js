@@ -12,7 +12,7 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
-  external: ['svelte', '@grimoire/yetzirah-core'],
+  external: ['svelte', '@grimoire-intel/yetzirah'],
   esbuildPlugins: [
     sveltePlugin({
       preprocess: sveltePreprocess(),

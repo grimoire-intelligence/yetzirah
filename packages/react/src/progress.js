@@ -2,10 +2,10 @@
  * React wrapper for ytz-progress Web Component.
  * Provides circular spinner and linear progress bar variants.
  *
- * @module @grimoire/yetzirah-react/progress
+ * @module @grimoire-intel/yetzirah-react/progress
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**

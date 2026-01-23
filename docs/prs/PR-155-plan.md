@@ -2,7 +2,7 @@
 
 ## Overview
 
-Add comprehensive integration tests and documentation for the `@grimoire/yetzirah-alpine` package. This PR completes the Alpine.js integration by:
+Add comprehensive integration tests and documentation for the `@grimoire-intel/yetzirah-alpine` package. This PR completes the Alpine.js integration by:
 
 1. Creating integration tests for all directives and the `x-ytz:model` directive
 2. Adding a README.md with installation, usage examples, and API documentation

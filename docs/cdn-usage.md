@@ -7,7 +7,7 @@ Yetzirah can be loaded directly from CDN with no build step required. This guide
 Add a single script tag to start using Yetzirah components:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 ```
 
 That's it! All components are now available:
@@ -33,10 +33,10 @@ Global CDN with excellent performance worldwide.
 
 ```html
 <!-- All components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <!-- Individual component -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/dialog.js"></script>
 ```
 
 ### unpkg
@@ -44,7 +44,7 @@ Global CDN with excellent performance worldwide.
 Direct npm CDN access.
 
 ```html
-<script type="module" src="https://unpkg.com/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://unpkg.com/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 ```
 
 ### esm.sh
@@ -52,7 +52,7 @@ Direct npm CDN access.
 Optimized for ES modules with automatic type generation.
 
 ```html
-<script type="module" src="https://esm.sh/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://esm.sh/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 ```
 
 ## Import Maps
@@ -69,8 +69,8 @@ Import maps provide an npm-like developer experience without a build step. They 
   <script type="importmap">
   {
     "imports": {
-      "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
-      "yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/"
+      "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js",
+      "yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/"
     }
   }
   </script>
@@ -112,7 +112,7 @@ For minimal payload, load only the components you need:
 
 ```html
 <!-- Load just the dialog component (~1KB gzipped) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/dialog.js"></script>
 
 <yz-dialog id="my-dialog">
   <p>Minimal bundle, maximum functionality.</p>
@@ -181,8 +181,8 @@ The Yetzirah Alpine.js plugin provides reactive bindings for components. Load it
   {
     "imports": {
       "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js",
-      "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
-      "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/cdn/yetzirah-alpine.js"
+      "@grimoire-intel/yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js",
+      "@grimoire-intel/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/cdn/yetzirah-alpine.js"
     }
   }
   </script>
@@ -190,11 +190,11 @@ The Yetzirah Alpine.js plugin provides reactive bindings for components. Load it
 <body>
   <script type="module">
     // Load Yetzirah core components
-    import '@grimoire/yetzirah-core';
+    import '@grimoire-intel/yetzirah';
     
     // Load and initialize Alpine with Yetzirah plugin
     import Alpine from 'alpinejs';
-    import yetzirahPlugin from '@grimoire/yetzirah-alpine';
+    import yetzirahPlugin from '@grimoire-intel/yetzirah-alpine';
     
     Alpine.plugin(yetzirahPlugin);
     Alpine.start();
@@ -224,12 +224,12 @@ For simpler setups without import maps:
 
 ```html
 <!-- Load Yetzirah core -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <!-- Load Alpine + plugin -->
 <script type="module">
   import Alpine from 'https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js';
-  import yetzirahPlugin from 'https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/cdn/yetzirah-alpine.js';
+  import yetzirahPlugin from 'https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/cdn/yetzirah-alpine.js';
   
   Alpine.plugin(yetzirahPlugin);
   Alpine.start();
@@ -244,7 +244,7 @@ For production, always pin to a specific version:
 
 ```html
 <!-- Exact version (most stable) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/core.js"></script>
 ```
 
 ### Version Strategies
@@ -262,7 +262,7 @@ For maximum security, use SRI hashes:
 
 ```html
 <script type="module"
-  src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js"
+  src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/core.js"
   integrity="sha384-..."
   crossorigin="anonymous"></script>
 ```
@@ -281,7 +281,7 @@ Yetzirah components are unstyled by default. Pair with Tachyons for rapid stylin
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4/css/tachyons.min.css">
 
   <!-- Yetzirah Components -->
-  <script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 </head>
 <body class="sans-serif pa4">
   <yz-dialog id="styled-dialog" class="pa4 br3 shadow-2 mw6">
@@ -319,7 +319,7 @@ Here's a full example with import maps, Tachyons, and multiple components:
   <script type="importmap">
   {
     "imports": {
-      "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"
+      "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"
     }
   }
   </script>

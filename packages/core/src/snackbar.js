@@ -2,7 +2,7 @@
  * ytz-snackbar - Transient notification Web Component.
  * Provides auto-dismissing notifications with queue management and positioning.
  *
- * @module @grimoire/yetzirah-core/snackbar
+ * @module @grimoire-intel/yetzirah/snackbar
  * @example
  * <ytz-snackbar id="snack">File saved successfully</ytz-snackbar>
  *

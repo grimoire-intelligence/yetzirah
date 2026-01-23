@@ -36,7 +36,7 @@ Yetzirah extracts what MUI got right and discards everything else.
 
 ```
 ┌─────────────────────────────────────────────┐
-│              @grimoire/yetzirah-core                 │
+│              @grimoire-intel/yetzirah                 │
 │    Web Components (light DOM, no Shadow)    │
 │  <ytz-dialog>, <ytz-autocomplete>, etc.     │
 └─────────────────────────────────────────────┘
@@ -69,8 +69,8 @@ Yetzirah extracts what MUI got right and discards everything else.
 
 Ship the foundation and the largest market.
 
-- `@grimoire/yetzirah-core` — Web Components, works in vanilla HTML
-- `@grimoire/yetzirah-react` — Thin wrappers for React integration
+- `@grimoire-intel/yetzirah` — Web Components, works in vanilla HTML
+- `@grimoire-intel/yetzirah-react` — Thin wrappers for React integration
 - NPM distribution primary, CDN available
 - Tachyons recommended for styling, any CSS works
 
@@ -80,9 +80,9 @@ Ship the foundation and the largest market.
 
 Expand to the rest of the framework market.
 
-- `@grimoire/yetzirah-vue` — Vue 3 wrappers with proper reactivity binding
-- `@grimoire/yetzirah-svelte` — Svelte wrappers (likely thinnest of all)
-- `@grimoire/yetzirah-angular` — Angular wrappers with change detection integration
+- `@grimoire-intel/yetzirah-vue` — Vue 3 wrappers with proper reactivity binding
+- `@grimoire-intel/yetzirah-svelte` — Svelte wrappers (likely thinnest of all)
+- `@grimoire-intel/yetzirah-angular` — Angular wrappers with change detection integration
 
 **Target audience:** Everyone else who hates their framework's Material implementation.
 
@@ -103,7 +103,7 @@ Extend to minimalist frameworks, ship additional components, and finalize npm di
 
 #### NPM Distribution Setup
 
-Finalize `@grimoire` organization on npmjs.com and publish all packages. Until then, CDN distribution via jsDelivr/unpkg serves as primary distribution channel.
+Finalize `@grimoire-intel` organization on npmjs.com and publish all packages. Until then, CDN distribution via jsDelivr/unpkg serves as primary distribution channel.
 
 #### Additional Components
 
@@ -114,7 +114,7 @@ Finalize `@grimoire` organization on npmjs.com and publish all packages. Until t
 | **Badge** | `<ytz-badge>` | Notification dot/count overlay. Positioned relative to slotted content. |
 | **Carousel** | `<ytz-carousel>` | *Maybe.* Stripped-down version—no infinite scroll, no autoplay by default. Touch/swipe, keyboard nav, dots/arrows. Based on existing MUI-idiomatic implementation. |
 
-#### Solid.js Wrappers (`@grimoire/yetzirah-solid`)
+#### Solid.js Wrappers (`@grimoire-intel/yetzirah-solid`)
 
 Solid.js developers prioritize fine-grained reactivity and minimal overhead—the same values Yetzirah embodies. The wrapper will be thin, leveraging Solid's excellent Web Component interop.
 
@@ -125,7 +125,7 @@ Solid.js developers prioritize fine-grained reactivity and minimal overhead—th
 
 **Why Solid fits:** Solid compiles away the framework, leaving only DOM operations—philosophically aligned with "the platform is sufficient."
 
-#### Alpine.js Plugin (`@grimoire/yetzirah-alpine`)
+#### Alpine.js Plugin (`@grimoire-intel/yetzirah-alpine`)
 
 Alpine.js is the jQuery of the modern era: progressive enhancement without build steps. Its CDN-first distribution makes it a natural complement to Yetzirah's Phase 3 work.
 
@@ -168,7 +168,7 @@ Alpine.js is the jQuery of the modern era: progressive enhancement without build
 
 ## Technical Foundation
 
-### Core (`@grimoire/yetzirah-core`)
+### Core (`@grimoire-intel/yetzirah`)
 
 | Aspect | Choice | Rationale |
 |--------|--------|-----------|
@@ -180,12 +180,12 @@ Alpine.js is the jQuery of the modern era: progressive enhancement without build
 
 | Package | Responsibility |
 |---------|---------------|
-| `@grimoire/yetzirah-react` | `onX` → `addEventListener` bridging, ref forwarding, boolean attribute handling |
-| `@grimoire/yetzirah-vue` | `v-model` support, `.sync` handling, event mapping |
-| `@grimoire/yetzirah-svelte` | Event forwarding, reactive attribute binding |
-| `@grimoire/yetzirah-angular` | `ControlValueAccessor` for forms, change detection |
-| `@grimoire/yetzirah-solid` | Signal integration, fine-grained reactivity binding |
-| `@grimoire/yetzirah-alpine` | `x-ytz` directive, `event.detail` → `event.target` bridging |
+| `@grimoire-intel/yetzirah-react` | `onX` → `addEventListener` bridging, ref forwarding, boolean attribute handling |
+| `@grimoire-intel/yetzirah-vue` | `v-model` support, `.sync` handling, event mapping |
+| `@grimoire-intel/yetzirah-svelte` | Event forwarding, reactive attribute binding |
+| `@grimoire-intel/yetzirah-angular` | `ControlValueAccessor` for forms, change detection |
+| `@grimoire-intel/yetzirah-solid` | Signal integration, fine-grained reactivity binding |
+| `@grimoire-intel/yetzirah-alpine` | `x-ytz` directive, `event.detail` → `event.target` bridging |
 
 Wrappers are thin. If a wrapper exceeds 50 lines per component, something is wrong.
 
@@ -199,7 +199,7 @@ Some frameworks have native Web Component interop and need no wrapper:
 | **HTMX** | HTML-centric, attribute-driven. Yetzirah's `<ytz-*>` elements work like any HTML element with `hx-*` attributes. |
 | **Stencil** | Compiles to Web Components. Native interop with other custom elements including Yetzirah. |
 
-These frameworks can import `@grimoire/yetzirah-core` directly and use `<ytz-dialog>`, `<ytz-menu>`, etc. without any bridging code.
+These frameworks can import `@grimoire-intel/yetzirah` directly and use `<ytz-dialog>`, `<ytz-menu>`, etc. without any bridging code.
 
 ---
 
@@ -211,10 +211,10 @@ CDN is the primary distribution channel until npm organization is finalized in P
 
 ```html
 <!-- Core components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <!-- Individual components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/dialog.js"></script>
 ```
 
 ### NPM (Phase 4)
@@ -223,13 +223,13 @@ npm publishing deferred until `@grimoire` organization is claimed on npmjs.com.
 
 ```bash
 # Core only (vanilla HTML)
-npm install @grimoire/yetzirah-core
+npm install @grimoire-intel/yetzirah
 
 # With React wrappers
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-react
+npm install @grimoire-intel/yetzirah @grimoire-intel/yetzirah-react
 
 # With Vue wrappers
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-vue
+npm install @grimoire-intel/yetzirah @grimoire-intel/yetzirah-vue
 ```
 
 ---
@@ -329,7 +329,7 @@ clickOutside()  → Dialog, Menu, Autocomplete, Popover
 keyNav()        → Menu, Autocomplete, Tabs, Listbox
 ```
 
-These live in `@grimoire/yetzirah-core` as internal utilities. Not exported—implementation details.
+These live in `@grimoire-intel/yetzirah` as internal utilities. Not exported—implementation details.
 
 ---
 
@@ -375,7 +375,7 @@ Every Yetzirah component guarantees:
 ### Vanilla HTML
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <ytz-button onclick="document.getElementById('my-dialog').setAttribute('open', '')" class="ph3 pv2 br2 white bg-blue">
   Open Dialog
@@ -393,7 +393,7 @@ Every Yetzirah component guarantees:
 ### React
 
 ```jsx
-import { Dialog, Button } from '@grimoire/yetzirah-react'
+import { Dialog, Button } from '@grimoire-intel/yetzirah-react'
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -424,7 +424,7 @@ function App() {
 
 ```vue
 <script setup>
-import { Dialog, Button } from '@grimoire/yetzirah-vue'
+import { Dialog, Button } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const open = ref(false)
@@ -453,7 +453,7 @@ const open = ref(false)
 
 ```svelte
 <script>
-  import { Dialog, Button } from '@grimoire/yetzirah-svelte'
+  import { Dialog, Button } from '@grimoire-intel/yetzirah-svelte'
   let open = false
 </script>
 
@@ -492,7 +492,7 @@ const open = ref(false)
 ## Core Implementation Pattern
 
 ```javascript
-// @grimoire/yetzirah-core/dialog.js
+// @grimoire-intel/yetzirah/dialog.js
 
 class YtzDialog extends HTMLElement {
   static observedAttributes = ['open']
@@ -554,9 +554,9 @@ export { YtzDialog }
 ## React Wrapper Pattern
 
 ```jsx
-// @grimoire/yetzirah-react/dialog.js
+// @grimoire-intel/yetzirah-react/dialog.js
 
-import '@grimoire/yetzirah-core/dialog.js'
+import '@grimoire-intel/yetzirah/dialog.js'
 import { useRef, useEffect } from 'react'
 
 export function Dialog({ open, onClose, children, className, ...props }) {
@@ -1117,9 +1117,9 @@ MUI's `m`, `p`, `mx`, `py`, etc. map directly to Tachyons:
 For gradual migration:
 
 ```jsx
-// @grimoire/yetzirah-react/mui-compat
-export { Dialog as MuiDialog } from '@grimoire/yetzirah-react'
-export { Autocomplete as MuiAutocomplete } from '@grimoire/yetzirah-react'
+// @grimoire-intel/yetzirah-react/mui-compat
+export { Dialog as MuiDialog } from '@grimoire-intel/yetzirah-react'
+export { Autocomplete as MuiAutocomplete } from '@grimoire-intel/yetzirah-react'
 // ...
 
 // Passthrough HTML elements
@@ -1201,14 +1201,14 @@ export const Box = (props) => <div {...props} />
 
 | | MUI | Headless UI | Radix | Shoelace | Yetzirah |
 |---|-----|-------------|-------|----------|----------|
-| Bundle | ~300kb | ~30kb | ~50kb | ~80kb | <10kb |
+| Bundle | ~300kb | ~30kb | ~50kb | ~80kb | <13KB |
 | Base | React | React | React | Web Components | Web Components |
 | React | ✓ | ✓ | ✓ | Via wrapper | ✓ |
 | Vue | Community | ✗ | ✗ | Via wrapper | ✓ |
 | Svelte | Community | ✗ | ✗ | Via wrapper | ✓ |
 | Angular | Community | ✗ | ✗ | Via wrapper | ✓ |
-| Solid | ✗ | ✗ | ✗ | Via wrapper | ✓ (Phase 4) |
-| Alpine | ✗ | ✗ | ✗ | ✗ | ✓ (Phase 4) |
+| Solid | ✗ | ✗ | ✗ | Via wrapper | ✓ |
+| Alpine | ✗ | ✗ | ✗ | ✗ | ✓ |
 | Lit | ✗ | ✗ | ✗ | ✓ | ✓ (native) |
 | HTMX | ✗ | ✗ | ✗ | ✗ | ✓ (native) |
 | Stencil | ✗ | ✗ | ✗ | ✓ | ✓ (native) |

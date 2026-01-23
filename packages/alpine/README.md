@@ -1,15 +1,15 @@
-# @grimoire/yetzirah-alpine
+# @grimoire-intel/yetzirah-alpine
 
 Alpine.js plugin for Yetzirah Web Components.
 
 ## Installation
 
 ```bash
-npm install @grimoire/yetzirah-alpine
+npm install @grimoire-intel/yetzirah-alpine
 # or
-pnpm add @grimoire/yetzirah-alpine
+pnpm add @grimoire-intel/yetzirah-alpine
 # or
-yarn add @grimoire/yetzirah-alpine
+yarn add @grimoire-intel/yetzirah-alpine
 ```
 
 ## Requirements
@@ -22,7 +22,7 @@ Register the plugin with Alpine before calling `Alpine.start()`:
 
 ```js
 import Alpine from 'alpinejs'
-import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
+import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
 
 Alpine.plugin(yetzirahPlugin)
 Alpine.start()
@@ -309,46 +309,22 @@ Tests use [Vitest](https://vitest.dev/) with happy-dom for DOM simulation.
 This package includes full TypeScript definitions:
 
 ```typescript
-import type { YtzMagic, SnackbarOptions, YetzirahAlpineOptions } from '@grimoire/yetzirah-alpine'
+import type { YtzMagic, SnackbarOptions, YetzirahAlpineOptions } from '@grimoire-intel/yetzirah-alpine'
 ```
 
-## Architecture
+## How It Works
 
-The Alpine plugin provides three integration layers:
+The plugin bridges Alpine's reactive system with Yetzirah's web components:
 
-1. **Component Directives** (`x-ytz-*`): Individual directives for each component type with specific attribute and event bindings.
+- **`effect()`**: Syncs Alpine state to component attributes
+- **Event listeners**: Sync component events back to Alpine state
+- **`cleanup()`**: Removes listeners when components are destroyed
 
-2. **Model Directive** (`x-ytz:model`): Unified two-way binding that auto-detects the component type and applies appropriate bindings.
-
-3. **Magic Methods** (`$ytz`): Programmatic utilities for controlling components from Alpine expressions.
-
-### How Directives Work
-
-Directives use Alpine's reactive system:
-- `effect()` - Syncs Alpine state to component attributes
-- Event listeners - Sync component events back to Alpine state
-- `cleanup()` - Removes event listeners when component is destroyed
-
-```js
-// Simplified directive implementation
-Alpine.directive('ytz-dialog', (el, { expression }, { evaluate, effect, cleanup }) => {
-  // Sync state → attribute
-  effect(() => {
-    const isOpen = evaluate(expression)
-    if (isOpen) el.setAttribute('open', '')
-    else el.removeAttribute('open')
-  })
-
-  // Sync event → state
-  const handler = () => Alpine.evaluate(el, `${expression} = false`)
-  el.addEventListener('close', handler)
-  cleanup(() => el.removeEventListener('close', handler))
-})
-```
+See [@grimoire-intel/yetzirah](https://www.npmjs.com/package/@grimoire-intel/yetzirah) for full component documentation.
 
 ## License
 
-ISC
+MIT
 
 ## Repository
 

@@ -2,7 +2,7 @@
  * Integration tests for Svelte Tier 1 framework wrappers.
  * Verifies event forwarding, attribute binding, and two-way binding across all Tier 1 components.
  *
- * @module @grimoire/yetzirah-svelte/__tests__/tier1-integration
+ * @module @grimoire-intel/yetzirah-svelte/__tests__/tier1-integration
  */
 
 import { describe, it, expect } from 'vitest'

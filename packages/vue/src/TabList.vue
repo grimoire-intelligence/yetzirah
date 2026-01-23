@@ -9,7 +9,7 @@
  * Semantic wrapper for grouping Tab components.
  * This is a simple container component for better semantic structure.
  *
- * @module @grimoire/yetzirah-vue/TabList
+ * @module @grimoire-intel/yetzirah-vue/TabList
  *
  * @example
  * <template>

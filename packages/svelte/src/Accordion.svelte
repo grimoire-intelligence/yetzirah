@@ -1,5 +1,5 @@
 <script lang="ts">
-	import '@grimoire/yetzirah-core'
+	import '@grimoire-intel/yetzirah'
 
 	/**
 	 * Svelte wrapper for ytz-accordion Web Component.

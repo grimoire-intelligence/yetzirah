@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-menu-item Web Component.
  * Individual menu item within a Menu component.
  *
- * @module @grimoire/yetzirah-vue/MenuItem
+ * @module @grimoire-intel/yetzirah-vue/MenuItem
  *
  * @example
  * <template>
@@ -30,7 +30,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the MenuItem component

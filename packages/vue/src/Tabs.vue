@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-tabs Web Component.
  * Provides v-model for two-way binding of selected tab with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Tabs
+ * @module @grimoire-intel/yetzirah-vue/Tabs
  *
  * @example
  * <template>
@@ -38,7 +38,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Tabs component

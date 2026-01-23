@@ -2,7 +2,7 @@
  * Solid JSX type declarations for Yetzirah Web Components.
  *
  * To use, add a triple-slash reference in your project:
- * /// <reference types="@grimoire/yetzirah-solid/jsx" />
+ * /// <reference types="@grimoire-intel/yetzirah-solid/jsx" />
  */
 
 import type {

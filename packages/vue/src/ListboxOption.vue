@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-option Web Component (used within Listbox).
  * Represents a selectable option in a listbox.
  *
- * @module @grimoire/yetzirah-vue/ListboxOption
+ * @module @grimoire-intel/yetzirah-vue/ListboxOption
  *
  * @example
  * <template>
@@ -27,7 +27,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the ListboxOption component

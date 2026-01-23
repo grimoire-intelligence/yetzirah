@@ -11,7 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { useAttrs } from 'vue'
 
 /**

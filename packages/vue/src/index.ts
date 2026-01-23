@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-vue
+ * @grimoire-intel/yetzirah-vue
  *
  * Vue 3 wrappers for Yetzirah Web Components.
  * Provides Vue-idiomatic APIs with full TypeScript support.
@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-export { VERSION } from '@grimoire/yetzirah-core'
+export { VERSION } from '@grimoire-intel/yetzirah'
 
 export { default as Accordion } from './Accordion.vue'
 export { default as AccordionItem } from './AccordionItem.vue'

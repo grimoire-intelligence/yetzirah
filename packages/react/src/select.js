@@ -1,9 +1,9 @@
 /**
  * React wrapper for ytz-select.
- * @module @grimoire/yetzirah-react/select
+ * @module @grimoire-intel/yetzirah-react/select
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**

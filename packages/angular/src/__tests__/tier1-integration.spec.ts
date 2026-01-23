@@ -2,7 +2,7 @@
  * Integration tests for Angular Tier 1 framework wrappers.
  * Verifies component creation, input binding, event emission, and ControlValueAccessor implementations.
  *
- * @module @grimoire/yetzirah-angular/__tests__/tier1-integration
+ * @module @grimoire-intel/yetzirah-angular/__tests__/tier1-integration
  */
 
 import { ComponentFixture, TestBed } from '@angular/core/testing'

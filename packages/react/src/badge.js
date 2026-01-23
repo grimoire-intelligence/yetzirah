@@ -2,10 +2,10 @@
  * React wrapper for ytz-badge Web Component.
  * Provides notification badge with count or dot indicator.
  *
- * @module @grimoire/yetzirah-react/badge
+ * @module @grimoire-intel/yetzirah-react/badge
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle } from 'react'
 
 /**

@@ -1,5 +1,5 @@
 /**
- * Public API Surface of @grimoire/yetzirah-angular
+ * Public API Surface of @grimoire-intel/yetzirah-angular
  */
 
 export * from './lib/yetzirah.module';

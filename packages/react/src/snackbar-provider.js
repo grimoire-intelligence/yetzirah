@@ -1,7 +1,7 @@
 /**
  * SnackbarProvider context for app-wide snackbar management.
  *
- * @module @grimoire/yetzirah-react/snackbar-provider
+ * @module @grimoire-intel/yetzirah-react/snackbar-provider
  */
 
 import { createContext, useContext, useState, useCallback, useRef } from 'react'

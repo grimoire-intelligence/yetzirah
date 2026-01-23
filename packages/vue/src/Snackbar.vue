@@ -18,7 +18,7 @@
  * Vue 3 wrapper for ytz-snackbar Web Component.
  * Provides v-model:open for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Snackbar
+ * @module @grimoire-intel/yetzirah-vue/Snackbar
  *
  * @example
  * <template>
@@ -36,7 +36,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { ref, watch } from 'vue'
 
 /**

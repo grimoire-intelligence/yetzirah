@@ -12,7 +12,7 @@
  * Vue 3 wrapper for ytz-menu-trigger Web Component.
  * Trigger element for opening a Menu component.
  *
- * @module @grimoire/yetzirah-vue/MenuTrigger
+ * @module @grimoire-intel/yetzirah-vue/MenuTrigger
  *
  * @example
  * <template>
@@ -26,5 +26,5 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 </script>

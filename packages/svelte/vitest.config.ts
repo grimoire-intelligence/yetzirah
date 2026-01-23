@@ -30,7 +30,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@grimoire/yetzirah-core': resolve(__dirname, './vitest.mock.ts')
+      '@grimoire-intel/yetzirah': resolve(__dirname, './vitest.mock.ts')
     },
     conditions: ['browser']
   },

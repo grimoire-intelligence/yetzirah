@@ -21,7 +21,7 @@
  * Vue 3 wrapper for ytz-autocomplete Web Component.
  * Provides v-model for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Autocomplete
+ * @module @grimoire-intel/yetzirah-vue/Autocomplete
  *
  * @example
  * <template>
@@ -52,7 +52,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Autocomplete component

@@ -3,7 +3,7 @@
  * Prevents the body scroll stuck bug when multiple components
  * (dialogs, drawers) request scroll lock simultaneously.
  *
- * @module @grimoire/yetzirah-core/utils/scroll-lock
+ * @module @grimoire-intel/yetzirah/utils/scroll-lock
  */
 
 /** @type {number} Number of components currently requesting scroll lock */

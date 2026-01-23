@@ -158,7 +158,7 @@ estimated_files:
 Create React wrapper for `<ytz-snackbar>` following existing wrapper patterns. Bridge `onDismiss` callback, expose `show()` and `dismiss()` methods via ref.
 
 **Acceptance Criteria:**
-- [ ] `<Snackbar>` component exported from @grimoire/yetzirah-react
+- [ ] `<Snackbar>` component exported from @grimoire-intel/yetzirah-react
 - [ ] `onDismiss` prop bridges to dismiss event
 - [ ] `open` prop controls visibility
 - [ ] `autoHideDuration` prop sets dismiss timing
@@ -193,7 +193,7 @@ estimated_files:
 Create React wrapper for `<ytz-progress>` following existing wrapper patterns. Support both `CircularProgress` and `LinearProgress` named exports for MUI compatibility.
 
 **Acceptance Criteria:**
-- [ ] `<Progress>` component exported from @grimoire/yetzirah-react
+- [ ] `<Progress>` component exported from @grimoire-intel/yetzirah-react
 - [ ] `<CircularProgress>` alias for circular variant
 - [ ] `<LinearProgress>` alias for linear variant
 - [ ] `value` prop for determinate mode
@@ -227,7 +227,7 @@ estimated_files:
 Create React wrapper for `<ytz-badge>` following existing wrapper patterns. Children become the anchored content.
 
 **Acceptance Criteria:**
-- [ ] `<Badge>` component exported from @grimoire/yetzirah-react
+- [ ] `<Badge>` component exported from @grimoire-intel/yetzirah-react
 - [ ] `badgeContent` prop sets the badge value
 - [ ] `max` prop caps displayed value
 - [ ] `invisible` prop hides the badge
@@ -370,7 +370,7 @@ estimated_files:
     description: Add solid package to workspace
 ---
 **Description:**
-Set up `@grimoire/yetzirah-solid` package with proper Solid.js build configuration. Create shared utilities for signal integration and event bridging.
+Set up `@grimoire-intel/yetzirah-solid` package with proper Solid.js build configuration. Create shared utilities for signal integration and event bridging.
 
 **Acceptance Criteria:**
 - [ ] Package builds with `pnpm build`
@@ -550,7 +550,7 @@ estimated_files:
     description: Add alpine package to workspace
 ---
 **Description:**
-Set up `@grimoire/yetzirah-alpine` package as an Alpine.js plugin. Create the plugin registration infrastructure and CDN-ready build.
+Set up `@grimoire-intel/yetzirah-alpine` package as an Alpine.js plugin. Create the plugin registration infrastructure and CDN-ready build.
 
 **Acceptance Criteria:**
 - [ ] Package builds as ESM and UMD for CDN usage
@@ -839,11 +839,11 @@ estimated_files:
     description: Guide for maintainers on publishing releases
 ---
 **Description:**
-Set up automated package publication to npm registry with compatibility for pnpm, bun, and yarn. Configure GitHub Actions workflow for version tagging, changelog generation, and multi-package publishing. All @grimoire/yetzirah-* packages should be published atomically with consistent versions.
+Set up automated package publication to npm registry with compatibility for pnpm, bun, and yarn. Configure GitHub Actions workflow for version tagging, changelog generation, and multi-package publishing. All @grimoire-intel/yetzirah-* packages should be published atomically with consistent versions.
 
 **Acceptance Criteria:**
 - [ ] GitHub Actions workflow publishes on version tag push
-- [ ] All 7 packages published atomically (@grimoire/yetzirah-core, -react, -vue, -svelte, -angular, -solid, -alpine)
+- [ ] All 7 packages published atomically (@grimoire-intel/yetzirah, -react, -vue, -svelte, -angular, -solid, -alpine)
 - [ ] Packages installable via `npm install`, `pnpm add`, `bun add`, and `yarn add`
 - [ ] Provenance attestation enabled for supply chain security
 - [ ] CDN bundles automatically available on jsDelivr/unpkg after npm publish

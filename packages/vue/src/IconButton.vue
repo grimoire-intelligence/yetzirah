@@ -16,7 +16,7 @@
  * Vue 3 wrapper for ytz-icon-button Web Component.
  * Provides icon button with required aria-label for accessibility.
  *
- * @module @grimoire/yetzirah-vue/IconButton
+ * @module @grimoire-intel/yetzirah-vue/IconButton
  *
  * @example
  * <template>
@@ -31,7 +31,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the IconButton component

@@ -125,6 +125,6 @@ Demo should showcase:
 
 ## Acceptance Criteria
 - [ ] Core component tests pass
-- [ ] `pnpm --filter @grimoire/yetzirah-solid test` succeeds
+- [ ] `pnpm --filter @grimoire-intel/yetzirah-solid test` succeeds
 - [ ] docs/solid.md documents usage patterns
 - [ ] Demo app runs (optional)

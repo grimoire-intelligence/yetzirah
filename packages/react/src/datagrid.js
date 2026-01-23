@@ -2,10 +2,10 @@
  * React wrapper for ytz-datagrid Web Component.
  * Provides data grid with virtual scrolling, sorting, and filtering.
  *
- * @module @grimoire/yetzirah-react/datagrid
+ * @module @grimoire-intel/yetzirah-react/datagrid
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle, useEffect, useCallback, Children } from 'react'
 
 /**

@@ -13,7 +13,7 @@
  * Vue 3 wrapper for ytz-tab Web Component.
  * Represents a single tab button within a Tabs component.
  *
- * @module @grimoire/yetzirah-vue/Tab
+ * @module @grimoire-intel/yetzirah-vue/Tab
  *
  * @example
  * <template>
@@ -26,7 +26,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Tab component

@@ -21,7 +21,7 @@
  * Vue 3 wrapper for ytz-tooltip Web Component.
  * Provides positioned hint text on hover/focus with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Tooltip
+ * @module @grimoire-intel/yetzirah-vue/Tooltip
  *
  * @example
  * <template>
@@ -52,7 +52,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Tooltip component

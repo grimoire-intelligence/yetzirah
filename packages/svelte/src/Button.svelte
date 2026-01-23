@@ -2,10 +2,10 @@
   Svelte wrapper for ytz-button Web Component.
   Polymorphic button/anchor that renders <a> when href provided, <button> otherwise.
 
-  @module @grimoire/yetzirah-svelte/Button
+  @module @grimoire-intel/yetzirah-svelte/Button
 -->
 <script>
-  import '@grimoire/yetzirah-core'
+  import '@grimoire-intel/yetzirah'
 
   /**
    * Button component - polymorphic button/anchor.

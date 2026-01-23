@@ -1,5 +1,5 @@
 {
-  "name": "@grimoire/yetzirah-alpine",
+  "name": "@grimoire-intel/yetzirah-alpine",
   "version": "0.1.0",
   "description": "Alpine.js plugin for Yetzirah Web Components",
   "type": "module",
@@ -39,7 +39,7 @@
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
@@ -49,7 +49,7 @@
     "alpinejs": ">=3.0.0"
   },
   "dependencies": {
-    "@grimoire/yetzirah-core": "workspace:*"
+    "@grimoire-intel/yetzirah": "workspace:*"
   },
   "sideEffects": false,
   "devDependencies": {

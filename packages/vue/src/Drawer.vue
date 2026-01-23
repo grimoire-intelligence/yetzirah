@@ -17,7 +17,7 @@
  * Provides v-model:open for two-way binding with full TypeScript support.
  * Slide-in panel with focus trap, scroll lock, and escape-to-close.
  *
- * @module @grimoire/yetzirah-vue/Drawer
+ * @module @grimoire-intel/yetzirah-vue/Drawer
  *
  * @example
  * <template>
@@ -41,7 +41,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { computed } from 'vue'
 
 /**

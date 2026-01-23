@@ -1,6 +1,6 @@
 /**
  * ytz-listbox - Keyboard-navigable list selection with single/multi-select modes.
- * @module @grimoire/yetzirah-core/listbox
+ * @module @grimoire-intel/yetzirah/listbox
  */
 
 import { createKeyNav } from './utils/key-nav.js'

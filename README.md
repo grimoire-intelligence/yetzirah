@@ -4,7 +4,7 @@
 
 Yetzirah is designed for two audiences: human developers who want accessible, unstyled primitives, and language models that need to reason about your UI without hallucinating APIs.
 
-A single MUI icon is 16KB gzipped. Yetzirah is under 15KB. Twenty-one components, full ARIA, no runtime CSS—small enough that your AI reads the whole thing.
+A single MUI icon is 16KB gzipped. Yetzirah is under 13KB. Twenty-one components, full ARIA, no runtime CSS—small enough that your AI reads the whole thing.
 
 When something's wrong? The output is `bg-blue white ph3 pv2 br2`, not a theme object four levels deep. You debug CSS classes, not JavaScript.
 
@@ -17,13 +17,13 @@ When something's wrong? The output is `bg-blue white ph3 pv2 br2`, not a theme o
 **MUI refugees.** Same components, fraction of the bundle.
 **AI-first teams.** Haiku gets it right.
 **Multi-framework shops.** One library, every framework.
-**Low-bandwidth apps.** Under 15KB on the wire.
+**Low-bandwidth apps.** Under 13KB on the wire.
 
 ### Alternatives
 
 | | MUI | Radix | Shoelace | Yetzirah |
 |---|-----|-------|----------|----------|
-| Size | >250KB | >40KB | >75KB | <15KB |
+| Size | >250KB | >40KB | >75KB | <13KB |
 | Frameworks | React | React | All | All |
 | AI-ready | ✗ | partial | partial | ✓ |
 
@@ -59,7 +59,7 @@ Use Tachyons classes based on button intent:
 One script tag. No npm. No build step. Working components in 10 seconds:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <ytz-dialog id="my-dialog">
   <div class="dialog-content">
@@ -77,44 +77,44 @@ One script tag. No npm. No build step. Working components in 10 seconds:
 
 ### React (18+)
 ```bash
-npm install @grimoire/yetzirah-react
+npm install @grimoire-intel/yetzirah-react
 ```
 
 ### Vue (3.3+)
 ```bash
-npm install @grimoire/yetzirah-vue
+npm install @grimoire-intel/yetzirah-vue
 ```
 > Requires Vue 3.3+ for `defineModel` support
 
 ### Svelte (4+)
 ```bash
-npm install @grimoire/yetzirah-svelte
+npm install @grimoire-intel/yetzirah-svelte
 ```
 > Supports Svelte 4 and 5
 
 ### Angular (16+)
 ```bash
-npm install @grimoire/yetzirah-angular
+npm install @grimoire-intel/yetzirah-angular
 ```
 > Requires Angular 16+ for standalone components
 
 ### Solid
 ```bash
-npm install @grimoire/yetzirah-solid
+npm install @grimoire-intel/yetzirah-solid
 ```
 > Primitive wrappers with reactive props
 
 ### Alpine
 ```bash
-npm install @grimoire/yetzirah-alpine
+npm install @grimoire-intel/yetzirah-alpine
 ```
 > Directives for `x-model` binding and attribute sync
 
 ### Vanilla HTML (Web Components)
 ```bash
-npm install @grimoire/yetzirah-core
+npm install @grimoire-intel/yetzirah
 ```
-> Framework packages automatically include the core, so you only need to install `@grimoire/yetzirah-core` directly when using vanilla HTML without a framework.
+> Framework packages automatically include the core, so you only need to install `@grimoire-intel/yetzirah` directly when using vanilla HTML without a framework.
 
 ### No Wrapper Needed
 
@@ -126,7 +126,7 @@ These frameworks have excellent Web Component interop and work with Yetzirah out
 | **HTMX** | HTML-centric; Yetzirah elements work like any HTML element |
 | **Stencil** | Web Components compiler; native interop with `<ytz-*>` elements |
 
-Just import `@grimoire/yetzirah-core` and use the elements directly.
+Just import `@grimoire-intel/yetzirah` and use the elements directly.
 
 ## Philosophy
 
@@ -181,13 +181,13 @@ MUI can't shrink. Tailwind keeps growing. They're locked into expensive models. 
 
 | Package | Gzipped |
 |---------|---------|
-| **@grimoire/yetzirah-core** (CDN) | 12.73 KB |
-| @grimoire/yetzirah-react | 2.53 KB |
-| @grimoire/yetzirah-vue | 3.91 KB |
-| @grimoire/yetzirah-svelte | 0.51 KB |
-| @grimoire/yetzirah-angular | 11.69 KB |
-| @grimoire/yetzirah-solid | 3.48 KB |
-| @grimoire/yetzirah-alpine | 2.41 KB |
+| **@grimoire-intel/yetzirah** (CDN) | 12.63 KB |
+| @grimoire-intel/yetzirah-react | 3.41 KB |
+| @grimoire-intel/yetzirah-vue | 4.47 KB |
+| @grimoire-intel/yetzirah-svelte | 0.51 KB |
+| @grimoire-intel/yetzirah-angular | 13.58 KB |
+| @grimoire-intel/yetzirah-solid | 2.03 KB |
+| @grimoire-intel/yetzirah-alpine | 1.79 KB |
 
 Individual components range from 0.50 KB (button) to 3.01 KB (datagrid) gzipped.
 
@@ -223,7 +223,7 @@ Individual components range from 0.50 KB (button) to 3.01 KB (datagrid) gzipped.
 
 ```html
 <script type="module">
-  import '@grimoire/yetzirah-core'
+  import '@grimoire-intel/yetzirah'
 </script>
 
 <ytz-dialog id="my-dialog">
@@ -243,7 +243,7 @@ Individual components range from 0.50 KB (button) to 3.01 KB (datagrid) gzipped.
 ### React
 
 ```jsx
-import { Dialog, Button, Toggle, Slider } from '@grimoire/yetzirah-react'
+import { Dialog, Button, Toggle, Slider } from '@grimoire-intel/yetzirah-react'
 
 function App() {
   const [open, setOpen] = useState(false)
@@ -281,7 +281,7 @@ function App() {
 ```vue
 <script setup>
 import { ref } from 'vue'
-import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-vue'
+import { Toggle, Slider, ThemeToggle } from '@grimoire-intel/yetzirah-vue'
 
 const enabled = ref(false)
 const volume = ref(50)
@@ -306,7 +306,7 @@ const volume = ref(50)
 
 ```svelte
 <script>
-  import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-svelte'
+  import { Toggle, Slider, ThemeToggle } from '@grimoire-intel/yetzirah-svelte'
 
   let enabled = false
   let volume = 50
@@ -331,7 +331,7 @@ const volume = ref(50)
 // app.component.ts
 import { Component } from '@angular/core'
 import { FormsModule } from '@angular/forms'
-import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-angular'
+import { Toggle, Slider, ThemeToggle } from '@grimoire-intel/yetzirah-angular'
 
 @Component({
   standalone: true,
@@ -364,7 +364,7 @@ export class AppComponent {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Toggle, Slider, ThemeToggle } from '@grimoire/yetzirah-solid'
+import { Toggle, Slider, ThemeToggle } from '@grimoire-intel/yetzirah-solid'
 
 function App() {
   const [enabled, setEnabled] = createSignal(false)
@@ -393,7 +393,7 @@ function App() {
 ```html
 <script type="module">
   import Alpine from 'alpinejs'
-  import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
+  import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
 
   Alpine.plugin(yetzirahPlugin)
   Alpine.start()
@@ -434,10 +434,10 @@ See the [MUI Rosetta Stone](demos/rosetta.html) for a complete guide to replicat
 
 ```js
 // Animation and positioning helpers
-import '@grimoire/yetzirah-core/button.css'     // Hover/click feedback
-import '@grimoire/yetzirah-core/dialog.css'     // Overlay positioning, fade-in
-import '@grimoire/yetzirah-core/disclosure.css' // Expand/collapse animation
-import '@grimoire/yetzirah-core/dark.css'       // Dark theme support
+import '@grimoire-intel/yetzirah/button.css'     // Hover/click feedback
+import '@grimoire-intel/yetzirah/dialog.css'     // Overlay positioning, fade-in
+import '@grimoire-intel/yetzirah/disclosure.css' // Expand/collapse animation
+import '@grimoire-intel/yetzirah/dark.css'       // Dark theme support
 ```
 
 ## Dark Mode
@@ -445,7 +445,7 @@ import '@grimoire/yetzirah-core/dark.css'       // Dark theme support
 Use the ThemeToggle component for automatic dark mode support:
 
 ```html
-<link rel="stylesheet" href="@grimoire/yetzirah-core/dark.css">
+<link rel="stylesheet" href="@grimoire-intel/yetzirah/dark.css">
 <ytz-theme-toggle></ytz-theme-toggle>
 ```
 
@@ -582,19 +582,19 @@ pnpm test
 
 ```bash
 # Vue tests
-pnpm --filter @grimoire/yetzirah-vue test
+pnpm --filter @grimoire-intel/yetzirah-vue test
 
 # Svelte tests
-pnpm --filter @grimoire/yetzirah-svelte test
+pnpm --filter @grimoire-intel/yetzirah-svelte test
 
 # Angular tests
-pnpm --filter @grimoire/yetzirah-angular test
+pnpm --filter @grimoire-intel/yetzirah-angular test
 
 # React tests
-pnpm --filter @grimoire/yetzirah-react test
+pnpm --filter @grimoire-intel/yetzirah-react test
 
 # Core tests
-pnpm --filter @grimoire/yetzirah-core test
+pnpm --filter @grimoire-intel/yetzirah test
 ```
 
 ### Watch Mode

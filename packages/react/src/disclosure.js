@@ -2,10 +2,10 @@
  * React wrapper for ytz-disclosure Web Component.
  * Provides controlled/uncontrolled open state management.
  *
- * @module @grimoire/yetzirah-react/disclosure
+ * @module @grimoire-intel/yetzirah-react/disclosure
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

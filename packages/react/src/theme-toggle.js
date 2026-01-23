@@ -2,10 +2,10 @@
  * React wrapper for ytz-theme-toggle Web Component.
  * Provides theme switching with persistence and system preference detection.
  *
- * @module @grimoire/yetzirah-react/theme-toggle
+ * @module @grimoire-intel/yetzirah-react/theme-toggle
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react'
 
 /**

@@ -7,7 +7,7 @@ This guide covers how to use Yetzirah from popular CDN providers and how to self
 The fastest way to get started is with a single script tag:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 ```
 
 All `ytz-*` custom elements are now available in your HTML.
@@ -20,14 +20,14 @@ All `ytz-*` custom elements are now available in your HTML.
 
 ```html
 <!-- All components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <!-- Tier 1 only (~6KB gzipped) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/tier1.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/tier1.js"></script>
 
 <!-- Individual components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/tabs.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/dialog.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/tabs.js"></script>
 ```
 
 **Advantages:**
@@ -42,13 +42,13 @@ All `ytz-*` custom elements are now available in your HTML.
 
 ```html
 <!-- All components -->
-<script type="module" src="https://unpkg.com/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://unpkg.com/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <!-- Tier 1 only -->
-<script type="module" src="https://unpkg.com/@grimoire/yetzirah-core@latest/cdn/tier1.js"></script>
+<script type="module" src="https://unpkg.com/@grimoire-intel/yetzirah@latest/cdn/tier1.js"></script>
 
 <!-- Individual component -->
-<script type="module" src="https://unpkg.com/@grimoire/yetzirah-core@latest/cdn/dialog.js"></script>
+<script type="module" src="https://unpkg.com/@grimoire-intel/yetzirah@latest/cdn/dialog.js"></script>
 ```
 
 **Advantages:**
@@ -62,10 +62,10 @@ All `ytz-*` custom elements are now available in your HTML.
 
 ```html
 <!-- All components -->
-<script type="module" src="https://esm.sh/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://esm.sh/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 
 <!-- With specific target -->
-<script type="module" src="https://esm.sh/@grimoire/yetzirah-core@latest/cdn/core.js?target=es2022"></script>
+<script type="module" src="https://esm.sh/@grimoire-intel/yetzirah@latest/cdn/core.js?target=es2022"></script>
 ```
 
 **Advantages:**
@@ -78,7 +78,7 @@ All `ytz-*` custom elements are now available in your HTML.
 [Skypack](https://www.skypack.dev/) provides optimized packages for modern browsers.
 
 ```html
-<script type="module" src="https://cdn.skypack.dev/@grimoire/yetzirah-core/cdn/core.js"></script>
+<script type="module" src="https://cdn.skypack.dev/@grimoire-intel/yetzirah/cdn/core.js"></script>
 ```
 
 **Advantages:**
@@ -94,7 +94,7 @@ Always pin to a specific version in production to ensure consistent behavior:
 
 ```html
 <!-- Exact version (recommended for production) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/core.js"></script>
 ```
 
 ### Version Strategies
@@ -120,7 +120,7 @@ For maximum security, use SRI hashes to ensure files haven't been tampered with:
 
 ```html
 <script type="module"
-  src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js"
+  src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/core.js"
   integrity="sha384-HASH_HERE"
   crossorigin="anonymous"></script>
 ```
@@ -130,7 +130,7 @@ For maximum security, use SRI hashes to ensure files haven't been tampered with:
 1. **Online tool:** Use [srihash.org](https://www.srihash.org/)
 2. **Command line:**
    ```bash
-   curl -s https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js | openssl dgst -sha384 -binary | openssl base64 -A
+   curl -s https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/core.js | openssl dgst -sha384 -binary | openssl base64 -A
    ```
 
 ## Self-Hosting
@@ -146,12 +146,12 @@ For maximum security, use SRI hashes to ensure files haven't been tampered with:
 
 1. **Install the package:**
    ```bash
-   npm install @grimoire/yetzirah-core
+   npm install @grimoire-intel/yetzirah
    ```
 
 2. **Copy CDN files to your static directory:**
    ```bash
-   cp -r node_modules/@grimoire/yetzirah-core/cdn ./public/vendor/yetzirah/
+   cp -r node_modules/@grimoire-intel/yetzirah/cdn ./public/vendor/yetzirah/
    ```
 
 3. **Reference from your HTML:**
@@ -174,7 +174,7 @@ const files = [
   // Add individual components as needed
 ];
 
-const src = 'node_modules/@grimoire/yetzirah-core/cdn';
+const src = 'node_modules/@grimoire-intel/yetzirah/cdn';
 const dest = 'public/vendor/yetzirah';
 
 mkdirSync(dest, { recursive: true });
@@ -218,8 +218,8 @@ Import maps provide an npm-like developer experience without a build step:
 <script type="importmap">
 {
   "imports": {
-    "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/core.js",
-    "yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@0.1.0/cdn/"
+    "yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/core.js",
+    "yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@0.1.0/cdn/"
   }
 }
 </script>
@@ -274,7 +274,7 @@ If using a service worker, include Yetzirah URLs in your caching strategy:
 // sw.js
 const YETZIRAH_VERSION = '0.1.0';
 const YETZIRAH_URLS = [
-  `https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@${YETZIRAH_VERSION}/cdn/core.js`,
+  `https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@${YETZIRAH_VERSION}/cdn/core.js`,
 ];
 
 self.addEventListener('install', (event) => {

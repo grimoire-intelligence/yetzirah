@@ -1,15 +1,15 @@
-# @grimoire/yetzirah-vue
+# @grimoire-intel/yetzirah-vue
 
 Vue 3 wrappers for Yetzirah Web Components.
 
 ## Installation
 
 ```bash
-npm install @grimoire/yetzirah-vue
+npm install @grimoire-intel/yetzirah-vue
 # or
-pnpm add @grimoire/yetzirah-vue
+pnpm add @grimoire-intel/yetzirah-vue
 # or
-yarn add @grimoire/yetzirah-vue
+yarn add @grimoire-intel/yetzirah-vue
 ```
 
 ## Requirements
@@ -30,7 +30,7 @@ Yetzirah provides Vue 3 components that wrap the underlying Web Components with 
 
 ```vue
 <script setup lang="ts">
-import { YtzButton, YtzDialog } from '@grimoire/yetzirah-vue'
+import { YtzButton, YtzDialog } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const isOpen = ref(false)
@@ -54,7 +54,7 @@ All components are exported as named exports, enabling tree-shaking:
 
 ```typescript
 // Only imports the specific components you need
-import { Button, Dialog, Select } from '@grimoire/yetzirah-vue'
+import { Button, Dialog, Select } from '@grimoire-intel/yetzirah-vue'
 ```
 
 ## Available Components (Tier 1)
@@ -80,7 +80,7 @@ All Tier 1 core components are available with full Vue 3 support:
 
 ```vue
 <script setup>
-import { Dialog, Button } from '@grimoire/yetzirah-vue'
+import { Dialog, Button } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const isOpen = ref(false)
@@ -108,7 +108,7 @@ const isOpen = ref(false)
 
 ```vue
 <script setup>
-import { Select, SelectOption } from '@grimoire/yetzirah-vue'
+import { Select, SelectOption } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const selected = ref('')
@@ -134,7 +134,7 @@ const selected = ref('')
 
 ```vue
 <script setup>
-import { Tabs, TabList, Tab, TabPanel } from '@grimoire/yetzirah-vue'
+import { Tabs, TabList, Tab, TabPanel } from '@grimoire-intel/yetzirah-vue'
 </script>
 
 <template>
@@ -155,7 +155,7 @@ import { Tabs, TabList, Tab, TabPanel } from '@grimoire/yetzirah-vue'
 
 ```vue
 <script setup>
-import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire/yetzirah-vue'
+import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire-intel/yetzirah-vue'
 </script>
 
 <template>
@@ -173,7 +173,7 @@ import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire/yetzirah-vue'
 
 ```vue
 <script setup>
-import { Autocomplete, AutocompleteOption } from '@grimoire/yetzirah-vue'
+import { Autocomplete, AutocompleteOption } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const value = ref('')
@@ -212,7 +212,7 @@ The following Tier 2 components are available with full Vue 3 support:
 
 ```vue
 <script setup>
-import { Toggle } from '@grimoire/yetzirah-vue'
+import { Toggle } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const enabled = ref(false)
@@ -237,7 +237,7 @@ const enabled = ref(false)
 
 ```vue
 <script setup>
-import { Chip } from '@grimoire/yetzirah-vue'
+import { Chip } from '@grimoire-intel/yetzirah-vue'
 </script>
 
 <template>
@@ -258,7 +258,7 @@ import { Chip } from '@grimoire/yetzirah-vue'
 
 ```vue
 <script setup>
-import { IconButton } from '@grimoire/yetzirah-vue'
+import { IconButton } from '@grimoire-intel/yetzirah-vue'
 </script>
 
 <template>
@@ -278,7 +278,7 @@ import { IconButton } from '@grimoire/yetzirah-vue'
 
 ```vue
 <script setup>
-import { Slider } from '@grimoire/yetzirah-vue'
+import { Slider } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const volume = ref(50)
@@ -307,7 +307,7 @@ const volume = ref(50)
 
 ```vue
 <script setup>
-import { DataGrid, DataGridColumn } from '@grimoire/yetzirah-vue'
+import { DataGrid, DataGridColumn } from '@grimoire-intel/yetzirah-vue'
 import { ref } from 'vue'
 
 const data = ref([
@@ -341,7 +341,7 @@ const data = ref([
 
 ```vue
 <script setup>
-import { ThemeToggle } from '@grimoire/yetzirah-vue'
+import { ThemeToggle } from '@grimoire-intel/yetzirah-vue'
 </script>
 
 <template>
@@ -391,7 +391,7 @@ Tests use [Vitest](https://vitest.dev/) with [@vue/test-utils](https://test-util
 This package includes full TypeScript definitions. The types are automatically exported and available when using TypeScript in your Vue project.
 
 ```typescript
-import type { YetzirahComponentProps, ValueProps } from '@grimoire/yetzirah-vue'
+import type { YetzirahComponentProps, ValueProps } from '@grimoire-intel/yetzirah-vue'
 ```
 
 ## Architecture
@@ -403,9 +403,19 @@ The Vue wrappers are thin adapters around Yetzirah's Web Components, providing:
 3. **Type Safety**: Full TypeScript definitions for props, events, and slots
 4. **Performance**: Minimal overhead, tree-shakeable builds
 
+## How It Works
+
+These wrappers integrate Yetzirah web components with Vue's reactivity:
+
+- **`v-model` support**: Two-way binding via Vue 3.3's `defineModel`
+- **Event bridging**: Component events emit as Vue events
+- **Type safety**: Full TypeScript definitions for props and events
+
+See [@grimoire-intel/yetzirah](https://www.npmjs.com/package/@grimoire-intel/yetzirah) for full component documentation.
+
 ## License
 
-ISC
+MIT
 
 ## Repository
 

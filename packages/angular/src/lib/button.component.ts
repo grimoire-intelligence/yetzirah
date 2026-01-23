@@ -2,10 +2,10 @@
  * Angular wrapper for ytz-button Web Component.
  * Polymorphic button that renders as <a> when href is provided, <button> otherwise.
  *
- * @module @grimoire/yetzirah-angular/button
+ * @module @grimoire-intel/yetzirah-angular/button
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import {
   Component,
   Input,
@@ -85,8 +85,8 @@ export class ButtonComponent implements OnInit, OnDestroy {
     // Ensure Web Component is available
     if (typeof window !== 'undefined' && !customElements.get('ytz-button')) {
       console.warn(
-        '@grimoire/yetzirah-angular: ytz-button Web Component not found. ' +
-        'Make sure to import @grimoire/yetzirah-core in your application.'
+        '@grimoire-intel/yetzirah-angular: ytz-button Web Component not found. ' +
+        'Make sure to import @grimoire-intel/yetzirah in your application.'
       )
     }
   }

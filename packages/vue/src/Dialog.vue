@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-dialog Web Component.
  * Provides v-model:open for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Dialog
+ * @module @grimoire-intel/yetzirah-vue/Dialog
  *
  * @example
  * <template>
@@ -35,7 +35,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { computed } from 'vue'
 
 /**

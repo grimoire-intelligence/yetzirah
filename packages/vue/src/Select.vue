@@ -21,7 +21,7 @@
  * Vue 3 wrapper for ytz-select Web Component.
  * Provides v-model for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Select
+ * @module @grimoire-intel/yetzirah-vue/Select
  *
  * @example
  * <template>
@@ -42,7 +42,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { ref, watch, onMounted } from 'vue'
 
 /**

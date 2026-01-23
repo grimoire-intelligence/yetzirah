@@ -17,13 +17,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `<ytz-badge>` - Notification dots and counts with overlay positioning
 
 #### Solid.js Integration
-- `@grimoire/yetzirah-solid` package with native signal-based wrappers
+- `@grimoire-intel/yetzirah-solid` package with native signal-based wrappers
 - Wrappers for all 22 components using Solid's fine-grained reactivity
 - TypeScript types with JSX namespace augmentation
 - SSR compatibility (Solid Start)
 
 #### Alpine.js Plugin
-- `@grimoire/yetzirah-alpine` package for progressive enhancement
+- `@grimoire-intel/yetzirah-alpine` package for progressive enhancement
 - Component-specific directives (`x-ytz-dialog`, `x-ytz-toggle`, etc.)
 - Unified `x-ytz:model` directive for two-way data binding
 - `$ytz` magic methods for imperative component control
@@ -162,10 +162,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `<ytz-datagrid>` - Data table with sorting
 
 #### Framework Wrappers
-- `@grimoire/yetzirah-react` - React wrappers with hooks
-- `@grimoire/yetzirah-vue` - Vue 3 wrappers with v-model
-- `@grimoire/yetzirah-svelte` - Svelte wrappers
-- `@grimoire/yetzirah-angular` - Angular wrappers with ControlValueAccessor
+- `@grimoire-intel/yetzirah-react` - React wrappers with hooks
+- `@grimoire-intel/yetzirah-vue` - Vue 3 wrappers with v-model
+- `@grimoire-intel/yetzirah-svelte` - Svelte wrappers
+- `@grimoire-intel/yetzirah-angular` - Angular wrappers with ControlValueAccessor
 
 #### Infrastructure
 - Monorepo with pnpm workspaces

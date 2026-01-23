@@ -63,15 +63,15 @@ Instead of importing the full bundle:
 
 ```html
 <!-- Not optimal for production -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/core.js"></script>
 ```
 
 Import only what you need:
 
 ```html
 <!-- Optimal - only loads button component (~0.5KB) -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/button.js"></script>
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/dialog.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/button.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/dialog.js"></script>
 ```
 
 ### 2. Use Tier 1 Bundle for Common Use Cases
@@ -80,7 +80,7 @@ If you need multiple common components, the tier 1 bundle is more efficient than
 
 ```html
 <!-- Good for apps using 5+ tier 1 components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/tier1.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/tier1.js"></script>
 ```
 
 ### 3. Lazy Load Components
@@ -90,7 +90,7 @@ For components not needed immediately, use dynamic imports:
 ```js
 // Load dialog only when needed
 document.querySelector('#open-dialog').addEventListener('click', async () => {
-  await import('https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/dialog.js')
+  await import('https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/dialog.js')
   document.querySelector('ytz-dialog').open = true
 })
 ```
@@ -100,7 +100,7 @@ document.querySelector('#open-dialog').addEventListener('click', async () => {
 For above-the-fold components, use preload hints:
 
 ```html
-<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/button.js">
+<link rel="modulepreload" href="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/button.js">
 ```
 
 ### 5. Use Import Maps for Cleaner Imports
@@ -109,7 +109,7 @@ For above-the-fold components, use preload hints:
 <script type="importmap">
 {
   "imports": {
-    "@yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/"
+    "@yetzirah/": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/"
   }
 }
 </script>

@@ -3,7 +3,7 @@
  * Supports both indeterminate (spinner) and determinate (progress bar) modes,
  * with circular and linear visual variants.
  *
- * @module @grimoire/yetzirah-core/progress
+ * @module @grimoire-intel/yetzirah/progress
  * @example
  * // Indeterminate circular spinner (default)
  * <ytz-progress></ytz-progress>

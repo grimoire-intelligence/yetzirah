@@ -2,7 +2,7 @@
  * Focus trap utility for modals/dialogs.
  * Keeps focus within a container element.
  *
- * @module @grimoire/yetzirah-core/utils/focus-trap
+ * @module @grimoire-intel/yetzirah/utils/focus-trap
  * @internal Not exported from package
  */
 

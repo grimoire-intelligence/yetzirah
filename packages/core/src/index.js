@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-core
+ * @grimoire-intel/yetzirah
  *
  * Web Components for behavioral UI patterns.
  * Zero dependencies, framework-agnostic, accessibility-first.

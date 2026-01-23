@@ -12,7 +12,7 @@ import {
   forwardRef
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import '@grimoire/yetzirah-core';
+import '@grimoire-intel/yetzirah';
 
 /**
  * Angular wrapper for ytz-listbox Web Component.

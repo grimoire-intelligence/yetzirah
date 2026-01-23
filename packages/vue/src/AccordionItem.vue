@@ -14,7 +14,7 @@
  * Vue 3 wrapper for ytz-accordion-item Web Component.
  * Individual accordion panel with v-model:open for two-way binding.
  *
- * @module @grimoire/yetzirah-vue/AccordionItem
+ * @module @grimoire-intel/yetzirah-vue/AccordionItem
  *
  * @example
  * <template>
@@ -33,7 +33,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the AccordionItem component

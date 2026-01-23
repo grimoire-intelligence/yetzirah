@@ -14,7 +14,7 @@
  * Vue 3 wrapper for ytz-progress Web Component.
  * Provides progress indicator with circular and linear modes.
  *
- * @module @grimoire/yetzirah-vue/Progress
+ * @module @grimoire-intel/yetzirah-vue/Progress
  *
  * @example
  * <template>
@@ -29,7 +29,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { computed } from 'vue'
 
 /**

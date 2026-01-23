@@ -2,10 +2,10 @@
  * React wrapper for ytz-snackbar Web Component.
  * Provides toast notifications with auto-dismiss and positioning.
  *
- * @module @grimoire/yetzirah-react/snackbar
+ * @module @grimoire-intel/yetzirah-react/snackbar
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

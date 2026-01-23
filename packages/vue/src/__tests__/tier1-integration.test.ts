@@ -2,7 +2,7 @@
  * Integration tests for Vue Tier 1 framework wrappers.
  * Verifies event forwarding, attribute binding, and two-way binding across all Tier 1 components.
  *
- * @module @grimoire/yetzirah-vue/__tests__/tier1-integration
+ * @module @grimoire-intel/yetzirah-vue/__tests__/tier1-integration
  */
 
 import { describe, it, expect } from 'vitest'

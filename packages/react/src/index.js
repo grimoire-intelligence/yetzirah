@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-react
+ * @grimoire-intel/yetzirah-react
  *
  * React wrappers for Yetzirah Web Components.
  * Thin wrappers providing React-idiomatic APIs.
@@ -7,7 +7,7 @@
  * @packageDocumentation
  */
 
-export { VERSION } from '@grimoire/yetzirah-core'
+export { VERSION } from '@grimoire-intel/yetzirah'
 
 export { Accordion, AccordionItem } from './accordion.js'
 export { Autocomplete, Option } from './autocomplete.js'

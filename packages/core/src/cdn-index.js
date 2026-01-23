@@ -1,12 +1,12 @@
 /**
  * CDN index - Re-exports all components for tree-shaking.
  * Import individual components for minimal bundle size:
- *   import '@grimoire/yetzirah-core/cdn/button.js'
+ *   import '@grimoire-intel/yetzirah/cdn/button.js'
  *
  * Or import all via this index:
- *   import '@grimoire/yetzirah-core/cdn'
+ *   import '@grimoire-intel/yetzirah/cdn'
  *
- * @module @grimoire/yetzirah-core/cdn
+ * @module @grimoire-intel/yetzirah/cdn
  */
 
 // Tier 1 Components

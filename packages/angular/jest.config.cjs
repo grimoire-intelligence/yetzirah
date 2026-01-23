@@ -4,7 +4,7 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/dist/'],
   testMatch: ['**/*.spec.ts'],
   moduleNameMapper: {
-    '@grimoire/yetzirah-core': '<rootDir>/../core/dist/index.js',
+    '@grimoire-intel/yetzirah': '<rootDir>/../core/dist/index.js',
     '^@angular/core/testing$': '<rootDir>/node_modules/@angular/core/fesm2022/testing.mjs'
   },
   transformIgnorePatterns: [

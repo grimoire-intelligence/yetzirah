@@ -17,7 +17,7 @@
  * Vue 3 wrapper for ytz-popover Web Component.
  * Provides v-model:open for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Popover
+ * @module @grimoire-intel/yetzirah-vue/Popover
  *
  * @example
  * <template>
@@ -44,7 +44,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Popover component

@@ -2,7 +2,7 @@
 
 ## Summary
 
-This PR sets up the `@grimoire/yetzirah-solid` package infrastructure for Solid.js framework wrappers. The package will follow established patterns from existing framework packages (React, Vue, Svelte, Angular) while leveraging Solid.js-specific features like signals for reactive state management.
+This PR sets up the `@grimoire-intel/yetzirah-solid` package infrastructure for Solid.js framework wrappers. The package will follow established patterns from existing framework packages (React, Vue, Svelte, Angular) while leveraging Solid.js-specific features like signals for reactive state management.
 
 ---
 
@@ -15,7 +15,7 @@ packages/solid/
 ├── vite.config.ts            # Vite build configuration for Solid library mode
 ├── vitest.config.ts          # Vitest test configuration
 ├── vitest.setup.ts           # Test setup with customElements mock
-├── vitest.mock.ts            # Mock for @grimoire/yetzirah-core
+├── vitest.mock.ts            # Mock for @grimoire-intel/yetzirah
 └── src/
     ├── index.ts              # Main entry point with exports
     ├── types.ts              # Shared TypeScript types
@@ -34,12 +34,12 @@ packages/solid/
 Based on the patterns from `packages/react/package.json` and `packages/vue/package.json`:
 
 **Key Configuration Points:**
-- **Name**: `@grimoire/yetzirah-solid`
+- **Name**: `@grimoire-intel/yetzirah-solid`
 - **Type**: `module` (ESM)
 - **Entry Points**: ESM and CJS builds with TypeScript declarations
 - **Build Tool**: Vite in library mode with `vite-plugin-solid`
 - **Peer Dependencies**: `solid-js >= 1.8.0`
-- **Dependencies**: `@grimoire/yetzirah-core: workspace:*`
+- **Dependencies**: `@grimoire-intel/yetzirah: workspace:*`
 
 **Dev Dependencies:**
 - `solid-js: ^1.9.0`
@@ -93,7 +93,7 @@ Based on the patterns from `packages/react/package.json` and `packages/vue/packa
     "outDir": "./dist",
     "rootDir": "./src",
     "paths": {
-      "@grimoire/yetzirah-core": ["../core/dist/index.d.ts"]
+      "@grimoire-intel/yetzirah": ["../core/dist/index.d.ts"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
@@ -122,7 +122,7 @@ export default defineConfig({
       fileName: (format) => `index.${format === 'es' ? 'js' : 'cjs'}`
     },
     rollupOptions: {
-      external: ['solid-js', '@grimoire/yetzirah-core'],
+      external: ['solid-js', '@grimoire-intel/yetzirah'],
     },
   },
 })
@@ -152,12 +152,12 @@ export default defineConfig({
       exclude: ['src/__tests__/**', 'src/index.ts']
     },
     deps: {
-      inline: ['@grimoire/yetzirah-core']
+      inline: ['@grimoire-intel/yetzirah']
     }
   },
   resolve: {
     alias: {
-      '@grimoire/yetzirah-core': resolve(__dirname, './vitest.mock.ts')
+      '@grimoire-intel/yetzirah': resolve(__dirname, './vitest.mock.ts')
     },
     conditions: ['browser']
   }
@@ -171,13 +171,13 @@ export default defineConfig({
 ```typescript
 // src/index.ts
 /**
- * @grimoire/yetzirah-solid
+ * @grimoire-intel/yetzirah-solid
  *
  * Solid.js wrappers for Yetzirah Web Components.
  * Native signal integration for reactive state management.
  */
 
-export { VERSION } from '@grimoire/yetzirah-core'
+export { VERSION } from '@grimoire-intel/yetzirah'
 export { createYetzirahWrapper } from './utils/create-wrapper'
 export { createEventBridge } from './utils/event-bridge'
 export type * from './types'
@@ -247,8 +247,8 @@ Utilities for:
 11. Create `src/index.ts` main entry point
 12. Create `src/__tests__/setup.test.ts` for basic validation
 13. Run `pnpm install` from root to link workspace
-14. Run `pnpm --filter @grimoire/yetzirah-solid build` to verify build
-15. Run `pnpm --filter @grimoire/yetzirah-solid test` to verify tests
+14. Run `pnpm --filter @grimoire-intel/yetzirah-solid build` to verify build
+15. Run `pnpm --filter @grimoire-intel/yetzirah-solid test` to verify tests
 
 ---
 

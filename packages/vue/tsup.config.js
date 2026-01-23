@@ -11,6 +11,6 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
-  external: ['vue', '@grimoire/yetzirah-core'],
+  external: ['vue', '@grimoire-intel/yetzirah'],
   esbuildPlugins: [vue()]
 })

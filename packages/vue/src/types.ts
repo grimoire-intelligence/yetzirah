@@ -1,7 +1,7 @@
 /**
  * Shared TypeScript types for Vue 3 wrapper components.
  *
- * @module @grimoire/yetzirah-vue/types
+ * @module @grimoire-intel/yetzirah-vue/types
  */
 
 /**

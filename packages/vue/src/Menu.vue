@@ -17,7 +17,7 @@
  * Vue 3 wrapper for ytz-menu Web Component.
  * Dropdown menu with keyboard navigation, positioned relative to trigger.
  *
- * @module @grimoire/yetzirah-vue/Menu
+ * @module @grimoire-intel/yetzirah-vue/Menu
  *
  * @example
  * <template>
@@ -42,7 +42,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Menu component

@@ -1,5 +1,5 @@
 {
-  "name": "@grimoire/yetzirah-vue",
+  "name": "@grimoire-intel/yetzirah-vue",
   "version": "0.1.0",
   "description": "Vue 3 wrappers for Yetzirah Web Components",
   "type": "module",
@@ -33,7 +33,7 @@
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
@@ -43,7 +43,7 @@
     "vue": ">=3.3.0"
   },
   "dependencies": {
-    "@grimoire/yetzirah-core": "workspace:*"
+    "@grimoire-intel/yetzirah": "workspace:*"
   },
   "sideEffects": false,
   "devDependencies": {

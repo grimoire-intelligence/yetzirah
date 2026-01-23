@@ -8,8 +8,8 @@ Add Yetzirah to your Rails 7+ app with Import Maps:
 
 ```bash
 # Pin the packages
-bin/importmap pin @grimoire/yetzirah-core
-bin/importmap pin @grimoire/yetzirah-alpine
+bin/importmap pin @grimoire-intel/yetzirah
+bin/importmap pin @grimoire-intel/yetzirah-alpine
 bin/importmap pin alpinejs
 ```
 
@@ -17,8 +17,8 @@ Then in `app/javascript/application.js`:
 
 ```js
 import Alpine from 'alpinejs'
-import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-import '@grimoire/yetzirah-core'
+import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+import '@grimoire-intel/yetzirah'
 
 Alpine.plugin(yetzirahPlugin)
 Alpine.start()
@@ -37,8 +37,8 @@ Use components in any ERB template:
 Import Maps are Rails 7's default for JavaScript. Pin Yetzirah directly from CDN:
 
 ```bash
-bin/importmap pin @grimoire/yetzirah-core
-bin/importmap pin @grimoire/yetzirah-alpine
+bin/importmap pin @grimoire-intel/yetzirah
+bin/importmap pin @grimoire-intel/yetzirah-alpine
 bin/importmap pin alpinejs
 ```
 
@@ -46,8 +46,8 @@ This adds entries to `config/importmap.rb`:
 
 ```ruby
 # config/importmap.rb
-pin "@grimoire/yetzirah-core", to: "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"
-pin "@grimoire/yetzirah-alpine", to: "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/dist/index.js"
+pin "@grimoire-intel/yetzirah", to: "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"
+pin "@grimoire-intel/yetzirah-alpine", to: "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/dist/index.js"
 pin "alpinejs", to: "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
 ```
 
@@ -57,10 +57,10 @@ For apps using jsbundling-rails with esbuild or Vite:
 
 ```bash
 # With npm
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-alpine alpinejs
+npm install @grimoire-intel/yetzirah @grimoire-intel/yetzirah-alpine alpinejs
 
 # With yarn
-yarn add @grimoire/yetzirah-core @grimoire/yetzirah-alpine alpinejs
+yarn add @grimoire-intel/yetzirah @grimoire-intel/yetzirah-alpine alpinejs
 ```
 
 ### Option 3: CDN Only
@@ -73,16 +73,16 @@ For the simplest setup, add directly to your layout:
   <script type="importmap">
   {
     "imports": {
-      "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
-      "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/dist/index.js",
+      "@grimoire-intel/yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js",
+      "@grimoire-intel/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/dist/index.js",
       "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
     }
   }
   </script>
   <script type="module">
     import Alpine from 'alpinejs'
-    import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-    import '@grimoire/yetzirah-core'
+    import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+    import '@grimoire-intel/yetzirah'
 
     Alpine.plugin(yetzirahPlugin)
     Alpine.start()

@@ -2,7 +2,7 @@
  * ytz-datagrid - Data Grid Web Component.
  * Virtual scrolling, sorting, filtering, keyboard navigation, and export.
  *
- * @module @grimoire/yetzirah-core/datagrid
+ * @module @grimoire-intel/yetzirah/datagrid
  * @example
  * <ytz-datagrid>
  *   <ytz-datagrid-column field="name" header="Name" sortable></ytz-datagrid-column>

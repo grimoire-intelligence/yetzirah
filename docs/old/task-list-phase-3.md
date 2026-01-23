@@ -445,11 +445,11 @@ estimated_files:
     description: Guide for maintainers on publishing releases
 ---
 **Description:**
-Set up automated package publication to npm registry with compatibility for pnpm, bun, and yarn. Configure GitHub Actions workflow for version tagging, changelog generation, and multi-package publishing. All @grimoire/yetzirah-* packages should be published atomically with consistent versions.
+Set up automated package publication to npm registry with compatibility for pnpm, bun, and yarn. Configure GitHub Actions workflow for version tagging, changelog generation, and multi-package publishing. All @grimoire-intel/yetzirah-* packages should be published atomically with consistent versions.
 
 **Acceptance Criteria:**
 - [ ] GitHub Actions workflow publishes on version tag push
-- [ ] All 5 packages published atomically (@grimoire/yetzirah-core, -react, -vue, -svelte, -angular)
+- [ ] All 5 packages published atomically (@grimoire-intel/yetzirah, -react, -vue, -svelte, -angular)
 - [ ] Packages installable via `npm install`, `pnpm add`, `bun add`, and `yarn add`
 - [ ] Provenance attestation enabled for supply chain security
 - [ ] CDN bundles automatically available on jsDelivr/unpkg after npm publish

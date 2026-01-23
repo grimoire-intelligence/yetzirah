@@ -2,10 +2,10 @@
  * React wrapper for ytz-popover Web Component.
  * Click-triggered positioned content for interactive overlays.
  *
- * @module @grimoire/yetzirah-react/popover
+ * @module @grimoire-intel/yetzirah-react/popover
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

@@ -14,16 +14,16 @@ Add Yetzirah via CDN in your base template:
     <script type="importmap">
     {
         "imports": {
-            "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
-            "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/dist/index.js",
+            "@grimoire-intel/yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js",
+            "@grimoire-intel/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/dist/index.js",
             "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
         }
     }
     </script>
     <script type="module">
         import Alpine from 'alpinejs'
-        import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-        import '@grimoire/yetzirah-core'
+        import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+        import '@grimoire-intel/yetzirah'
 
         Alpine.plugin(yetzirahPlugin)
         window.Alpine = Alpine
@@ -57,8 +57,8 @@ The simplest approach - no build step required:
     <script type="importmap">
     {
         "imports": {
-            "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
-            "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/dist/index.js",
+            "@grimoire-intel/yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js",
+            "@grimoire-intel/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/dist/index.js",
             "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js",
             "htmx.org": "https://cdn.jsdelivr.net/npm/htmx.org@2/dist/htmx.min.js"
         }
@@ -66,8 +66,8 @@ The simplest approach - no build step required:
     </script>
     <script type="module">
         import Alpine from 'alpinejs'
-        import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-        import '@grimoire/yetzirah-core'
+        import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+        import '@grimoire-intel/yetzirah'
         import 'htmx.org'
 
         Alpine.plugin(yetzirahPlugin)
@@ -88,8 +88,8 @@ Download and serve from your static files:
 ```bash
 # Download to your static directory
 mkdir -p static/js/vendor
-curl -o static/js/vendor/yetzirah-core.js https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js
-curl -o static/js/vendor/yetzirah-alpine.js https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/dist/index.js
+curl -o static/js/vendor/yetzirah.js https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js
+curl -o static/js/vendor/yetzirah-alpine.js https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/dist/index.js
 curl -o static/js/vendor/alpine.js https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js
 ```
 
@@ -100,8 +100,8 @@ Update your template:
 <script type="importmap">
 {
     "imports": {
-        "@grimoire/yetzirah-core": "{% static 'js/vendor/yetzirah-core.js' %}",
-        "@grimoire/yetzirah-alpine": "{% static 'js/vendor/yetzirah-alpine.js' %}",
+        "@grimoire-intel/yetzirah": "{% static 'js/vendor/yetzirah.js' %}",
+        "@grimoire-intel/yetzirah-alpine": "{% static 'js/vendor/yetzirah-alpine.js' %}",
         "alpinejs": "{% static 'js/vendor/alpine.js' %}"
     }
 }
@@ -113,14 +113,14 @@ Update your template:
 For projects using a bundler (webpack, Vite, etc.):
 
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-alpine alpinejs htmx.org
+npm install @grimoire-intel/yetzirah @grimoire-intel/yetzirah-alpine alpinejs htmx.org
 ```
 
 ```js
 // static/js/app.js
 import Alpine from 'alpinejs'
-import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-import '@grimoire/yetzirah-core'
+import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+import '@grimoire-intel/yetzirah'
 import 'htmx.org'
 
 Alpine.plugin(yetzirahPlugin)

@@ -14,16 +14,16 @@ This guide covers using Yetzirah web components with Solid.js for a reactive, pe
 ## Installation
 
 ```bash
-npm install @grimoire/yetzirah-solid solid-js
+npm install @grimoire-intel/yetzirah-solid solid-js
 # or
-pnpm add @grimoire/yetzirah-solid solid-js
+pnpm add @grimoire-intel/yetzirah-solid solid-js
 ```
 
 ## Quick Start
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Button, Dialog } from '@grimoire/yetzirah-solid'
+import { Button, Dialog } from '@grimoire-intel/yetzirah-solid'
 
 function App() {
   const [open, setOpen] = createSignal(false)
@@ -46,7 +46,7 @@ function App() {
 ### Button
 
 ```tsx
-import { Button } from '@grimoire/yetzirah-solid'
+import { Button } from '@grimoire-intel/yetzirah-solid'
 
 function Counter() {
   const [count, setCount] = createSignal(0)
@@ -65,7 +65,7 @@ function Counter() {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Button, Dialog } from '@grimoire/yetzirah-solid'
+import { Button, Dialog } from '@grimoire-intel/yetzirah-solid'
 
 function DialogExample() {
   const [open, setOpen] = createSignal(false)
@@ -102,7 +102,7 @@ function DialogExample() {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Tabs, TabList, Tab, TabPanel } from '@grimoire/yetzirah-solid'
+import { Tabs, TabList, Tab, TabPanel } from '@grimoire-intel/yetzirah-solid'
 
 function TabsExample() {
   const [activeTab, setActiveTab] = createSignal('overview')
@@ -143,7 +143,7 @@ function TabsExample() {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Select, SelectOption } from '@grimoire/yetzirah-solid'
+import { Select, SelectOption } from '@grimoire-intel/yetzirah-solid'
 
 function SelectExample() {
   const [size, setSize] = createSignal('medium')
@@ -166,7 +166,7 @@ function SelectExample() {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Toggle } from '@grimoire/yetzirah-solid'
+import { Toggle } from '@grimoire-intel/yetzirah-solid'
 
 function ToggleExample() {
   const [enabled, setEnabled] = createSignal(false)
@@ -186,7 +186,7 @@ function ToggleExample() {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Slider } from '@grimoire/yetzirah-solid'
+import { Slider } from '@grimoire-intel/yetzirah-solid'
 
 function SliderExample() {
   const [volume, setVolume] = createSignal(50)
@@ -210,7 +210,7 @@ function SliderExample() {
 
 ```tsx
 import { createSignal } from 'solid-js'
-import { Disclosure, DisclosureTrigger, DisclosureContent } from '@grimoire/yetzirah-solid'
+import { Disclosure, DisclosureTrigger, DisclosureContent } from '@grimoire-intel/yetzirah-solid'
 
 function DisclosureExample() {
   const [open, setOpen] = createSignal(false)
@@ -236,7 +236,7 @@ Solid's signals integrate seamlessly with Yetzirah components:
 
 ```tsx
 import { createSignal, createEffect } from 'solid-js'
-import { Slider } from '@grimoire/yetzirah-solid'
+import { Slider } from '@grimoire-intel/yetzirah-solid'
 
 function ReactiveSlider() {
   const [value, setValue] = createSignal(50)
@@ -257,7 +257,7 @@ function ReactiveSlider() {
 All components accept callback props for their respective events:
 
 ```tsx
-import { Dialog, Select, Toggle, Slider, Tabs } from '@grimoire/yetzirah-solid'
+import { Dialog, Select, Toggle, Slider, Tabs } from '@grimoire-intel/yetzirah-solid'
 
 // Dialog - onClose
 <Dialog open={open()} onClose={() => setOpen(false)}>
@@ -284,7 +284,7 @@ Use Solid's derived signals for computed values:
 
 ```tsx
 import { createSignal, createMemo } from 'solid-js'
-import { Slider, Progress } from '@grimoire/yetzirah-solid'
+import { Slider, Progress } from '@grimoire-intel/yetzirah-solid'
 
 function DerivedExample() {
   const [value, setValue] = createSignal(0)
@@ -315,7 +315,7 @@ import type {
   SliderProps,
   TabsProps,
   DisclosureProps
-} from '@grimoire/yetzirah-solid'
+} from '@grimoire-intel/yetzirah-solid'
 
 // Custom wrapper with extended props
 interface MyDialogProps extends DialogProps {
@@ -344,7 +344,7 @@ Use `clientOnly` for components that require the DOM:
 import { clientOnly } from '@solidjs/start'
 
 const Dialog = clientOnly(() =>
-  import('@grimoire/yetzirah-solid').then(m => ({ default: m.Dialog }))
+  import('@grimoire-intel/yetzirah-solid').then(m => ({ default: m.Dialog }))
 )
 
 function App() {
@@ -362,7 +362,7 @@ Components hydrate correctly when the custom elements are registered before hydr
 
 ```tsx
 // entry-client.tsx
-import '@grimoire/yetzirah-core' // Register custom elements
+import '@grimoire-intel/yetzirah' // Register custom elements
 import { hydrate } from 'solid-js/web'
 import App from './App'
 

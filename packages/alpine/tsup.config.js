@@ -10,5 +10,5 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
-  external: ['alpinejs', '@grimoire/yetzirah-core'],
+  external: ['alpinejs', '@grimoire-intel/yetzirah'],
 })

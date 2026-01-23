@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-solid
+ * @grimoire-intel/yetzirah-solid
  *
  * Solid.js wrappers for Yetzirah Web Components.
  * Provides reactive component wrappers using Solid's primitives.
@@ -8,7 +8,7 @@
  */
 
 // Import and register core web components
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Re-export VERSION from core

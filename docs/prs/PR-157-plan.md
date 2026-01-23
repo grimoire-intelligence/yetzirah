@@ -51,9 +51,9 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'cdn',
-  // For CDN, bundle Alpine dependency but externalize yetzirah-core
+  // For CDN, bundle Alpine dependency but externalize yetzirah
   // (users load core separately via CDN)
-  external: ['@grimoire/yetzirah-core'],
+  external: ['@grimoire-intel/yetzirah'],
   noExternal: ['alpinejs'],
 })
 ```
@@ -96,7 +96,7 @@ Load the Alpine plugin directly from CDN:
 {
   "imports": {
     "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js",
-    "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/cdn/yetzirah-alpine.js"
+    "@grimoire-intel/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/cdn/yetzirah-alpine.js"
   }
 }
 </script>

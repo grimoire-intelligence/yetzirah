@@ -19,6 +19,6 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'cdn',
-  // Both Alpine and yetzirah-core are external - users load them via CDN
-  external: ['alpinejs', '@grimoire/yetzirah-core'],
+  // Both Alpine and yetzirah are external - users load them via CDN
+  external: ['alpinejs', '@grimoire-intel/yetzirah'],
 })

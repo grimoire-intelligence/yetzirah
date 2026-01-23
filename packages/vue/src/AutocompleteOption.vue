@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-option Web Component (used within Autocomplete/Listbox/Select).
  * Provides Vue-idiomatic API with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/AutocompleteOption
+ * @module @grimoire-intel/yetzirah-vue/AutocompleteOption
  *
  * @example
  * <template>
@@ -35,7 +35,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the AutocompleteOption component

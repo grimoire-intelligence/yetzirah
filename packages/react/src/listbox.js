@@ -1,9 +1,9 @@
 /**
  * React wrapper for ytz-listbox.
- * @module @grimoire/yetzirah-react/listbox
+ * @module @grimoire-intel/yetzirah-react/listbox
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle, useEffect } from 'react'
 
 /**

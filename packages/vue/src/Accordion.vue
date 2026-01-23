@@ -13,7 +13,7 @@
  * Vue 3 wrapper for ytz-accordion Web Component.
  * Coordinated disclosure container that manages multiple accordion items.
  *
- * @module @grimoire/yetzirah-vue/Accordion
+ * @module @grimoire-intel/yetzirah-vue/Accordion
  *
  * @example
  * <template>
@@ -45,7 +45,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Accordion component

@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-alpine
+ * @grimoire-intel/yetzirah-alpine
  *
  * Alpine.js plugin for Yetzirah Web Components.
  * Provides directives and magics for Alpine.js integration.
@@ -8,7 +8,7 @@
  */
 
 // Import and register core web components
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { registerDirectives } from './directives'
 import { registerModelDirective } from './model'
 import { createYtzMagic, type YtzMagic, type SnackbarOptions } from './magics'
@@ -63,7 +63,7 @@ interface AlpineInstance {
  * @example
  * ```js
  * import Alpine from 'alpinejs'
- * import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
+ * import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
  *
  * Alpine.plugin(yetzirahPlugin)
  * Alpine.start()

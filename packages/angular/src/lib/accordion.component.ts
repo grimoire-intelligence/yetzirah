@@ -9,7 +9,7 @@ import {
   OnDestroy,
   OnChanges
 } from '@angular/core';
-import '@grimoire/yetzirah-core';
+import '@grimoire-intel/yetzirah';
 
 /**
  * Angular wrapper for ytz-accordion Web Component.

@@ -6,7 +6,7 @@
  * module is loaded - no additional JavaScript required.
  *
  * Usage:
- *   <script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/auto.js"></script>
+ *   <script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/auto.js"></script>
  *
  * After loading, all ytz-* elements are available:
  *   <ytz-dialog>...</ytz-dialog>
@@ -18,7 +18,7 @@
  * - Self-contained: All components bundled, no external dependencies
  * - Side-effect module: Registers elements on import
  *
- * @module @grimoire/yetzirah-core/cdn/auto
+ * @module @grimoire-intel/yetzirah/cdn/auto
  */
 
 // Import all components (triggers their registration via side effects)

@@ -2,10 +2,10 @@
  * React wrapper for ytz-drawer Web Component.
  * Provides slide-in panel with focus trap, scroll lock, and escape-to-close.
  *
- * @module @grimoire/yetzirah-react/drawer
+ * @module @grimoire-intel/yetzirah-react/drawer
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

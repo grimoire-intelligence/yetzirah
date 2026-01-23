@@ -2,7 +2,7 @@
  * Idempotent custom element registration utility.
  * Prevents duplicate registration errors when scripts load multiple times.
  *
- * @module @grimoire/yetzirah-core/utils/register
+ * @module @grimoire-intel/yetzirah/utils/register
  * @internal Not exported from package
  */
 

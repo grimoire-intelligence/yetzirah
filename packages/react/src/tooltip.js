@@ -2,10 +2,10 @@
  * React wrapper for ytz-tooltip Web Component.
  * Provides positioned hint text on hover/focus.
  *
- * @module @grimoire/yetzirah-react/tooltip
+ * @module @grimoire-intel/yetzirah-react/tooltip
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

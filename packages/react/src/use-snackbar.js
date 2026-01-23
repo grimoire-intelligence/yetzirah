@@ -1,7 +1,7 @@
 /**
  * useSnackbar hook for local snackbar state management.
  *
- * @module @grimoire/yetzirah-react/use-snackbar
+ * @module @grimoire-intel/yetzirah-react/use-snackbar
  */
 
 import { useState, useCallback } from 'react'

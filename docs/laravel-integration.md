@@ -7,15 +7,15 @@ Integrate Yetzirah Web Components with Laravel applications using Vite and Livew
 Install via npm with Laravel's Vite setup:
 
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-alpine alpinejs
+npm install @grimoire-intel/yetzirah @grimoire-intel/yetzirah-alpine alpinejs
 ```
 
 In `resources/js/app.js`:
 
 ```js
 import Alpine from 'alpinejs'
-import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-import '@grimoire/yetzirah-core'
+import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+import '@grimoire-intel/yetzirah'
 
 Alpine.plugin(yetzirahPlugin)
 window.Alpine = Alpine
@@ -35,15 +35,15 @@ Use components in any Blade template:
 Laravel uses Vite by default for asset bundling:
 
 ```bash
-npm install @grimoire/yetzirah-core @grimoire/yetzirah-alpine alpinejs
+npm install @grimoire-intel/yetzirah @grimoire-intel/yetzirah-alpine alpinejs
 ```
 
 Configure `resources/js/app.js`:
 
 ```js
 import Alpine from 'alpinejs'
-import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-import '@grimoire/yetzirah-core'
+import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+import '@grimoire-intel/yetzirah'
 
 Alpine.plugin(yetzirahPlugin)
 window.Alpine = Alpine
@@ -91,16 +91,16 @@ For simpler projects without a build step:
     <script type="importmap">
     {
         "imports": {
-            "@grimoire/yetzirah-core": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js",
-            "@grimoire/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine@latest/dist/index.js",
+            "@grimoire-intel/yetzirah": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js",
+            "@grimoire-intel/yetzirah-alpine": "https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine@latest/dist/index.js",
             "alpinejs": "https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"
         }
     }
     </script>
     <script type="module">
         import Alpine from 'alpinejs'
-        import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-        import '@grimoire/yetzirah-core'
+        import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+        import '@grimoire-intel/yetzirah'
 
         Alpine.plugin(yetzirahPlugin)
         window.Alpine = Alpine
@@ -485,8 +485,8 @@ Ensure Alpine starts after Livewire:
 ```js
 // resources/js/app.js
 import Alpine from 'alpinejs'
-import { yetzirahPlugin } from '@grimoire/yetzirah-alpine'
-import '@grimoire/yetzirah-core'
+import { yetzirahPlugin } from '@grimoire-intel/yetzirah-alpine'
+import '@grimoire-intel/yetzirah'
 
 Alpine.plugin(yetzirahPlugin)
 window.Alpine = Alpine

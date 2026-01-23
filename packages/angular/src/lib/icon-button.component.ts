@@ -2,10 +2,10 @@
  * Angular wrapper for ytz-icon-button Web Component.
  * Provides icon button with required label/aria-label for accessibility.
  *
- * @module @grimoire/yetzirah-angular/icon-button
+ * @module @grimoire-intel/yetzirah-angular/icon-button
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import {
   Component,
   Input,
@@ -79,8 +79,8 @@ export class IconButtonComponent implements OnInit, OnDestroy {
     // Ensure Web Component is available
     if (typeof window !== 'undefined' && !customElements.get('ytz-icon-button')) {
       console.warn(
-        '@grimoire/yetzirah-angular: ytz-icon-button Web Component not found. ' +
-        'Make sure to import @grimoire/yetzirah-core in your application.'
+        '@grimoire-intel/yetzirah-angular: ytz-icon-button Web Component not found. ' +
+        'Make sure to import @grimoire-intel/yetzirah in your application.'
       )
     }
   }

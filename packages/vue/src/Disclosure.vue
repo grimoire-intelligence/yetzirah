@@ -14,7 +14,7 @@
  * Vue 3 wrapper for ytz-disclosure Web Component.
  * Provides v-model:open for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Disclosure
+ * @module @grimoire-intel/yetzirah-vue/Disclosure
  *
  * @example
  * <template>
@@ -33,7 +33,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Disclosure component

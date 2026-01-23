@@ -7,7 +7,7 @@ This guide covers idiomatic vanilla JavaScript patterns for using Yetzirah compo
 Add a script tag to load Yetzirah components:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js"></script>
 ```
 
 Components are immediately available in your HTML:
@@ -562,7 +562,7 @@ let dialogLoaded = false;
 async function ensureDialogLoaded() {
   if (dialogLoaded) return;
 
-  await import('https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/dialog.js');
+  await import('https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/dialog.js');
   dialogLoaded = true;
 }
 
@@ -578,7 +578,7 @@ document.querySelector('[data-dialog]').addEventListener('click', async (e) => {
 // Check if custom elements are supported
 if ('customElements' in window) {
   // Load Yetzirah components
-  import('https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core@latest/cdn/core.js');
+  import('https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah@latest/cdn/core.js');
 } else {
   // Fallback for older browsers
   console.warn('Custom Elements not supported. Falling back to basic HTML.');

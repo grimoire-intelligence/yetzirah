@@ -30,7 +30,7 @@ Add these scripts to your HTML:
 </script>
 
 <!-- Yetzirah components -->
-<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/core.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/core.js"></script>
 ```
 
 Then in your module script:
@@ -403,7 +403,7 @@ Common methods:
 
 ## Comparison with React Wrapper
 
-Yetzirah provides official React wrappers (`@grimoire/yetzirah-react`) for build-based projects. Here's how the approaches compare:
+Yetzirah provides official React wrappers (`@grimoire-intel/yetzirah-react`) for build-based projects. Here's how the approaches compare:
 
 ### Preact + HTM (No Build)
 
@@ -432,7 +432,7 @@ function MyDialog() {
 ### React Wrapper (With Build)
 
 ```jsx
-import { Dialog } from '@grimoire/yetzirah-react';
+import { Dialog } from '@grimoire-intel/yetzirah-react';
 
 function MyDialog() {
   return (
@@ -487,8 +487,8 @@ Web Components are supported in all modern browsers. For IE11, additional polyfi
 
 1. **Lazy load components**: Import only the Yetzirah components you need:
    ```javascript
-   import 'https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/dialog.js';
-   import 'https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-core/cdn/tabs.js';
+   import 'https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/dialog.js';
+   import 'https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah/cdn/tabs.js';
    ```
 
 2. **Memoize callbacks**: Use `useCallback` for event handlers:

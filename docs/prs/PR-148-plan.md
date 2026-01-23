@@ -38,7 +38,7 @@ Each component follows this Solid.js pattern:
 
 ```tsx
 import { Component, JSX, createEffect, onCleanup, splitProps } from 'solid-js'
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 interface DialogProps extends JSX.HTMLAttributes<HTMLElement> {
   open?: boolean

@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-svelte
+ * @grimoire-intel/yetzirah-svelte
  *
  * Svelte wrappers for Yetzirah Web Components.
  * Thin wrappers providing Svelte-idiomatic APIs.
@@ -10,7 +10,7 @@
  * @packageDocumentation
  */
 
-export { VERSION } from '@grimoire/yetzirah-core'
+export { VERSION } from '@grimoire-intel/yetzirah'
 
 export { default as Accordion } from './Accordion.svelte'
 export { default as AccordionItem } from './AccordionItem.svelte'

@@ -16,7 +16,7 @@
  * Vue 3 wrapper for ytz-badge Web Component.
  * Provides notification badge with dot, count, and hidden modes.
  *
- * @module @grimoire/yetzirah-vue/Badge
+ * @module @grimoire-intel/yetzirah-vue/Badge
  *
  * @example
  * <template>
@@ -37,7 +37,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { computed } from 'vue'
 
 /**

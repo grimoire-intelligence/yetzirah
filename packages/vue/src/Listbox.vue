@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-listbox Web Component.
  * Provides v-model for two-way binding with full TypeScript support.
  *
- * @module @grimoire/yetzirah-vue/Listbox
+ * @module @grimoire-intel/yetzirah-vue/Listbox
  *
  * @example
  * <template>
@@ -35,7 +35,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the Listbox component

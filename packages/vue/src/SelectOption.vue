@@ -15,7 +15,7 @@
  * Vue 3 wrapper for ytz-option Web Component (used with Select).
  * Provides type-safe props for option elements.
  *
- * @module @grimoire/yetzirah-vue/SelectOption
+ * @module @grimoire-intel/yetzirah-vue/SelectOption
  *
  * @example
  * <template>
@@ -27,7 +27,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the SelectOption component

@@ -1,5 +1,5 @@
 {
-  "name": "@grimoire/yetzirah-react",
+  "name": "@grimoire-intel/yetzirah-react",
   "version": "0.1.0",
   "description": "React wrappers for Yetzirah Web Components",
   "type": "module",
@@ -29,7 +29,7 @@
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",
@@ -40,7 +40,7 @@
     "react-dom": ">=18.0.0"
   },
   "dependencies": {
-    "@grimoire/yetzirah-core": "workspace:*"
+    "@grimoire-intel/yetzirah": "workspace:*"
   },
   "sideEffects": false
 }

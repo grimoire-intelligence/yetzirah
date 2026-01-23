@@ -2,7 +2,7 @@
 
 ## Overview
 
-This PR sets up the `@grimoire/yetzirah-alpine` package as an Alpine.js plugin. The package will provide Alpine.js integration for Yetzirah web components, enabling seamless use in Alpine.js applications and server-rendered frameworks like Rails, Laravel, and Django.
+This PR sets up the `@grimoire-intel/yetzirah-alpine` package as an Alpine.js plugin. The package will provide Alpine.js integration for Yetzirah web components, enabling seamless use in Alpine.js applications and server-rendered frameworks like Rails, Laravel, and Django.
 
 This PR focuses on **infrastructure setup only** - directives will be implemented in subsequent PRs (PR-152 through PR-155).
 
@@ -72,7 +72,7 @@ packages/alpine/
 
 ```json
 {
-  "name": "@grimoire/yetzirah-alpine",
+  "name": "@grimoire-intel/yetzirah-alpine",
   "version": "0.1.0",
   "description": "Alpine.js plugin for Yetzirah Web Components",
   "type": "module",
@@ -120,7 +120,7 @@ packages/alpine/
     "alpinejs": ">=3.10.0"
   },
   "dependencies": {
-    "@grimoire/yetzirah-core": "workspace:*"
+    "@grimoire-intel/yetzirah": "workspace:*"
   },
   "devDependencies": {
     "@types/alpinejs": "^3.13.0",
@@ -148,7 +148,7 @@ packages/alpine/
     "declaration": true,
     "declarationMap": true,
     "paths": {
-      "@grimoire/yetzirah-core": ["../core/dist/index.d.ts"],
+      "@grimoire-intel/yetzirah": ["../core/dist/index.d.ts"],
       "alpinejs": ["./node_modules/alpinejs/dist/module.esm.js"]
     }
   },
@@ -172,7 +172,7 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
-  external: ['alpinejs', '@grimoire/yetzirah-core'],
+  external: ['alpinejs', '@grimoire-intel/yetzirah'],
 })
 ```
 
@@ -195,7 +195,7 @@ export default defineConfig({
   outExtension: () => ({ js: '.global.js' }),
   // Bundle core, externalize Alpine (user provides it)
   external: ['alpinejs'],
-  noExternal: ['@grimoire/yetzirah-core'],
+  noExternal: ['@grimoire-intel/yetzirah'],
   esbuildOptions(options) {
     options.footer = {
       js: `
@@ -214,7 +214,7 @@ export default defineConfig({
 
 ```typescript
 /**
- * @grimoire/yetzirah-alpine
+ * @grimoire-intel/yetzirah-alpine
  *
  * Alpine.js plugin for Yetzirah Web Components.
  * Provides seamless integration between Alpine.js and Yetzirah components.
@@ -223,7 +223,7 @@ export default defineConfig({
  */
 
 // Re-export core version for consistency
-export { VERSION } from '@grimoire/yetzirah-core'
+export { VERSION } from '@grimoire-intel/yetzirah'
 
 // Main plugin export
 export { default, yetzirahPlugin } from './plugin'
@@ -238,7 +238,7 @@ export type * from './types'
 import type { Alpine, PluginCallback } from 'alpinejs'
 
 // Import all Yetzirah core components to ensure they're registered
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Yetzirah Alpine.js plugin.
@@ -248,7 +248,7 @@ import '@grimoire/yetzirah-core'
  * @example
  * // NPM Module Usage
  * import Alpine from 'alpinejs'
- * import yetzirah from '@grimoire/yetzirah-alpine'
+ * import yetzirah from '@grimoire-intel/yetzirah-alpine'
  * 
  * Alpine.plugin(yetzirah)
  * Alpine.start()
@@ -256,7 +256,7 @@ import '@grimoire/yetzirah-core'
  * @example
  * // CDN Usage (plugin auto-registers)
  * <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
- * <script src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine/dist/alpine-yetzirah.global.js"></script>
+ * <script src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine/dist/alpine-yetzirah.global.js"></script>
  */
 const yetzirahPlugin: PluginCallback = (Alpine: Alpine) => {
   // Store reference to Alpine for internal use
@@ -575,7 +575,7 @@ describe('index exports', () => {
 ### 12. README.md
 
 ```markdown
-# @grimoire/yetzirah-alpine
+# @grimoire-intel/yetzirah-alpine
 
 Alpine.js plugin for [Yetzirah](https://github.com/grimoire-intelligence/yetzirah) Web Components.
 
@@ -584,14 +584,14 @@ Alpine.js plugin for [Yetzirah](https://github.com/grimoire-intelligence/yetzira
 ### NPM Module
 
 \`\`\`bash
-npm install @grimoire/yetzirah-alpine alpinejs
+npm install @grimoire-intel/yetzirah-alpine alpinejs
 # or
-pnpm add @grimoire/yetzirah-alpine alpinejs
+pnpm add @grimoire-intel/yetzirah-alpine alpinejs
 \`\`\`
 
 \`\`\`javascript
 import Alpine from 'alpinejs'
-import yetzirah from '@grimoire/yetzirah-alpine'
+import yetzirah from '@grimoire-intel/yetzirah-alpine'
 
 Alpine.plugin(yetzirah)
 Alpine.start()
@@ -604,7 +604,7 @@ Alpine.start()
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
 
 <!-- Yetzirah Alpine Plugin (auto-registers) -->
-<script src="https://cdn.jsdelivr.net/npm/@grimoire/yetzirah-alpine/dist/alpine-yetzirah.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@grimoire-intel/yetzirah-alpine/dist/alpine-yetzirah.global.js"></script>
 \`\`\`
 
 ## Features
@@ -666,14 +666,14 @@ ISC
 ## Build Verification Steps
 
 1. Run `pnpm install` from workspace root
-2. Run `pnpm --filter @grimoire/yetzirah-alpine build`
+2. Run `pnpm --filter @grimoire-intel/yetzirah-alpine build`
 3. Verify outputs in `packages/alpine/dist/`:
    - `index.js` (ESM)
    - `index.cjs` (CommonJS)
    - `index.d.ts` (TypeScript types)
-4. Run `pnpm --filter @grimoire/yetzirah-alpine build:cdn`
+4. Run `pnpm --filter @grimoire-intel/yetzirah-alpine build:cdn`
 5. Verify `packages/alpine/dist/alpine-yetzirah.global.js` exists
-6. Run `pnpm --filter @grimoire/yetzirah-alpine test`
+6. Run `pnpm --filter @grimoire-intel/yetzirah-alpine test`
 7. Verify all tests pass
 
 ---

@@ -2,7 +2,7 @@
  * ytz-badge - Notification badge Web Component.
  * Overlays a count or dot indicator on slotted content.
  *
- * @module @grimoire/yetzirah-core/badge
+ * @module @grimoire-intel/yetzirah/badge
  * @example
  * // Dot badge (no value)
  * <ytz-badge>

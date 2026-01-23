@@ -13,7 +13,7 @@
  * Vue 3 wrapper for ytz-tabpanel Web Component.
  * Represents a content panel controlled by a Tab.
  *
- * @module @grimoire/yetzirah-vue/TabPanel
+ * @module @grimoire-intel/yetzirah-vue/TabPanel
  *
  * @example
  * <template>
@@ -26,7 +26,7 @@
  * </template>
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 
 /**
  * Props for the TabPanel component

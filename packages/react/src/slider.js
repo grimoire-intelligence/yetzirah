@@ -2,10 +2,10 @@
  * React wrapper for ytz-slider Web Component.
  * Provides controlled slider with value/onChange props.
  *
- * @module @grimoire/yetzirah-react/slider
+ * @module @grimoire-intel/yetzirah-react/slider
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useImperativeHandle, useEffect, useCallback } from 'react'
 
 /**

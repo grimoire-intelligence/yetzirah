@@ -4,7 +4,7 @@ import {
   CUSTOM_ELEMENTS_SCHEMA,
   ChangeDetectionStrategy
 } from '@angular/core';
-import '@grimoire/yetzirah-core';
+import '@grimoire-intel/yetzirah';
 
 /**
  * Angular wrapper for ytz-option Web Component (used within ytz-select).

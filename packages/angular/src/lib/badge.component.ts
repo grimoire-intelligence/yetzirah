@@ -7,7 +7,7 @@ import {
   ElementRef,
   AfterViewInit
 } from '@angular/core';
-import '@grimoire/yetzirah-core';
+import '@grimoire-intel/yetzirah';
 
 /**
  * Badge position options

@@ -11,6 +11,6 @@ export default defineConfig({
   treeshake: true,
   minify: true,
   outDir: 'dist',
-  external: ['solid-js', '@grimoire/yetzirah-core'],
+  external: ['solid-js', '@grimoire-intel/yetzirah'],
   esbuildPlugins: [solidPlugin({ solid: { generate: 'dom' } })],
 })

@@ -1,11 +1,11 @@
-# @grimoire/yetzirah-svelte
+# @grimoire-intel/yetzirah-svelte
 
 Svelte wrappers for Yetzirah Web Components.
 
 ## Installation
 
 ```bash
-pnpm add @grimoire/yetzirah-svelte @grimoire/yetzirah-core
+pnpm add @grimoire-intel/yetzirah-svelte @grimoire-intel/yetzirah
 ```
 
 ## Usage
@@ -21,7 +21,7 @@ You can use Yetzirah Web Components directly in Svelte:
 
 ```svelte
 <script>
-  import '@grimoire/yetzirah-core/button'
+  import '@grimoire-intel/yetzirah/button'
 </script>
 
 <ytz-button on:click={() => console.log('clicked')}>
@@ -35,7 +35,7 @@ Or use the Svelte wrappers for better type safety:
 
 ```svelte
 <script>
-  import { Button } from '@grimoire/yetzirah-svelte'
+  import { Button } from '@grimoire-intel/yetzirah-svelte'
 </script>
 
 <Button on:click={() => console.log('clicked')}>
@@ -75,7 +75,7 @@ All Tier 1 core components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Dialog, Button } from '@grimoire/yetzirah-svelte'
+  import { Dialog, Button } from '@grimoire-intel/yetzirah-svelte'
   let isOpen = false
 </script>
 
@@ -99,7 +99,7 @@ All Tier 1 core components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Select, SelectOption } from '@grimoire/yetzirah-svelte'
+  import { Select, SelectOption } from '@grimoire-intel/yetzirah-svelte'
   let selected = ''
 </script>
 
@@ -121,7 +121,7 @@ All Tier 1 core components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Tabs, TabList, Tab, TabPanel } from '@grimoire/yetzirah-svelte'
+  import { Tabs, TabList, Tab, TabPanel } from '@grimoire-intel/yetzirah-svelte'
 </script>
 
 <Tabs>
@@ -140,7 +140,7 @@ All Tier 1 core components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire/yetzirah-svelte'
+  import { Menu, MenuTrigger, MenuItem, Button } from '@grimoire-intel/yetzirah-svelte'
 </script>
 
 <Menu>
@@ -156,7 +156,7 @@ All Tier 1 core components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Autocomplete, AutocompleteOption } from '@grimoire/yetzirah-svelte'
+  import { Autocomplete, AutocompleteOption } from '@grimoire-intel/yetzirah-svelte'
   let value = ''
   const options = ['Apple', 'Banana', 'Cherry', 'Date']
 </script>
@@ -187,7 +187,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Toggle } from '@grimoire/yetzirah-svelte'
+  import { Toggle } from '@grimoire-intel/yetzirah-svelte'
   let enabled = false
 </script>
 
@@ -207,7 +207,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Chip } from '@grimoire/yetzirah-svelte'
+  import { Chip } from '@grimoire-intel/yetzirah-svelte'
 </script>
 
 <Chip deletable on:delete={() => console.log('deleted')}>Tag Name</Chip>
@@ -226,7 +226,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { IconButton } from '@grimoire/yetzirah-svelte'
+  import { IconButton } from '@grimoire-intel/yetzirah-svelte'
 </script>
 
 <IconButton aria-label="Close" tooltip="Close dialog" on:click={() => console.log('clicked')}>
@@ -244,7 +244,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { Slider } from '@grimoire/yetzirah-svelte'
+  import { Slider } from '@grimoire-intel/yetzirah-svelte'
   let volume = 50
 </script>
 
@@ -268,7 +268,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { DataGrid, DataGridColumn } from '@grimoire/yetzirah-svelte'
+  import { DataGrid, DataGridColumn } from '@grimoire-intel/yetzirah-svelte'
 
   const data = [
     { id: 1, name: 'Alice', email: 'alice@example.com' },
@@ -299,7 +299,7 @@ The following Tier 2 components are available with Svelte-idiomatic bindings:
 
 ```svelte
 <script>
-  import { ThemeToggle } from '@grimoire/yetzirah-svelte'
+  import { ThemeToggle } from '@grimoire-intel/yetzirah-svelte'
 </script>
 
 <ThemeToggle storageKey="my-app-theme" on:themechange={(e) => console.log(e.detail)} />
@@ -339,6 +339,16 @@ pnpm test:coverage
 
 Tests use [Vitest](https://vitest.dev/) with [@testing-library/svelte](https://testing-library.com/docs/svelte-testing-library/intro/) and [happy-dom](https://github.com/capricorn86/happy-dom) for DOM simulation.
 
+## How It Works
+
+Svelte has excellent native Web Component support. These wrappers primarily provide:
+
+- **TypeScript definitions**: Full type safety for props and events
+- **`bind:` support**: Two-way binding for `open`, `checked`, `value`
+- **Event forwarding**: Component events forwarded via `on:*` syntax
+
+See [@grimoire-intel/yetzirah](https://www.npmjs.com/package/@grimoire-intel/yetzirah) for full component documentation.
+
 ## License
 
-ISC
+MIT

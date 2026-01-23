@@ -1,5 +1,5 @@
 /**
- * @grimoire/yetzirah-solid
+ * @grimoire-intel/yetzirah-solid
  *
  * Solid.js wrappers for Yetzirah Web Components.
  * Provides type declarations for using Yetzirah components with Solid's JSX.

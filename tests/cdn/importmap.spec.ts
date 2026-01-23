@@ -241,7 +241,7 @@ test.describe('Import Map Demo Page', () => {
       });
 
       expect(importMap).toBeTruthy();
-      expect(importMap.imports).toHaveProperty('@grimoire/yetzirah-core');
+      expect(importMap.imports).toHaveProperty('@grimoire-intel/yetzirah');
     });
   });
 

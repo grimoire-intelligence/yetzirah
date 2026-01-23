@@ -2,7 +2,7 @@
  * ytz-icon-button - Icon button Web Component.
  * A button variant requiring aria-label for accessibility.
  *
- * @module @grimoire/yetzirah-core/icon-button
+ * @module @grimoire-intel/yetzirah/icon-button
  * @example
  * <ytz-icon-button aria-label="Close">
  *   <svg>...</svg>

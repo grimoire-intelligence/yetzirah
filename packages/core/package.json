@@ -1,5 +1,5 @@
 {
-  "name": "@grimoire/yetzirah-core",
+  "name": "@grimoire-intel/yetzirah",
   "version": "0.1.0",
   "description": "Web Components for behavioral UI patterns - zero dependencies, framework-agnostic",
   "type": "module",
@@ -136,7 +136,7 @@
     "yetzirah"
   ],
   "author": "Grimoire Intelligence",
-  "license": "ISC",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/grimoire-intelligence/yetzirah.git",

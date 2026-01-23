@@ -2,10 +2,10 @@
  * React wrappers for ytz-autocomplete Web Components.
  * Text input with filterable dropdown selection.
  *
- * @module @grimoire/yetzirah-react/autocomplete
+ * @module @grimoire-intel/yetzirah-react/autocomplete
  */
 
-import '@grimoire/yetzirah-core'
+import '@grimoire-intel/yetzirah'
 import { forwardRef, useRef, useEffect, useImperativeHandle } from 'react'
 
 /**

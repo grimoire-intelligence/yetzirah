@@ -1,7 +1,7 @@
 import 'jest-preset-angular/setup-jest'
 
-// Mock @grimoire/yetzirah-core to avoid loading the actual web components
-jest.mock('@grimoire/yetzirah-core', () => ({}))
+// Mock @grimoire-intel/yetzirah to avoid loading the actual web components
+jest.mock('@grimoire-intel/yetzirah', () => ({}))
 
 // Mock customElements API
 Object.defineProperty(window, 'customElements', {

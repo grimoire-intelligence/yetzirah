@@ -1,6 +1,6 @@
 /**
  * ytz-tabs - Tabbed interface Web Components.
- * @module @grimoire/yetzirah-core/tabs
+ * @module @grimoire-intel/yetzirah/tabs
  * @example
  * <ytz-tabs>
  *   <ytz-tab panel="tab1">Account</ytz-tab>

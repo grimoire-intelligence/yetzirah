@@ -2,7 +2,7 @@
  * ytz-toggle - Switch/Toggle Web Component.
  * A toggle switch with checkbox semantics and aria-checked.
  *
- * @module @grimoire/yetzirah-core/toggle
+ * @module @grimoire-intel/yetzirah/toggle
  * @example
  * <ytz-toggle>Enable notifications</ytz-toggle>
  *

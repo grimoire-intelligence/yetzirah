@@ -9,7 +9,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
  *
  * @example
  * // Import in your Angular module
- * import { YetzirahModule } from '@grimoire/yetzirah-angular';
+ * import { YetzirahModule } from '@grimoire-intel/yetzirah-angular';
  *
  * @NgModule({
  *   imports: [YetzirahModule]
@@ -36,13 +36,13 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 export class YetzirahModule {
   constructor() {
     // Ensure Web Components are loaded
-    // The actual component definitions come from @grimoire/yetzirah-core
+    // The actual component definitions come from @grimoire-intel/yetzirah
     // which should be imported in your application's main.ts or index.html
     if (typeof window !== 'undefined' && !customElements.get('ytz-button')) {
       console.warn(
-        '@grimoire/yetzirah-angular: Web Components not detected. ' +
-        'Make sure to import @grimoire/yetzirah-core in your application:\n' +
-        'import "@grimoire/yetzirah-core";\n' +
+        '@grimoire-intel/yetzirah-angular: Web Components not detected. ' +
+        'Make sure to import @grimoire-intel/yetzirah in your application:\n' +
+        'import "@grimoire-intel/yetzirah";\n' +
         'Or include the CDN bundle in your index.html'
       );
     }
@@ -55,7 +55,7 @@ export class YetzirahModule {
  *
  * @example
  * import { Component } from '@angular/core';
- * import { provideYetzirah } from '@grimoire/yetzirah-angular';
+ * import { provideYetzirah } from '@grimoire-intel/yetzirah-angular';
  *
  * @Component({
  *   selector: 'app-root',

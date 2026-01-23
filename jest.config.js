@@ -13,10 +13,10 @@ export default {
     '^.+\.js$': 'babel-jest',
   },
   transformIgnorePatterns: [
-    '/node_modules/(?!@grimoire)',
+    '/node_modules/(?!@grimoire-intel)',
   ],
   moduleNameMapper: {
-    '^@grimoire/yetzirah-core$': '<rootDir>/packages/core/src/index.js',
+    '^@grimoire-intel/yetzirah$': '<rootDir>/packages/core/src/index.js',
   },
   collectCoverageFrom: [
     'packages/*/src/**/*.js',
