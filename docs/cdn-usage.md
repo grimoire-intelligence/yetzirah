@@ -349,6 +349,64 @@ Here's a full example with import maps, Tachyons, and multiple components:
 </html>
 ```
 
+## Theming with CSS Custom Properties
+
+Tachyons is great for rapid development, but for design system consistency you may want CSS custom properties (design tokens):
+
+```html
+<style>
+  :root {
+    --color-primary: #357edd;
+    --color-primary-hover: #00449e;
+    --color-danger: #e7040f;
+    --color-text: #111;
+    --color-bg: #fff;
+    --radius: 0.25rem;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+  }
+
+  [data-theme="dark"] {
+    --color-primary: #96ccff;
+    --color-primary-hover: #357edd;
+    --color-text: #f4f4f4;
+    --color-bg: #1a1a1a;
+  }
+
+  /* Utility classes using custom properties */
+  .bg-primary { background-color: var(--color-primary); }
+  .bg-primary-hover:hover { background-color: var(--color-primary-hover); }
+  .bg-danger { background-color: var(--color-danger); }
+  .text-primary { color: var(--color-primary); }
+  .text-body { color: var(--color-text); }
+  .bg-body { background-color: var(--color-bg); }
+  .radius { border-radius: var(--radius); }
+  .pa-sm { padding: var(--space-sm); }
+  .pa-md { padding: var(--space-md); }
+</style>
+
+<!-- Compose utilities like Tachyons, but with your design tokens -->
+<body class="bg-body text-body pa-md">
+  <ytz-button class="bg-primary bg-primary-hover white pa-sm radius pointer bn">
+    Save
+  </ytz-button>
+
+  <ytz-button class="bg-danger white pa-sm radius pointer bn">
+    Delete
+  </ytz-button>
+
+  <!-- Toggle dark mode -->
+  <ytz-theme-toggle></ytz-theme-toggle>
+</body>
+```
+
+The `<ytz-theme-toggle>` component automatically sets `data-theme="dark"` on the document root and persists the preference to localStorage. Your utility classes automatically adapt.
+
+**Choose your approach:**
+- **Tachyons**: Fast iteration, AI-friendly, no build step
+- **CSS Custom Properties**: Design system consistency, dark mode support
+- **Both**: Use Tachyons for layout (`flex`, `pa3`, `mw6`), custom properties for brand colors
+
 ## Troubleshooting
 
 ### Components not rendering

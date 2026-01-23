@@ -37,20 +37,40 @@ Themed libraries force your AI to learn theme objects, design tokens, and `sx` p
 
 We recommend [Tachyons](https://tachyons.io/)—close enough to raw CSS that even Haiku gets it right, small enough to fit in any context window.
 
-**Want consistent styling across AI sessions?** Put your conventions in `AGENTS.md`. Plain text, read once, applied everywhere. Zero runtime cost.
+**Need consistent design tokens?** Use CSS custom properties:
 
-### Example: Button Conventions for AGENTS.md
+```css
+/* theme.css */
+:root {
+  --color-primary: #357edd;
+  --color-primary-dark: #00449e;
+  --color-danger: #e7040f;
+  --radius-default: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+}
 
-```markdown
-Use Tachyons classes based on button intent:
+[data-theme="dark"] {
+  --color-primary: #96ccff;
+  --color-primary-dark: #357edd;
+}
 
-| Intent | Classes | Hover |
-|--------|---------|-------|
-| Primary | `bg-blue white bn ph3 pv2 br2 pointer` | `hover-bg-dark-blue` |
-| Secondary | `bg-transparent blue ba b--blue ph3 pv2 br2 pointer` | `hover-bg-lightest-blue` |
-| Destructive | `bg-dark-red white bn ph3 pv2 br2 pointer` | `hover-bg-red` |
-| Disabled | Add `o-50 not-allowed` to any variant | — |
+/* Utility classes using custom properties */
+.bg-primary { background-color: var(--color-primary); }
+.bg-primary-dark { background-color: var(--color-primary-dark); }
+.bg-danger { background-color: var(--color-danger); }
+.text-primary { color: var(--color-primary); }
+.radius { border-radius: var(--radius-default); }
 ```
+
+```html
+<!-- Use like Tachyons, but with your design tokens -->
+<ytz-button class="bg-primary white ph3 pv2 radius pointer">
+  Save
+</ytz-button>
+```
+
+This gives you theme-level consistency without runtime JavaScript. Toggle dark mode by setting `data-theme="dark"` on `<html>`—your utility classes automatically adapt.
 
 ---
 
