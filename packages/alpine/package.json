@@ -19,7 +19,8 @@
   "files": [
     "dist",
     "cdn",
-    "src/*.d.ts"
+    "src/*.d.ts",
+    "!**/*.map"
   ],
   "scripts": {
     "build": "tsup",

@@ -15,7 +15,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "!**/*.map"
   ],
   "scripts": {
     "build": "ng-packagr -p ng-package.json",

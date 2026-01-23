@@ -118,7 +118,8 @@
     "dist",
     "cdn",
     "src/dark.css",
-    "*.css"
+    "*.css",
+    "!**/*.map"
   ],
   "scripts": {
     "build": "tsup",
