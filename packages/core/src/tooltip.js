@@ -15,6 +15,23 @@
  *   <button>Hover me</button>
  *   <span slot="content">Bottom tooltip</span>
  * </ytz-tooltip>
+ *
+ * @example
+ * // Headless mode for SVG canvas or custom positioning
+ * <ytz-tooltip id="canvas-tip">
+ *   <span slot="content"></span>
+ * </ytz-tooltip>
+ *
+ * svg.addEventListener('mousemove', (e) => {
+ *   const el = getElementAtPoint(e.clientX, e.clientY)
+ *   if (el) {
+ *     tooltip.anchorTo(e.clientX, e.clientY)
+ *     tooltip.text = el.label
+ *     tooltip.show()
+ *   } else {
+ *     tooltip.hide()
+ *   }
+ * })
  */
 
 import { position } from './utils/position.js'
@@ -41,6 +58,8 @@ class YtzTooltip extends HTMLElement {
   #hideTimeout = null
   /** @type {boolean} */
   #isVisible = false
+  /** @type {HTMLElement|null} */
+  #anchor = null
 
   connectedCallback() {
     this.#setup()
@@ -224,6 +243,55 @@ class YtzTooltip extends HTMLElement {
   hide() {
     clearTimeout(this.#showTimeout)
     this.#hide()
+  }
+
+  /**
+   * Anchor tooltip to viewport coordinates.
+   * Enables "headless" mode for programmatic positioning (e.g., SVG canvas).
+   * @param {number} x - Viewport X coordinate
+   * @param {number} y - Viewport Y coordinate
+   */
+  anchorTo(x, y) {
+    if (!this.#anchor) {
+      // Clean up any existing trigger listeners
+      if (this.#trigger && this.#trigger !== this.#anchor) {
+        this.#cleanup()
+        this.#trigger.removeAttribute('aria-describedby')
+      }
+
+      this.#anchor = document.createElement('span')
+      this.#anchor.style.cssText = 'position:fixed;width:1px;height:1px;pointer-events:none'
+      this.prepend(this.#anchor)
+      this.#trigger = this.#anchor
+
+      // Ensure content is set up if we're in headless mode
+      if (!this.#content) {
+        this.#content = this.querySelector('[slot="content"]')
+      }
+      if (this.#content && !this.#contentId) {
+        this.#contentId = this.#content.id || `ytz-tooltip-${++tooltipId}`
+        this.#content.id = this.#contentId
+        this.#content.setAttribute('role', 'tooltip')
+        this.#content.hidden = true
+      }
+    }
+
+    this.#anchor.style.left = `${x}px`
+    this.#anchor.style.top = `${y}px`
+
+    if (this.#isVisible) this.#updatePosition()
+  }
+
+  /** @returns {string} Text content of the tooltip */
+  get text() {
+    return this.#content?.textContent || ''
+  }
+
+  /** @param {string} value */
+  set text(value) {
+    if (this.#content) {
+      this.#content.textContent = value
+    }
   }
 }
 

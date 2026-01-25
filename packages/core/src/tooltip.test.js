@@ -426,4 +426,134 @@ describe('YtzTooltip', () => {
       expect(content.hidden).toBe(false)
     })
   })
+
+  describe('headless mode (anchorTo)', () => {
+    test('anchorTo creates virtual anchor element', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <span slot="content">Tooltip text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+
+      tooltip.anchorTo(100, 200)
+
+      const anchor = tooltip.firstElementChild
+      expect(anchor.style.position).toBe('fixed')
+      expect(anchor.style.left).toBe('100px')
+      expect(anchor.style.top).toBe('200px')
+    })
+
+    test('anchorTo updates position on subsequent calls', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <span slot="content">Tooltip text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+
+      tooltip.anchorTo(100, 200)
+      tooltip.anchorTo(300, 400)
+
+      const anchor = tooltip.firstElementChild
+      expect(anchor.style.left).toBe('300px')
+      expect(anchor.style.top).toBe('400px')
+    })
+
+    test('anchorTo sets up content in headless mode', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <span slot="content">Tooltip text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+      const content = document.querySelector('[slot="content"]')
+
+      tooltip.anchorTo(100, 200)
+
+      expect(content.getAttribute('role')).toBe('tooltip')
+      expect(content.id).toMatch(/^ytz-tooltip-\d+$/)
+    })
+
+    test('show/hide work in headless mode', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <span slot="content">Tooltip text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+      const content = document.querySelector('[slot="content"]')
+
+      tooltip.anchorTo(100, 200)
+      tooltip.show()
+      expect(content.hidden).toBe(false)
+
+      tooltip.hide()
+      expect(content.hidden).toBe(true)
+    })
+
+    test('anchorTo cleans up existing trigger listeners', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <button>Trigger</button>
+          <span slot="content">Tooltip text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+      const trigger = document.querySelector('button')
+      const content = document.querySelector('[slot="content"]')
+
+      // Switch to headless mode
+      tooltip.anchorTo(100, 200)
+
+      // Old trigger should no longer show tooltip
+      trigger.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }))
+      jest.runAllTimers()
+      expect(content.hidden).toBe(true)
+
+      // aria-describedby should be removed from old trigger
+      expect(trigger.hasAttribute('aria-describedby')).toBe(false)
+    })
+
+    test('text getter returns content text', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <button>Trigger</button>
+          <span slot="content">Initial text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+      expect(tooltip.text).toBe('Initial text')
+    })
+
+    test('text setter updates content', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <button>Trigger</button>
+          <span slot="content">Initial text</span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+      const content = document.querySelector('[slot="content"]')
+
+      tooltip.text = 'Updated text'
+
+      expect(content.textContent).toBe('Updated text')
+      expect(tooltip.text).toBe('Updated text')
+    })
+
+    test('text works in headless mode', () => {
+      document.body.innerHTML = `
+        <ytz-tooltip>
+          <span slot="content"></span>
+        </ytz-tooltip>
+      `
+      const tooltip = document.querySelector('ytz-tooltip')
+
+      tooltip.anchorTo(100, 200)
+      tooltip.text = 'Dynamic content'
+
+      expect(tooltip.text).toBe('Dynamic content')
+    })
+  })
 })
