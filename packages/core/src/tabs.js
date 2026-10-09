@@ -19,7 +19,8 @@ class YtzTabs extends HTMLElement {
   #keyNav = null
 
   connectedCallback() {
-    this.setAttribute('role', 'tablist')
+    this.#setupTablist()
+    this.removeAttribute('role')
     this.#setupKeyNav()
     if (!this.hasAttribute('value')) {
       const firstTab = this.querySelector('ytz-tab')
@@ -28,6 +29,25 @@ class YtzTabs extends HTMLElement {
       }
     }
     this.#updateSelection()
+  }
+
+  #setupTablist() {
+    const tabs = [...this.querySelectorAll('ytz-tab')]
+    if (!tabs.length) return
+
+    const currentContainer = tabs[0].parentElement
+    const hasOnlyTabs = currentContainer && currentContainer !== this &&
+      [...currentContainer.children].every((child) => child.localName === 'ytz-tab')
+
+    if (hasOnlyTabs) {
+      currentContainer.setAttribute('role', 'tablist')
+      return
+    }
+
+    const tablist = document.createElement('div')
+    tablist.setAttribute('role', 'tablist')
+    tabs[0].parentNode.insertBefore(tablist, tabs[0])
+    tabs.forEach((tab) => tablist.append(tab))
   }
 
   attributeChangedCallback(name, oldVal, newVal) {

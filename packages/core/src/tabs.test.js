@@ -11,7 +11,7 @@ describe('YtzTabs', () => {
   })
 
   describe('structure and roles', () => {
-    test('ytz-tabs has role="tablist"', () => {
+    test('tablist contains tabs only and leaves panels as siblings', () => {
       document.body.innerHTML = `
         <ytz-tabs>
           <ytz-tab panel="p1">Tab 1</ytz-tab>
@@ -19,7 +19,33 @@ describe('YtzTabs', () => {
         </ytz-tabs>
       `
       const tabs = document.querySelector('ytz-tabs')
-      expect(tabs.getAttribute('role')).toBe('tablist')
+      const tablist = tabs.querySelector('[role="tablist"]')
+      const panel = tabs.querySelector('ytz-tabpanel')
+
+      expect(tabs.hasAttribute('role')).toBe(false)
+      expect(tablist).not.toBeNull()
+      expect([...tablist.children].every((child) => child.localName === 'ytz-tab')).toBe(true)
+      expect(tablist.contains(panel)).toBe(false)
+      expect(panel.parentElement).toBe(tabs)
+    })
+
+    test('uses an existing tab-only wrapper as the tablist', () => {
+      document.body.innerHTML = `
+        <ytz-tabs>
+          <div class="tabs-row">
+            <ytz-tab panel="p1">Tab 1</ytz-tab>
+            <ytz-tab panel="p2">Tab 2</ytz-tab>
+          </div>
+          <ytz-tabpanel id="p1">Content 1</ytz-tabpanel>
+          <ytz-tabpanel id="p2">Content 2</ytz-tabpanel>
+        </ytz-tabs>
+      `
+      const tablist = document.querySelector('.tabs-row')
+      const panel = document.querySelector('ytz-tabpanel')
+
+      expect(tablist.getAttribute('role')).toBe('tablist')
+      expect([...tablist.children].every((child) => child.localName === 'ytz-tab')).toBe(true)
+      expect(panel.parentElement).toBe(document.querySelector('ytz-tabs'))
     })
 
     test('ytz-tab has role="tab"', () => {
